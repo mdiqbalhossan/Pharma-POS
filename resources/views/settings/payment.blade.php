@@ -1,0 +1,162 @@
+@extends('layouts.app')
+
+@section('title', 'Payment Settings')
+
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title">Payment Settings</h4>
+                    </div>
+                    <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <form action="{{ route('settings.payment.update') }}" method="POST">
+                            @csrf
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="mb-3">Payment Methods</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="payment_cash_enabled"
+                                                name="payment_cash_enabled" value="1"
+                                                {{ $settings['payment_cash_enabled'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="payment_cash_enabled">Enable Cash
+                                                Payment</label>
+                                        </div>
+                                        <small class="text-muted">Allow customers to pay with cash.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="payment_card_enabled"
+                                                name="payment_card_enabled" value="1"
+                                                {{ $settings['payment_card_enabled'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="payment_card_enabled">Enable Card
+                                                Payment</label>
+                                        </div>
+                                        <small class="text-muted">Allow customers to pay with credit/debit cards.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="payment_bank_enabled"
+                                                name="payment_bank_enabled" value="1"
+                                                {{ $settings['payment_bank_enabled'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="payment_bank_enabled">Enable Bank
+                                                Transfer</label>
+                                        </div>
+                                        <small class="text-muted">Allow customers to pay via bank transfer.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="payment_cheque_enabled"
+                                                name="payment_cheque_enabled" value="1"
+                                                {{ $settings['payment_cheque_enabled'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="payment_cheque_enabled">Enable Cheque
+                                                Payment</label>
+                                        </div>
+                                        <small class="text-muted">Allow customers to pay with cheques.</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3 bank-details-section" id="bank_details_section"
+                                style="{{ $settings['payment_bank_enabled'] == '1' ? '' : 'display: none;' }}">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-3">
+                                        <label for="bank_details">Bank Account Details</label>
+                                        <textarea name="bank_details" id="bank_details" rows="4"
+                                            class="form-control @error('bank_details') is-invalid @enderror">{{ old('bank_details', $settings['bank_details']) }}</textarea>
+                                        <small class="text-muted">Enter your bank account details for bank transfers
+                                            (account number, bank name, etc.)</small>
+                                        @error('bank_details')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="payment_other_enabled"
+                                                name="payment_other_enabled" value="1"
+                                                {{ $settings['payment_other_enabled'] == '1' ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="payment_other_enabled">Enable Other
+                                                Payment Method</label>
+                                        </div>
+                                        <small class="text-muted">Allow an additional custom payment method.</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 other-payment-section" id="other_payment_section"
+                                    style="{{ $settings['payment_other_enabled'] == '1' ? '' : 'display: none;' }}">
+                                    <div class="form-group mb-3">
+                                        <label for="payment_other_label">Other Payment Method Label</label>
+                                        <input type="text" name="payment_other_label" id="payment_other_label"
+                                            class="form-control @error('payment_other_label') is-invalid @enderror"
+                                            value="{{ old('payment_other_label', $settings['payment_other_label']) }}">
+                                        <small class="text-muted">Label for the other payment method (e.g. Mobile Payment,
+                                            PayPal, etc.)</small>
+                                        @error('payment_other_label')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-end mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Payment Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle bank details section
+            const bankEnabledCheckbox = document.getElementById('payment_bank_enabled');
+            const bankDetailsSection = document.getElementById('bank_details_section');
+
+            bankEnabledCheckbox.addEventListener('change', function() {
+                bankDetailsSection.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Toggle other payment method section
+            const otherEnabledCheckbox = document.getElementById('payment_other_enabled');
+            const otherPaymentSection = document.getElementById('other_payment_section');
+
+            otherEnabledCheckbox.addEventListener('change', function() {
+                otherPaymentSection.style.display = this.checked ? 'block' : 'none';
+            });
+        });
+    </script>
+@endsection
