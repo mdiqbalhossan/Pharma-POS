@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Medicine')
+@section('title', __('medicine.edit_medicine'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
@@ -10,8 +10,8 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Edit Medicine',
-        'subtitle' => 'Update medicine information',
+        'title' => __('medicine.edit_medicine'),
+        'subtitle' => __('medicine.update_medicine_information'),
     ])
 
     <div class="card">
@@ -21,20 +21,21 @@
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                        <label for="name" class="form-label">{{ __('medicine.name') }} <span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                            name="name" value="{{ old('name', $medicine->name) }}" placeholder="eg: Paracetamol"
-                            required>
+                            name="name" value="{{ old('name', $medicine->name) }}"
+                            placeholder="{{ __('medicine.eg_paracetamol') }}" required>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label for="generic_name" class="form-label">Generic Name</label>
+                        <label for="generic_name" class="form-label">{{ __('medicine.generic_name') }}</label>
                         <input type="text" class="form-control @error('generic_name') is-invalid @enderror"
                             id="generic_name" name="generic_name" value="{{ old('generic_name', $medicine->generic_name) }}"
-                            placeholder="eg: Paracetamol">
+                            placeholder="{{ __('medicine.eg_paracetamol') }}">
                         @error('generic_name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -42,12 +43,12 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="input-blocks add-product list">
-                            <label>Barcode</label>
-                            <input type="text" class="form-control list" placeholder="Please Enter Barcode"
-                                id="barcode" name="barcode" value="{{ old('barcode', $medicine->barcode) }}"
-                                placeholder="eg: 1234567890">
+                            <label>{{ __('medicine.barcode') }}</label>
+                            <input type="text" class="form-control list"
+                                placeholder="{{ __('medicine.please_enter_barcode') }}" id="barcode" name="barcode"
+                                value="{{ old('barcode', $medicine->barcode) }}">
                             <button type="button" class="btn btn-primaryadd" id="generate-barcode">
-                                Generate Barcode
+                                {{ __('medicine.generate_barcode') }}
                             </button>
                         </div>
                         @error('barcode')
@@ -57,15 +58,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="medicine_type_id" class="form-label">Medicine Type <span
+                            <label for="medicine_type_id" class="form-label">{{ __('medicine.medicine_type') }} <span
                                     class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-medicine-type"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select @error('medicine_type_id') is-invalid @enderror" id="medicine_type_id"
                             name="medicine_type_id" required>
-                            <option value="">Select Type</option>
+                            <option value="">{{ __('medicine.select_type') }}</option>
                             @foreach ($medicineTypes as $type)
                                 <option value="{{ $type->id }}"
                                     {{ old('medicine_type_id', $medicine->medicine_type_id) == $type->id ? 'selected' : '' }}>
@@ -80,15 +81,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="medicine_leaf_id" class="form-label">Medicine Leaf <span
+                            <label for="medicine_leaf_id" class="form-label">{{ __('medicine.medicine_leaf') }} <span
                                     class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-medicine-leaf"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select @error('medicine_leaf_id') is-invalid @enderror" id="medicine_leaf_id"
                             name="medicine_leaf_id" required>
-                            <option value="">Select Leaf</option>
+                            <option value="">{{ __('medicine.select_leaf') }}</option>
                             @foreach ($medicineLeafs as $leaf)
                                 <option value="{{ $leaf->id }}"
                                     {{ old('medicine_leaf_id', $medicine->medicine_leaf_id) == $leaf->id ? 'selected' : '' }}>
@@ -103,14 +104,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="unit_id" class="form-label">Unit <span class="text-danger">*</span></label>
+                            <label for="unit_id" class="form-label">{{ __('medicine.unit') }} <span
+                                    class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-units"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select @error('unit_id') is-invalid @enderror" id="unit_id" name="unit_id"
                             required>
-                            <option value="">Select Unit</option>
+                            <option value="">{{ __('medicine.select_unit') }}</option>
                             @foreach ($units as $unit)
                                 <option value="{{ $unit->id }}"
                                     {{ old('unit_id', $medicine->unit_id) == $unit->id ? 'selected' : '' }}>
@@ -125,15 +127,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="medicine_categories" class="form-label">Categories <span
+                            <label for="medicine_categories" class="form-label">{{ __('medicine.categories') }} <span
                                     class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-category"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select select2 @error('medicine_categories') is-invalid @enderror"
                             id="medicine_categories" name="medicine_categories[]" multiple
-                            placeholder="Select Categories">
+                            placeholder="{{ __('medicine.select_categories') }}">
                             @foreach ($medicineCategories as $category)
                                 <option value="{{ $category->id }}"
                                     {{ old('medicine_categories', $medicine->medicine_categories->pluck('id')->toArray()) && in_array($category->id, old('medicine_categories', $medicine->medicine_categories->pluck('id')->toArray())) ? 'selected' : '' }}>
@@ -148,15 +150,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="supplier_id" class="form-label">Supplier <span
+                            <label for="supplier_id" class="form-label">{{ __('medicine.supplier') }} <span
                                     class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-supplier"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select select2 @error('supplier_id') is-invalid @enderror" id="supplier_id"
                             name="supplier_id">
-                            <option value="">Select Supplier</option>
+                            <option value="">{{ __('medicine.select_supplier') }}</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}"
                                     {{ old('supplier_id', $medicine->supplier_id) == $supplier->id ? 'selected' : '' }}>
@@ -171,14 +173,15 @@
 
                     <div class="col-md-4 mb-3">
                         <div class="add-newplus">
-                            <label for="vendor_id" class="form-label">Vendor <span class="text-danger">*</span></label>
+                            <label for="vendor_id" class="form-label">{{ __('medicine.vendor') }} <span
+                                    class="text-danger">*</span></label>
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add-vendor"><i
-                                    data-feather="plus-circle" class="plus-down-add"></i><span>Add
-                                    New</span></a>
+                                    data-feather="plus-circle"
+                                    class="plus-down-add"></i><span>{{ __('medicine.add_new') }}</span></a>
                         </div>
                         <select class="select select2 @error('vendor_id') is-invalid @enderror" id="vendor_id"
                             name="vendor_id">
-                            <option value="">Select Vendor</option>
+                            <option value="">{{ __('medicine.select_vendor') }}</option>
                             @foreach ($vendors as $vendor)
                                 <option value="{{ $vendor->id }}"
                                     {{ old('vendor_id', $medicine->vendor_id) == $vendor->id ? 'selected' : '' }}>
@@ -192,11 +195,12 @@
                     </div>
 
                     <div class="col-md-3 mb-3">
-                        <label for="sale_price" class="form-label">Sale Price <span class="text-danger">*</span></label>
+                        <label for="sale_price" class="form-label">{{ __('medicine.sale_price') }} <span
+                                class="text-danger">*</span></label>
                         <input type="number" step="0.01"
                             class="form-control @error('sale_price') is-invalid @enderror" id="sale_price"
                             name="sale_price" value="{{ old('sale_price', $medicine->sale_price) }}"
-                            placeholder="eg: 100" required>
+                            placeholder="{{ __('medicine.eg_100') }}" required>
                         @error('sale_price')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

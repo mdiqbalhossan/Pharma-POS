@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trial Balance')
+@section('title', __('account.trial_balance'))
 
 @section('content')
     <div class="container-fluid">
@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Trial Balance</h3>
+                        <h3 class="card-title">{{ __('account.trial_balance') }}</h3>
                     </div>
                     <div class="card-body">
                         <!-- Filter Form -->
@@ -16,14 +16,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="start_date">Start Date</label>
+                                        <label for="start_date">{{ __('account.from_date') }}</label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
                                             value="{{ $startDate }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="end_date">End Date</label>
+                                        <label for="end_date">{{ __('account.to_date') }}</label>
                                         <input type="date" class="form-control" id="end_date" name="end_date"
                                             value="{{ $endDate }}">
                                     </div>
@@ -32,8 +32,10 @@
                                     <div class="form-group">
                                         <label>&nbsp;</label>
                                         <div class="d-flex gap-2">
-                                            <button type="submit" class="btn btn-primary">Filter</button>
-                                            <a href="{{ route('trial-balance.index') }}" class="btn btn-secondary">Reset</a>
+                                            <button type="submit"
+                                                class="btn btn-primary">{{ __('account.generate') }}</button>
+                                            <a href="{{ route('trial-balance.index') }}"
+                                                class="btn btn-secondary">{{ __('account.reset') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -44,11 +46,11 @@
                         <div class="mb-3">
                             <a href="{{ route('trial-balance.print', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
                                 class="btn btn-info" target="_blank">
-                                <i class="fas fa-print"></i> Print
+                                <i class="fas fa-print"></i> {{ __('account.print') }}
                             </a>
                             <a href="{{ route('trial-balance.download', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
                                 class="btn btn-success">
-                                <i class="fas fa-download"></i> Download PDF
+                                <i class="fas fa-download"></i> {{ __('account.download_pdf') }}
                             </a>
                         </div>
 
@@ -57,11 +59,11 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Account Name</th>
-                                        <th>Type</th>
-                                        <th class="text-right">Debit</th>
-                                        <th class="text-right">Credit</th>
-                                        <th class="text-right">Balance</th>
+                                        <th>{{ __('account.name') }}</th>
+                                        <th>{{ __('account.type') }}</th>
+                                        <th class="text-right">{{ __('account.debit') }}</th>
+                                        <th class="text-right">{{ __('account.credit') }}</th>
+                                        <th class="text-right">{{ __('account.balance') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +82,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr class="font-weight-bold">
-                                        <td colspan="2">Total</td>
+                                        <td colspan="2">{{ __('account.total') }}</td>
                                         <td class="text-right">{{ number_format($totalDebit, 2) }}</td>
                                         <td class="text-right">{{ number_format($totalCredit, 2) }}</td>
                                         <td class="text-right {{ $totalBalance < 0 ? 'text-danger' : 'text-success' }}">

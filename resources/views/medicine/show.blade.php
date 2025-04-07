@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Medicine Details')
+@section('title', __('medicine.medicine_details'))
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Medicine Details',
-        'subtitle' => 'View medicine information',
+        'title' => __('medicine.medicine_details'),
+        'subtitle' => __('medicine.view_medicine_information'),
     ])
 
     <div class="row">
@@ -15,12 +15,12 @@
                     <div class="d-flex align-items-center">
                         <h4 class="card-title mb-0">{{ $medicine->name }}</h4>
                         @if ($medicine->is_active)
-                            <span class="badge bg-success ms-2">Active</span>
+                            <span class="badge bg-success ms-2">{{ __('medicine.active') }}</span>
                         @else
-                            <span class="badge bg-danger ms-2">Inactive</span>
+                            <span class="badge bg-danger ms-2">{{ __('medicine.inactive') }}</span>
                         @endif
                         @if ($medicine->prescription_required)
-                            <span class="badge bg-warning ms-2">Prescription Required</span>
+                            <span class="badge bg-warning ms-2">{{ __('medicine.prescription_required') }}</span>
                         @endif
                     </div>
                 </div>
@@ -40,10 +40,10 @@
 
                             <div class="d-grid gap-2 mt-3">
                                 <a href="{{ route('medicines.edit', $medicine->id) }}" class="btn btn-primary">
-                                    <i data-feather="edit" class="feather-sm me-1"></i> Edit
+                                    <i data-feather="edit" class="feather-sm me-1"></i> {{ __('medicine.edit') }}
                                 </a>
                                 <button type="button" class="btn btn-danger confirm-text" data-id="{{ $medicine->id }}">
-                                    <i data-feather="trash-2" class="feather-sm me-1"></i> Delete
+                                    <i data-feather="trash-2" class="feather-sm me-1"></i> {{ __('medicine.delete') }}
                                 </button>
                                 <form id="delete-form-{{ $medicine->id }}"
                                     action="{{ route('medicines.destroy', $medicine->id) }}" method="POST"
@@ -61,56 +61,61 @@
                                 <div class="col-12 mb-4">
                                     <div class="card border">
                                         <div class="card-header bg-light">
-                                            <h5 class="mb-0"><i data-feather="info" class="feather-sm me-1"></i> Basic
-                                                Information</h5>
+                                            <h5 class="mb-0"><i data-feather="info" class="feather-sm me-1"></i>
+                                                {{ __('medicine.basic_information') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Name</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.name') }}</h6>
                                                     <p class="text-dark">{{ $medicine->name }}</p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Generic Name</h6>
-                                                    <p class="text-dark">{{ $medicine->generic_name ?: 'N/A' }}</p>
-                                                </div>
-
-                                                <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Barcode</h6>
-                                                    <p class="text-dark">{{ $medicine->barcode ?: 'N/A' }}</p>
-                                                </div>
-
-                                                <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Medicine Type</h6>
-                                                    <p class="text-dark">{{ $medicine->medicine_type->name ?? 'N/A' }}</p>
-                                                </div>
-
-                                                <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Medicine Leaf</h6>
-                                                    <p class="text-dark">
-                                                        {{ $medicine->medicine_leaf ? $medicine->medicine_leaf->type . ' (' . $medicine->medicine_leaf->qty_box . ')' : 'N/A' }}
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.generic_name') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->generic_name ?: __('medicine.na') }}
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Unit</h6>
-                                                    <p class="text-dark">{{ $medicine->unit->name ?? 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.barcode') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->barcode ?: __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Batch Number</h6>
-                                                    <p class="text-dark">{{ $medicine->batch_number ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.medicine_type') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->medicine_type->name ?? __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Dosage</h6>
-                                                    <p class="text-dark">{{ $medicine->dosage ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.medicine_leaf') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->medicine_leaf ? $medicine->medicine_leaf->type . ' (' . $medicine->medicine_leaf->qty_box . ')' : __('medicine.na') }}
+                                                    </p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Storage Condition</h6>
-                                                    <p class="text-dark">{{ $medicine->storage_condition ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.unit') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->unit->name ?? __('medicine.na') }}
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.batch_number') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->batch_number ?: __('medicine.na') }}
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.dosage') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->dosage ?: __('medicine.na') }}</p>
+                                                </div>
+
+                                                <div class="col-md-4 mb-3">
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.storage_condition') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->storage_condition ?: __('medicine.na') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,34 +127,34 @@
                                     <div class="card border">
                                         <div class="card-header bg-light">
                                             <h5 class="mb-0"><i data-feather="dollar-sign" class="feather-sm me-1"></i>
-                                                Pricing</h5>
+                                                {{ __('medicine.pricing') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Sale Price</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.sale_price') }}</h6>
                                                     <p class="text-dark fw-bold">
                                                         {{ number_format($medicine->sale_price, 2) }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Purchase Price</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.purchase_price') }}</h6>
                                                     <p class="text-dark">{{ number_format($medicine->purchase_price, 2) }}
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">VAT (%)</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.vat') }} (%)</h6>
                                                     <p class="text-dark">{{ $medicine->vat_percentage ?: '0' }}%</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Discount (%)</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.discount') }} (%)</h6>
                                                     <p class="text-dark">{{ $medicine->discount_percentage ?: '0' }}%</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Loyalty Points</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.loyalty_point') }}</h6>
                                                     <p class="text-dark">{{ $medicine->loyalty_point ?: '0' }}</p>
                                                 </div>
                                             </div>
@@ -162,28 +167,30 @@
                                     <div class="card border">
                                         <div class="card-header bg-light">
                                             <h5 class="mb-0"><i data-feather="package" class="feather-sm me-1"></i>
-                                                Inventory</h5>
+                                                {{ __('medicine.inventory') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Quantity</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.quantity') }}</h6>
                                                     <p class="text-dark">{{ $medicine->quantity ?: '0' }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Reorder Level</h6>
-                                                    <p class="text-dark">{{ $medicine->reorder_level ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.reorder_level') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->reorder_level ?: __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Alert Quantity</h6>
-                                                    <p class="text-dark">{{ $medicine->alert_quantity ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.alert_quantity') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->alert_quantity ?: __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Shelf</h6>
-                                                    <p class="text-dark">{{ $medicine->shelf ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.shelf') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->shelf ?: __('medicine.na') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,18 +202,20 @@
                                     <div class="card border">
                                         <div class="card-header bg-light">
                                             <h5 class="mb-0"><i data-feather="truck" class="feather-sm me-1"></i>
-                                                Supplier & Vendor</h5>
+                                                {{ __('medicine.supplier_vendor') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <h6 class="text-muted mb-1">Supplier</h6>
-                                                    <p class="text-dark">{{ $medicine->supplier->name ?? 'N/A' }}</p>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->supplier->name ?? __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
                                                     <h6 class="text-muted mb-1">Vendor</h6>
-                                                    <p class="text-dark">{{ $medicine->vendor->name ?? 'N/A' }}</p>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->vendor->name ?? __('medicine.na') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,19 +227,20 @@
                                     <div class="card border">
                                         <div class="card-header bg-light">
                                             <h5 class="mb-0"><i data-feather="calendar" class="feather-sm me-1"></i>
-                                                Dates</h5>
+                                                {{ __('medicine.dates') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Manufacturing Date</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.manufacturing_date') }}
+                                                    </h6>
                                                     <p class="text-dark">
-                                                        {{ $medicine->manufacturing_date ? date('M d, Y', strtotime($medicine->manufacturing_date)) : 'N/A' }}
+                                                        {{ $medicine->manufacturing_date ? date('M d, Y', strtotime($medicine->manufacturing_date)) : __('medicine.na') }}
                                                     </p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
-                                                    <h6 class="text-muted mb-1">Expiration Date</h6>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.expiration_date') }}</h6>
                                                     <p class="text-dark">
                                                         @if ($medicine->expiration_date)
                                                             {{ date('M d, Y', strtotime($medicine->expiration_date)) }}
@@ -240,12 +250,14 @@
                                                                 $diff = $now->diff($expiry);
                                                             @endphp
                                                             @if ($now > $expiry)
-                                                                <span class="badge bg-danger">Expired</span>
+                                                                <span
+                                                                    class="badge bg-danger">{{ __('medicine.expired') }}</span>
                                                             @elseif($diff->days < 30)
-                                                                <span class="badge bg-warning">Expiring Soon</span>
+                                                                <span
+                                                                    class="badge bg-warning">{{ __('medicine.expiring_soon') }}</span>
                                                             @endif
                                                         @else
-                                                            N/A
+                                                            {{ __('medicine.na') }}
                                                         @endif
                                                     </p>
                                                 </div>
@@ -259,54 +271,58 @@
                                     <div class="card border">
                                         <div class="card-header bg-light">
                                             <h5 class="mb-0"><i data-feather="clipboard" class="feather-sm me-1"></i>
-                                                Additional Information</h5>
+                                                {{ __('medicine.additional_information') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
                                                 @if ($medicine->description)
                                                     <div class="col-md-12 mb-3">
-                                                        <h6 class="text-muted mb-1">Description</h6>
+                                                        <h6 class="text-muted mb-1">{{ __('medicine.description') }}</h6>
                                                         <p class="text-dark">{{ $medicine->description }}</p>
                                                     </div>
                                                 @endif
 
                                                 @if ($medicine->side_effects)
                                                     <div class="col-md-12 mb-3">
-                                                        <h6 class="text-muted mb-1">Side Effects</h6>
+                                                        <h6 class="text-muted mb-1">{{ __('medicine.side_effects') }}</h6>
                                                         <p class="text-dark">{{ $medicine->side_effects }}</p>
                                                     </div>
                                                 @endif
 
                                                 @if ($medicine->contraindications)
                                                     <div class="col-md-12 mb-3">
-                                                        <h6 class="text-muted mb-1">Contraindications</h6>
+                                                        <h6 class="text-muted mb-1">{{ __('medicine.contraindications') }}
+                                                        </h6>
                                                         <p class="text-dark">{{ $medicine->contraindications }}</p>
                                                     </div>
                                                 @endif
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">IGTA</h6>
-                                                    <p class="text-dark">{{ $medicine->igta ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.igta') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->igta ?: __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">HNS Code</h6>
-                                                    <p class="text-dark">{{ $medicine->hns_code ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.hns_code') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->hns_code ?: __('medicine.na') }}
+                                                    </p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Serial Number</h6>
-                                                    <p class="text-dark">{{ $medicine->serial_number ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.serial_number') }}</h6>
+                                                    <p class="text-dark">
+                                                        {{ $medicine->serial_number ?: __('medicine.na') }}</p>
                                                 </div>
 
                                                 <div class="col-md-4 mb-3">
-                                                    <h6 class="text-muted mb-1">Lot Number</h6>
-                                                    <p class="text-dark">{{ $medicine->lot_number ?: 'N/A' }}</p>
+                                                    <h6 class="text-muted mb-1">{{ __('medicine.lot_number') }}</h6>
+                                                    <p class="text-dark">{{ $medicine->lot_number ?: __('medicine.na') }}
+                                                    </p>
                                                 </div>
 
                                                 @if ($medicine->medicine_categories->count() > 0)
                                                     <div class="col-md-12 mb-3">
-                                                        <h6 class="text-muted mb-1">Categories</h6>
+                                                        <h6 class="text-muted mb-1">{{ __('medicine.categories') }}</h6>
                                                         <div>
                                                             @foreach ($medicine->medicine_categories as $category)
                                                                 <span
@@ -334,12 +350,12 @@
         $(document).on('click', '.confirm-text', function() {
             const id = $(this).data('id');
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: '{{ __('medicine.are_you_sure') }}',
+                text: "{{ __('medicine.you_wont_be_able_to_revert_this') }}",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
+                confirmButtonText: '{{ __('medicine.yes_delete_it') }}',
+                cancelButtonText: '{{ __('medicine.no_cancel') }}',
                 customClass: {
                     confirmButton: 'btn btn-primary me-3',
                     cancelButton: 'btn btn-danger'

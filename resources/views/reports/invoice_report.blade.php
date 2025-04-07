@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Invoice Report')
+@section('title', __('Invoice Report'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,8 +13,8 @@
     <div class="page-header report">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Invoice Report</h4>
-                <h6>View and analyze your invoice data</h6>
+                <h4>{{ __('Invoice Report') }}</h4>
+                <h6>{{ __('Track invoice status and payments') }}</h6>
             </div>
         </div>
     </div>
@@ -22,13 +22,13 @@
     <!-- Report filter -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('reports.invoices') }}" method="GET">
+            <form action="{{ route('reports.invoice') }}" method="GET">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>Customer</label>
+                            <label>{{ __('Customer') }}</label>
                             <select name="customer_id" class="select2">
-                                <option value="all">All Customers</option>
+                                <option value="">{{ __('All Customers') }}</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}"
                                         {{ request('customer_id') == $customer->id ? 'selected' : '' }}>
@@ -40,38 +40,38 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>Invoice Number</label>
+                            <label>{{ __('Invoice No') }}</label>
                             <input type="text" name="invoice_no" value="{{ request('invoice_no') ?? '' }}"
-                                placeholder="Enter invoice number">
+                                placeholder="{{ __('Enter invoice number') }}">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>From Date</label>
+                            <label>{{ __('From Date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
-                                <input type="text" name="start_date" class="datetimepicker" placeholder="Choose Date"
-                                    value="{{ request('start_date') ?? '' }}">
+                                <input type="text" name="start_date" class="datetimepicker"
+                                    placeholder="{{ __('Choose Date') }}" value="{{ request('start_date') ?? '' }}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>To Date</label>
+                            <label>{{ __('To Date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
-                                <input type="text" name="end_date" class="datetimepicker" placeholder="Choose Date"
-                                    value="{{ request('end_date') ?? '' }}">
+                                <input type="text" name="end_date" class="datetimepicker"
+                                    placeholder="{{ __('Choose Date') }}" value="{{ request('end_date') ?? '' }}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
                             <label>&nbsp;</label>
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            <a href="{{ route('reports.invoices') }}" class="btn btn-info ms-2">Reset</a>
+                            <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
+                            <a href="{{ route('reports.invoice') }}" class="btn btn-info ms-2">{{ __('Reset') }}</a>
                         </div>
                     </div>
                 </div>
@@ -86,23 +86,23 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>Invoice Number</th>
-                            <th>Customer</th>
-                            <th>Date</th>
-                            <th>Items</th>
-                            <th>Subtotal</th>
-                            <th>Tax</th>
-                            <th>Discount</th>
-                            <th>Grand Total</th>
-                            <th>Status</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('Invoice No') }}</th>
+                            <th>{{ __('Customer') }}</th>
+                            <th>{{ __('Date') }}</th>
+                            <th>{{ __('Items') }}</th>
+                            <th>{{ __('Sub Total') }}</th>
+                            <th>{{ __('Tax') }}</th>
+                            <th>{{ __('Discount') }}</th>
+                            <th>{{ __('Grand Total') }}</th>
+                            <th>{{ __('Payment Status') }}</th>
+                            <th class="no-sort">{{ __('Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($invoices as $invoice)
                             <tr>
                                 <td>#{{ $invoice->sale_no }}</td>
-                                <td>{{ $invoice->customer ? $invoice->customer->name : 'N/A' }}</td>
+                                <td>{{ $invoice->customer ? $invoice->customer->name : __('N/A') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($invoice->sale_date)->format('d M Y') }}</td>
                                 <td>{{ $invoice->medicines->count() }}</td>
                                 <td>{{ show_amount($invoice->total_amount, 2) }}</td>
@@ -111,11 +111,11 @@
                                 <td>{{ show_amount($invoice->grand_total, 2) }}</td>
                                 <td>
                                     @if ($invoice->amount_due <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
+                                        <span class="badge-linesuccess">{{ __('Paid') }}</span>
                                     @elseif($invoice->amount_paid > 0 && $invoice->amount_due > 0)
-                                        <span class="badges-warning">Partial</span>
+                                        <span class="badges-warning">{{ __('Partial') }}</span>
                                     @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
+                                        <span class="badge badge-linedangered">{{ __('Unpaid') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">

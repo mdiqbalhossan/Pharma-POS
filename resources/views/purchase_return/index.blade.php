@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Purchase Returns')
+@section('title', __('purchase_return.purchase_return_list'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,8 +13,8 @@
     <div class="page-header transfer">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Purchase Return List</h4>
-                <h6>Manage your purchase returns</h6>
+                <h4>{{ __('purchase_return.purchase_return_list') }}</h4>
+                <h6>{{ __('purchase_return.manage_purchase_returns') }}</h6>
             </div>
         </div>
     </div>
@@ -37,9 +37,9 @@
                 <div class="form-sort">
                     <i data-feather="sliders" class="info-img"></i>
                     <select class="select">
-                        <option>Sort by Date</option>
-                        <option>Newest</option>
-                        <option>Oldest</option>
+                        <option>{{ __('purchase_return.sort_by_date') }}</option>
+                        <option>{{ __('purchase_return.newest') }}</option>
+                        <option>{{ __('purchase_return.oldest') }}</option>
                     </select>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                             <div class="input-blocks">
                                 <i data-feather="user" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Supplier Name</option>
+                                    <option>{{ __('purchase_return.choose_supplier_name') }}</option>
                                     <option>Apex Computers</option>
                                     <option>Beats Headphones</option>
                                     <option>Dazzle Shoes</option>
@@ -64,7 +64,7 @@
                             <div class="input-blocks">
                                 <i data-feather="file" class="info-img"></i>
                                 <select class="select">
-                                    <option>Enter Reference</option>
+                                    <option>{{ __('purchase_return.enter_reference') }}</option>
                                     <option>PT001</option>
                                     <option>PT002</option>
                                     <option>PT003</option>
@@ -75,17 +75,17 @@
                             <div class="input-blocks">
                                 <i class="fas fa-money-bill info-img"></i>
                                 <select class="select">
-                                    <option>Choose Payment Status</option>
-                                    <option>Paid</option>
-                                    <option>Partial</option>
-                                    <option>Unpaid</option>
+                                    <option>{{ __('purchase_return.choose_payment_status') }}</option>
+                                    <option>{{ __('purchase_return.paid') }}</option>
+                                    <option>{{ __('purchase_return.partial') }}</option>
+                                    <option>{{ __('purchase_return.unpaid') }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 col-12 ms-auto">
                             <div class="input-blocks">
                                 <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Search </a>
+                                    {{ __('purchase_return.search') }} </a>
                             </div>
                         </div>
                     </div>
@@ -97,23 +97,23 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>Purchase Invoice</th>
-                            <th>Medicine</th>
-                            <th>Date</th>
-                            <th>Returned Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Grand Total</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Payment Status</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('purchase_return.purchase_invoice') }}</th>
+                            <th>{{ __('purchase_return.medicine') }}</th>
+                            <th>{{ __('purchase_return.date') }}</th>
+                            <th>{{ __('purchase_return.returned_quantity') }}</th>
+                            <th>{{ __('purchase_return.unit_price') }}</th>
+                            <th>{{ __('purchase_return.grand_total') }}</th>
+                            <th>{{ __('purchase_return.paid') }}</th>
+                            <th>{{ __('purchase_return.due') }}</th>
+                            <th>{{ __('purchase_return.payment_status') }}</th>
+                            <th class="no-sort">{{ __('purchase_return.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($purchaseReturns as $return)
                             <tr>
-                                <td>{{ $return->purchase ? $return->purchase->invoice_no : 'N/A' }}</td>
-                                <td>{{ $return->medicine ? $return->medicine->name : 'N/A' }}</td>
+                                <td>{{ $return->purchase ? $return->purchase->invoice_no : __('purchase_return.na') }}</td>
+                                <td>{{ $return->medicine ? $return->medicine->name : __('purchase_return.na') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($return->created_at)->format('d M Y') }}</td>
                                 <td>{{ $return->quantity }}</td>
                                 <td>{{ number_format($return->unit_price, 2) }}</td>
@@ -122,11 +122,11 @@
                                 <td>{{ number_format($return->due_amount, 2) }}</td>
                                 <td>
                                     @if ($return->due_amount <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
+                                        <span class="badge-linesuccess">{{ __('purchase_return.paid') }}</span>
                                     @elseif($return->paid_amount > 0 && $return->due_amount > 0)
-                                        <span class="badges-warning">Partial</span>
+                                        <span class="badges-warning">{{ __('purchase_return.partial') }}</span>
                                     @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
+                                        <span class="badge badge-linedangered">{{ __('purchase_return.unpaid') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">

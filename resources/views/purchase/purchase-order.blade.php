@@ -1,172 +1,206 @@
 @extends('layouts.app')
 
-@section('title', 'Purchase Order')
+@section('title', __('purchase.order'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-    <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
 @endpush
 
 @section('content')
-    <div class="page-header transfer">
+    <div class="page-header">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Purchase Order List</h4>
-                <h6>Manage your purchase orders</h6>
+                <h4>{{ __('purchase.order') }}</h4>
+                <h6>{{ __('purchase.order_details') }}</h6>
             </div>
         </div>
-
-        <div class="d-flex purchase-pg-btn">
-            <div class="page-btn">
-                <a href="{{ route('purchases.create') }}" class="btn btn-added"><i data-feather="plus-circle"
-                        class="me-2"></i>Add New Purchase</a>
-            </div>
-        </div>
-
+        <ul class="table-top-head">
+            <li>
+                <div class="page-btn">
+                    <a href="{{ route('purchases.index') }}" class="btn btn-secondary"><i data-feather="arrow-left"
+                            class="me-2"></i>{{ __('purchase.back_to') }}</a>
+                </div>
+            </li>
+        </ul>
     </div>
 
-    <!-- /product list -->
-    <div class="card table-list-card">
+    <div class="card">
         <div class="card-body">
-            <div class="table-top">
-                <div class="search-set">
-                    <div class="search-input">
-                        <a href="" class="btn btn-searchset"><i data-feather="search" class="feather-search"></i></a>
-                    </div>
-                </div>
-                <div class="search-path">
-                    <a class="btn btn-filter" id="filter_search">
-                        <i data-feather="filter" class="filter-icon"></i>
-                        <span><img src="assets/img/icons/closes.svg" alt="img"></span>
-                    </a>
-                </div>
-                <div class="form-sort">
-                    <i data-feather="sliders" class="info-img"></i>
-                    <select class="select">
-                        <option>Sort by Date</option>
-                        <option>Newest</option>
-                        <option>Oldest</option>
-                    </select>
-                </div>
-            </div>
-            <!-- /Filter -->
-            <div class="card" id="filter_inputs">
-                <div class="card-body pb-0">
-                    <div class="row">
-                        <div class="col-lg-2 col-sm-6 col-12">
-                            <div class="input-blocks">
-                                <i data-feather="user" class="info-img"></i>
-                                <select class="select">
-                                    <option>Choose Supplier Name</option>
-                                    <option>Apex Computers</option>
-                                    <option>Beats Headphones</option>
-                                    <option>Dazzle Shoes</option>
-                                    <option>Best Accessories</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 col-12">
-                            <div class="input-blocks">
-                                <i data-feather="stop-circle" class="info-img"></i>
-                                <select class="select">
-                                    <option>Choose Status</option>
-                                    <option>Received</option>
-                                    <option>Ordered</option>
-                                    <option>Pending</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 col-12">
-                            <div class="input-blocks">
-                                <i data-feather="file" class="info-img"></i>
-                                <select class="select">
-                                    <option>Enter Reference</option>
-                                    <option>PT001</option>
-                                    <option>PT002</option>
-                                    <option>PT003</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 col-12">
-                            <div class="input-blocks">
-                                <i class="fas fa-money-bill info-img"></i>
-                                <select class="select">
-                                    <option>Choose Payment Status</option>
-                                    <option>Paid</option>
-                                    <option>Partial</option>
-                                    <option>Unpaid</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 col-12 ms-auto">
-                            <div class="input-blocks">
-                                <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Search </a>
-                            </div>
+            <form id="convertPurchaseOrderForm" action="{{ route('purchases.convert-purchase-order', $purchase->id) }}"
+                method="POST">
+                @csrf
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="alert alert-info">
+                            <p class="mb-0">{{ __('purchase.converting_order', ['invoice' => $purchase->invoice_no]) }}
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- /Filter -->
-            <div class="table-responsive product-list">
-                <table class="table  datanew list">
-                    <thead>
-                        <tr>
-                            <th>Supplier Name</th>
-                            <th>Reference</th>
-                            <th>Date</th>
-                            <th>Grand Total</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Payment Status</th>
-                            <th class="no-sort">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($purchaseOrders as $purchaseOrder)
-                            <tr>
-                                <td>{{ $purchaseOrder->supplier ? $purchaseOrder->supplier->name : 'N/A' }}</td>
-                                <td>{{ $purchaseOrder->invoice_no }}</td>
-                                <td>{{ \Carbon\Carbon::parse($purchaseOrder->date)->format('d M Y') }}</td>
-                                <td>{{ number_format($purchaseOrder->grand_total, 2) }}</td>
-                                <td>{{ number_format($purchaseOrder->paid_amount, 2) }}</td>
-                                <td>{{ number_format($purchaseOrder->due_amount, 2) }}</td>
-                                <td>
-                                    @if ($purchaseOrder->due_amount <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
-                                    @elseif($purchaseOrder->paid_amount > 0 && $purchaseOrder->due_amount > 0)
-                                        <span class="badges-warning">Partial</span>
-                                    @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
-                                    @endif
-                                </td>
-                                <td class="action-table-data">
-                                    <div class="edit-delete-action">
-                                        <a class="me-2 p-2" href="{{ route('purchases.show', $purchaseOrder->id) }}">
-                                            <i data-feather="eye" class="action-eye"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
 
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="supplier_id">{{ __('purchase.supplier') }}</label>
+                            <input type="text" class="form-control" value="{{ $purchase->supplier->name }}" readonly>
+                            <input type="hidden" name="supplier_id" value="{{ $purchase->supplier_id }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="date">{{ __('purchase.date') }} <span class="text-danger">*</span></label>
+                            <input type="date" name="date" id="date" class="form-control"
+                                value="{{ date('Y-m-d') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="status">{{ __('purchase.status') }} <span class="text-danger">*</span></label>
+                            <select name="status" id="status" class="form-control select2" required>
+                                <option value="received">{{ __('purchase.received') }}</option>
+                                <option value="pending">{{ __('purchase.pending') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="purchase-items-table">
+                                <thead>
+                                    <tr>
+                                        <th width="20%">{{ __('purchase.medicine') }}</th>
+                                        <th>{{ __('purchase.batch_no') }}</th>
+                                        <th>{{ __('purchase.expiry_date') }}</th>
+                                        <th>{{ __('purchase.qty') }}</th>
+                                        <th>{{ __('purchase.purchase_price') }}</th>
+                                        <th>{{ __('purchase.discount') }} (%)</th>
+                                        <th>{{ __('purchase.tax') }} (%)</th>
+                                        <th>{{ __('purchase.subtotal') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($purchase->medicines as $medicine)
+                                        <tr>
+                                            <td>
+                                                {{ $medicine->name }}
+                                                <input type="hidden" name="medicine_id[]" value="{{ $medicine->id }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="batch_no[]" class="form-control"
+                                                    value="{{ $medicine->pivot->batch_no ?? '' }}" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="expiry_date[]" class="form-control"
+                                                    value="{{ date('Y-m-d', strtotime('+1 year')) }}" required>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="quantity[]" class="form-control quantity"
+                                                    value="{{ $medicine->pivot->quantity }}" min="1" required>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="unit_price[]" class="form-control unit-price"
+                                                    value="{{ $medicine->pivot->unit_price }}" min="0"
+                                                    step="0.01" required>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="discount[]" class="form-control discount"
+                                                    value="{{ $medicine->pivot->discount ?? 0 }}" min="0"
+                                                    max="100" step="0.01">
+                                            </td>
+                                            <td>
+                                                <input type="number" name="tax[]" class="form-control tax"
+                                                    value="{{ $medicine->pivot->tax ?? 0 }}" min="0" max="100"
+                                                    step="0.01">
+                                            </td>
+                                            <td>
+                                                <span class="subtotal">
+                                                    {{ number_format($medicine->pivot->subtotal, 2) }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="note">{{ __('purchase.note') }}</label>
+                            <textarea name="note" id="note" class="form-control" rows="4">{{ $purchase->note }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border">
+                            <div class="card-body">
+                                <div class="form-group row mb-3">
+                                    <label for="shipping"
+                                        class="col-md-4 col-form-label">{{ __('purchase.shipping') }}</label>
+                                    <div class="col-md-8">
+                                        <input type="number" name="shipping" id="shipping" class="form-control"
+                                            value="{{ $purchase->shipping ?? 0 }}" min="0" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label for="discount"
+                                        class="col-md-4 col-form-label">{{ __('purchase.discount') }}</label>
+                                    <div class="col-md-8">
+                                        <input type="number" name="discount" id="discount" class="form-control"
+                                            value="{{ $purchase->discount ?? 0 }}" min="0" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label for="payment_method"
+                                        class="col-md-4 col-form-label">{{ __('purchase.payment_method') }}</label>
+                                    <div class="col-md-8">
+                                        <select name="payment_method" id="payment_method" class="form-control select2"
+                                            required>
+                                            <option value="cash">{{ __('purchase.payment_method_cash') }}</option>
+                                            <option value="bank_transfer">{{ __('purchase.payment_method_bank') }}
+                                            </option>
+                                            <option value="cheque">{{ __('purchase.payment_method_cheque') }}</option>
+                                            <option value="other">{{ __('purchase.payment_method_other') }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label for="paid_amount"
+                                        class="col-md-4 col-form-label">{{ __('purchase.paid_amount') }}</label>
+                                    <div class="col-md-8">
+                                        <input type="number" name="paid_amount" id="paid_amount" class="form-control"
+                                            value="0" min="0" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12 text-end">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('purchase.action.cancel') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('purchase.convert') }}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <!-- /product list -->
 @endsection
 
 @push('script')
-    <!-- Datatable JS -->
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
     <!-- Select2 JS -->
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-    <!-- Datetimepicker JS -->
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- Toastr JS -->
+    <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endpush

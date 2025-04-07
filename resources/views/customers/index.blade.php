@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Customers')
+@section('title', __('customers.customers'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,10 +8,10 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Customers',
-        'subtitle' => 'Manage your customers',
+        'title' => __('customers.customers'),
+        'subtitle' => __('customers.manage_customers'),
         'button' => [
-            'text' => 'Create Customer',
+            'text' => __('customers.create_customer'),
             'url' => route('customers.create'),
             'icon' => 'plus',
         ],
@@ -32,15 +32,15 @@
                 <thead>
                     <tr>
                         <th class="no-sort">
-                            SN
+                            {{ __('customers.sn') }}
                         </th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Balance</th>
-                        <th>Created On</th>
-                        <th class="no-sort">Action</th>
+                        <th>{{ __('customers.name') }}</th>
+                        <th>{{ __('customers.phone') }}</th>
+                        <th>{{ __('customers.email') }}</th>
+                        <th>{{ __('customers.address') }}</th>
+                        <th>{{ __('customers.balance') }}</th>
+                        <th>{{ __('customers.created_on') }}</th>
+                        <th class="no-sort">{{ __('customers.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,15 +71,15 @@
                             <td class="action-table-data">
                                 <div class="edit-delete-action">
                                     <a class="me-2 p-2" href="{{ route('customers.edit', $customer->id) }}"
-                                        data-bs-toggle="tooltip" title="Edit">
+                                        data-bs-toggle="tooltip" title="{{ __('customers.edit_tooltip') }}">
                                         <i data-feather="edit" class="feather-edit"></i>
                                     </a>
                                     <a class="p-2 me-2" href="{{ route('customers.show', $customer->id) }}"
-                                        data-bs-toggle="tooltip" title="View">
+                                        data-bs-toggle="tooltip" title="{{ __('customers.view_tooltip') }}">
                                         <i data-feather="eye" class="feather-eye"></i>
                                     </a>
                                     <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                        title="Delete" data-id="{{ $customer->id }}">
+                                        title="{{ __('customers.delete_tooltip') }}" data-id="{{ $customer->id }}">
                                         <i data-feather="trash-2" class="feather-trash-2"></i>
                                     </a>
                                     <form id="delete-form-{{ $customer->id }}"

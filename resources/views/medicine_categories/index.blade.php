@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Medicine Categories')
+@section('title', __('medicine_categories.title'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,10 +8,10 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Medicine Categories',
-        'subtitle' => 'Manage your medicine categories',
+        'title' => __('medicine_categories.title'),
+        'subtitle' => __('medicine_categories.manage_subtitle'),
         'button' => [
-            'text' => 'Create Medicine Category',
+            'text' => __('medicine_categories.create_button'),
             'url' => route('medicine-categories.create'),
             'icon' => 'plus',
         ],
@@ -30,12 +30,12 @@
                 <table class="table datanew">
                     <thead>
                         <tr>
-                            <th class="no-sort">SN</th>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Description</th>
-                            <th>Created On</th>
-                            <th class="no-sort">Action</th>
+                            <th class="no-sort">{{ __('medicine_categories.sn') }}</th>
+                            <th>{{ __('medicine_categories.name') }}</th>
+                            <th>{{ __('medicine_categories.slug') }}</th>
+                            <th>{{ __('medicine_categories.description') }}</th>
+                            <th>{{ __('medicine_categories.created_on') }}</th>
+                            <th class="no-sort">{{ __('medicine_categories.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,16 +44,16 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
-                                <td>{{ $category->description ?? 'N/A' }}</td>
+                                <td>{{ $category->description ?? __('medicine_categories.na') }}</td>
                                 <td>{{ $category->created_at->format('d M Y') }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="me-2 p-2" href="{{ route('medicine-categories.edit', $category->id) }}"
-                                            data-bs-toggle="tooltip" title="Edit">
+                                            data-bs-toggle="tooltip" title="{{ __('medicine_categories.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            title="Delete" data-id="{{ $category->id }}">
+                                            title="{{ __('medicine_categories.delete') }}" data-id="{{ $category->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                         <form id="delete-form-{{ $category->id }}"

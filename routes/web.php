@@ -34,6 +34,12 @@ Route::redirect('/', 'login');
 
 Route::middleware('auth')->group(function () {
 
+    // Language
+    Route::get('/language/{language}', function ($language) {
+        session(['language' => $language]);
+        return redirect()->back();
+    })->name('language');
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

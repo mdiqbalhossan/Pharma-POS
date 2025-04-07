@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Accounts')
+@section('title', __('account.accounts'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,10 +8,10 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Accounts',
-        'subtitle' => 'Manage your accounts',
+        'title' => __('account.accounts'),
+        'subtitle' => __('account.manage_your_accounts'),
         'button' => [
-            'text' => 'Create Account',
+            'text' => __('account.create_account'),
             'url' => route('accounts.create'),
             'icon' => 'plus',
         ],
@@ -31,14 +31,14 @@
                     <thead>
                         <tr>
                             <th class="no-sort">
-                                SN
+                                {{ __('account.sn') }}
                             </th>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Created On</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('account.name') }}</th>
+                            <th>{{ __('account.type') }}</th>
+                            <th>{{ __('account.description') }}</th>
+                            <th>{{ __('account.status') }}</th>
+                            <th>{{ __('account.created_on') }}</th>
+                            <th class="no-sort">{{ __('account.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,27 +47,27 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $account->name }}</td>
                                 <td>{{ $account->type }}</td>
-                                <td>{{ $account->description ?? 'N/A' }}</td>
+                                <td>{{ $account->description ?? __('account.na') }}</td>
                                 <td>
                                     @if ($account->is_active)
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">{{ __('account.active') }}</span>
                                     @else
-                                        <span class="badge bg-danger">Inactive</span>
+                                        <span class="badge bg-danger">{{ __('account.inactive') }}</span>
                                     @endif
                                 </td>
                                 <td>{{ $account->created_at->format('d M Y') }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="me-2 p-2" href="{{ route('accounts.edit', $account->id) }}"
-                                            data-bs-toggle="tooltip" title="Edit">
+                                            data-bs-toggle="tooltip" title="{{ __('account.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
                                         <a class="p-2 me-2" href="{{ route('accounts.show', $account->id) }}"
-                                            data-bs-toggle="tooltip" title="View">
+                                            data-bs-toggle="tooltip" title="{{ __('account.view') }}">
                                             <i data-feather="eye" class="feather-eye"></i>
                                         </a>
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            title="Delete" data-id="{{ $account->id }}">
+                                            title="{{ __('account.delete') }}" data-id="{{ $account->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                         <form id="delete-form-{{ $account->id }}"

@@ -1,265 +1,300 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Invoice #{{ $purchase->invoice_no }}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
+@section('title', __('purchase.invoice_title'))
 
-        .invoice-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
-            line-height: 24px;
-        }
+@push('plugin')
+    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+@endpush
 
-        .header {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-
-        .logo {
-            float: left;
-            max-width: 150px;
-        }
-
-        .company-info {
-            float: right;
-            text-align: right;
-        }
-
-        .invoice-details {
-            margin-bottom: 30px;
-        }
-
-        .supplier-details {
-            width: 50%;
-            float: left;
-        }
-
-        .purchase-details {
-            width: 50%;
-            float: right;
-            text-align: right;
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table th,
-        table td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #f8f8f8;
-        }
-
-        .totals {
-            float: right;
-            width: 350px;
-        }
-
-        .totals-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }
-
-        .totals-row.grand-total {
-            font-weight: bold;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
-        .payment-info {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .notes {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        @media print {
-            .no-print {
-                display: none;
-            }
-
-            body {
-                padding: 0;
-                margin: 0;
-            }
-
-            .invoice-container {
-                box-shadow: none;
-                border: none;
-                padding: 10px;
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="invoice-container">
-        <div class="header">
-            <div class="logo">
-                <h2>Pharmacy</h2>
-            </div>
-            <div class="company-info">
-                <h2>INVOICE</h2>
-                <p>Invoice #: {{ $purchase->invoice_no }}</p>
-                <p>Date: {{ date('d M, Y', strtotime($purchase->date)) }}</p>
-                <p>Type: {{ ucfirst(str_replace('_', ' ', $purchase->type)) }}</p>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-        <div class="invoice-details">
-            <div class="supplier-details">
-                <h3>Supplier Details:</h3>
-                <p><strong>{{ $purchase->supplier->name }}</strong></p>
-                @if ($purchase->supplier->email)
-                    <p>Email: {{ $purchase->supplier->email }}</p>
-                @endif
-                @if ($purchase->supplier->phone)
-                    <p>Phone: {{ $purchase->supplier->phone }}</p>
-                @endif
-                @if ($purchase->supplier->address)
-                    <p>Address: {{ $purchase->supplier->address }}</p>
-                @endif
-            </div>
-            <div class="purchase-details">
-                <h3>Payment Info:</h3>
-                <p>Method: {{ $purchase->payment_method }}</p>
-                <p>Status:
-                    @php
-                        $paymentStatus = 'Paid';
-                        if ($purchase->due_amount > 0 && $purchase->paid_amount == 0) {
-                            $paymentStatus = 'Unpaid';
-                        } elseif ($purchase->due_amount > 0) {
-                            $paymentStatus = 'Partial';
-                        }
-                    @endphp
-                    {{ $paymentStatus }}
-                </p>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Medicine</th>
-                    <th>Batch No</th>
-                    <th>Expiry Date</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>Discount</th>
-                    <th>Tax</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($purchase->medicines as $index => $medicine)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $medicine->name }}</td>
-                        <td>{{ $medicine->pivot->batch_no }}</td>
-                        <td>{{ date('d M, Y', strtotime($medicine->pivot->expiry_date)) }}</td>
-                        <td>{{ $medicine->pivot->quantity }}</td>
-                        <td>${{ number_format($medicine->pivot->unit_price, 2) }}</td>
-                        <td>${{ number_format($medicine->pivot->discount, 2) }}</td>
-                        <td>${{ number_format($medicine->pivot->total_tax, 2) }}</td>
-                        <td>${{ number_format($medicine->pivot->grand_total, 2) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <div class="totals">
-            <div class="totals-row">
-                <span>Subtotal:</span>
-                <span>${{ number_format($purchase->subtotal, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Tax:</span>
-                <span>${{ number_format($purchase->total_tax, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Discount:</span>
-                <span>${{ number_format($purchase->discount, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Shipping:</span>
-                <span>${{ number_format($purchase->shipping, 2) }}</span>
-            </div>
-            <div class="totals-row grand-total">
-                <span>Grand Total:</span>
-                <span>${{ number_format($purchase->grand_total, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Paid Amount:</span>
-                <span>${{ number_format($purchase->paid_amount, 2) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>Due Amount:</span>
-                <span>${{ number_format($purchase->due_amount, 2) }}</span>
+@section('content')
+    <div class="page-header">
+        <div class="add-item d-flex">
+            <div class="page-title">
+                <h4>{{ __('purchase.invoice_title') }} #{{ $purchase->invoice_no }}</h4>
+                <h6>{{ __('purchase.view_invoice_details') }}</h6>
             </div>
         </div>
-        <div class="clear"></div>
-
-        @if ($purchase->note)
-            <div class="notes">
-                <h3>Notes:</h3>
-                <p>{!! $purchase->note !!}</p>
-            </div>
-        @endif
-
-        <div class="footer">
-            <p>Thank you for your business!</p>
-        </div>
+        <ul class="table-top-head">
+            <li>
+                <div class="page-btn">
+                    <a href="{{ route('purchases.index') }}" class="btn btn-secondary"><i data-feather="arrow-left"
+                            class="me-2"></i>{{ __('purchase.back_to_purchase') }}</a>
+                </div>
+            </li>
+            <li>
+                <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('purchase.print') }}" id="print-invoice"><i
+                        data-feather="printer" class="feather-printer"></i></a>
+            </li>
+            <li>
+                <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('purchase.download') }}"
+                    id="download-invoice"><i data-feather="download" class="feather-download"></i></a>
+            </li>
+        </ul>
     </div>
 
-    <script>
-        window.onload = function() {
-            window.print();
-        };
-    </script>
-</body>
+    <div id="invoice-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-sm border mb-4">
+                    <div class="card-body invoice-content">
+                        <!-- Invoice Header -->
+                        <div class="invoice-header mb-4 pb-3 border-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @if (setting('logo'))
+                                        <div class="logo-container mb-3">
+                                            <img src="{{ asset('storage/' . setting('logo')) }}"
+                                                alt="{{ __('purchase.company_logo') }}" class="img-fluid"
+                                                style="max-height: 80px;">
+                                        </div>
+                                    @endif
+                                    <h2 class="company-name">{{ setting('company_name') }}</h2>
+                                    <div class="company-details">
+                                        @if (setting('company_address'))
+                                            <p class="company-address mb-1">{{ setting('company_address') }}</p>
+                                        @endif
+                                        @if (setting('company_phone'))
+                                            <p class="company-phone mb-1">{{ __('purchase.phone') }}:
+                                                {{ setting('company_phone') }}</p>
+                                        @endif
+                                        @if (setting('company_email'))
+                                            <p class="company-email mb-0">{{ __('purchase.email') }}:
+                                                {{ setting('company_email') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <h1 class="invoice-title">{{ __('purchase.purchase_invoice') }}</h1>
+                                    <div class="invoice-details mt-3">
+                                        <p class="invoice-id mb-1">{{ __('purchase.invoice_no') }}:
+                                            #{{ $purchase->invoice_no }}
+                                        </p>
+                                        <p class="invoice-date mb-1">{{ __('purchase.date') }}:
+                                            {{ date('d M, Y', strtotime($purchase->date)) }}</p>
+                                        <p class="payment-status mb-0">
+                                            {{ __('purchase.status') }}:
+                                            @php
+                                                $statusText = 'Paid';
+                                                $statusClass = 'text-success';
 
-</html>
+                                                if ($purchase->due_amount > 0 && $purchase->paid_amount == 0) {
+                                                    $statusText = 'Unpaid';
+                                                    $statusClass = 'text-danger';
+                                                } elseif ($purchase->due_amount > 0) {
+                                                    $statusText = 'Partial';
+                                                    $statusClass = 'text-warning';
+                                                }
+                                            @endphp
+                                            <span
+                                                class="{{ $statusClass }}">{{ __('purchase.status.' . $statusText) }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Supplier and Purchase Information -->
+                        <div class="invoice-info mb-4 pb-3 border-bottom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="section-title">{{ __('purchase.supplier_info') }}</h5>
+                                    <div class="supplier-details">
+                                        <p class="supplier-name mb-1">{{ $purchase->supplier->name }}</p>
+                                        @if ($purchase->supplier->email)
+                                            <p class="supplier-email mb-1">{{ __('purchase.email') }}:
+                                                {{ $purchase->supplier->email }}</p>
+                                        @endif
+                                        @if ($purchase->supplier->phone)
+                                            <p class="supplier-phone mb-1">{{ __('purchase.phone') }}:
+                                                {{ $purchase->supplier->phone }}</p>
+                                        @endif
+                                        @if ($purchase->supplier->address)
+                                            <p class="supplier-address mb-0">{{ __('purchase.address') }}:
+                                                {{ $purchase->supplier->address }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="section-title">{{ __('purchase.purchase_info') }}</h5>
+                                    <div class="purchase-details">
+                                        <p class="purchase-type mb-1">{{ __('purchase.purchase_type') }}:
+                                            {{ ucfirst(str_replace('_', ' ', $purchase->type)) }}</p>
+                                        @if ($purchase->reference_no)
+                                            <p class="purchase-ref mb-1">{{ __('purchase.reference') }}:
+                                                {{ $purchase->reference_no }}</p>
+                                        @endif
+                                        <p class="payment-method mb-0">{{ __('purchase.payment_method') }}:
+                                            {{ $purchase->payment_method }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Purchase Items Table -->
+                        <div class="invoice-items mb-4">
+                            <h5 class="section-title mb-3">{{ __('purchase.purchase_items') }}</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{ __('purchase.item') }}</th>
+                                            <th>{{ __('purchase.batch') }}</th>
+                                            <th>{{ __('purchase.expiry') }}</th>
+                                            <th>{{ __('purchase.qty') }}</th>
+                                            <th>{{ __('purchase.unit_price') }}</th>
+                                            <th>{{ __('purchase.discount') }}</th>
+                                            <th>{{ __('purchase.tax') }}</th>
+                                            <th>{{ __('purchase.total') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($purchase->purchaseDetails as $key => $item)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $item->medicine ? $item->medicine->name : 'N/A' }}</td>
+                                                <td>{{ $item->batch_no }}</td>
+                                                <td>{{ $item->expiry_date ? date('M Y', strtotime($item->expiry_date)) : 'N/A' }}
+                                                </td>
+                                                <td>{{ $item->quantity }}</td>
+                                                <td>${{ number_format($item->unit_price, 2) }}</td>
+                                                <td>${{ number_format($item->discount_amount, 2) }}</td>
+                                                <td>${{ number_format($item->tax_amount, 2) }}</td>
+                                                <td>${{ number_format($item->subtotal, 2) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Payment Summary -->
+                        <div class="invoice-summary mb-4">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="notes">
+                                        <h5 class="section-title mb-3">{{ __('purchase.notes') }}</h5>
+                                        <div class="note-content p-3 bg-light rounded">
+                                            {!! $purchase->note ?? '<em>' . __('purchase.no_notes') . '</em>' !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="payment-summary">
+                                        <h5 class="section-title mb-3">{{ __('purchase.summary') }}</h5>
+                                        <div class="summary-table">
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{ __('purchase.subtotal') }}</td>
+                                                        <td class="text-end">${{ number_format($purchase->subtotal, 2) }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ __('purchase.tax') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->total_tax, 2) }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ __('purchase.discount') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->discount, 2) }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ __('purchase.shipping') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->shipping, 2) }}</td>
+                                                    </tr>
+                                                    <tr class="fw-bold">
+                                                        <td>{{ __('purchase.grand_total') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->grand_total, 2) }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{{ __('purchase.paid_amount') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->paid_amount, 2) }}</td>
+                                                    </tr>
+                                                    <tr class="fw-bold">
+                                                        <td>{{ __('purchase.due_amount') }}</td>
+                                                        <td class="text-end">
+                                                            ${{ number_format($purchase->due_amount, 2) }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="invoice-footer mt-5 pt-4 border-top">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="terms-conditions">
+                                        <h6>{{ __('purchase.terms_conditions') }}</h6>
+                                        <p class="small">
+                                            {{ setting('invoice_terms') ?? __('purchase.standard_terms') }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <div class="invoice-signature">
+                                        <p>{{ __('purchase.authorized_signature') }}</p>
+                                        <div class="signature-line mt-4">____________________</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <p class="small mb-0">{{ __('purchase.thank_you') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('script')
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Print invoice
+            $('#print-invoice').on('click', function() {
+                window.print();
+            });
+
+            // Download invoice as PDF
+            $('#download-invoice').on('click', function() {
+                const element = document.getElementById('invoice-container');
+                const options = {
+                    margin: 1,
+                    filename: 'purchase-invoice-{{ $purchase->invoice_no }}.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2
+                    },
+                    jsPDF: {
+                        unit: 'cm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                };
+
+                html2pdf().set(options).from(element).save();
+            });
+        });
+    </script>
+@endpush

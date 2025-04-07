@@ -10,9 +10,9 @@
                 <!-- Receipt content will be loaded here dynamically -->
                 <div class="text-center">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                        <span class="visually-hidden">{{ __('Loading...') }}</span>
                     </div>
-                    <p>Loading receipt...</p>
+                    <p>{{ __('Loading receipt...') }}</p>
                 </div>
             </div>
         </div>
@@ -23,34 +23,34 @@
 <script type="text/template" id="receipt-template">
     <div class="icon-head text-center">
         <a href="javascript:void(0);">
-            <img src="assets/img/logo.png" width="100" height="30" alt="Receipt Logo">
+            <img src="assets/img/logo.png" width="100" height="30" alt="{{ __('Receipt Logo') }}">
         </a>
     </div>
     <div class="text-center info text-center">
         <h6>Dreamguys Technologies Pvt Ltd.,</h6>
-        <p class="mb-0">Phone Number: +1 5656665656</p>
-        <p class="mb-0">Email: <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+        <p class="mb-0">{{ __('Phone Number:') }} +1 5656665656</p>
+        <p class="mb-0">{{ __('Email:') }} <a href="mailto:example@gmail.com">example@gmail.com</a></p>
     </div>
     <div class="tax-invoice">
-        <h6 class="text-center">Tax Invoice</h6>
+        <h6 class="text-center">{{ __('Tax Invoice') }}</h6>
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <div class="invoice-user-name"><span>Name: </span><span id="customer-name"></span></div>
-                <div class="invoice-user-name"><span>Invoice No: </span><span id="invoice-no"></span></div>
+                <div class="invoice-user-name"><span>{{ __('Name:') }} </span><span id="customer-name"></span></div>
+                <div class="invoice-user-name"><span>{{ __('Invoice No:') }} </span><span id="invoice-no"></span></div>
             </div>
             <div class="col-sm-12 col-md-6">
-                <div class="invoice-user-name"><span>Customer Id: </span><span id="customer-id"></span></div>
-                <div class="invoice-user-name"><span>Date: </span><span id="invoice-date"></span></div>
+                <div class="invoice-user-name"><span>{{ __('Customer Id:') }} </span><span id="customer-id"></span></div>
+                <div class="invoice-user-name"><span>{{ __('Date:') }} </span><span id="invoice-date"></span></div>
             </div>
         </div>
     </div>
     <table class="table-borderless w-100 table-fit">
         <thead>
             <tr>
-                <th># Item</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th class="text-end">Total</th>
+                <th># {{ __('Item') }}</th>
+                <th>{{ __('Price') }}</th>
+                <th>{{ __('Qty') }}</th>
+                <th class="text-end">{{ __('Total') }}</th>
             </tr>
         </thead>
         <tbody id="receipt-items">
@@ -61,31 +61,31 @@
                 <td colspan="4">
                     <table class="table-borderless w-100 table-fit">
                         <tr>
-                            <td>Sub Total :</td>
+                            <td>{{ __('Sub Total') }} :</td>
                             <td class="text-end" id="receipt-subtotal"></td>
                         </tr>
                         <tr>
-                            <td>Discount :</td>
+                            <td>{{ __('Discount') }} :</td>
                             <td class="text-end" id="receipt-discount"></td>
                         </tr>
                         <tr>
-                            <td>Shipping :</td>
+                            <td>{{ __('Shipping') }} :</td>
                             <td class="text-end" id="receipt-shipping"></td>
                         </tr>
                         <tr>
-                            <td>Tax :</td>
+                            <td>{{ __('Tax') }} :</td>
                             <td class="text-end" id="receipt-tax"></td>
                         </tr>
                         <tr>
-                            <td>Total Bill :</td>
+                            <td>{{ __('Total Bill') }} :</td>
                             <td class="text-end" id="receipt-total"></td>
                         </tr>
                         <tr>
-                            <td>Due :</td>
+                            <td>{{ __('Due') }} :</td>
                             <td class="text-end" id="receipt-due"></td>
                         </tr>
                         <tr>
-                            <td>Total Payable :</td>
+                            <td>{{ __('Total Payable') }} :</td>
                             <td class="text-end" id="receipt-payable"></td>
                         </tr>
                     </table>
@@ -94,11 +94,11 @@
         </tfoot>
     </table>
     <div class="text-center invoice-bar">
-        <p>**VAT against this challan is payable through central registration. Thank you for your business!</p>
+        <p>{{ __('**VAT against this challan is payable through central registration. Thank you for your business!') }}</p>
         <a href="javascript:void(0);" id="receipt-barcode" class="d-flex justify-content-center mb-2">
         </a>
-        <p>Sale <span id="receipt-sale-no"></span></p>
-        <p>Thank You For Shopping With Us. Please Come Again</p>
-        <a href="javascript:void(0);" class="btn btn-primary print-button">Print Receipt</a>
+        <p>{{ __('Sale') }} <span id="receipt-sale-no"></span></p>
+        <p>{{ __('Thank You For Shopping With Us. Please Come Again') }}</p>
+        <a href="javascript:void(0);" class="btn btn-primary print-button">{{ __('Print Receipt') }}</a>
     </div>
 </script>

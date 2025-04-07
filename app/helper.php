@@ -67,3 +67,92 @@ function date_time_show($dateTime)
     $timeFormat = setting('time_format');
     return date($dateFormat . ' ' . $timeFormat, strtotime($dateTime));
 }
+
+/**
+ * Get All Languages
+ */
+function get_all_languages()
+{
+    $filtered = ['.', '..'];
+    $dirs     = [];
+    $d        = dir(resource_path('lang'));
+    while (($entry = $d->read()) !== false) {
+        if (is_dir(resource_path('lang') . '/' . $entry) && ! in_array($entry, $filtered)) {
+            $dirs[] = $entry;
+        }
+    }
+
+    return $dirs;
+}
+
+/**
+ * Get Language Full name
+ */
+function get_language_full_name($language)
+{
+    $languages = [
+        'en' => 'English',
+        'bn' => 'Bengali',
+        'hi' => 'Hindi',
+        'ar' => 'Arabic',
+        'fr' => 'French',
+        'de' => 'German',
+        'es' => 'Spanish',
+        'it' => 'Italian',
+        'ja' => 'Japanese',
+        'ko' => 'Korean',
+        'pt' => 'Portuguese',
+        'ru' => 'Russian',
+        'tr' => 'Turkish',
+        'zh' => 'Chinese',
+        'nl' => 'Dutch',
+        'pl' => 'Polish',
+        'ro' => 'Romanian',
+        'sv' => 'Swedish',
+        'th' => 'Thai',
+        'vi' => 'Vietnamese',
+        'id' => 'Indonesian',
+    ];
+
+    return $languages[$language] ?? $language;
+}
+
+/**
+ * Get Langauge Flag
+ */
+function get_language_flag($language)
+{
+    $languageFlags = [
+        'en' => 'us',
+        'bn' => 'bd',
+        'hi' => 'in',
+        'ar' => 'sa',
+        'fr' => 'fr',
+        'de' => 'de',
+        'es' => 'es',
+        'it' => 'it',
+        'ja' => 'jp',
+        'ko' => 'kr',
+        'pt' => 'pt',
+        'ru' => 'ru',
+        'tr' => 'tr',
+        'zh' => 'cn',
+        'nl' => 'nl',
+        'pl' => 'pl',
+        'ro' => 'ro',
+        'sv' => 'se',
+        'th' => 'th',
+        'vi' => 'vn',
+        'id' => 'id',
+    ];
+
+    return $languageFlags[$language] ?? $language;
+}
+
+/**
+ * Get Current User Language
+ */
+function get_current_user_language()
+{
+    return session('language') ?? 'en';
+}

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Purchases')
+@section('title', __('purchase.purchases'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,15 +13,15 @@
     <div class="page-header transfer">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Purchase List</h4>
-                <h6>Manage your purchases</h6>
+                <h4>{{ __('purchase.list') }}</h4>
+                <h6>{{ __('purchase.manage_purchases') }}</h6>
             </div>
         </div>
 
         <div class="d-flex purchase-pg-btn">
             <div class="page-btn">
                 <a href="{{ route('purchases.create') }}" class="btn btn-added"><i data-feather="plus-circle"
-                        class="me-2"></i>Add New Purchase</a>
+                        class="me-2"></i>{{ __('purchase.add_new') }}</a>
             </div>
         </div>
 
@@ -45,9 +45,9 @@
                 <div class="form-sort">
                     <i data-feather="sliders" class="info-img"></i>
                     <select class="select">
-                        <option>Sort by Date</option>
-                        <option>Newest</option>
-                        <option>Oldest</option>
+                        <option>{{ __('purchase.sort_date') }}</option>
+                        <option>{{ __('purchase.newest') }}</option>
+                        <option>{{ __('purchase.oldest') }}</option>
                     </select>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                             <div class="input-blocks">
                                 <i data-feather="user" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Supplier Name</option>
-                                    <option>Apex Computers</option>
-                                    <option>Beats Headphones</option>
-                                    <option>Dazzle Shoes</option>
-                                    <option>Best Accessories</option>
+                                    <option>{{ __('purchase.choose_supplier') }}</option>
+                                    <option>{{ __('purchase.vendor.apex_computers') }}</option>
+                                    <option>{{ __('purchase.vendor.beats_headphones') }}</option>
+                                    <option>{{ __('purchase.vendor.dazzle_shoes') }}</option>
+                                    <option>{{ __('purchase.vendor.best_accessories') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -71,10 +71,10 @@
                             <div class="input-blocks">
                                 <i data-feather="stop-circle" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Status</option>
-                                    <option>Received</option>
-                                    <option>Ordered</option>
-                                    <option>Pending</option>
+                                    <option>{{ __('purchase.choose_status') }}</option>
+                                    <option>{{ __('purchase.status.received') }}</option>
+                                    <option>{{ __('purchase.status.ordered') }}</option>
+                                    <option>{{ __('purchase.status.pending') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -82,10 +82,10 @@
                             <div class="input-blocks">
                                 <i data-feather="file" class="info-img"></i>
                                 <select class="select">
-                                    <option>Enter Reference</option>
-                                    <option>PT001</option>
-                                    <option>PT002</option>
-                                    <option>PT003</option>
+                                    <option>{{ __('purchase.enter_reference') }}</option>
+                                    <option>{{ __('purchase.reference.pt001') }}</option>
+                                    <option>{{ __('purchase.reference.pt002') }}</option>
+                                    <option>{{ __('purchase.reference.pt003') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -93,17 +93,17 @@
                             <div class="input-blocks">
                                 <i class="fas fa-money-bill info-img"></i>
                                 <select class="select">
-                                    <option>Choose Payment Status</option>
-                                    <option>Paid</option>
-                                    <option>Partial</option>
-                                    <option>Unpaid</option>
+                                    <option>{{ __('purchase.choose_payment_status') }}</option>
+                                    <option>{{ __('purchase.payment_status.paid') }}</option>
+                                    <option>{{ __('purchase.payment_status.partial') }}</option>
+                                    <option>{{ __('purchase.payment_status.unpaid') }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 col-12 ms-auto">
                             <div class="input-blocks">
-                                <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Search </a>
+                                <a class="btn btn-filters ms-auto"><i data-feather="search" class="feather-search"></i>
+                                    {{ __('purchase.search') }}</a>
                             </div>
                         </div>
                     </div>
@@ -111,18 +111,18 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive product-list">
-                <table class="table  datanew list">
+                <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>Supplier Name</th>
-                            <th>Reference</th>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Grand Total</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Payment Status</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('purchase.supplier_name') }}</th>
+                            <th>{{ __('purchase.reference') }}</th>
+                            <th>{{ __('purchase.date') }}</th>
+                            <th>{{ __('purchase.type') }}</th>
+                            <th>{{ __('purchase.grand_total') }}</th>
+                            <th>{{ __('purchase.paid') }}</th>
+                            <th>{{ __('purchase.due') }}</th>
+                            <th>{{ __('purchase.payment_status') }}</th>
+                            <th class="no-sort">{{ __('purchase.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,9 +133,10 @@
                                 <td>{{ \Carbon\Carbon::parse($purchase->date)->format('d M Y') }}</td>
                                 <td>
                                     @if ($purchase->type == 'purchase')
-                                        <span class="badges status-badge">Purchase</span>
+                                        <span class="badges status-badge">{{ __('purchase.purchase') }}</span>
                                     @elseif($purchase->type == 'purchase_order')
-                                        <span class="badges status-badge ordered">Purchase Order</span>
+                                        <span
+                                            class="badges status-badge ordered">{{ __('purchase.purchase_order') }}</span>
                                     @endif
                                 </td>
                                 <td>{{ number_format($purchase->grand_total, 2) }}</td>
@@ -143,26 +144,30 @@
                                 <td>{{ number_format($purchase->due_amount, 2) }}</td>
                                 <td>
                                     @if ($purchase->due_amount <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
+                                        <span class="badge-linesuccess">{{ __('purchase.payment_status.paid') }}</span>
                                     @elseif($purchase->paid_amount > 0 && $purchase->due_amount > 0)
-                                        <span class="badges-warning">Partial</span>
+                                        <span class="badges-warning">{{ __('purchase.payment_status.partial') }}</span>
                                     @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
+                                        <span
+                                            class="badge badge-linedangered">{{ __('purchase.payment_status.unpaid') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
-                                        <a class="me-2 p-2" href="{{ route('purchases.show', $purchase->id) }}">
+                                        <a class="me-2 p-2" href="{{ route('purchases.show', $purchase->id) }}"
+                                            title="{{ __('purchase.action.view') }}">
                                             <i data-feather="eye" class="action-eye"></i>
                                         </a>
-                                        <a class="me-2 p-2" href="{{ route('purchases.edit', $purchase->id) }}">
+                                        <a class="me-2 p-2" href="{{ route('purchases.edit', $purchase->id) }}"
+                                            title="{{ __('purchase.action.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
-                                        <a class="me-2 p-2" href="{{ route('purchases.return', $purchase->id) }}">
+                                        <a class="me-2 p-2" href="{{ route('purchases.return', $purchase->id) }}"
+                                            title="{{ __('purchase.action.return') }}">
                                             <i data-feather="corner-up-left" class="feather-edit"></i>
                                         </a>
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            title="Delete" data-id="{{ $purchase->id }}">
+                                            title="{{ __('purchase.action.delete') }}" data-id="{{ $purchase->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                         <form id="delete-form-{{ $purchase->id }}"

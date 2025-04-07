@@ -1,0 +1,190 @@
+<?php
+
+return [
+    // General terms
+    'purchases'              => 'Purchases',
+    'purchase'               => 'Purchase',
+    'purchase_order'         => 'Purchase Order',
+    'list'                   => 'Purchase List',
+    'manage_purchases'       => 'Manage your purchases',
+    'add_new'                => 'Add New Purchase',
+    'order'                  => 'Purchase Order',
+    'order_details'          => 'Manage purchase order details',
+    'add_medicine'           => 'Add Medicine',
+    'no_items_added'         => 'No medicine items have been added yet. Please add items to continue.',
+    'total_tax'              => 'Total Tax',
+    'payment_info'           => 'Payment Information',
+    'payment_note'           => 'Payment Note',
+    'edit_purchase'          => 'Update purchase information',
+    'received'               => 'Received',
+    'pending'                => 'Pending',
+    'ordered'                => 'Ordered',
+    'phone'                  => 'Phone',
+    'email'                  => 'Email',
+    'address'                => 'Address',
+    'to'                     => 'To',
+    'items'                  => 'Purchase Items',
+    'purchase_type'          => 'Purchase Type',
+    'purchase_items'         => 'Purchase Items',
+    'print'                  => 'Print',
+    'download'               => 'Download',
+    'company_logo'           => 'Company Logo',
+    'back_to_purchase'       => 'Back to Purchase',
+    'view_invoice_details'   => 'View purchase invoice details',
+    'converting_order'       => 'Converting purchase order: :invoice to purchase',
+
+    // Page titles and descriptions
+    'edit'                   => 'Edit Purchase',
+    'create'                 => 'Create Purchase',
+    'details'                => 'Purchase Details',
+    'invoice'                => 'Purchase Invoice',
+    'invoice_title'          => 'PURCHASE INVOICE',
+    'new'                    => 'New Purchase',
+    'create_new'             => 'Create new purchase',
+    'update'                 => 'Update Purchase',
+    'save'                   => 'Save Purchase',
+    'view_info'              => 'View purchase information',
+    'update_info'            => 'Update purchase information',
+    'view_invoice'           => 'View purchase invoice details',
+    'back_to'                => 'Back to Purchase',
+    'convert_to'             => 'Convert to Purchase',
+
+    // Field labels
+    'reference_invoice'      => 'Reference/Invoice No',
+    'date'                   => 'Date',
+    'type'                   => 'Type',
+    'supplier'               => 'Supplier',
+    'select_supplier'        => 'Select Supplier',
+    'medicine_name'          => 'Medicine Name',
+    'medicine_placeholder'   => 'Please type medicine name or barcode and select',
+    'medicine'               => 'Medicine',
+    'batch_no'               => 'Batch No',
+    'expiry_date'            => 'Expiry Date',
+    'qty'                    => 'Qty',
+    'mrp'                    => 'MRP',
+    'purchase_price'         => 'Purchase Price',
+    'discount_percent'       => 'Discount %',
+    'tax_percent'            => 'Tax %',
+    'tax_amount'             => 'Tax Amount',
+    'subtotal'               => 'Subtotal',
+    'row_total'              => 'Row Total',
+    'action'                 => 'Action',
+    'order_tax'              => 'Order Tax (%)',
+    'discount'               => 'Discount',
+    'shipping_cost'          => 'Shipping Cost',
+    'shipping'               => 'Shipping',
+    'note'                   => 'Note',
+    'grand_total'            => 'Grand Total',
+    'paid_amount'            => 'Paid Amount',
+    'due_amount'             => 'Due Amount',
+    'payment_method'         => 'Payment Method',
+    'payment_status'         => 'Payment Status',
+    'supplier_name'          => 'Supplier Name',
+    'reference'              => 'Reference',
+    'paid'                   => 'Paid',
+    'due'                    => 'Due',
+    'tax'                    => 'Tax',
+
+    // Payment methods (simplified)
+    'payment_method_cash'    => 'Cash',
+    'payment_method_bank'    => 'Bank Transfer',
+    'payment_method_cheque'  => 'Cheque',
+    'payment_method_other'   => 'Other',
+
+    // Invoice specific
+    'invoice_no'             => 'Invoice No',
+    'status'                 => 'Status',
+    'supplier_info'          => 'Supplier Information',
+    'purchase_info'          => 'Purchase Information',
+    'payment_summary'        => 'Payment Summary',
+    'summary'                => 'Summary',
+    'item'                   => 'Item',
+    'batch'                  => 'Batch',
+    'expiry'                 => 'Expiry',
+    'unit_price'             => 'Unit Price',
+    'total'                  => 'Total',
+    'notes'                  => 'Notes',
+    'no_notes'               => 'No notes available',
+    'terms_conditions'       => 'Terms & Conditions',
+    'standard_terms'         => 'Standard terms and conditions apply.',
+    'authorized_signature'   => 'Authorized Signature',
+    'thank_you'              => 'Thank you for your business!',
+
+    // Filter options
+    'sort_date'              => 'Sort by Date',
+    'newest'                 => 'Newest',
+    'oldest'                 => 'Oldest',
+    'choose_supplier'        => 'Choose Supplier Name',
+    'choose_status'          => 'Choose Status',
+    'choose_payment_status'  => 'Choose Payment Status',
+    'enter_reference'        => 'Enter Reference',
+    'search'                 => 'Search',
+
+    // Status options
+    'status_received'        => 'Received',
+    'status_ordered'         => 'Ordered',
+    'status_pending'         => 'Pending',
+
+    // Payment status options
+    'payment_status'         => [
+        'paid'    => 'Paid',
+        'partial' => 'Partial',
+        'unpaid'  => 'Unpaid',
+    ],
+
+    // Vendor options
+    'vendor'                 => [
+        'apex_computers'   => 'Apex Computers',
+        'beats_headphones' => 'Beats Headphones',
+        'dazzle_shoes'     => 'Dazzle Shoes',
+        'best_accessories' => 'Best Accessories',
+    ],
+
+    // Reference options
+    'reference'              => [
+        'pt001' => 'PT001',
+        'pt002' => 'PT002',
+        'pt003' => 'PT003',
+    ],
+
+    // Actions
+    'action'                 => [
+        'view'     => 'View',
+        'edit'     => 'Edit',
+        'delete'   => 'Delete',
+        'print'    => 'Print',
+        'download' => 'Download',
+        'return'   => 'Return',
+        'save'     => 'Save',
+        'update'   => 'Update',
+        'cancel'   => 'Cancel',
+        'back'     => 'Back',
+    ],
+
+    // Supplier modal
+    'supplier'               => [
+        'add_new' => 'Add New Supplier',
+        'add'     => 'Add Supplier',
+        'name'    => 'Name',
+        'email'   => 'Email',
+        'phone'   => 'Phone',
+        'address' => 'Address',
+        'close'   => 'Close',
+    ],
+
+    // Others
+    'loading_details'        => 'Loading purchase details...',
+    'convert_order_purchase' => 'Convert Purchase Order to Purchase',
+    'convert'                => 'Convert',
+    'collapse'               => 'Collapse',
+
+    // Format strings
+    'format'                 => [
+        'subtotal'    => 'Subtotal:',
+        'tax'         => 'Tax:',
+        'discount'    => 'Discount:',
+        'grand_total' => 'Grand Total:',
+        'paid_amount' => 'Paid Amount:',
+        'due_amount'  => 'Due Amount:',
+    ],
+];

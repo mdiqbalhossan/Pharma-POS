@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Medicines')
+@section('title', __('medicine.medicines'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,10 +8,10 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Medicines',
-        'subtitle' => 'Manage your medicines',
+        'title' => __('medicine.medicines'),
+        'subtitle' => __('medicine.manage_your_medicines'),
         'button' => [
-            'text' => 'Create Medicine',
+            'text' => __('medicine.create_medicine'),
             'url' => route('medicines.create'),
             'icon' => 'plus',
         ],
@@ -30,16 +30,16 @@
                 <table class="table datanew">
                     <thead>
                         <tr>
-                            <th class="no-sort">SN</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Generic Name</th>
-                            <th>Type</th>
-                            <th>Unit</th>
-                            <th>Sale Price</th>
-                            <th>Stock</th>
-                            <th>Status</th>
-                            <th class="no-sort">Action</th>
+                            <th class="no-sort">{{ __('medicine.sn') }}</th>
+                            <th>{{ __('medicine.image') }}</th>
+                            <th>{{ __('medicine.name') }}</th>
+                            <th>{{ __('medicine.generic_name') }}</th>
+                            <th>{{ __('medicine.type') }}</th>
+                            <th>{{ __('medicine.unit') }}</th>
+                            <th>{{ __('medicine.sale_price') }}</th>
+                            <th>{{ __('medicine.stock') }}</th>
+                            <th>{{ __('medicine.status') }}</th>
+                            <th class="no-sort">{{ __('medicine.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,9 +51,9 @@
                                         class="img-thumbnail" width="50">
                                 </td>
                                 <td>{{ $medicine->name }}</td>
-                                <td>{{ $medicine->generic_name ?? 'N/A' }}</td>
-                                <td>{{ $medicine->medicine_type->name ?? 'N/A' }}</td>
-                                <td>{{ $medicine->unit->name ?? 'N/A' }}</td>
+                                <td>{{ $medicine->generic_name ?? __('medicine.na') }}</td>
+                                <td>{{ $medicine->medicine_type->name ?? __('medicine.na') }}</td>
+                                <td>{{ $medicine->unit->name ?? __('medicine.na') }}</td>
                                 <td>{{ show_amount($medicine->sale_price) }}</td>
                                 <td>
                                     @if ($medicine->quantity > 0)
@@ -63,28 +63,28 @@
                                             <span class="badge bg-success">{{ $medicine->quantity }}</span>
                                         @endif
                                     @else
-                                        <span class="badge bg-danger">Out of Stock</span>
+                                        <span class="badge bg-danger">{{ __('medicine.out_of_stock') }}</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if ($medicine->is_active)
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">{{ __('medicine.active') }}</span>
                                     @else
-                                        <span class="badge bg-danger">Inactive</span>
+                                        <span class="badge bg-danger">{{ __('medicine.inactive') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="me-2 p-2" href="{{ route('medicines.edit', $medicine->id) }}"
-                                            data-bs-toggle="tooltip" title="Edit">
+                                            data-bs-toggle="tooltip" title="{{ __('medicine.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
                                         <a class="p-2 me-2" href="{{ route('medicines.show', $medicine->id) }}"
-                                            data-bs-toggle="tooltip" title="View">
+                                            data-bs-toggle="tooltip" title="{{ __('medicine.view') }}">
                                             <i data-feather="eye" class="feather-eye"></i>
                                         </a>
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            title="Delete" data-id="{{ $medicine->id }}">
+                                            title="{{ __('medicine.delete') }}" data-id="{{ $medicine->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                         <form id="delete-form-{{ $medicine->id }}"

@@ -103,21 +103,17 @@
         <!-- Flag -->
         <li class="nav-item dropdown has-arrow flag-nav nav-item-box">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
-                <img src="{{ asset('assets/img/flags/us.png') }}" alt="Language" class="img-fluid">
+                <img src="{{ asset('assets/img/flags/' . get_language_flag(get_current_user_language()) . '.png') }}"
+                    alt="Language" class="img-fluid">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:void(0);" class="dropdown-item active">
-                    <img src="{{ asset('assets/img/flags/us.png') }}" alt="" height="16"> English
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="{{ asset('assets/img/flags/fr.png') }}" alt="" height="16"> French
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="{{ asset('assets/img/flags/es.png') }}" alt="" height="16"> Spanish
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="{{ asset('assets/img/flags/de.png') }}" alt="" height="16"> German
-                </a>
+                @foreach (get_all_languages() as $language)
+                    <a href="{{ route('language', $language) }}"
+                        class="dropdown-item {{ get_current_user_language() == $language ? 'active' : '' }}">
+                        <img src="{{ asset('assets/img/flags/' . get_language_flag($language) . '.png') }}"
+                            alt="" height="16"> {{ get_language_full_name($language) }}
+                    </a>
+                @endforeach
             </div>
         </li>
         <!-- /Flag -->

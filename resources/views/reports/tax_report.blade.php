@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tax Report')
+@section('title', __('Tax Report'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -15,8 +15,8 @@
     <div class="page-header report">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Tax Report</h4>
-                <h6>View and analyze your tax data</h6>
+                <h4>{{ __('Tax Report') }}</h4>
+                <h6>{{ __('View tax collection and payments') }}</h6>
             </div>
         </div>
     </div>
@@ -28,29 +28,29 @@
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>From Date</label>
+                            <label>{{ __('From Date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
-                                <input type="text" name="start_date" class="datetimepicker" placeholder="Choose Date"
-                                    value="{{ request('start_date') ?? '' }}">
+                                <input type="text" name="start_date" class="datetimepicker"
+                                    placeholder="{{ __('Choose Date') }}" value="{{ request('start_date') ?? '' }}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>To Date</label>
+                            <label>{{ __('To Date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
-                                <input type="text" name="end_date" class="datetimepicker" placeholder="Choose Date"
-                                    value="{{ request('end_date') ?? '' }}">
+                                <input type="text" name="end_date" class="datetimepicker"
+                                    placeholder="{{ __('Choose Date') }}" value="{{ request('end_date') ?? '' }}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="input-blocks">
                             <label>&nbsp;</label>
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            <a href="{{ route('reports.tax') }}" class="btn btn-info ms-2">Reset</a>
+                            <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
+                            <a href="{{ route('reports.tax') }}" class="btn btn-info ms-2">{{ __('Reset') }}</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($salesTax, 2) }}</h4>
-                    <h5>Sales Tax</h5>
+                    <h5>{{ __('Sales Tax') }}</h5>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($purchaseTax, 2) }}</h4>
-                    <h5>Purchase Tax</h5>
+                    <h5>{{ __('Purchase Tax') }}</h5>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($netTax, 2) }}</h4>
-                    <h5>Net Tax</h5>
+                    <h5>{{ __('Net Tax') }}</h5>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
     @if (count($taxByMonth) > 0)
         <div class="card">
             <div class="card-header">
-                <h5>Tax Trend by Month</h5>
+                <h5>{{ __('Tax Trend by Month') }}</h5>
             </div>
             <div class="card-body">
                 <div id="tax-chart"></div>
@@ -102,17 +102,17 @@
     @if (count($taxByMonth) > 0)
         <div class="card table-list-card">
             <div class="card-header">
-                <h5>Tax by Month</h5>
+                <h5>{{ __('Tax by Month') }}</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table datanew list">
                         <thead>
                             <tr>
-                                <th>Month</th>
-                                <th>Sales Tax</th>
-                                <th>Purchase Tax</th>
-                                <th>Net Tax</th>
+                                <th>{{ __('Month') }}</th>
+                                <th>{{ __('Sales Tax') }}</th>
+                                <th>{{ __('Purchase Tax') }}</th>
+                                <th>{{ __('Net Tax') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,13 +160,13 @@
 
             var options = {
                 series: [{
-                    name: 'Sales Tax',
+                    name: '{{ __('Sales Tax') }}',
                     data: salesTaxData
                 }, {
-                    name: 'Purchase Tax',
+                    name: '{{ __('Purchase Tax') }}',
                     data: purchaseTaxData
                 }, {
-                    name: 'Net Tax',
+                    name: '{{ __('Net Tax') }}',
                     data: netTaxData
                 }],
                 chart: {
@@ -196,7 +196,7 @@
                 },
                 yaxis: {
                     title: {
-                        text: 'Amount'
+                        text: '{{ __('Amount') }}'
                     }
                 },
                 fill: {

@@ -13,8 +13,8 @@
         'button' => [
             'text' => 'Create Medicine Type',
             'url' => route('medicine-types.create'),
-            'icon' => 'plus'
-        ]
+            'icon' => 'plus',
+        ],
     ])
 
     <div class="card table-list-card">
@@ -38,27 +38,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($medicineTypes as $type)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $type->name }}</td>
-                            <td>{{ $type->description ?? 'N/A' }}</td>
-                            <td>{{ $type->created_at->format('d M Y') }}</td>
-                            <td class="action-table-data">
-                                <div class="edit-delete-action">
-                                    <a class="me-2 p-2" href="{{ route('medicine-types.edit', $type->id) }}" data-bs-toggle="tooltip" title="Edit">
-                                        <i data-feather="edit" class="feather-edit"></i>
-                                    </a>
-                                    <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete" data-id="{{ $type->id }}">
-                                        <i data-feather="trash-2" class="feather-trash-2"></i>
-                                    </a>
-                                    <form id="delete-form-{{ $type->id }}" action="{{ route('medicine-types.destroy', $type->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($medicineTypes as $type)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $type->name }}</td>
+                                <td>{{ $type->description ?? 'N/A' }}</td>
+                                <td>{{ $type->created_at->format('d M Y') }}</td>
+                                <td class="action-table-data">
+                                    <div class="edit-delete-action">
+                                        <a class="me-2 p-2" href="{{ route('medicine-types.edit', $type->id) }}"
+                                            data-bs-toggle="tooltip" title="Edit">
+                                            <i data-feather="edit" class="feather-edit"></i>
+                                        </a>
+                                        <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
+                                            title="Delete" data-id="{{ $type->id }}">
+                                            <i data-feather="trash-2" class="feather-trash-2"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $type->id }}"
+                                            action="{{ route('medicine-types.destroy', $type->id) }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -71,5 +75,4 @@
     <!-- Datatable JS -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
-
 @endpush

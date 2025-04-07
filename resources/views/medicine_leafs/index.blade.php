@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Medicine Leafs')
+@section('title', __('medicine_leafs.title'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,13 +8,13 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Medicine Leafs',
-        'subtitle' => 'Manage all medicine leafs',
+        'title' => __('medicine_leafs.title'),
+        'subtitle' => __('medicine_leafs.manage_all'),
         'button' => [
-            'text' => 'Create Medicine Leaf',
+            'text' => __('medicine_leafs.create_medicine_leaf'),
             'url' => route('medicine-leafs.create'),
-            'icon' => 'plus'
-        ]
+            'icon' => 'plus',
+        ],
     ])
 
     <div class="card table-list-card">
@@ -30,15 +30,15 @@
                 <table class="table datanew">
                     <thead>
                         <tr>
-                            <th class="no-sort">SN</th>
-                            <th>Type</th>
-                            <th>Quantity per Box</th>
-                            <th>Created On</th>
-                            <th class="no-sort">Action</th>
+                            <th class="no-sort">{{ __('medicine_leafs.sn') }}</th>
+                            <th>{{ __('medicine_leafs.type') }}</th>
+                            <th>{{ __('medicine_leafs.quantity_per_box') }}</th>
+                            <th>{{ __('medicine_leafs.created_on') }}</th>
+                            <th class="no-sort">{{ __('medicine_leafs.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($medicineLeafs as $leaf)
+                        @foreach ($medicineLeafs as $leaf)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $leaf->type }}</td>
@@ -46,13 +46,17 @@
                                 <td>{{ $leaf->created_at->format('d M Y') }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
-                                        <a class="me-2 p-2" href="{{ route('medicine-leafs.edit', $leaf->id) }}" data-bs-toggle="tooltip" title="Edit">
+                                        <a class="me-2 p-2" href="{{ route('medicine-leafs.edit', $leaf->id) }}"
+                                            data-bs-toggle="tooltip" title="{{ __('medicine_leafs.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
-                                        <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete" data-id="{{ $leaf->id }}">
+                                        <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
+                                            title="{{ __('medicine_leafs.delete') }}" data-id="{{ $leaf->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
-                                        <form id="delete-form-{{ $leaf->id }}" action="{{ route('medicine-leafs.destroy', $leaf->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $leaf->id }}"
+                                            action="{{ route('medicine-leafs.destroy', $leaf->id) }}" method="POST"
+                                            style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>

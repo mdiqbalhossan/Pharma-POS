@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Barcode Preview')
+@section('title', __('medicine.barcode_preview'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -41,19 +41,19 @@
     <div class="page-header no-print">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Barcode Preview</h4>
-                <h6>Preview and print barcodes</h6>
+                <h4>{{ __('medicine.barcode_preview') }}</h4>
+                <h6>{{ __('medicine.preview_and_print_barcodes') }}</h6>
             </div>
         </div>
         <div class="d-flex align-items-center">
             <ul class="table-top-head">
                 <li>
                     <a href="{{ route('print.barcode') }}" class="btn btn-secondary me-2"><i data-feather="arrow-left"
-                            class="me-2"></i>Back</a>
+                            class="me-2"></i>{{ __('medicine.back') }}</a>
                 </li>
                 <li>
                     <button class="btn btn-primary" id="print_btn">
-                        <i data-feather="printer" class="me-2"></i>Print Barcode
+                        <i data-feather="printer" class="me-2"></i>{{ __('medicine.print_barcode') }}
                     </button>
                 </li>
             </ul>
@@ -84,7 +84,8 @@
                                 </div>
 
                                 @if ($showPrice)
-                                    <p class="mt-1"><strong>Price: ${{ number_format($product['price'], 2) }}</strong></p>
+                                    <p class="mt-1"><strong>{{ __('medicine.price') }}:
+                                            ${{ number_format($product['price'], 2) }}</strong></p>
                                 @endif
                             </div>
                         </div>
@@ -92,7 +93,7 @@
                 @endforeach
             @else
                 <div class="col-12 text-center">
-                    <h5>No products selected for barcode printing</h5>
+                    <h5>{{ __('medicine.no_products_selected') }}</h5>
                 </div>
             @endif
         </div>
@@ -109,7 +110,8 @@
                 let container = $(".barcode-container");
 
                 let printWindow = window.open('', '_blank');
-                printWindow.document.write('<html><head><title>Barcode Print</title>');
+                printWindow.document.write(
+                '<html><head><title>{{ __('medicine.barcode_print') }}</title>');
                 printWindow.document.write(
                     `<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">`);
                 printWindow.document.write(
