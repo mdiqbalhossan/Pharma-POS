@@ -86,6 +86,12 @@
                     <i data-feather="grid"></i>
                 </a>
             </li>
+            <li class="nav-item nav-item-box">
+                <a href="javascript:void(0);" onclick="showKeyboardShortcutModal()" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="Keyboard Shortcuts">
+                    <i data-feather="command"></i>
+                </a>
+            </li>
         @else
             <li class="nav-item nav-item-box" title="POS">
                 <a href="{{ route('pos.index') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="POS">

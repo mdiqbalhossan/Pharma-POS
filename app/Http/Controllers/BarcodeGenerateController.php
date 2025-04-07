@@ -36,7 +36,7 @@ class BarcodeGenerateController extends Controller
                 'generic_name' => $medicine->generic_name,
                 'barcode'      => $medicine->barcode,
                 'price'        => $medicine->sale_price,
-                'image'        => $medicine->image ? asset('storage/medicines/' . $medicine->image) : asset('assets/img/placeholder.png'),
+                'image'        => $medicine->image,
             ];
         }
 

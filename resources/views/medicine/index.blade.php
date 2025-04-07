@@ -47,19 +47,14 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    @if ($medicine->image)
-                                        <img src="{{ Storage::url($medicine->image) }}" alt="{{ $medicine->name }}"
-                                            class="img-thumbnail" width="50">
-                                    @else
-                                        <img src="{{ asset('assets/img/placeholder.png') }}" alt="{{ $medicine->name }}"
-                                            class="img-thumbnail" width="50">
-                                    @endif
+                                    <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
+                                        class="img-thumbnail" width="50">
                                 </td>
                                 <td>{{ $medicine->name }}</td>
                                 <td>{{ $medicine->generic_name ?? 'N/A' }}</td>
                                 <td>{{ $medicine->medicine_type->name ?? 'N/A' }}</td>
                                 <td>{{ $medicine->unit->name ?? 'N/A' }}</td>
-                                <td>{{ number_format($medicine->sale_price, 2) }}</td>
+                                <td>{{ show_amount($medicine->sale_price) }}</td>
                                 <td>
                                     @if ($medicine->quantity > 0)
                                         @if ($medicine->quantity <= $medicine->alert_quantity)

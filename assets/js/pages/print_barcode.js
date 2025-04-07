@@ -31,6 +31,7 @@ $(document).ready(function () {
             },
         })
         .autocomplete("instance")._renderItem = function (ul, item) {
+        console.log(item);
         return $("<li>")
             .append(
                 `<div class="search-item d-flex align-items-center gap-2">

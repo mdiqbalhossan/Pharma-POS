@@ -294,6 +294,8 @@
     @include('pos.include._orders')
     @include('pos.include._customer')
     @include('pos.include._products')
+    @include('pos.include._keyboard_shortcut')
+
 @endsection
 
 @push('script')
@@ -302,6 +304,10 @@
     <!-- Datatable JS -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
+    <!-- Howler JS -->
+    <script src="{{ asset('assets/js/howler.min.js') }}"></script>
     <!-- POS JS -->
     <script src="{{ asset('assets/js/pages/pos.js') }}"></script>
+    <!-- Keyboard Shortcuts JS -->
+    <script src="{{ asset('assets/js/pages/keyboardshortcut.js') }}"></script>
 @endpush

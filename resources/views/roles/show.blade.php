@@ -11,9 +11,11 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">{{ $role->name }} Role</h5>
-            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">
-                <i data-feather="edit" class="me-2"></i> Edit Role
-            </a>
+            @if ($role->name != 'Admin')
+                <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">
+                    <i data-feather="edit" class="me-2"></i> Edit Role
+                </a>
+            @endif
         </div>
         <div class="card-body">
             <h6 class="mb-3">Assigned Permissions</h6>

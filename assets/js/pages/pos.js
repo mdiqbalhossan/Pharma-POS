@@ -272,6 +272,7 @@ $(document).ready(function () {
 
     // Also use event delegation for delete button
     $(".product-wrap").on("click", ".delete-icon", function () {
+        removeSound.play();
         // Remove from localStorage
         let id = $(this).closest(".cart-product-item").data("id");
         removeFromLocalStorage(id);
@@ -1601,5 +1602,24 @@ $(document).ready(function () {
             // Clear search inputs when changing tabs
             $(".order-search-input").val("");
         });
+    });
+    let soundBody = $("body");
+    // Work with media
+    let cartSound = new Howl({
+        src: [base_url + "/assets/media/click.wav"],
+    });
+
+    let removeSound = new Howl({
+        src: [base_url + "/assets/media/erase.wav"],
+    });
+
+    // Play sound when adding to cart
+    soundBody.on("click", ".product-info", function () {
+        cartSound.play();
+    });
+
+    // Play sound when erase cart
+    soundBody.on("click", "#clear-cart", function () {
+        removeSound.play();
     });
 });
