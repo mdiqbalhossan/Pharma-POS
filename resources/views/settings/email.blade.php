@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Email Settings')
+@section('title', __('Email Settings'))
 
 @section('content')
     <div class="container-fluid">
@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header">
-                        <h4 class="card-title">Email Settings</h4>
+                        <h4 class="card-title">{{ __('Email Settings') }}</h4>
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -22,7 +22,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="mail_mailer">Mail Driver <span class="text-danger">*</span></label>
+                                        <label for="mail_mailer">{{ __('Mail Driver') }} <span
+                                                class="text-danger">*</span></label>
                                         <select name="mail_mailer" id="mail_mailer"
                                             class="form-control @error('mail_mailer') is-invalid @enderror" required>
                                             <option value="smtp"
@@ -49,11 +50,12 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <label for="mail_host">Mail Host <span class="text-danger">*</span></label>
+                                        <label for="mail_host">{{ __('Mail Host') }} <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="mail_host" id="mail_host"
                                             class="form-control @error('mail_host') is-invalid @enderror"
                                             value="{{ old('mail_host', $settings['mail_host']) }}" required>
-                                        <small class="text-muted">Ex: smtp.gmail.com, smtp.mailtrap.io</small>
+                                        <small class="text-muted">{{ __('Ex: smtp.gmail.com, smtp.mailtrap.io') }}</small>
                                         @error('mail_host')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -64,11 +66,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_port">Mail Port <span class="text-danger">*</span></label>
+                                        <label for="mail_port">{{ __('Mail Port') }} <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="mail_port" id="mail_port"
                                             class="form-control @error('mail_port') is-invalid @enderror"
                                             value="{{ old('mail_port', $settings['mail_port']) }}" required>
-                                        <small class="text-muted">Common ports: 25, 465, 587, 2525</small>
+                                        <small class="text-muted">{{ __('Common ports: 25, 465, 587, 2525') }}</small>
                                         @error('mail_port')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -77,11 +80,11 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_username">Mail Username</label>
+                                        <label for="mail_username">{{ __('Mail Username') }}</label>
                                         <input type="text" name="mail_username" id="mail_username"
                                             class="form-control @error('mail_username') is-invalid @enderror"
                                             value="{{ old('mail_username', $settings['mail_username']) }}">
-                                        <small class="text-muted">Usually your email address</small>
+                                        <small class="text-muted">{{ __('Usually your email address') }}</small>
                                         @error('mail_username')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -90,11 +93,11 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_password">Mail Password</label>
+                                        <label for="mail_password">{{ __('Mail Password') }}</label>
                                         <input type="password" name="mail_password" id="mail_password"
                                             class="form-control @error('mail_password') is-invalid @enderror"
                                             value="{{ old('mail_password', $settings['mail_password']) }}">
-                                        <small class="text-muted">For Gmail, use app password</small>
+                                        <small class="text-muted">{{ __('For Gmail, use app password') }}</small>
                                         @error('mail_password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -105,17 +108,20 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_encryption">Mail Encryption</label>
+                                        <label for="mail_encryption">{{ __('Mail Encryption') }}</label>
                                         <select name="mail_encryption" id="mail_encryption"
                                             class="form-control @error('mail_encryption') is-invalid @enderror">
                                             <option value=""
-                                                {{ $settings['mail_encryption'] == '' ? 'selected' : '' }}>None
+                                                {{ $settings['mail_encryption'] == '' ? 'selected' : '' }}>
+                                                {{ __('None') }}
                                             </option>
                                             <option value="tls"
-                                                {{ $settings['mail_encryption'] == 'tls' ? 'selected' : '' }}>TLS
+                                                {{ $settings['mail_encryption'] == 'tls' ? 'selected' : '' }}>
+                                                {{ __('TLS') }}
                                             </option>
                                             <option value="ssl"
-                                                {{ $settings['mail_encryption'] == 'ssl' ? 'selected' : '' }}>SSL
+                                                {{ $settings['mail_encryption'] == 'ssl' ? 'selected' : '' }}>
+                                                {{ __('SSL') }}
                                             </option>
                                         </select>
                                         @error('mail_encryption')
@@ -126,13 +132,14 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_from_address">From Email Address <span
+                                        <label for="mail_from_address">{{ __('From Email Address') }} <span
                                                 class="text-danger">*</span></label>
                                         <input type="email" name="mail_from_address" id="mail_from_address"
                                             class="form-control @error('mail_from_address') is-invalid @enderror"
                                             value="{{ old('mail_from_address', $settings['mail_from_address']) }}"
                                             required>
-                                        <small class="text-muted">Email address that appears in the "From" field</small>
+                                        <small
+                                            class="text-muted">{{ __('Email address that appears in the "From" field') }}</small>
                                         @error('mail_from_address')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -141,11 +148,12 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-3">
-                                        <label for="mail_from_name">From Name <span class="text-danger">*</span></label>
+                                        <label for="mail_from_name">{{ __('From Name') }} <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="mail_from_name" id="mail_from_name"
                                             class="form-control @error('mail_from_name') is-invalid @enderror"
                                             value="{{ old('mail_from_name', $settings['mail_from_name']) }}" required>
-                                        <small class="text-muted">Name that appears in the "From" field</small>
+                                        <small class="text-muted">{{ __('Name that appears in the "From" field') }}</small>
                                         @error('mail_from_name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -157,15 +165,14 @@
                                 <div class="col-md-12">
                                     <div class="alert alert-info">
                                         <i class="fas fa-info-circle me-2"></i>
-                                        After changing these settings, it's recommended to test your email configuration by
-                                        sending a test email.
+                                        {{ __('After changing these settings, it\'s recommended to test your email configuration by sending a test email.') }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group text-end mt-3">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save"></i> Save Email Settings
+                                    <i class="fas fa-save"></i> {{ __('Save Email Settings') }}
                                 </button>
                             </div>
                         </form>
@@ -174,9 +181,10 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <h5>Send Test Email</h5>
-                                <p class="text-muted">Send a test email to verify your email configuration is working
-                                    correctly.</p>
+                                <h5>{{ __('Send Test Email') }}</h5>
+                                <p class="text-muted">
+                                    {{ __('Send a test email to verify your email configuration is working correctly.') }}
+                                </p>
 
                                 @if (session('email_success'))
                                     <div class="alert alert-success">
@@ -201,9 +209,9 @@
                                             <div class="input-group mb-3">
                                                 <input type="email" name="test_email"
                                                     class="form-control @error('test_email') is-invalid @enderror"
-                                                    placeholder="Enter email address to send test" required>
+                                                    placeholder="{{ __('Enter email address to send test') }}" required>
                                                 <button class="btn btn-info" type="submit">
-                                                    <i class="fas fa-paper-plane"></i> Send Test Email
+                                                    <i class="fas fa-paper-plane"></i> {{ __('Send Test Email') }}
                                                 </button>
                                             </div>
                                             @error('test_email')

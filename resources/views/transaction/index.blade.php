@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transactions')
+@section('title', __('Transaction'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,8 +8,8 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Transactions',
-        'subtitle' => 'Manage your transactions',
+        'title' => __('Transaction'),
+        'subtitle' => __('Manage your transactions'),
     ])
 
     <div class="card table-list-card">
@@ -25,13 +25,13 @@
                 <table class="table datanew">
                     <thead>
                         <tr>
-                            <th>Transaction ID</th>
-                            <th>Account</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Actions</th>
+                            <th>{{ __('Transaction ID') }}</th>
+                            <th>{{ __('Account') }}</th>
+                            <th>{{ __('Type') }}</th>
+                            <th>{{ __('Amount') }}</th>
+                            <th>{{ __('Date') }}</th>
+                            <th>{{ __('Description') }}</th>
+                            <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="me-2 p-2" href="{{ route('transactions.show', $transaction) }}"
-                                            data-bs-toggle="tooltip" title="View">
+                                            data-bs-toggle="tooltip" title="{{ __('View') }}">
                                             <i data-feather="eye" class="feather-eye"></i>
                                         </a>
                                     </div>

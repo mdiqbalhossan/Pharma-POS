@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Sale Return Details')
+@section('title', __('index.Sale Return Details'))
 
 @section('content')
     <div class="page-header transfer">
         <div class="page-title">
-            <h4>Sale Return Details</h4>
-            <h6>View sale return details</h6>
+            <h4>{{ __('index.Sale Return Details') }}</h4>
+            <h6>{{ __('index.View sale return details') }}</h6>
         </div>
         <div class="page-btn">
             <a href="{{ route('sale-returns.index') }}" class="btn btn-added">
-                <i data-feather="list" class="me-2"></i>Return List
+                <i data-feather="list" class="me-2"></i>{{ __('index.Return List') }}
             </a>
         </div>
     </div>
@@ -24,24 +24,25 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="info-inner">
-                                        <h6>Sale Information:</h6>
-                                        <p><strong>Invoice No:</strong>
-                                            {{ $saleReturn->sale ? $saleReturn->sale->invoice_no : 'N/A' }}
+                                        <h6>{{ __('index.Sale Information:') }}</h6>
+                                        <p><strong>{{ __('index.Invoice No:') }}</strong>
+                                            {{ $saleReturn->sale ? $saleReturn->sale->invoice_no : __('index.N/A') }}
                                         </p>
-                                        <p><strong>Customer:</strong>
-                                            {{ $saleReturn->sale && $saleReturn->sale->customer ? $saleReturn->sale->customer->name : 'N/A' }}
+                                        <p><strong>{{ __('index.Customer:') }}</strong>
+                                            {{ $saleReturn->sale && $saleReturn->sale->customer ? $saleReturn->sale->customer->name : __('index.N/A') }}
                                         </p>
-                                        <p><strong>Return Date:</strong>
+                                        <p><strong>{{ __('index.Return Date:') }}</strong>
                                             {{ \Carbon\Carbon::parse($saleReturn->created_at)->format('d M Y') }}</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="info-inner">
-                                        <h6>Return Information:</h6>
-                                        <p><strong>Medicine:</strong>
-                                            {{ $saleReturn->medicine ? $saleReturn->medicine->name : 'N/A' }}</p>
-                                        <p><strong>Returned Quantity:</strong> {{ $saleReturn->quantity }}</p>
-                                        <p><strong>Status:</strong> Completed</p>
+                                        <h6>{{ __('index.Return Information:') }}</h6>
+                                        <p><strong>{{ __('index.Medicine:') }}</strong>
+                                            {{ $saleReturn->medicine ? $saleReturn->medicine->name : __('index.N/A') }}</p>
+                                        <p><strong>{{ __('index.Returned Quantity:') }}</strong>
+                                            {{ $saleReturn->quantity }}</p>
+                                        <p><strong>{{ __('index.Status:') }}</strong> {{ __('index.Completed') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +59,7 @@
                             <table style="width: 100%;line-height: inherit;text-align: left;">
                                 <tr>
                                     <td style="padding:5px;vertical-align:top;text-align:left;padding-bottom: 20px;">
-                                        <b>Return Details:</b>
+                                        <b>{{ __('index.Return Details:') }}</b>
                                     </td>
                                 </tr>
                             </table>
@@ -66,18 +67,28 @@
                     </tr>
 
                     <tr class="heading" style="background: #F3F2F7;">
-                        <td style="padding:5px;vertical-align:top;text-align:left;font-weight: bold;">Medicine</td>
-                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">Quantity</td>
-                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">Unit Price</td>
-                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">Total</td>
-                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">Discount</td>
-                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">Tax</td>
-                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">Grand Total</td>
+                        <td style="padding:5px;vertical-align:top;text-align:left;font-weight: bold;">
+                            {{ __('index.Medicine') }}
+                        </td>
+                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">
+                            {{ __('index.Quantity') }}</td>
+                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">
+                            {{ __('index.Unit Price') }}</td>
+                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">
+                            {{ __('index.Total') }}
+                        </td>
+                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">
+                            {{ __('index.Discount') }}</td>
+                        <td style="padding:5px;vertical-align:top;text-align:center;font-weight: bold;">
+                            {{ __('index.Tax') }}
+                        </td>
+                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
+                            {{ __('index.Grand Total') }}</td>
                     </tr>
 
                     <tr class="item">
                         <td style="padding:5px;vertical-align:top;text-align:left;border-bottom: 1px solid #ddd;">
-                            {{ $saleReturn->medicine ? $saleReturn->medicine->name : 'N/A' }}
+                            {{ $saleReturn->medicine ? $saleReturn->medicine->name : __('index.N/A') }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
                             {{ $saleReturn->quantity }}
@@ -107,7 +118,7 @@
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td
                             style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;border-top: 1px solid #ddd;">
-                            Grand Total</td>
+                            {{ __('index.Grand Total') }}</td>
                         <td
                             style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;border-top: 1px solid #ddd;">
                             {{ number_format($saleReturn->grand_total, 2) }}</td>
@@ -119,7 +130,8 @@
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
-                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">Paid Amount</td>
+                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
+                            {{ __('index.Paid Amount') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
                             {{ number_format($saleReturn->paid_amount, 2) }}</td>
                     </tr>
@@ -130,7 +142,8 @@
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
-                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">Due Amount</td>
+                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
+                            {{ __('index.Due Amount') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
                             {{ number_format($saleReturn->due_amount, 2) }}</td>
                     </tr>
@@ -141,9 +154,10 @@
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
                         <td style="padding:5px;vertical-align:top;text-align:center;"></td>
-                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">Payment Method</td>
+                        <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
+                            {{ __('index.Payment Method') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
-                            {{ ucfirst($saleReturn->payment_method) }}</td>
+                            {{ __(ucfirst($saleReturn->payment_method)) }}</td>
                     </tr>
                 </table>
             </div>
@@ -151,7 +165,7 @@
             @if ($saleReturn->note)
                 <div class="row mt-4">
                     <div class="col-lg-12">
-                        <div class="form-title">Note</div>
+                        <div class="form-title">{{ __('index.Note') }}</div>
                         <div class="invoice-note">
                             <p>{{ $saleReturn->note }}</p>
                         </div>

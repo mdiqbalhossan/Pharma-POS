@@ -5,6 +5,7 @@ use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
 use App\Models\Medicine;
+use App\Models\MedicineCategory;
 use App\Models\Purchase;
 use App\Models\Sales;
 use App\Models\Supplier;
@@ -154,7 +155,13 @@ class ReportController extends Controller
             return $medicine->quantity * $medicine->purchase_price;
         });
 
-        return view('reports.inventory_report', compact('medicines', 'totalInventoryValue', 'totalInventoryCost'));
+        $categories      = MedicineCategory::all();
+        $totalProducts   = $medicines->count();
+        $totalQuantity   = $medicines->sum('quantity');
+        $lowStockItems   = $medicines->where('quantity', '<=', 10)->count();
+        $outOfStockItems = $medicines->where('quantity', 0)->count();
+
+        return view('reports.inventory_report', compact('medicines', 'totalInventoryValue', 'totalInventoryCost', 'categories', 'totalProducts', 'totalQuantity', 'lowStockItems', 'outOfStockItems'));
     }
 
     /**
@@ -226,7 +233,12 @@ class ReportController extends Controller
             $supplier->purchase_count  = $purchases->count();
         }
 
-        return view('reports.supplier_report', compact('suppliers'));
+        $totalPurchases = Purchase::count();
+        $totalAmount    = Purchase::sum('grand_total');
+        $totalPaid      = Purchase::sum('paid_amount');
+        $totalDue       = Purchase::sum('due_amount');
+
+        return view('reports.supplier_report', compact('suppliers', 'totalPurchases', 'totalAmount', 'totalPaid', 'totalDue'));
     }
 
     /**
@@ -259,13 +271,24 @@ class ReportController extends Controller
 
             $sales = $salesQuery->get();
 
-            $customer->total_sales = $sales->sum('grand_total');
-            $customer->total_paid  = $sales->sum('amount_paid');
-            $customer->total_due   = $sales->sum('amount_due');
-            $customer->sale_count  = $sales->count();
+            $customer->total_spent  = $sales->sum('grand_total');
+            $customer->total_paid   = $sales->sum('amount_paid');
+            $customer->total_due    = $sales->sum('amount_due');
+            $customer->total_orders = $sales->count();
         }
 
-        return view('reports.customer_report', compact('customers'));
+        $totalOrders  = Sales::count();
+        $totalSpent   = Sales::sum('grand_total');
+        $totalBalance = Sales::sum('amount_due');
+        $totalDue     = Sales::sum('amount_due');
+
+        return view('reports.customer_report', compact(
+            'customers',
+            'totalOrders',
+            'totalSpent',
+            'totalBalance',
+            'totalDue'
+        ));
     }
 
     /**
@@ -290,11 +313,11 @@ class ReportController extends Controller
             $query->where('expense_category_id', $request->category_id);
         }
 
-        $expenses     = $query->orderBy('date', 'desc')->get();
-        $categories   = ExpenseCategory::all();
-        $totalExpense = $expenses->sum('amount');
+        $expenses      = $query->orderBy('date', 'desc')->get();
+        $categories    = ExpenseCategory::all();
+        $totalExpenses = $expenses->sum('amount');
 
-        return view('reports.expense_report', compact('expenses', 'categories', 'totalExpense'));
+        return view('reports.expense_report', compact('expenses', 'categories', 'totalExpenses'));
     }
 
     /**
@@ -388,7 +411,7 @@ class ReportController extends Controller
             $purchaseQuery->whereBetween('date', [$start_date, $end_date]);
         }
         $purchases   = $purchaseQuery->get();
-        $purchaseTax = $purchases->sum('tax_amount');
+        $purchaseTax = $purchases->sum('total_tax');
 
         // Calculate net tax
         $netTax = $salesTax - $purchaseTax;
@@ -404,7 +427,7 @@ class ReportController extends Controller
                 $monthEnd   = $date->copy()->endOfMonth();
 
                 $monthSalesTax    = Sales::whereBetween('sale_date', [$monthStart, $monthEnd])->sum('tax_amount');
-                $monthPurchaseTax = Purchase::whereBetween('date', [$monthStart, $monthEnd])->sum('tax_amount');
+                $monthPurchaseTax = Purchase::whereBetween('date', [$monthStart, $monthEnd])->sum('total_tax');
 
                 $taxByMonth[$date->format('Y-m')] = [
                     'month'        => $date->format('M Y'),

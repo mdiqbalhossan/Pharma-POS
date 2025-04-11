@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sale Returns')
+@section('title', __('index.Sale Returns'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,8 +13,8 @@
     <div class="page-header transfer">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Sale Return List</h4>
-                <h6>Manage your sale returns</h6>
+                <h4>{{ __('index.Sale Return List') }}</h4>
+                <h6>{{ __('index.Manage your sale returns') }}</h6>
             </div>
         </div>
     </div>
@@ -37,9 +37,9 @@
                 <div class="form-sort">
                     <i data-feather="sliders" class="info-img"></i>
                     <select class="select">
-                        <option>Sort by Date</option>
-                        <option>Newest</option>
-                        <option>Oldest</option>
+                        <option>{{ __('index.Sort by Date') }}</option>
+                        <option>{{ __('index.Newest') }}</option>
+                        <option>{{ __('index.Oldest') }}</option>
                     </select>
                 </div>
             </div>
@@ -52,11 +52,11 @@
                             <div class="input-blocks">
                                 <i data-feather="user" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Customer Name</option>
-                                    <option>John Doe</option>
-                                    <option>Jane Smith</option>
-                                    <option>Michael Johnson</option>
-                                    <option>Sarah Williams</option>
+                                    <option>{{ __('index.Choose Customer Name') }}</option>
+                                    <option>{{ __('index.John Doe') }}</option>
+                                    <option>{{ __('index.Jane Smith') }}</option>
+                                    <option>{{ __('index.Michael Johnson') }}</option>
+                                    <option>{{ __('index.Sarah Williams') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -64,10 +64,10 @@
                             <div class="input-blocks">
                                 <i data-feather="file" class="info-img"></i>
                                 <select class="select">
-                                    <option>Enter Reference</option>
-                                    <option>SR001</option>
-                                    <option>SR002</option>
-                                    <option>SR003</option>
+                                    <option>{{ __('index.Enter Reference') }}</option>
+                                    <option>{{ __('index.SR001') }}</option>
+                                    <option>{{ __('index.SR002') }}</option>
+                                    <option>{{ __('index.SR003') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -75,17 +75,17 @@
                             <div class="input-blocks">
                                 <i class="fas fa-money-bill info-img"></i>
                                 <select class="select">
-                                    <option>Choose Payment Status</option>
-                                    <option>Paid</option>
-                                    <option>Partial</option>
-                                    <option>Unpaid</option>
+                                    <option>{{ __('index.Choose Payment Status') }}</option>
+                                    <option>{{ __('index.Paid') }}</option>
+                                    <option>{{ __('index.Partial') }}</option>
+                                    <option>{{ __('index.Unpaid') }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 col-12 ms-auto">
                             <div class="input-blocks">
                                 <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Search </a>
+                                    {{ __('index.Search') }} </a>
                             </div>
                         </div>
                     </div>
@@ -97,23 +97,23 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>Sale Invoice</th>
-                            <th>Medicine</th>
-                            <th>Date</th>
-                            <th>Returned Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Grand Total</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Payment Status</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('index.Sale Invoice') }}</th>
+                            <th>{{ __('index.Medicine') }}</th>
+                            <th>{{ __('index.Date') }}</th>
+                            <th>{{ __('index.Returned Quantity') }}</th>
+                            <th>{{ __('index.Unit Price') }}</th>
+                            <th>{{ __('index.Grand Total') }}</th>
+                            <th>{{ __('index.Paid') }}</th>
+                            <th>{{ __('index.Due') }}</th>
+                            <th>{{ __('index.Payment Status') }}</th>
+                            <th class="no-sort">{{ __('index.Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($saleReturns as $return)
                             <tr>
-                                <td>#{{ $return->sale ? $return->sale->sale_no : 'N/A' }}</td>
-                                <td>{{ $return->medicine ? $return->medicine->name : 'N/A' }}</td>
+                                <td>#{{ $return->sale ? $return->sale->sale_no : __('index.N/A') }}</td>
+                                <td>{{ $return->medicine ? $return->medicine->name : __('index.N/A') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($return->created_at)->format('d M Y') }}</td>
                                 <td>{{ $return->quantity }}</td>
                                 <td>{{ number_format($return->unit_price, 2) }}</td>
@@ -122,11 +122,11 @@
                                 <td>{{ number_format($return->due_amount, 2) }}</td>
                                 <td>
                                     @if ($return->due_amount <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
+                                        <span class="badge-linesuccess">{{ __('index.Paid') }}</span>
                                     @elseif($return->paid_amount > 0 && $return->due_amount > 0)
-                                        <span class="badges-warning">Partial</span>
+                                        <span class="badges-warning">{{ __('index.Partial') }}</span>
                                     @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
+                                        <span class="badge badge-linedangered">{{ __('index.Unpaid') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">

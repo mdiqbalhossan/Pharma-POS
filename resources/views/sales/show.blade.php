@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sale Details')
+@section('title', __('index.Sale Details'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,15 +13,15 @@
     <div class="page-header">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Sale Details</h4>
-                <h6>View sale information</h6>
+                <h4>{{ __('index.Sale Details') }}</h4>
+                <h6>{{ __('index.View and analyze your sales data') }}</h6>
             </div>
         </div>
         <ul class="table-top-head">
             <li>
                 <div class="page-btn">
                     <a href="{{ route('sales.index') }}" class="btn btn-secondary"><i data-feather="arrow-left"
-                            class="me-2"></i>Back to Sales</a>
+                            class="me-2"></i>{{ __('index.Back') }}</a>
                 </div>
             </li>
             <li>
@@ -37,11 +37,11 @@
                 <div class="col-md-12 d-flex justify-content-end">
                     <div class="action-buttons">
                         <a href="#" class="btn btn-primary me-2" id="print-sale" onclick="window.print()">
-                            <i data-feather="printer" class="me-1"></i> Print
+                            <i data-feather="printer" class="me-1"></i> {{ __('index.Print Receipt') }}
                         </a>
                         <a href="{{ route('sales.download.invoice', $sale->id) }}" class="btn btn-info me-2"
                             id="download-sale">
-                            <i data-feather="download" class="me-1"></i> Download
+                            <i data-feather="download" class="me-1"></i> {{ __('index.Download') }}
                         </a>
                     </div>
                 </div>
@@ -51,19 +51,19 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border mb-4">
                         <div class="card-header bg-light">
-                            <h5 class="mb-0">Sale Information</h5>
+                            <h5 class="mb-0">{{ __('index.Sale Information') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Reference/Invoice No:</span>
+                                        <span class="text-muted">{{ __('index.Reference/Invoice No:') }}</span>
                                         <h6 class="mb-0 mt-1">{{ $sale->sale_no }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Status:</span>
+                                        <span class="text-muted">{{ __('index.Status') }}:</span>
                                         <h6 class="mb-0 mt-1">
                                             <span
                                                 class="badge {{ $sale->status == 'success' ? 'bg-success' : 'bg-warning' }}">
@@ -74,35 +74,35 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Customer:</span>
+                                        <span class="text-muted">{{ __('index.Customer') }}:</span>
                                         <h6 class="mb-0 mt-1">{{ $sale->customer->name }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Sale Date:</span>
+                                        <span class="text-muted">{{ __('index.Sale Date:') }}</span>
                                         <h6 class="mb-0 mt-1">{{ date('d M, Y', strtotime($sale->sale_date)) }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Payment Method:</span>
+                                        <span class="text-muted">{{ __('index.Payment Method') }}:</span>
                                         <h6 class="mb-0 mt-1">{{ $sale->payment_method }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Payment Status:</span>
+                                        <span class="text-muted">{{ __('index.Payment Status') }}:</span>
                                         <h6 class="mb-0 mt-1">
                                             @php
-                                                $paymentStatus = 'Paid';
+                                                $paymentStatus = __('index.Paid');
                                                 $badgeClass = 'bg-success';
 
                                                 if ($sale->amount_due > 0 && $sale->amount_paid == 0) {
-                                                    $paymentStatus = 'Unpaid';
+                                                    $paymentStatus = __('index.Unpaid');
                                                     $badgeClass = 'bg-danger';
                                                 } elseif ($sale->amount_due > 0) {
-                                                    $paymentStatus = 'Partial';
+                                                    $paymentStatus = __('index.Partial');
                                                     $badgeClass = 'bg-warning';
                                                 }
                                             @endphp
@@ -112,8 +112,8 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <div class="sale-info-item">
-                                        <span class="text-muted">Staff:</span>
-                                        <h6 class="mb-0 mt-1">{{ $sale->user->name ?? 'N/A' }}</h6>
+                                        <span class="text-muted">{{ __('index.Staff') }}:</span>
+                                        <h6 class="mb-0 mt-1">{{ $sale->user->name ?? __('index.N/A') }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -122,11 +122,11 @@
 
                     <div class="card shadow-sm border mb-4">
                         <div class="card-header bg-light">
-                            <h5 class="mb-0">Note</h5>
+                            <h5 class="mb-0">{{ __('index.Note') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="sale-note">
-                                {!! $sale->note ?? '<span class="text-muted">No notes available</span>' !!}
+                                {!! $sale->note ?? '<span class="text-muted">' . __('index.No notes available') . '</span>' !!}
                             </div>
                         </div>
                     </div>
@@ -135,37 +135,38 @@
                 <div class="col-lg-4">
                     <div class="card shadow-sm border mb-4">
                         <div class="card-header bg-light">
-                            <h5 class="mb-0">Payment Summary</h5>
+                            <h5 class="mb-0">{{ __('index.Payment Summary') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="sale-total">
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Subtotal:</span>
+                                    <span class="text-muted">{{ __('index.Sub Total') }}:</span>
                                     <span>${{ number_format($sale->total_amount, 2) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Tax ({{ $sale->tax_percentage }}%):</span>
+                                    <span class="text-muted">{{ __('index.Tax') }} ({{ $sale->tax_percentage }}%):</span>
                                     <span>${{ number_format($sale->tax_amount, 2) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Discount ({{ $sale->discount_percentage }}%):</span>
+                                    <span class="text-muted">{{ __('index.Discount') }}
+                                        ({{ $sale->discount_percentage }}%):</span>
                                     <span>${{ number_format($sale->discount_amount, 2) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Shipping:</span>
+                                    <span class="text-muted">{{ __('index.Shipping') }}:</span>
                                     <span>${{ number_format($sale->shipping_amount, 2) }}</span>
                                 </div>
                                 <div
                                     class="sale-total-item d-flex justify-content-between mb-3 border-top border-bottom py-2">
-                                    <h5>Grand Total:</h5>
+                                    <h5>{{ __('index.Grand Total') }}:</h5>
                                     <h5>${{ number_format($sale->grand_total, 2) }}</h5>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
-                                    <span class="text-muted">Paid Amount:</span>
+                                    <span class="text-muted">{{ __('index.Amount Paid') }}:</span>
                                     <span>${{ number_format($sale->amount_paid, 2) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3 border-top pt-2">
-                                    <h6>Due Amount:</h6>
+                                    <h6>{{ __('index.Due') }}:</h6>
                                     <h6>${{ number_format($sale->amount_due, 2) }}</h6>
                                 </div>
                             </div>
@@ -174,7 +175,7 @@
 
                     <div class="card shadow-sm border mb-4">
                         <div class="card-header bg-light">
-                            <h5 class="mb-0">Customer Information</h5>
+                            <h5 class="mb-0">{{ __('index.Customer Information') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="customer-info">
@@ -201,7 +202,7 @@
                 <div class="col-lg-12">
                     <div class="card shadow-sm border mb-4">
                         <div class="card-header bg-light">
-                            <h5 class="mb-0">Sale Items</h5>
+                            <h5 class="mb-0">{{ __('index.Sale Items') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -209,10 +210,10 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th>#</th>
-                                            <th>Medicine</th>
-                                            <th>Qty</th>
-                                            <th>Unit Price</th>
-                                            <th>Total</th>
+                                            <th>{{ __('index.Medicine') }}</th>
+                                            <th>{{ __('index.Qty') }}</th>
+                                            <th>{{ __('index.Unit Price') }}</th>
+                                            <th>{{ __('index.Total') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Supplier Report'))
+@section('title', __('reports.supplier_report'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,8 +13,8 @@
     <div class="page-header report">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>{{ __('Supplier Report') }}</h4>
-                <h6>{{ __('View supplier purchase history') }}</h6>
+                <h4>{{ __('reports.supplier_report') }}</h4>
+                <h6>{{ __('reports.view_supplier_purchase_history') }}</h6>
             </div>
         </div>
     </div>
@@ -22,13 +22,13 @@
     <!-- Report filter -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('reports.supplier') }}" method="GET">
+            <form action="{{ route('reports.suppliers') }}" method="GET">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>{{ __('Supplier') }}</label>
+                            <label>{{ __('reports.supplier') }}</label>
                             <select name="supplier_id" class="select2">
-                                <option value="">{{ __('All Suppliers') }}</option>
+                                <option value="">{{ __('reports.all_suppliers') }}</option>
                                 @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}"
                                         {{ request('supplier_id') == $supplier->id ? 'selected' : '' }}>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>{{ __('From Date') }}</label>
+                            <label>{{ __('reports.from_date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
                                 <input type="text" name="start_date" class="datetimepicker"
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
-                            <label>{{ __('To Date') }}</label>
+                            <label>{{ __('reports.to_date') }}</label>
                             <div class="input-groupicon calender-input">
                                 <i data-feather="calendar" class="info-img"></i>
                                 <input type="text" name="end_date" class="datetimepicker"
@@ -61,8 +61,9 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
                             <label>&nbsp;</label>
-                            <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
-                            <a href="{{ route('reports.supplier') }}" class="btn btn-info ms-2">{{ __('Reset') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('reports.search') }}</button>
+                            <a href="{{ route('reports.suppliers') }}"
+                                class="btn btn-info ms-2">{{ __('reports.reset') }}</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ $totalPurchases }}</h4>
-                    <h5>{{ __('Total Purchases') }}</h5>
+                    <h5>{{ __('reports.total_purchases') }}</h5>
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($totalAmount, 2) }}</h4>
-                    <h5>{{ __('Total Purchase Amount') }}</h5>
+                    <h5>{{ __('reports.total_purchase_amount') }}</h5>
                 </div>
             </div>
         </div>
@@ -92,7 +93,7 @@
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($totalPaid, 2) }}</h4>
-                    <h5>{{ __('Amount Paid') }}</h5>
+                    <h5>{{ __('reports.amount_paid') }}</h5>
                 </div>
             </div>
         </div>
@@ -105,18 +106,18 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>{{ __('Supplier') }}</th>
-                            <th>{{ __('Email') }}</th>
-                            <th>{{ __('Phone') }}</th>
-                            <th>{{ __('Total Purchases') }}</th>
-                            <th>{{ __('Total Amount') }}</th>
-                            <th>{{ __('Amount Paid') }}</th>
-                            <th>{{ __('Balance') }}</th>
-                            <th class="no-sort">{{ __('Action') }}</th>
+                            <th>{{ __('reports.supplier') }}</th>
+                            <th>{{ __('reports.email') }}</th>
+                            <th>{{ __('reports.phone') }}</th>
+                            <th>{{ __('reports.total_purchases') }}</th>
+                            <th>{{ __('reports.total_amount') }}</th>
+                            <th>{{ __('reports.amount_paid') }}</th>
+                            <th>{{ __('reports.balance') }}</th>
+                            <th class="no-sort">{{ __('reports.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($supplierData as $data)
+                        @foreach ($suppliers as $data)
                             <tr>
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email ?? __('N/A') }}</td>

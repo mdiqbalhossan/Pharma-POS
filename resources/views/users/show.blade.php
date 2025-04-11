@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'User Details')
+@section('title', __('users.User Details'))
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'User Details',
-        'subtitle' => 'View user information',
+        'title' => __('users.User Details'),
+        'subtitle' => __('users.View user information'),
         'button' => [
-            'text' => 'Edit User',
+            'text' => __('users.Edit User'),
             'url' => route('users.edit', $user->id),
-            'icon' => 'edit'
-        ]
+            'icon' => 'edit',
+        ],
     ])
 
     <div class="row">
@@ -23,7 +23,7 @@
                         </div>
                         <h4>{{ $user->name }}</h4>
                         <h6>{{ $user->email }}</h6>
-                        <p class="text-muted">Member since {{ $user->created_at->format('d M Y') }}</p>
+                        <p class="text-muted">{{ __('users.Member since') }} {{ $user->created_at->format('d M Y') }}</p>
                     </div>
                 </div>
             </div>
@@ -31,27 +31,27 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5>Assigned Roles</h5>
+                    <h5>{{ __('users.Assigned Roles') }}</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>SN</th>
-                                    <th>Role Name</th>
+                                    <th>{{ __('users.SN') }}</th>
+                                    <th>{{ __('users.Role Name') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($user->roles as $role)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $role->name }}</td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $role->name }}</td>
+                                    </tr>
                                 @empty
-                                <tr>
-                                    <td colspan="2" class="text-center">No roles assigned</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center">{{ __('users.No roles assigned') }}</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -61,4 +61,4 @@
         </div>
     </div>
 
-@endsection 
+@endsection

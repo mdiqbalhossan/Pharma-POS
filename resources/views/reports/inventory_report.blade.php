@@ -101,8 +101,8 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>{{ __('Product Name') }}</th>
-                            <th>{{ __('SKU') }}</th>
+                            <th>{{ __('Medicine Name') }}</th>
+                            <th>{{ __('Generic Name') }}</th>
                             <th>{{ __('Category') }}</th>
                             <th>{{ __('Unit Price') }}</th>
                             <th>{{ __('Stock') }}</th>
@@ -111,26 +111,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products as $product)
+                        @foreach ($medicines as $product)
                             <tr>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->sku ?? __('N/A') }}</td>
-                                <td>{{ $product->category ? $product->category->name : __('N/A') }}</td>
+                                <td>{{ $product->generic_name ?? __('N/A') }}</td>
+                                <td>
+                                    @foreach ($product->medicine_categories as $category)
+                                        {{ $category->name }}
+                                        @if (!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>{{ show_amount($product->sale_price, 2) }}</td>
                                 <td>
-                                    @if ($product->stock <= 0)
+                                    @if ($product->quantity <= 0)
                                         <span class="badge badge-danger">{{ __('Out of Stock') }}</span>
-                                    @elseif($product->stock <= $product->alert_quantity)
-                                        <span class="badge badge-warning">{{ $product->stock }}
+                                    @elseif($product->quantity <= $product->alert_quantity)
+                                        <span class="badge badge-warning">{{ $product->quantity }}
                                             {{ __('Low Stock') }}</span>
                                     @else
-                                        <span class="badge badge-success">{{ $product->stock }}</span>
+                                        <span class="badge badge-success">
+                                            {{ $product->quantity }} {{ $product->unit->name }}
+                                        </span>
                                     @endif
                                 </td>
-                                <td>{{ show_amount($product->stock * $product->sale_price, 2) }}</td>
+                                <td>{{ show_amount($product->quantity * $product->sale_price, 2) }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
-                                        <a class="me-2 p-2" href="{{ route('products.show', $product->id) }}">
+                                        <a class="me-2 p-2" href="{{ route('medicines.show', $product->id) }}">
                                             <i data-feather="eye" class="action-eye"></i>
                                         </a>
                                     </div>

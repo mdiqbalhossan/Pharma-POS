@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Role Permissions')
+@section('title', __('Role Permissions'))
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Role Permissions',
-        'subtitle' => 'View role permissions',
+        'title' => __('Role Permissions'),
+        'subtitle' => __('View role permissions'),
     ])
 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">{{ $role->name }} Role</h5>
+            <h5 class="card-title mb-0">{{ $role->name }} {{ __('Role') }}</h5>
             @if ($role->name != 'Admin')
                 <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">
-                    <i data-feather="edit" class="me-2"></i> Edit Role
+                    <i data-feather="edit" class="me-2"></i> {{ __('Edit Role') }}
                 </a>
             @endif
         </div>
         <div class="card-body">
-            <h6 class="mb-3">Assigned Permissions</h6>
+            <h6 class="mb-3">{{ __('Assigned Permissions') }}</h6>
 
             @if (count($rolePermissions) > 0)
                 <div class="accordion" id="permissionsAccordion">
@@ -69,13 +69,13 @@
                 </div>
             @else
                 <div class="alert alert-info">
-                    <p class="mb-0">No permissions assigned to this role.</p>
+                    <p class="mb-0">{{ __('No permissions assigned to this role.') }}</p>
                 </div>
             @endif
 
             <div class="d-flex justify-content-end mt-4">
                 <a href="{{ route('roles.index') }}" class="btn btn-secondary">
-                    <i data-feather="arrow-left" class="me-2"></i> Back to Roles
+                    <i data-feather="arrow-left" class="me-2"></i> {{ __('Back to Roles') }}
                 </a>
             </div>
         </div>

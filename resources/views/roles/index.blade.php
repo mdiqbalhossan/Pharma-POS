@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Roles & Permissions')
+@section('title', __('Roles & Permissions'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,10 +8,10 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Roles & Permissions',
-        'subtitle' => 'Manage your roles',
+        'title' => __('Roles & Permissions'),
+        'subtitle' => __('Manage your roles'),
         'button' => [
-            'text' => 'Create Role',
+            'text' => __('Create Role'),
             'url' => route('roles.create'),
             'icon' => 'plus',
         ],
@@ -32,11 +32,11 @@
                 <thead>
                     <tr>
                         <th class="no-sort">
-                            SN
+                            {{ __('SN') }}
                         </th>
-                        <th>Role Name</th>
-                        <th>Created On</th>
-                        <th class="no-sort">Action</th>
+                        <th>{{ __('Role Name') }}</th>
+                        <th>{{ __('Created On') }}</th>
+                        <th class="no-sort">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,18 +49,18 @@
                                 <div class="edit-delete-action">
                                     @if ($role->name != 'Admin')
                                         <a class="me-2 p-2" href="{{ route('roles.edit', $role->id) }}"
-                                            data-bs-toggle="tooltip" title="Edit">
+                                            data-bs-toggle="tooltip" title="{{ __('Edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
                                     @endif
 
-                                    <a class="p-2 me-2" href="{{ route('roles.show', $role->id) }}" data-bs-toggle="tooltip"
-                                        title="Permissions">
+                                    <a class="p-2 me-2" href="{{ route('roles.show', $role->id) }}"
+                                        data-bs-toggle="tooltip" title="{{ __('Permissions') }}">
                                         <i data-feather="shield" class="shield"></i>
                                     </a>
                                     @if ($role->name != 'Admin')
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            title="Delete" data-id="{{ $role->id }}">
+                                            title="{{ __('Delete') }}" data-id="{{ $role->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                     @endif

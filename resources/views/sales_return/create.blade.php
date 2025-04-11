@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Sale Return')
+@section('title', __('index.Create Sale Return'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
@@ -11,8 +11,8 @@
 @section('content')
     <div class="page-header transfer">
         <div class="page-title">
-            <h4>Create Sale Return</h4>
-            <h6>Return medicines from sale #{{ $sale->sale_no }}</h6>
+            <h4>{{ __('index.Create Sale Return') }}</h4>
+            <h6>{{ __('index.Return medicines from sale') }} #{{ $sale->sale_no }}</h6>
         </div>
     </div>
 
@@ -25,18 +25,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="info-inner">
-                                        <h6>Sale Information:</h6>
-                                        <p><strong>Invoice:</strong> #{{ $sale->sale_no }}</p>
-                                        <p><strong>Customer:</strong>
-                                            {{ $sale->customer ? $sale->customer->name : 'N/A' }}</p>
-                                        <p><strong>Date:</strong>
+                                        <h6>{{ __('index.Sale Information:') }}</h6>
+                                        <p><strong>{{ __('index.Invoice:') }}</strong> #{{ $sale->sale_no }}</p>
+                                        <p><strong>{{ __('index.Customer:') }}</strong>
+                                            {{ $sale->customer ? $sale->customer->name : __('index.N/A') }}</p>
+                                        <p><strong>{{ __('index.Date:') }}</strong>
                                             {{ \Carbon\Carbon::parse($sale->created_at)->format('d M Y') }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="info-inner">
-                                        <h6>Return Information:</h6>
-                                        <p><strong>Date:</strong> {{ now()->format('d M Y') }}</p>
+                                        <h6>{{ __('index.Return Information:') }}</h6>
+                                        <p><strong>{{ __('index.Date:') }}</strong> {{ now()->format('d M Y') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -47,15 +47,15 @@
 
             <div class="row mt-4">
                 <div class="col-lg-12">
-                    <div class="form-title">Select Medicine to Return</div>
+                    <div class="form-title">{{ __('index.Select Medicine to Return') }}</div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Medicine</th>
-                                    <th>Sold Qty</th>
-                                    <th>Unit Price</th>
-                                    <th>Action</th>
+                                    <th>{{ __('index.Medicine') }}</th>
+                                    <th>{{ __('index.Sold Qty') }}</th>
+                                    <th>{{ __('index.Unit Price') }}</th>
+                                    <th>{{ __('index.Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +70,7 @@
                                                 data-medicine-name="{{ $item->name }}"
                                                 data-sold-qty="{{ $item->pivot->quantity }}"
                                                 data-unit-price="{{ $item->pivot->price }}">
-                                                Return
+                                                {{ __('index.Return') }}
                                             </button>
                                         </td>
                                     </tr>
@@ -90,26 +90,26 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="form-title">Return Details</div>
+                            <div class="form-title">{{ __('index.Return Details') }}</div>
                         </div>
 
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Medicine</label>
+                                <label>{{ __('index.Medicine') }}</label>
                                 <input type="text" id="medicine_name" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Sold Quantity</label>
+                                <label>{{ __('index.Sold Quantity') }}</label>
                                 <input type="text" id="sold_qty" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Return Quantity <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Return Quantity') }} <span class="text-danger">*</span></label>
                                 <input type="number" id="quantity" name="quantity" required min="1" step="1"
                                     class="form-control">
                                 @error('quantity')
@@ -120,14 +120,14 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Unit Price <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Unit Price') }} <span class="text-danger">*</span></label>
                                 <input type="number" id="display_unit_price" readonly class="form-control">
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Total Price <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Total Price') }} <span class="text-danger">*</span></label>
                                 <input type="number" id="total_price" name="total_price" readonly class="form-control">
                                 @error('total_price')
                                     <div class="text-danger">{{ $message }}</div>
@@ -137,7 +137,7 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Discount (%)</label>
+                                <label>{{ __('index.Discount') }} (%)</label>
                                 <input type="number" id="discount" name="discount" value="0" min="0"
                                     step="0.01" class="form-control">
                                 @error('discount')
@@ -148,7 +148,7 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Tax (%)</label>
+                                <label>{{ __('index.Tax') }} (%)</label>
                                 <input type="number" id="tax" name="tax" value="0" min="0"
                                     step="0.01" class="form-control">
                                 @error('tax')
@@ -159,7 +159,7 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Grand Total <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Grand Total') }} <span class="text-danger">*</span></label>
                                 <input type="number" id="grand_total" name="grand_total" readonly class="form-control">
                                 @error('grand_total')
                                     <div class="text-danger">{{ $message }}</div>
@@ -169,13 +169,13 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Payment Method <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Payment Method') }} <span class="text-danger">*</span></label>
                                 <select name="payment_method" required class="select">
-                                    <option value="">Select Payment Method</option>
-                                    <option value="cash">Cash</option>
-                                    <option value="credit_card">Credit Card</option>
-                                    <option value="bank_transfer">Bank Transfer</option>
-                                    <option value="cheque">Cheque</option>
+                                    <option value="">{{ __('index.Select Payment Method') }}</option>
+                                    <option value="cash">{{ __('index.Cash') }}</option>
+                                    <option value="credit_card">{{ __('index.Credit Card') }}</option>
+                                    <option value="bank_transfer">{{ __('index.Bank Transfer') }}</option>
+                                    <option value="cheque">{{ __('index.Cheque') }}</option>
                                 </select>
                                 @error('payment_method')
                                     <div class="text-danger">{{ $message }}</div>
@@ -185,7 +185,7 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Paid Amount <span class="text-danger">*</span></label>
+                                <label>{{ __('index.Paid Amount') }} <span class="text-danger">*</span></label>
                                 <input type="number" id="paid_amount" name="paid_amount" value="0" min="0"
                                     step="0.01" required class="form-control">
                                 @error('paid_amount')
@@ -196,7 +196,7 @@
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="input-blocks">
-                                <label>Due Amount</label>
+                                <label>{{ __('index.Due Amount') }}</label>
                                 <input type="number" id="due_amount" name="due_amount" readonly class="form-control">
                                 @error('due_amount')
                                     <div class="text-danger">{{ $message }}</div>
@@ -206,7 +206,7 @@
 
                         <div class="col-lg-12">
                             <div class="input-blocks">
-                                <label>Note</label>
+                                <label>{{ __('index.Note') }}</label>
                                 <textarea name="note" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
@@ -217,8 +217,7 @@
                                     <input class="form-check-input" type="checkbox" name="confirmation"
                                         id="confirmation" value="1" required>
                                     <label class="form-check-label" for="confirmation">
-                                        <strong>You cannot edit sale return. Confirm you want to return this
-                                            medicine.</strong>
+                                        <strong>{{ __('index.You cannot edit sale return. Confirm you want to return this medicine.') }}</strong>
                                     </label>
                                 </div>
                                 @error('confirmation')
@@ -228,8 +227,8 @@
                         </div>
 
                         <div class="col-lg-12 mt-3">
-                            <button type="submit" class="btn btn-submit me-2">Submit</button>
-                            <a href="{{ route('sales.index') }}" class="btn btn-cancel">Cancel</a>
+                            <button type="submit" class="btn btn-submit me-2">{{ __('index.Submit') }}</button>
+                            <a href="{{ route('sales.index') }}" class="btn btn-cancel">{{ __('index.Cancel') }}</a>
                         </div>
                     </div>
                 </form>

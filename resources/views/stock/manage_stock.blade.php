@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Manage Stocks')
+@section('title', __('Manage Stocks'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -11,8 +11,8 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Stock',
-        'subtitle' => 'Manage your Stock',
+        'title' => __('Stock'),
+        'subtitle' => __('Manage your Stock'),
     ])
 
     <div class="card table-list-card">
@@ -32,9 +32,9 @@
                         <div class="form-sort">
                             <i data-feather="sliders" class="info-img"></i>
                             <select class="select" id="sort_by">
-                                <option>Sort by Sale Price</option>
-                                <option value="lowest">Lowest</option>
-                                <option value="highest">Highest</option>
+                                <option>@lang('Sort by Sale Price')</option>
+                                <option value="lowest">@lang('Lowest')</option>
+                                <option value="highest">@lang('Highest')</option>
                             </select>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <div class="input-blocks">
                                 <i data-feather="archive" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Category</option>
+                                    <option>@lang('Choose Category')</option>
                                     @foreach ($medicine_categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -59,7 +59,7 @@
                             <div class="input-blocks">
                                 <i data-feather="box" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Vendor</option>
+                                    <option>@lang('Choose Vendor')</option>
                                     @foreach ($vendors as $vendor)
                                         <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
                                     @endforeach
@@ -69,7 +69,7 @@
                         <div class="col-lg-4 col-sm-6 col-12 ms-auto">
                             <div class="input-blocks">
                                 <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Filter </a>
+                                    @lang('Filter') </a>
                             </div>
                         </div>
                     </div>
@@ -80,13 +80,13 @@
                 <table class="table datanew">
                     <thead>
                         <tr>
-                            <th class="no-sort">SN</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Generic Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th class="no-sort">Action</th>
+                            <th class="no-sort">@lang('SN')</th>
+                            <th>@lang('Image')</th>
+                            <th>@lang('Name')</th>
+                            <th>@lang('Generic Name')</th>
+                            <th>@lang('Quantity')</th>
+                            <th>@lang('Price')</th>
+                            <th class="no-sort">@lang('Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,26 +94,21 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    @if ($medicine->image)
-                                        <img src="{{ Storage::url($medicine->image) }}" alt="{{ $medicine->name }}"
-                                            class="img-thumbnail" width="50">
-                                    @else
-                                        <img src="{{ asset('assets/img/placeholder.png') }}" alt="{{ $medicine->name }}"
-                                            class="img-thumbnail" width="50">
-                                    @endif
+                                    <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
+                                        class="img-thumbnail" width="50">
                                 </td>
                                 <td>{{ $medicine->name }}</td>
-                                <td>{{ $medicine->generic_name ?? 'N/A' }}</td>
+                                <td>{{ $medicine->generic_name ?? __('N/A') }}</td>
                                 <td>
-                                    {{ $medicine->quantity }}
+                                    {{ $medicine->quantity }} {{ $medicine->unit->name }}
                                 </td>
-                                <td>{{ number_format($medicine->sale_price, 2) }}</td>
+                                <td>{{ show_amount($medicine->sale_price) }}</td>
 
 
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">
                                         <a class="p-2 me-2" href="{{ route('medicines.show', $medicine->id) }}"
-                                            data-bs-toggle="tooltip" title="View">
+                                            data-bs-toggle="tooltip" title="@lang('View')">
                                             <i data-feather="eye" class="feather-eye"></i>
                                         </a>
                                     </div>

@@ -29,7 +29,7 @@
                         <!-- Left column with image and basic info -->
                         <div class="col-md-3 text-center mb-4">
                             @if ($medicine->image)
-                                <img src="{{ Storage::url($medicine->image) }}" alt="{{ $medicine->name }}"
+                                <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
                                     class="img-fluid rounded mb-3" style="max-height: 200px;">
                             @else
                                 <div class="border rounded d-flex align-items-center justify-content-center"

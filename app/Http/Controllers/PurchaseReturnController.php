@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Medicine;
 use App\Models\Purchase;
 use App\Models\PurchaseReturn;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,8 @@ class PurchaseReturnController extends Controller
     public function index()
     {
         $purchaseReturns = PurchaseReturn::with(['purchase', 'medicine'])->latest()->get();
-        return view('purchase_return.index', compact('purchaseReturns'));
+        $suppliers       = Supplier::all();
+        return view('purchase_return.index', compact('purchaseReturns', 'suppliers'));
     }
 
     /**

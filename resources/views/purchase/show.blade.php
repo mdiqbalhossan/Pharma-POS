@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="purchase-info-item">
-                                        <span class="text-muted">{{ __('purchase.supplier') }}:</span>
+                                        <span class="text-muted">{{ __('purchase.supplier.title') }}:</span>
                                         <h6 class="mb-0 mt-1">{{ $purchase->supplier->name }}</h6>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="purchase-info-item">
-                                        <span class="text-muted">{{ __('purchase.payment_status') }}:</span>
+                                        <span class="text-muted">{{ __('purchase.payment_status.title') }}:</span>
                                         <h6 class="mb-0 mt-1">
                                             @php
                                                 $paymentStatus = 'paid';
@@ -144,32 +144,32 @@
                             <div class="purchase-total">
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.subtotal') }}:</span>
-                                    <span>${{ number_format($purchase->subtotal, 2) }}</span>
+                                    <span>${{ show_amount($purchase->subtotal) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.tax') }}:</span>
-                                    <span>${{ number_format($purchase->total_tax, 2) }}</span>
+                                    <span>${{ show_amount($purchase->total_tax) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.discount') }}:</span>
-                                    <span>${{ number_format($purchase->discount, 2) }}</span>
+                                    <span>${{ show_amount($purchase->discount) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.shipping') }}:</span>
-                                    <span>${{ number_format($purchase->shipping, 2) }}</span>
+                                    <span>${{ show_amount($purchase->shipping) }}</span>
                                 </div>
                                 <div
                                     class="purchase-total-item d-flex justify-content-between mb-3 border-top border-bottom py-2">
                                     <h5>{{ __('purchase.grand_total') }}:</h5>
-                                    <h5>${{ number_format($purchase->grand_total, 2) }}</h5>
+                                    <h5>${{ show_amount($purchase->grand_total) }}</h5>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.paid_amount') }}:</span>
-                                    <span>${{ number_format($purchase->paid_amount, 2) }}</span>
+                                    <span>${{ show_amount($purchase->paid_amount) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3 border-top pt-2">
                                     <h6>{{ __('purchase.due_amount') }}:</h6>
-                                    <h6>${{ number_format($purchase->due_amount, 2) }}</h6>
+                                    <h6>${{ show_amount($purchase->due_amount) }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -230,10 +230,10 @@
                                                 <td>{{ $medicine->pivot->batch_no }}</td>
                                                 <td>{{ date('M Y', strtotime($medicine->pivot->expiry_date)) }}</td>
                                                 <td>{{ $medicine->pivot->quantity }}</td>
-                                                <td>${{ number_format($medicine->pivot->unit_price, 2) }}</td>
-                                                <td>${{ number_format($medicine->pivot->discount_amount, 2) }}</td>
-                                                <td>${{ number_format($medicine->pivot->tax_amount, 2) }}</td>
-                                                <td>${{ number_format($medicine->pivot->subtotal, 2) }}</td>
+                                                <td>${{ show_amount($medicine->pivot->unit_price) }}</td>
+                                                <td>${{ show_amount($medicine->pivot->discount_amount) }}</td>
+                                                <td>${{ show_amount($medicine->pivot->tax_amount) }}</td>
+                                                <td>${{ show_amount($medicine->pivot->subtotal) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

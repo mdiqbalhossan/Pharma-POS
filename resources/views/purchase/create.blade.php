@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="form-group">
-                            <label for="supplier_id">{{ __('purchase.supplier') }} <span
+                            <label for="supplier_id">{{ __('purchase.supplier.title') }} <span
                                     class="text-danger">*</span></label>
                             <select name="supplier_id" id="supplier_id" class="form-control select2" required>
                                 <option value="">{{ __('purchase.select_supplier') }}</option>

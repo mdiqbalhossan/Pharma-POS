@@ -16,6 +16,8 @@ use App\Http\Controllers\MedicineTypeController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PurchaseReturnController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleReturnController;
 use App\Http\Controllers\SalesController;
@@ -36,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
     // Language
     Route::get('/language/{language}', function ($language) {
-        session(['language' => $language]);
+        session('language', $language);
         return redirect()->back();
     })->name('language');
 
@@ -86,8 +88,8 @@ Route::middleware('auth')->group(function () {
     Route::get('purchase/order', [PurchaseController::class, 'purchaseOrder'])->name('purchase.order');
 
     // Purchase Return
-    Route::resource('purchase-returns', App\Http\Controllers\PurchaseReturnController::class);
-    Route::get('purchases/{purchase}/return', [App\Http\Controllers\PurchaseReturnController::class, 'createFromPurchase'])->name('purchases.return');
+    Route::resource('purchase-returns', PurchaseReturnController::class);
+    Route::get('purchases/{purchase}/return', [PurchaseReturnController::class, 'createFromPurchase'])->name('purchases.return');
 
     // Medicine search for purchase
     Route::get('/medicines-search', [AjaxController::class, 'searchMedicines'])->name('medicines.search');
@@ -164,7 +166,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Reports
-    Route::controller(App\Http\Controllers\ReportController::class)->group(function () {
+    Route::controller(ReportController::class)->group(function () {
         Route::get('/reports/sales', 'salesReport')->name('reports.sales');
         Route::get('/reports/purchases', 'purchaseReport')->name('reports.purchases');
         Route::get('/reports/inventory', 'inventoryReport')->name('reports.inventory');

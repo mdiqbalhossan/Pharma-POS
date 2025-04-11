@@ -307,3 +307,17 @@ function showPOSNotification(title, type, message) {
         customWrapper: "",
     });
 }
+
+$(document).ready(function () {
+    var $activeItem = $(".sidebar .active"); // your active menu item
+    var $sidebar = $(".sidebar"); // or the scrollable container if different
+    console.log($activeItem);
+    if ($activeItem.length) {
+        var sidebarHeight = $sidebar.height();
+        var itemOffsetTop = $activeItem.position().top;
+        var itemHeight = $activeItem.outerHeight();
+        var scrollTop = itemOffsetTop - sidebarHeight / 2 + itemHeight / 2;
+
+        $sidebar.scrollTop(scrollTop);
+    }
+});

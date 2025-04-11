@@ -121,8 +121,8 @@
                             <th>{{ __('purchase.grand_total') }}</th>
                             <th>{{ __('purchase.paid') }}</th>
                             <th>{{ __('purchase.due') }}</th>
-                            <th>{{ __('purchase.payment_status') }}</th>
-                            <th class="no-sort">{{ __('purchase.action') }}</th>
+                            <th>{{ __('purchase.payment_status.title') }}</th>
+                            <th class="no-sort">{{ __('purchase.action.title') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,9 +139,9 @@
                                             class="badges status-badge ordered">{{ __('purchase.purchase_order') }}</span>
                                     @endif
                                 </td>
-                                <td>{{ number_format($purchase->grand_total, 2) }}</td>
-                                <td>{{ number_format($purchase->paid_amount, 2) }}</td>
-                                <td>{{ number_format($purchase->due_amount, 2) }}</td>
+                                <td>{{ show_amount($purchase->grand_total) }}</td>
+                                <td>{{ show_amount($purchase->paid_amount) }}</td>
+                                <td>{{ show_amount($purchase->due_amount) }}</td>
                                 <td>
                                     @if ($purchase->due_amount <= 0)
                                         <span class="badge-linesuccess">{{ __('purchase.payment_status.paid') }}</span>

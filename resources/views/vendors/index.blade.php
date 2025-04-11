@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Vendors')
+@section('title', __('Vendors'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -8,13 +8,13 @@
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Vendors',
-        'subtitle' => 'Manage your vendors',
+        'title' => __('Vendors'),
+        'subtitle' => __('Manage your vendors'),
         'button' => [
-            'text' => 'Create Vendor',
+            'text' => __('Create Vendor'),
             'url' => route('vendors.create'),
-            'icon' => 'plus'
-        ]
+            'icon' => 'plus',
+        ],
     ])
 
     <div class="card table-list-card">
@@ -25,26 +25,26 @@
                         <a href="" class="btn btn-searchset"><i data-feather="search" class="feather-search"></i></a>
                     </div>
                 </div>
-                </div>
             </div>
-            <div class="table-responsive">
-                <table class="table datanew">
-                    <thead>
-                        <tr>
-                            <th class="no-sort">
-                                SN
-                            </th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Balance</th>
-                            <th>Created On</th>
-                            <th class="no-sort">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($vendors as $vendor)
+        </div>
+        <div class="table-responsive">
+            <table class="table datanew">
+                <thead>
+                    <tr>
+                        <th class="no-sort">
+                            {{ __('SN') }}
+                        </th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Phone') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Address') }}</th>
+                        <th>{{ __('Balance') }}</th>
+                        <th>{{ __('Created On') }}</th>
+                        <th class="no-sort">{{ __('Action') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($vendors as $vendor)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $vendor->name }}</td>
@@ -52,14 +52,15 @@
                             <td>{{ $vendor->email }}</td>
                             <td>
                                 {{ $vendor->address }}
-                                @if($vendor->city || $vendor->state || $vendor->zip)
+                                @if ($vendor->city || $vendor->state || $vendor->zip)
                                     <br>
                                     {{ collect([$vendor->city, $vendor->state, $vendor->zip])->filter()->implode(', ') }}
                                 @endif
                             </td>
                             <td>
-                                @if($vendor->opening_balance)
-                                    <span class="badge bg-{{ $vendor->opening_balance_type === 'credit' ? 'success' : 'danger' }}">
+                                @if ($vendor->opening_balance)
+                                    <span
+                                        class="badge bg-{{ $vendor->opening_balance_type === 'credit' ? 'success' : 'danger' }}">
                                         {{ $vendor->formatted_opening_balance }}
                                     </span>
                                 @else
@@ -69,27 +70,32 @@
                             <td>{{ $vendor->created_at->format('d M Y') }}</td>
                             <td class="action-table-data">
                                 <div class="edit-delete-action">
-                                    <a class="me-2 p-2" href="{{ route('vendors.edit', $vendor->id) }}" data-bs-toggle="tooltip" title="Edit">
+                                    <a class="me-2 p-2" href="{{ route('vendors.edit', $vendor->id) }}"
+                                        data-bs-toggle="tooltip" title="{{ __('Edit') }}">
                                         <i data-feather="edit" class="feather-edit"></i>
                                     </a>
-                                    <a class="p-2 me-2" href="{{ route('vendors.show', $vendor->id) }}" data-bs-toggle="tooltip" title="View">
+                                    <a class="p-2 me-2" href="{{ route('vendors.show', $vendor->id) }}"
+                                        data-bs-toggle="tooltip" title="{{ __('View') }}">
                                         <i data-feather="eye" class="feather-eye"></i>
                                     </a>
-                                    <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete" data-id="{{ $vendor->id }}">
+                                    <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
+                                        title="{{ __('Delete') }}" data-id="{{ $vendor->id }}">
                                         <i data-feather="trash-2" class="feather-trash-2"></i>
                                     </a>
-                                    <form id="delete-form-{{ $vendor->id }}" action="{{ route('vendors.destroy', $vendor->id) }}" method="POST" style="display: none;">
+                                    <form id="delete-form-{{ $vendor->id }}"
+                                        action="{{ route('vendors.destroy', $vendor->id) }}" method="POST"
+                                        style="display: none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
     </div>
 @endsection
 

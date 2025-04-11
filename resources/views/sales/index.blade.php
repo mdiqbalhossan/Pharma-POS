@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sales')
+@section('title', __('index.Sales'))
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
@@ -13,8 +13,8 @@
     <div class="page-header transfer">
         <div class="add-item d-flex">
             <div class="page-title">
-                <h4>Sales List</h4>
-                <h6>Manage your sales</h6>
+                <h4>{{ __('index.Sales Report') }}</h4>
+                <h6>{{ __('index.View and analyze your sales data') }}</h6>
             </div>
         </div>
     </div>
@@ -37,9 +37,9 @@
                 <div class="form-sort">
                     <i data-feather="sliders" class="info-img"></i>
                     <select class="select">
-                        <option>Sort by Date</option>
-                        <option>Newest</option>
-                        <option>Oldest</option>
+                        <option>{{ __('index.Sort by Date') }}</option>
+                        <option>{{ __('index.Newest') }}</option>
+                        <option>{{ __('index.Oldest') }}</option>
                     </select>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                             <div class="input-blocks">
                                 <i data-feather="user" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Customer Name</option>
-                                    <option value="all">All Customers</option>
+                                    <option>{{ __('index.Choose Customer Name') }}</option>
+                                    <option value="all">{{ __('index.All Customers') }}</option>
                                     @foreach ($customers as $customer)
                                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                                     @endforeach
@@ -63,10 +63,10 @@
                             <div class="input-blocks">
                                 <i data-feather="stop-circle" class="info-img"></i>
                                 <select class="select">
-                                    <option>Choose Status</option>
-                                    <option>Success</option>
-                                    <option>Hold</option>
-                                    <option>Cancel</option>
+                                    <option>{{ __('index.Choose Status') }}</option>
+                                    <option>{{ __('index.Success') }}</option>
+                                    <option>{{ __('index.Hold') }}</option>
+                                    <option>{{ __('index.Cancel') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -74,17 +74,17 @@
                             <div class="input-blocks">
                                 <i class="fas fa-money-bill info-img"></i>
                                 <select class="select">
-                                    <option>Choose Payment Status</option>
-                                    <option>Paid</option>
-                                    <option>Partial</option>
-                                    <option>Unpaid</option>
+                                    <option>{{ __('index.Choose Payment Status') }}</option>
+                                    <option>{{ __('index.Paid') }}</option>
+                                    <option>{{ __('index.Partial') }}</option>
+                                    <option>{{ __('index.Unpaid') }}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-6 col-12 ms-auto">
                             <div class="input-blocks">
                                 <a class="btn btn-filters ms-auto"> <i data-feather="search" class="feather-search"></i>
-                                    Search </a>
+                                    {{ __('index.Search') }} </a>
                             </div>
                         </div>
                     </div>
@@ -95,28 +95,28 @@
                 <table class="table datanew list">
                     <thead>
                         <tr>
-                            <th>Customer Name</th>
-                            <th>Reference</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Grand Total</th>
-                            <th>Paid</th>
-                            <th>Due</th>
-                            <th>Payment Status</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('index.Customer Name') }}</th>
+                            <th>{{ __('index.Reference') }}</th>
+                            <th>{{ __('index.Date') }}</th>
+                            <th>{{ __('index.Status') }}</th>
+                            <th>{{ __('index.Grand Total') }}</th>
+                            <th>{{ __('index.Paid') }}</th>
+                            <th>{{ __('index.Due') }}</th>
+                            <th>{{ __('index.Payment Status') }}</th>
+                            <th class="no-sort">{{ __('index.Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($sales as $sale)
                             <tr>
-                                <td>{{ $sale->customer ? $sale->customer->name : 'N/A' }}</td>
+                                <td>{{ $sale->customer ? $sale->customer->name : __('index.N/A') }}</td>
                                 <td>#{{ $sale->sale_no }}</td>
                                 <td>{{ \Carbon\Carbon::parse($sale->sale_date)->format('d M Y') }}</td>
                                 <td>
                                     @if ($sale->status == 'success')
-                                        <span class="badges status-badge">Success</span>
+                                        <span class="badges status-badge">{{ __('index.Success') }}</span>
                                     @elseif($sale->status == 'hold')
-                                        <span class="badges status-badge ordered">Hold</span>
+                                        <span class="badges status-badge ordered">{{ __('index.Hold') }}</span>
                                     @endif
                                 </td>
                                 <td>{{ number_format($sale->grand_total, 2) }}</td>
@@ -124,11 +124,11 @@
                                 <td>{{ number_format($sale->amount_due, 2) }}</td>
                                 <td>
                                     @if ($sale->amount_due <= 0)
-                                        <span class="badge-linesuccess">Paid</span>
+                                        <span class="badge-linesuccess">{{ __('index.Paid') }}</span>
                                     @elseif($sale->amount_paid > 0 && $sale->amount_due > 0)
-                                        <span class="badges-warning">Partial</span>
+                                        <span class="badges-warning">{{ __('index.Partial') }}</span>
                                     @else
-                                        <span class="badge badge-linedangered">Unpaid</span>
+                                        <span class="badge badge-linedangered">{{ __('index.Unpaid') }}</span>
                                     @endif
                                 </td>
                                 <td class="action-table-data">

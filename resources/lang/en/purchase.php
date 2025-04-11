@@ -127,6 +127,7 @@ return [
 
     // Payment status options
     'payment_status'         => [
+        'title'   => 'Payment Status',
         'paid'    => 'Paid',
         'partial' => 'Partial',
         'unpaid'  => 'Unpaid',
@@ -140,15 +141,9 @@ return [
         'best_accessories' => 'Best Accessories',
     ],
 
-    // Reference options
-    'reference'              => [
-        'pt001' => 'PT001',
-        'pt002' => 'PT002',
-        'pt003' => 'PT003',
-    ],
-
     // Actions
     'action'                 => [
+        'title'    => 'Actions',
         'view'     => 'View',
         'edit'     => 'Edit',
         'delete'   => 'Delete',
@@ -163,6 +158,7 @@ return [
 
     // Supplier modal
     'supplier'               => [
+        'title'   => 'Supplier',
         'add_new' => 'Add New Supplier',
         'add'     => 'Add Supplier',
         'name'    => 'Name',
@@ -187,4 +183,6 @@ return [
         'paid_amount' => 'Paid Amount:',
         'due_amount'  => 'Due Amount:',
     ],
+
+    'manage_purchase_orders' => 'Manage purchase orders',
 ];

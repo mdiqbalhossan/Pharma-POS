@@ -387,7 +387,7 @@
                         <label for="image" class="form-label">Medicine Image</label>
                         @if ($medicine->image)
                             <div class="mb-2">
-                                <img src="{{ Storage::url($medicine->image) }}" alt="{{ $medicine->name }}"
+                                <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
                                     class="img-thumbnail" style="max-height: 100px;">
                             </div>
                         @endif

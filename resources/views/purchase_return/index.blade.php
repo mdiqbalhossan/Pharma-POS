@@ -53,32 +53,21 @@
                                 <i data-feather="user" class="info-img"></i>
                                 <select class="select">
                                     <option>{{ __('purchase_return.choose_supplier_name') }}</option>
-                                    <option>Apex Computers</option>
-                                    <option>Beats Headphones</option>
-                                    <option>Dazzle Shoes</option>
-                                    <option>Best Accessories</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-sm-6 col-12">
-                            <div class="input-blocks">
-                                <i data-feather="file" class="info-img"></i>
-                                <select class="select">
-                                    <option>{{ __('purchase_return.enter_reference') }}</option>
-                                    <option>PT001</option>
-                                    <option>PT002</option>
-                                    <option>PT003</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="col-lg-2 col-sm-6 col-12">
                             <div class="input-blocks">
                                 <i class="fas fa-money-bill info-img"></i>
                                 <select class="select">
                                     <option>{{ __('purchase_return.choose_payment_status') }}</option>
-                                    <option>{{ __('purchase_return.paid') }}</option>
-                                    <option>{{ __('purchase_return.partial') }}</option>
-                                    <option>{{ __('purchase_return.unpaid') }}</option>
+                                    <option value="paid">{{ __('purchase_return.paid') }}</option>
+                                    <option value="partial">{{ __('purchase_return.partial') }}</option>
+                                    <option value="unpaid">{{ __('purchase_return.unpaid') }}</option>
                                 </select>
                             </div>
                         </div>

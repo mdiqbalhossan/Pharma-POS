@@ -22,7 +22,7 @@
     <!-- Report filter -->
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('reports.invoice') }}" method="GET">
+            <form action="{{ route('reports.invoices') }}" method="GET">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="input-blocks">
@@ -71,7 +71,7 @@
                         <div class="input-blocks">
                             <label>&nbsp;</label>
                             <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
-                            <a href="{{ route('reports.invoice') }}" class="btn btn-info ms-2">{{ __('Reset') }}</a>
+                            <a href="{{ route('reports.invoices') }}" class="btn btn-info ms-2">{{ __('Reset') }}</a>
                         </div>
                     </div>
                 </div>

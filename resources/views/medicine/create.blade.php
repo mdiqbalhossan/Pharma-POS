@@ -469,24 +469,3 @@
     <!-- Medicine JS -->
     <script src="{{ asset('assets/js/pages/medicine.js') }}"></script>
 @endpush
-
-</div>
-</div>
-@include('medicine.modal._unit')
-@include('medicine.modal._category')
-@include('medicine.modal._medicineLeaf')
-@include('medicine.modal._medicineType')
-@include('medicine.modal._supplier')
-@include('medicine.modal._vendor')
-@endsection
-
-@push('script')
-<!-- Select2 JS -->
-<script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-<!-- Datetimepicker JS -->
-<script src="{{ asset('assets/js/moment.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-
-<!-- Medicine JS -->
-<script src="{{ asset('assets/js/pages/medicine.js') }}"></script>
-@endpush

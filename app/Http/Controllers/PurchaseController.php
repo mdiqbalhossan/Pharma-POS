@@ -398,7 +398,7 @@ class PurchaseController extends Controller
      */
     public function purchaseOrder()
     {
-        $purchaseOrders = Purchase::where('type', 'purchase_order')->get();
-        return view('purchase.purchase-order', compact('purchaseOrders'));
+        $purchase = Purchase::where('type', 'purchase_order')->get();
+        return view('purchase.purchase-order', compact('purchase'));
     }
 }

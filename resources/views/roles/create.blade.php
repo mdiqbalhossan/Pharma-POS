@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Create Role')
+@section('title', __('Create Role'))
 
 @section('content')
     @include('layouts.partials.breadcrumb', [
-        'title' => 'Create Role',
-        'subtitle' => 'Add a new role',
+        'title' => __('Create Role'),
+        'subtitle' => __('Add a new role'),
     ])
 
     <div class="card">
@@ -14,7 +14,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="name" class="form-label">Role Name</label>
+                        <label for="name" class="form-label">{{ __('Role Name') }}</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                             name="name" value="{{ old('name') }}" required>
                         @error('name')
@@ -24,12 +24,12 @@
 
                     <div class="col-md-12 mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <label class="form-label mb-0">Permissions</label>
+                            <label class="form-label mb-0">{{ __('Permissions') }}</label>
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-primary me-2"
-                                    id="select-all-btn">Select All</button>
+                                    id="select-all-btn">{{ __('Select All') }}</button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary"
-                                    id="deselect-all-btn">Deselect All</button>
+                                    id="deselect-all-btn">{{ __('Deselect All') }}</button>
                             </div>
                         </div>
 
@@ -97,8 +97,8 @@
 
                     <div class="col-md-12">
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('roles.index') }}" class="btn btn-secondary me-2">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Create Role</button>
+                            <a href="{{ route('roles.index') }}" class="btn btn-secondary me-2">{{ __('Cancel') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('Create Role') }}</button>
                         </div>
                     </div>
                 </div>
