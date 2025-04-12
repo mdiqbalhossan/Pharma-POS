@@ -285,56 +285,27 @@
                                 <div class="col-md-4">
                                     <div class="card mb-4">
                                         <div class="card-header">
-                                            <h5 class="card-title mb-0">{{ __('Company Logo') }}</h5>
+                                            <h5 class="card-title mb-0">{{ __('Invoice Logo') }}</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group mb-3">
-                                                <label>{{ __('Current Logo') }}</label>
+                                                <label>{{ __('Invoice Logo') }}</label>
                                                 <div class="mb-3">
-                                                    @if (!empty($settings['company_logo']))
-                                                        <img src="{{ asset('storage/' . $settings['company_logo']) }}"
-                                                            alt="{{ __('Company Logo') }}"
+                                                    @if (!empty($settings['invoice_logo']))
+                                                        <img src="{{ asset('public/storage/' . $settings['invoice_logo']) }}"
+                                                            alt="{{ __('Invoice Logo') }}"
                                                             class="img-fluid img-thumbnail" style="max-height: 100px;">
                                                     @else
                                                         <p class="text-muted">{{ __('No logo uploaded') }}</p>
                                                     @endif
                                                 </div>
-                                                <label for="company_logo">{{ __('Upload New Logo') }}</label>
-                                                <input type="file" name="company_logo" id="company_logo"
-                                                    class="form-control @error('company_logo') is-invalid @enderror"
+                                                <label for="invoice_logo">{{ __('Upload New Logo') }}</label>
+                                                <input type="file" name="invoice_logo" id="invoice_logo"
+                                                    class="form-control @error('invoice_logo') is-invalid @enderror"
                                                     accept="image/*">
                                                 <small
                                                     class="text-muted">{{ __('Recommended size: 200x50 pixels') }}</small>
-                                                @error('company_logo')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title mb-0">{{ __('Company Favicon') }}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group mb-3">
-                                                <label>{{ __('Current Favicon') }}</label>
-                                                <div class="mb-3">
-                                                    @if (!empty($settings['company_favicon']))
-                                                        <img src="{{ asset('storage/' . $settings['company_favicon']) }}"
-                                                            alt="{{ __('Company Favicon') }}"
-                                                            class="img-fluid img-thumbnail" style="max-height: 32px;">
-                                                    @else
-                                                        <p class="text-muted">{{ __('No favicon uploaded') }}</p>
-                                                    @endif
-                                                </div>
-                                                <label for="company_favicon">{{ __('Upload New Favicon') }}</label>
-                                                <input type="file" name="company_favicon" id="company_favicon"
-                                                    class="form-control @error('company_favicon') is-invalid @enderror"
-                                                    accept="image/*">
-                                                <small
-                                                    class="text-muted">{{ __('Recommended size: 32x32 pixels') }}</small>
-                                                @error('company_favicon')
+                                                @error('invoice_logo')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>

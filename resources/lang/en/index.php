@@ -417,4 +417,9 @@ return [
     'Received'                                                                                                   => 'Received',
     'Pending'                                                                                                    => 'Pending',
     'Order'                                                                                                      => 'Order',
+    'Manage your transactions'                                                                                   => 'Manage your transactions',
+    'Transaction ID'                                                                                             => 'Transaction ID',
+    'Account'                                                                                                    => 'Account',
+    'Description'                                                                                                => 'Description',
+    
 ];

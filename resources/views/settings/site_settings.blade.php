@@ -308,7 +308,7 @@
                                                 <label>{{ __('Current Site Logo') }}</label>
                                                 <div class="mb-3">
                                                     @if (!empty($settings['site_logo']))
-                                                        <img src="{{ asset('storage/' . $settings['site_logo']) }}"
+                                                        <img src="{{ asset('public/storage/' . $settings['site_logo']) }}"
                                                             alt="{{ __('Site Logo') }}" class="img-fluid img-thumbnail"
                                                             style="max-height: 100px;">
                                                     @else
@@ -323,6 +323,34 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-title mb-0">{{ __('Favicon') }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label for="favicon">{{ __('Current Favicon') }}</label>
+                                            <div class="mb-3">
+                                                @if (!empty($settings['favicon']))
+                                                    <img src="{{ asset('public/storage/' . $settings['favicon']) }}"
+                                                        alt="{{ __('Favicon') }}" class="img-fluid img-thumbnail"
+                                                        style="max-height: 100px;">
+                                                @else
+                                                    <p class="text-muted">{{ __('No favicon uploaded') }}</p>
+                                                @endif
+                                            </div>
+                                            <label for="favicon">{{ __('Upload New Favicon') }}</label>
+                                            <input type="file" name="favicon" id="favicon"
+                                                class="form-control @error('favicon') is-invalid @enderror"
+                                                accept="image/*">
+                                            @error('favicon')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

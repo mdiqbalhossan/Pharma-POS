@@ -31,6 +31,10 @@ class SettingController extends Controller
             'stock_expiry_alert_days' => Setting::get('stock_expiry_alert_days') ?? '30',
             'site_logo'               => Setting::get('site_logo') ?? '',
             'favicon'                 => Setting::get('favicon') ?? '',
+            'pagination_limit'        => Setting::get('pagination_limit') ?? '10',
+            'purchase_prefix'         => Setting::get('purchase_prefix') ?? 'PUR',
+            'return_prefix'           => Setting::get('return_prefix') ?? 'RET',
+            'sale_prefix'             => Setting::get('sale_prefix') ?? 'SAL',
         ];
 
         return view('settings.site_settings', compact('settings'));
@@ -54,6 +58,12 @@ class SettingController extends Controller
             'maintenance_mode'        => 'nullable|string|in:0,1',
             'allow_backorder'         => 'nullable|string|in:0,1',
             'stock_expiry_alert_days' => 'nullable|integer|min:1',
+            'pagination_limit'        => 'nullable|integer|min:1',
+            'purchase_prefix'         => 'nullable|string|max:10',
+            'return_prefix'           => 'nullable|string|max:10',
+            'sale_prefix'             => 'nullable|string|max:10',
+            'site_logo'               => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'favicon'                 => 'nullable|image|mimes:ico,png|max:1024',
         ]);
 
         // Handle site logo upload
@@ -152,6 +162,7 @@ class SettingController extends Controller
             'website_link'                  => 'nullable|string|max:255',
             'pharmacist_license'            => 'nullable|string|max:50',
             'prescription_required_message' => 'nullable|string',
+            'invoice_logo'                  => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // Handle invoice logo upload
