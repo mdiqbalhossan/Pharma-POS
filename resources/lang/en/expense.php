@@ -45,4 +45,8 @@ return [
 
     // Placeholders
     'na'                       => 'N/A',
+
+    // Account
+    'account'                  => 'Account',
+    'select_account'           => 'Select Account',
 ];

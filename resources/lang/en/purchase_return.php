@@ -75,4 +75,6 @@ return [
     'due_amount_label'               => 'Due Amount',
     'payment_method_label'           => 'Payment Method',
     'note_heading'                   => 'Note',
+    'select_account'                 => 'Select Account',
+    'account'                        => 'Account',
 ];

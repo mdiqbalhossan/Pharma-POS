@@ -27,6 +27,7 @@ return new class extends Migration
             $table->decimal('due_amount', 10, 2);
             $table->string('payment_method');
             $table->text('note')->nullable();
+            $table->foreignId('account_id')->constrained('accounts');
             $table->timestamps();
         });
     }

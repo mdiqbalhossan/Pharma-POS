@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->string('description')->nullable();
             $table->string('reference')->nullable();
+            $table->foreignId('account_id')->constrained('accounts');
             $table->timestamps();
         });
     }

@@ -148,38 +148,10 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group mb-3">
-                                        <label for="default_language">{{ __('Default Language') }} <span
-                                                class="text-danger">*</span></label>
-                                        <select name="default_language" id="default_language"
-                                            class="form-control @error('default_language') is-invalid @enderror" required>
-                                            <option value="en"
-                                                {{ $settings['default_language'] == 'en' ? 'selected' : '' }}>English
-                                            </option>
-                                            <option value="es"
-                                                {{ $settings['default_language'] == 'es' ? 'selected' : '' }}>Spanish
-                                            </option>
-                                            <option value="fr"
-                                                {{ $settings['default_language'] == 'fr' ? 'selected' : '' }}>French
-                                            </option>
-                                            <option value="de"
-                                                {{ $settings['default_language'] == 'de' ? 'selected' : '' }}>German
-                                            </option>
-                                            <option value="ar"
-                                                {{ $settings['default_language'] == 'ar' ? 'selected' : '' }}>Arabic
-                                            </option>
-                                        </select>
-                                        @error('default_language')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
                                         <label for="timezone">{{ __('Timezone') }} <span
                                                 class="text-danger">*</span></label>
                                         <select name="timezone" id="timezone"
-                                            class="form-control @error('timezone') is-invalid @enderror" required>
+                                            class="select2 @error('timezone') is-invalid @enderror" required>
                                             <option value="UTC" {{ $settings['timezone'] == 'UTC' ? 'selected' : '' }}>
                                                 UTC</option>
                                             <option value="America/New_York"
@@ -226,7 +198,7 @@
                                         <label for="barcode_type">{{ __('Barcode Type') }} <span
                                                 class="text-danger">*</span></label>
                                         <select name="barcode_type" id="barcode_type"
-                                            class="form-control @error('barcode_type') is-invalid @enderror" required>
+                                            class="select2 @error('barcode_type') is-invalid @enderror" required>
                                             <option value="CODE128"
                                                 {{ $settings['barcode_type'] == 'CODE128' ? 'selected' : '' }}>CODE128
                                             </option>
@@ -239,6 +211,26 @@
                                                 {{ $settings['barcode_type'] == 'UPC' ? 'selected' : '' }}>UPC</option>
                                         </select>
                                         @error('barcode_type')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                {{-- Default Account --}}
+                                <div class="col-md-3">
+                                    <div class="form-group mb-3">
+                                        <label for="default_account">{{ __('Default Account') }}</label>
+                                        <select name="default_account" id="default_account"
+                                            class="select2 @error('default_account') is-invalid @enderror" required>
+                                            <option value="">{{ __('Select Account') }}</option>
+                                            @foreach ($accounts as $account)
+                                                <option value="{{ $account->id }}"
+                                                    {{ $settings['default_account'] == $account->id ? 'selected' : '' }}>
+                                                    {{ $account->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small
+                                            class="text-muted">{{ __('This account will be used as the default account for all transactions. Specially in sales transactions.') }}</small>
+                                        @error('default_account')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -295,6 +287,8 @@
                                         @enderror
                                     </div>
                                 </div>
+
+
                             </div>
 
                             <div class="row">

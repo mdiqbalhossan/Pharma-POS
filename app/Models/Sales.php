@@ -26,6 +26,7 @@ class Sales extends Model
         'status',
         'note',
         'user_id',
+        'account_id',
     ];
 
     public function customer()
@@ -58,5 +59,10 @@ class Sales extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
     }
 }

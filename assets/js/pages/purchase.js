@@ -1,5 +1,6 @@
 $(document).ready(function () {
     const baseUrl = $("#base-url").attr("content");
+    let currency = $("#currency").val();
 
     // Initialize Summernote
     $("#summernote").summernote({
@@ -12,23 +13,41 @@ $(document).ready(function () {
     });
 
     // Medicine search with Select2 AJAX
-    $("#medicine_search").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: baseUrl + "/medicines-search", // The URL to your backend script
-                type: "GET",
-                data: { term: request.term }, // Send input value as "term"
-                dataType: "json",
-                success: function (data) {
-                    response(data); // Pass the data to the autocomplete widget
-                },
-            });
-        },
-        minLength: 2, // Minimum characters before triggering the search
-        select: function (event, ui) {
-            addMedicineToTable(ui.item.medicine);
-        },
-    });
+    $("#medicine_search")
+        .autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: baseUrl + "/medicines-search", // The URL to your backend script
+                    type: "GET",
+                    data: { term: request.term }, // Send input value as "term"
+                    dataType: "json",
+                    success: function (data) {
+                        response(data); // Pass the data to the autocomplete widget
+                    },
+                });
+            },
+            minLength: 2, // Minimum characters before triggering the search
+            select: function (event, ui) {
+                addMedicineToTable(ui.item.medicine);
+                $(this).val("");
+                return false;
+            },
+        })
+        .autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append(
+                `<div class="search-item d-flex align-items-center gap-2">
+                    <div class="item-img">
+                        <img src="${item.medicine.image}" alt="${item.medicine.name}" width="50">
+                    </div>
+                    <div class="item-info">
+                        <p class="mb-0">${item.medicine.name}</p>
+                        <p class="mb-0"><small>${item.medicine.generic_name}</small></p>
+                    </div>
+                </div>`
+            )
+            .appendTo(ul);
+    };
 
     // Function to add medicine to table
     function addMedicineToTable(medicine) {
@@ -91,15 +110,15 @@ $(document).ready(function () {
                     }">
                 </td>
                 <td>
-                    <span class="tax-amount">0.00</span>
+                    <span class="tax-amount">${currency} 0.00</span>
                     <input type="hidden" name="tax_amount[]" class="tax-amount-input" value="0">
                 </td>
                 <td>
-                    <span class="subtotal">0.00</span>
+                    <span class="subtotal">${currency} 0.00</span>
                     <input type="hidden" name="subtotal[]" class="subtotal-input" value="0">
                 </td>
                 <td>
-                    <span class="row-total">0.00</span>
+                    <span class="row-total">${currency} 0.00</span>
                     <input type="hidden" name="row_total[]" class="row-total-input" value="0">
                 </td>
                 <td>
@@ -118,7 +137,13 @@ $(document).ready(function () {
 
         // Initialize the datepicker for the new row
         $(".expiry-date").datetimepicker({
-            format: "YYYY-MM-DD",
+            format: "DD-MM-YYYY",
+            icons: {
+                up: "fas fa-angle-up",
+                down: "fas fa-angle-down",
+                next: "fas fa-angle-right",
+                previous: "fas fa-angle-left",
+            },
         });
     }
 
@@ -167,13 +192,13 @@ $(document).ready(function () {
         const total = subtotal - discountAmount + taxAmount;
 
         // Update display values
-        row.find(".subtotal").text(subtotal.toFixed(2));
+        row.find(".subtotal").text(currency + " " + subtotal.toFixed(2));
         row.find(".subtotal-input").val(subtotal.toFixed(2));
 
-        row.find(".tax-amount").text(taxAmount.toFixed(2));
+        row.find(".tax-amount").text(currency + " " + taxAmount.toFixed(2));
         row.find(".tax-amount-input").val(taxAmount.toFixed(2));
 
-        row.find(".row-total").text(total.toFixed(2));
+        row.find(".row-total").text(currency + " " + total.toFixed(2));
         row.find(".row-total-input").val(total.toFixed(2));
     }
 
@@ -215,27 +240,29 @@ $(document).ready(function () {
             shippingCost;
 
         // Update display values
-        $("#subtotal-value").text(subtotal.toFixed(2));
+        $("#subtotal-value").text(currency + " " + subtotal.toFixed(2));
         $("#subtotal-input").val(subtotal.toFixed(2));
 
-        $("#tax-value").text((totalTax + additionalTax).toFixed(2));
+        $("#tax-value").text(
+            currency + " " + (totalTax + additionalTax).toFixed(2)
+        );
         $("#tax-input").val((totalTax + additionalTax).toFixed(2));
 
         $("#discount-value").text(
-            (totalDiscountAmount + orderDiscount).toFixed(2)
+            currency + " " + (totalDiscountAmount + orderDiscount).toFixed(2)
         );
         $("#discount-input").val(
             (totalDiscountAmount + orderDiscount).toFixed(2)
         );
 
-        $("#grand-total-value").text(grandTotal.toFixed(2));
+        $("#grand-total-value").text(currency + " " + grandTotal.toFixed(2));
         $("#grand-total-input").val(grandTotal.toFixed(2));
 
         // Update due amount based on paid amount
         const paidAmount = parseFloat($("#paid_amount").val()) || 0;
         const dueAmount = grandTotal - paidAmount;
 
-        $("#due-amount-value").text(dueAmount.toFixed(2));
+        $("#due-amount-value").text(currency + " " + dueAmount.toFixed(2));
         $("#due_amount").val(dueAmount.toFixed(2));
     }
 
@@ -332,5 +359,14 @@ $(document).ready(function () {
                 }
             },
         });
+    });
+
+    // Print purchase
+    $(document).on("click", "#print-purchase", function () {
+        const purchaseId = $(this).data("purchase-id");
+        window.open(
+            baseUrl + "/purchases/" + purchaseId + "/invoice",
+            "_blank"
+        );
     });
 });

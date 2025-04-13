@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    protected $fillable = ['expense_category_id', 'date', 'expense_for', 'amount', 'description', 'reference'];
+    protected $fillable = ['expense_category_id', 'date', 'expense_for', 'amount', 'description', 'reference', 'account_id'];
 
     protected $casts = [
         'date'   => 'date',
@@ -43,5 +43,10 @@ class Expense extends Model
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = $value ? Carbon::parse($value) : null;
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
     }
 }

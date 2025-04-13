@@ -87,7 +87,23 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="account_id" class="form-label">{{ __('expense.account') }} <span
+                                class="text-danger">*</span></label>
+                        <select name="account_id" id="account_id" class="form-control select2" required>
+                            <option value="">{{ __('expense.select_account') }}</option>
+                            @foreach ($accounts as $account)
+                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('account_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
+
+
 
                 <div class="mb-3">
                     <label for="description" class="form-label">{{ __('expense.description') }}</label>

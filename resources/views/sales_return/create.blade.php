@@ -62,8 +62,8 @@
                                 @foreach ($sale->medicines as $item)
                                     <tr>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->pivot->quantity }}</td>
-                                        <td>{{ number_format($item->pivot->price, 2) }}</td>
+                                        <td>{{ $item->pivot->quantity }} {{ $item->unit->name }}</td>
+                                        <td>{{ show_amount($item->pivot->price) }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary return-btn"
                                                 data-medicine-id="{{ $item->id }}"
@@ -178,6 +178,21 @@
                                     <option value="cheque">{{ __('index.Cheque') }}</option>
                                 </select>
                                 @error('payment_method')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="input-blocks">
+                                <label>{{ __('index.Account') }} <span class="text-danger">*</span></label>
+                                <select name="account_id" id="account_id" class="form-control select2" required>
+                                    <option value="">{{ __('index.Select Account') }}</option>
+                                    @foreach ($accounts as $account)
+                                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('account_id')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

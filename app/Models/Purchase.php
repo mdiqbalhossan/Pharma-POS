@@ -20,6 +20,7 @@ class Purchase extends Model
         'due_amount',
         'payment_method',
         'note',
+        'account_id',
     ];
 
     public function supplier()
@@ -31,6 +32,11 @@ class Purchase extends Model
     {
         return $this->belongsToMany(Medicine::class, 'medicine_purchase')
             ->withPivot('quantity', 'unit_price', 'total_price', 'discount', 'tax', 'total_tax', 'grand_total', 'batch_no', 'expiry_date');
+    }
+
+    public function accounts()
+    {
+        return $this->belongsTo(Account::class);
     }
 
     /**

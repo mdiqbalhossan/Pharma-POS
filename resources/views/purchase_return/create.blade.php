@@ -66,9 +66,9 @@
                                 @foreach ($purchase->medicines as $item)
                                     <tr>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->pivot->quantity }}</td>
-                                        <td>{{ $item->quantity }}</td>
-                                        <td>{{ number_format($item->pivot->unit_price, 2) }}</td>
+                                        <td>{{ $item->pivot->quantity }} {{ $item->unit->name }}</td>
+                                        <td>{{ $item->quantity }} {{ $item->unit->name }}</td>
+                                        <td>{{ show_amount($item->pivot->unit_price) }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-primary return-btn"
                                                 data-medicine-id="{{ $item->id }}"
@@ -193,6 +193,21 @@
                                     <option value="cheque">{{ __('purchase_return.cheque') }}</option>
                                 </select>
                                 @error('payment_method')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="input-blocks">
+                                <label>{{ __('purchase_return.account') }} <span class="text-danger">*</span></label>
+                                <select name="account_id" id="account_id" class="form-control select2" required>
+                                    <option value="">{{ __('purchase_return.select_account') }}</option>
+                                    @foreach ($accounts as $account)
+                                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('account_id')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

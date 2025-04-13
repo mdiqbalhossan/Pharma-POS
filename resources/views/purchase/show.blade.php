@@ -36,12 +36,11 @@
             <div class="row mb-4">
                 <div class="col-md-12 d-flex justify-content-end">
                     <div class="action-buttons">
-                        <a href="#" class="btn btn-primary me-2" id="print-purchase"
-                            data-purchase-id="{{ $purchase->id }}">
+                        <a class="btn btn-primary me-2" id="print-purchase" data-purchase-id="{{ $purchase->id }}">
                             <i data-feather="printer" class="me-1"></i> {{ __('purchase.action.print') }}
                         </a>
-                        <a href="#" class="btn btn-info me-2" id="download-purchase"
-                            data-purchase-id="{{ $purchase->id }}">
+                        <a href="{{ route('purchases.download', $purchase->id) }}" class="btn btn-info me-2"
+                            id="download-purchase" data-purchase-id="{{ $purchase->id }}">
                             <i data-feather="download" class="me-1"></i> {{ __('purchase.action.download') }}
                         </a>
                         @if ($purchase->type == 'purchase_order')
@@ -144,32 +143,32 @@
                             <div class="purchase-total">
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.subtotal') }}:</span>
-                                    <span>${{ show_amount($purchase->subtotal) }}</span>
+                                    <span>{{ show_amount($purchase->subtotal) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.tax') }}:</span>
-                                    <span>${{ show_amount($purchase->total_tax) }}</span>
+                                    <span>{{ show_amount($purchase->total_tax) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.discount') }}:</span>
-                                    <span>${{ show_amount($purchase->discount) }}</span>
+                                    <span>{{ show_amount($purchase->discount) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.shipping') }}:</span>
-                                    <span>${{ show_amount($purchase->shipping) }}</span>
+                                    <span>{{ show_amount($purchase->shipping) }}</span>
                                 </div>
                                 <div
                                     class="purchase-total-item d-flex justify-content-between mb-3 border-top border-bottom py-2">
                                     <h5>{{ __('purchase.grand_total') }}:</h5>
-                                    <h5>${{ show_amount($purchase->grand_total) }}</h5>
+                                    <h5>{{ show_amount($purchase->grand_total) }}</h5>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('purchase.paid_amount') }}:</span>
-                                    <span>${{ show_amount($purchase->paid_amount) }}</span>
+                                    <span>{{ show_amount($purchase->paid_amount) }}</span>
                                 </div>
                                 <div class="purchase-total-item d-flex justify-content-between mb-3 border-top pt-2">
                                     <h6>{{ __('purchase.due_amount') }}:</h6>
-                                    <h6>${{ show_amount($purchase->due_amount) }}</h6>
+                                    <h6>{{ show_amount($purchase->due_amount) }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -229,11 +228,11 @@
                                                 <td>{{ $medicine->name }}</td>
                                                 <td>{{ $medicine->pivot->batch_no }}</td>
                                                 <td>{{ date('M Y', strtotime($medicine->pivot->expiry_date)) }}</td>
-                                                <td>{{ $medicine->pivot->quantity }}</td>
-                                                <td>${{ show_amount($medicine->pivot->unit_price) }}</td>
-                                                <td>${{ show_amount($medicine->pivot->discount_amount) }}</td>
-                                                <td>${{ show_amount($medicine->pivot->tax_amount) }}</td>
-                                                <td>${{ show_amount($medicine->pivot->subtotal) }}</td>
+                                                <td>{{ $medicine->pivot->quantity }} {{ $medicine->unit->name }}</td>
+                                                <td>{{ show_amount($medicine->pivot->unit_price) }}</td>
+                                                <td>{{ show_amount($medicine->pivot->discount_amount) }}</td>
+                                                <td>{{ show_amount($medicine->pivot->tax_amount) }}</td>
+                                                <td>{{ show_amount($medicine->pivot->subtotal) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -279,4 +278,6 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!-- Toastr JS -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+    <!-- Purchase JS -->
+    <script src="{{ asset('assets/js/pages/purchase_show.js') }}"></script>
 @endpush

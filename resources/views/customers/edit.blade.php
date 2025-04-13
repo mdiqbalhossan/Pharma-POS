@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="phone" class="form-label">{{ __('customers.phone') }}</label>
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
+                        <label for="number" class="form-label">{{ __('customers.phone') }}</label>
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="number"
                             name="phone" value="{{ old('phone', $customer->phone) }}" required>
                         @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>

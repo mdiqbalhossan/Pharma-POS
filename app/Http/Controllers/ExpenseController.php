@@ -1,13 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
+use App\Trait\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
+    use Transaction;
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +26,8 @@ class ExpenseController extends Controller
     public function create()
     {
         $expenseCategories = ExpenseCategory::all();
-        return view('expense.create', compact('expenseCategories'));
+        $accounts          = Account::all();
+        return view('expense.create', compact('expenseCategories', 'accounts'));
     }
 
     /**
@@ -33,17 +37,33 @@ class ExpenseController extends Controller
     {
         $validated = $request->validate([
             'expense_category_id' => 'required|exists:expense_categories,id',
-            'date' => 'required|date',
-            'expense_for' => 'required|string|max:255',
-            'amount' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'reference' => 'nullable|string|max:255',
+            'date'                => 'required|date',
+            'expense_for'         => 'required|string|max:255',
+            'amount'              => 'required|numeric|min:0',
+            'description'         => 'nullable|string',
+            'reference'           => 'nullable|string|max:255',
+            'account_id'          => 'required|exists:accounts,id',
         ]);
 
-        Expense::create($validated);
+        DB::beginTransaction();
+        try {
+            $expense = Expense::create($validated);
 
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expense created successfully.');
+            $this->saveTransaction([
+                'account_id'       => $validated['account_id'],
+                'type'             => 'expense',
+                'amount'           => $validated['amount'],
+                'transaction_date' => $validated['date'],
+                'description'      => $validated['description'],
+            ]);
+            DB::commit();
+            return redirect()->route('expenses.index')
+                ->with('success', 'Expense created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('expenses.index')
+                ->with('error', 'Expense creation failed.');
+        }
     }
 
     /**
@@ -61,7 +81,8 @@ class ExpenseController extends Controller
     public function edit(Expense $expense)
     {
         $expenseCategories = ExpenseCategory::all();
-        return view('expense.edit', compact('expense', 'expenseCategories'));
+        $accounts          = Account::all();
+        return view('expense.edit', compact('expense', 'expenseCategories', 'accounts'));
     }
 
     /**
@@ -71,17 +92,33 @@ class ExpenseController extends Controller
     {
         $validated = $request->validate([
             'expense_category_id' => 'required|exists:expense_categories,id',
-            'date' => 'required|date',
-            'expense_for' => 'required|string|max:255',
-            'amount' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'reference' => 'nullable|string|max:255',
+            'date'                => 'required|date',
+            'expense_for'         => 'required|string|max:255',
+            'amount'              => 'required|numeric|min:0',
+            'description'         => 'nullable|string',
+            'reference'           => 'nullable|string|max:255',
+            'account_id'          => 'required|exists:accounts,id',
         ]);
 
-        $expense->update($validated);
+        DB::beginTransaction();
+        try {
+            $expense->update($validated);
 
-        return redirect()->route('expenses.index')
-            ->with('success', 'Expense updated successfully.');
+            $this->updateTransaction([
+                'account_id'       => $validated['account_id'],
+                'type'             => 'expense',
+                'amount'           => $validated['amount'],
+                'transaction_date' => $validated['date'],
+                'description'      => $validated['description'],
+            ]);
+            DB::commit();
+            return redirect()->route('expenses.index')
+                ->with('success', 'Expense updated successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('expenses.index')
+                ->with('error', 'Expense update failed.');
+        }
     }
 
     /**

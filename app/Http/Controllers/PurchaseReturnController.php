@@ -1,15 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Medicine;
 use App\Models\Purchase;
 use App\Models\PurchaseReturn;
 use App\Models\Supplier;
+use App\Trait\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseReturnController extends Controller
 {
+    use Transaction;
     /**
      * Display a listing of the resource.
      */
@@ -34,8 +37,8 @@ class PurchaseReturnController extends Controller
     public function createFromPurchase(Purchase $purchase)
     {
         $purchase->load('medicines', 'supplier');
-
-        return view('purchase_return.create', compact('purchase'));
+        $accounts = Account::all();
+        return view('purchase_return.create', compact('purchase', 'accounts'));
     }
 
     /**
@@ -57,6 +60,7 @@ class PurchaseReturnController extends Controller
             'payment_method' => 'required|string',
             'note'           => 'nullable|string',
             'confirmation'   => 'required|accepted',
+            'account_id'     => 'required|exists:accounts,id',
         ]);
 
         $purchase = Purchase::findOrFail($request->purchase_id);
@@ -96,6 +100,7 @@ class PurchaseReturnController extends Controller
                 'due_amount'     => $request->due_amount,
                 'payment_method' => $request->payment_method,
                 'note'           => $request->note,
+                'account_id'     => $request->account_id,
             ]);
 
             // Update stock
@@ -103,6 +108,14 @@ class PurchaseReturnController extends Controller
                 $medicine->quantity -= $request->quantity;
                 $medicine->save();
             }
+
+            $this->saveTransaction([
+                'account_id'       => $request->account_id,
+                'type'             => 'purchase_return',
+                'amount'           => $request->grand_total,
+                'transaction_date' => $request->date,
+                'description'      => $request->note,
+            ]);
 
             DB::commit();
 

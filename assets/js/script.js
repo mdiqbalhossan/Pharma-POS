@@ -1664,15 +1664,6 @@ $(".quantity-btn").on("click", function () {
 
 // Custom Country Code Selector
 
-if ($("#phone").length > 0) {
-    var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
-        utilsScript: "assets/plugins/intltelinput/js/utils.js",
-    });
-}
-
-// Custom Country Code Selector
-
 if ($("#phone2").length > 0) {
     var input = document.querySelector("#phone2");
     window.intlTelInput(input, {

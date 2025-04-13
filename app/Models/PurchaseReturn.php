@@ -18,6 +18,7 @@ class PurchaseReturn extends Model
         'due_amount',
         'payment_method',
         'note',
+        'account_id',
     ];
 
     public function purchase()
@@ -28,5 +29,10 @@ class PurchaseReturn extends Model
     public function medicine()
     {
         return $this->belongsTo(Medicine::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Medicine;
 use App\Models\Sales;
+use App\Trait\Transaction;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,8 @@ use Milon\Barcode\Facades\DNS2DFacade;
 
 class SalesController extends Controller
 {
+    use Transaction;
+
     public function index()
     {
         $sales     = Sales::with('customer')->latest()->get();
@@ -88,6 +91,7 @@ class SalesController extends Controller
             'status'              => $request->status,
             'note'                => $request->note,
             'user_id'             => Auth::id(),
+            'account_id'          => setting('default_account'),
         ]);
 
         $medicines = $request->medicines;
@@ -107,6 +111,14 @@ class SalesController extends Controller
                 }
             }
         }
+
+        $this->saveTransaction([
+            'account_id'       => setting('default_account'),
+            'type'             => 'sale',
+            'amount'           => $request->grand_total,
+            'transaction_date' => $request->sale_date,
+            'description'      => $request->note,
+        ]);
 
         return $sale;
     }
@@ -175,6 +187,14 @@ class SalesController extends Controller
                 }
             }
         }
+
+        $this->updateTransaction([
+            'account_id'       => setting('default_account'),
+            'type'             => 'sale',
+            'amount'           => $request->grand_total,
+            'transaction_date' => $request->sale_date,
+            'description'      => $request->note,
+        ]);
 
         return $sale;
     }

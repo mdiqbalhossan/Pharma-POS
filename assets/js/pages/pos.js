@@ -1,5 +1,6 @@
 $(document).ready(function () {
     let base_url = $('meta[name="base-url"]').attr("content");
+    let currency = $("#currency").val();
 
     // Initialize the cart from localStorage when page loads
     initCartFromLocalStorage();
@@ -202,7 +203,7 @@ $(document).ready(function () {
                                         medicine.name
                                     }</a></h6>
                                     <p class="sale-price">${
-                                        medicine.sale_price
+                                        currency + " " + medicine.sale_price
                                     }</p>
                                 </div>
                             </div>
@@ -699,7 +700,7 @@ $(document).ready(function () {
                                         <span>${product.generic_name}</span>
                                         <h6><a href="javascript:void(0);">${product.name}</a></h6>
                                     </div>
-                                    <p>${product.sale_price}</p>
+                                    <p>${currency} ${product.sale_price}</p>
                                 </div>
                             </div>
                             <div class="quantity ms-3">
@@ -756,7 +757,7 @@ $(document).ready(function () {
 
                     // Fill customer details
                     $("#customer-name").text(order.customer.name);
-                    $("#invoice-no").text(order.sale_no);
+                    $("#invoice-no").text("#" + order.sale_no);
                     $("#customer-id").text("#" + order.customer.id);
                     $("#invoice-date").text(order.sale_date);
 
@@ -766,22 +767,34 @@ $(document).ready(function () {
                         itemsHtml += `
                         <tr>
                             <td>${index + 1}. ${medicine.name}</td>
-                            <td>${medicine.pivot.price}</td>
+                            <td>${currency} ${medicine.pivot.price}</td>    
                             <td>${medicine.pivot.quantity}</td>
-                            <td class="text-end">${medicine.pivot.total}</td>
+                            <td class="text-end">${currency} ${
+                            medicine.pivot.total
+                        }</td>
                         </tr>
                         `;
                     });
                     $("#receipt-items").html(itemsHtml);
 
                     // Fill totals
-                    $("#receipt-subtotal").text(order.total_amount);
-                    $("#receipt-discount").text("-" + order.discount_amount);
-                    $("#receipt-shipping").text(order.shipping_amount);
-                    $("#receipt-tax").text(order.tax_amount);
-                    $("#receipt-total").text(order.grand_total);
-                    $("#receipt-due").text(order.amount_due);
-                    $("#receipt-payable").text(order.grand_total);
+                    $("#receipt-subtotal").text(
+                        currency + " " + order.total_amount
+                    );
+                    $("#receipt-discount").text(
+                        "-" + currency + " " + order.discount_amount
+                    );
+                    $("#receipt-shipping").text(
+                        currency + " " + order.shipping_amount
+                    );
+                    $("#receipt-tax").text(currency + " " + order.tax_amount);
+                    $("#receipt-total").text(
+                        currency + " " + order.grand_total
+                    );
+                    $("#receipt-due").text(currency + " " + order.amount_due);
+                    $("#receipt-payable").text(
+                        currency + " " + order.grand_total
+                    );
                     $("#receipt-sale-no").text(order.sale_no);
                     $("#receipt-barcode").html(order.barcode);
 

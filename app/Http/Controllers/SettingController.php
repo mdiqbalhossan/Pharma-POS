@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
+use App\Models\Account;
 use App\Models\Setting;
 use Exception;
 use Illuminate\Http\Request;
@@ -35,9 +36,10 @@ class SettingController extends Controller
             'purchase_prefix'         => Setting::get('purchase_prefix') ?? 'PUR',
             'return_prefix'           => Setting::get('return_prefix') ?? 'RET',
             'sale_prefix'             => Setting::get('sale_prefix') ?? 'SAL',
+            'default_account'         => Setting::get('default_account') ?? '',
         ];
-
-        return view('settings.site_settings', compact('settings'));
+        $accounts = Account::where('is_active', '1')->get();
+        return view('settings.site_settings', compact('settings', 'accounts'));
     }
 
     public function updateSiteSettings(Request $request)
@@ -51,7 +53,6 @@ class SettingController extends Controller
             'default_tax'             => 'required|numeric',
             'invoice_prefix'          => 'required|string|max:10',
             'invoice_footer'          => 'nullable|string',
-            'default_language'        => 'required|string|max:5',
             'timezone'                => 'required|string|max:50',
             'low_stock_alert'         => 'required|integer|min:1',
             'barcode_type'            => 'required|string|max:20',
@@ -64,6 +65,7 @@ class SettingController extends Controller
             'sale_prefix'             => 'nullable|string|max:10',
             'site_logo'               => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'favicon'                 => 'nullable|image|mimes:ico,png|max:1024',
+            'default_account'         => 'nullable|exists:accounts,id',
         ]);
 
         // Handle site logo upload

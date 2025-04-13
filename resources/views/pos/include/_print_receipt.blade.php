@@ -23,16 +23,16 @@
 <script type="text/template" id="receipt-template">
     <div class="icon-head text-center">
         <a href="javascript:void(0);">
-            <img src="assets/img/logo.png" width="100" height="30" alt="{{ __('Receipt Logo') }}">
+            <img src="{{ photo_url(setting('invoice_logo')) }}" width="100" height="30" alt="{{ __('Receipt Logo') }}">
         </a>
     </div>
     <div class="text-center info text-center">
-        <h6>Dreamguys Technologies Pvt Ltd.,</h6>
-        <p class="mb-0">{{ __('Phone Number:') }} +1 5656665656</p>
-        <p class="mb-0">{{ __('Email:') }} <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+        <h6>{{ setting('company_name') }}</h6>
+        <p class="mb-0">{{ __('Phone Number:') }} {{ setting('company_phone') }}</p>
+        <p class="mb-0">{{ __('Email:') }} <a href="mailto:{{ setting('company_email') }}">{{ setting('company_email') }}</a></p>
     </div>
     <div class="tax-invoice">
-        <h6 class="text-center">{{ __('Tax Invoice') }}</h6>
+        <h6 class="text-center">{{ __('Sale Invoice') }}</h6>
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="invoice-user-name"><span>{{ __('Name:') }} </span><span id="customer-name"></span></div>
@@ -98,7 +98,7 @@
         <a href="javascript:void(0);" id="receipt-barcode" class="d-flex justify-content-center mb-2">
         </a>
         <p>{{ __('Sale') }} <span id="receipt-sale-no"></span></p>
-        <p>{{ __('Thank You For Shopping With Us. Please Come Again') }}</p>
+        <p>{{ setting('invoice_footer') }}</p>
         <a href="javascript:void(0);" class="btn btn-primary print-button">{{ __('Print Receipt') }}</a>
     </div>
 </script>

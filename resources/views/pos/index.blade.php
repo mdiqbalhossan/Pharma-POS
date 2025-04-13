@@ -234,39 +234,58 @@
                 <div class="block-section payment-method">
                     <h6>{{ __('index.Payment Method') }}</h6>
                     <div class="row d-flex align-items-center justify-content-center methods">
-                        <div class="col-md-6 col-lg-4 item">
-                            <div class="default-cover payment-option">
-                                <input type="radio" id="payment-cash" name="payment-method" value="cash"
-                                    class="payment-radio" checked>
-                                <label for="payment-cash">
-                                    <img src="{{ asset('assets/img/icons/cash-pay.svg') }}"
-                                        alt="{{ __('index.Payment Method') }}">
-                                    <span>{{ __('index.Cash') }}</span>
-                                </label>
+                        @if (setting('payment_cash_enabled'))
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="default-cover payment-option">
+                                    <input type="radio" id="payment-cash" name="payment-method" value="cash"
+                                        class="payment-radio" checked>
+                                    <label for="payment-cash">
+                                        <img src="{{ asset('assets/img/icons/cash-pay.svg') }}"
+                                            alt="{{ __('index.Payment Method') }}">
+                                        <span>{{ __('index.Cash') }}</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 item">
-                            <div class="default-cover payment-option">
-                                <input type="radio" id="payment-card" name="payment-method" value="card"
-                                    class="payment-radio">
-                                <label for="payment-card">
-                                    <img src="{{ asset('assets/img/icons/credit-card.svg') }}"
-                                        alt="{{ __('index.Payment Method') }}">
-                                    <span>{{ __('index.Card') }}</span>
-                                </label>
+                        @endif
+                        @if (setting('payment_card_enabled'))
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="default-cover payment-option">
+                                    <input type="radio" id="payment-card" name="payment-method" value="card"
+                                        class="payment-radio">
+                                    <label for="payment-card">
+                                        <img src="{{ asset('assets/img/icons/credit-card.svg') }}"
+                                            alt="{{ __('index.Payment Method') }}">
+                                        <span>{{ __('index.Card') }}</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 item">
-                            <div class="default-cover payment-option">
-                                <input type="radio" id="payment-scan" name="payment-method" value="scan"
-                                    class="payment-radio">
-                                <label for="payment-scan">
-                                    <img src="{{ asset('assets/img/icons/qr-scan.svg') }}"
-                                        alt="{{ __('index.Payment Method') }}">
-                                    <span>{{ __('index.Scan') }}</span>
-                                </label>
+                        @endif
+                        @if (setting('payment_bank_enabled'))
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="default-cover payment-option">
+                                    <input type="radio" id="payment-bank" name="payment-method" value="bank"
+                                        class="payment-radio">
+                                    <label for="payment-bank">
+                                        <img src="{{ asset('assets/img/icons/qr-scan.svg') }}"
+                                            alt="{{ __('index.Payment Method') }}">
+                                        <span>{{ __('index.Bank') }}</span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+                        @if (setting('payment_cheque_enabled'))
+                            <div class="col-md-6 col-lg-4 item">
+                                <div class="default-cover payment-option">
+                                    <input type="radio" id="payment-cheque" name="payment-method" value="cheque"
+                                        class="payment-radio">
+                                    <label for="payment-cheque">
+                                        <img src="{{ asset('assets/img/icons/qr-scan.svg') }}"
+                                            alt="{{ __('index.Payment Method') }}">
+                                        <span>{{ __('index.Cheque') }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="d-grid btn-block">

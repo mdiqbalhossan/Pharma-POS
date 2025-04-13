@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
-    <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 @endpush
 
 @section('content')

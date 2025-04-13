@@ -50,6 +50,7 @@
 </head>
 
 <body>
+    <input type="hidden" id="currency" value="{{ setting('currency_symbol') }}">
     <div id="global-loader">
         <div class="whirly-loader"> </div>
     </div>

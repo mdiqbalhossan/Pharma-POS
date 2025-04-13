@@ -37,20 +37,39 @@
         </ul>
     </div>
 
-    <form id="purchaseCreateForm" action="{{ route('purchases.store') }}" method="POST">
+    {{-- Error --}}
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+    <form id="purchase-form" action="{{ route('purchases.store') }}" method="POST">
         @csrf
         <div class="card">
-            <div class="card-body">
+            <div class="card-body add-product">
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="form-group">
-                            <label for="date">{{ __('purchase.date') }} <span class="text-danger">*</span></label>
-                            <input type="date" name="date" id="date" class="form-control"
-                                value="{{ date('Y-m-d') }}" required>
+                    <div class="col-md-3 mb-3">
+                        <div class="input-blocks">
+                            <label for="date">{{ __('index.Date') }} <span class="text-danger">*</span></label>
+                            <div class="input-groupicon calender-input">
+                                <i data-feather="calendar" class="info-img"></i>
+                                <input type="text" id="date" name="date" class="datetimepicker"
+                                    value="{{ date('Y-m-d') }}" required>
+                            </div>
+                            @error('date')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="form-group">
+                    <div class="col-md-3 mb-3">
+                        <div class="input-blocks">
                             <label for="supplier_id">{{ __('purchase.supplier.title') }} <span
                                     class="text-danger">*</span></label>
                             <select name="supplier_id" id="supplier_id" class="form-control select2" required>
@@ -61,8 +80,18 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="form-group">
+                    <div class="col-md-3 mb-3">
+                        <div class="input-blocks">
+                            <label for="purchase_type">{{ __('purchase.purchase_type') }} <span
+                                    class="text-danger">*</span></label>
+                            <select name="purchase_type" id="purchase_type" class="form-control select2" required>
+                                <option value="purchase">{{ __('purchase.purchase') }}</option>
+                                <option value="purchase_order">{{ __('purchase.purchase_order') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="input-blocks">
                             <label for="purchase_status">{{ __('purchase.status') }} <span
                                     class="text-danger">*</span></label>
                             <select name="purchase_status" id="purchase_status" class="form-control select2" required>
@@ -75,13 +104,16 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <div class="form-group">
-                            <label for="medicine_search">{{ __('purchase.add_medicine') }}</label>
-                            <select id="medicine_search" class="form-control select2"
-                                data-placeholder="{{ __('purchase.medicine_placeholder') }}">
-                                <option value=""></option>
-                            </select>
+                    <div class="col-lg-6">
+                        <div class="input-blocks search-form seacrh-barcode-item">
+                            <div class="searchInput">
+                                <label class="form-label">{{ __('medicine.product') }}</label>
+                                <input type="text" class="form-control" id="medicine_search"
+                                    placeholder="{{ __('medicine.search_product_by_name_or_code') }}">
+                                <div class="resultBox">
+                                </div>
+                                <div class="icon"><i class="fas fa-search"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,18 +121,21 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="purchase-items-table">
+                            <table class="table table-bordered table-striped" id="purchase-table">
                                 <thead>
                                     <tr>
                                         <th width="20%">{{ __('purchase.medicine') }}</th>
                                         <th>{{ __('purchase.batch_no') }}</th>
                                         <th>{{ __('purchase.expiry_date') }}</th>
                                         <th>{{ __('purchase.qty') }}</th>
+                                        <th>{{ __('purchase.sale_price') }}</th>
                                         <th>{{ __('purchase.purchase_price') }}</th>
                                         <th>{{ __('purchase.discount') }} (%)</th>
                                         <th>{{ __('purchase.tax') }} (%)</th>
+                                        <th>{{ __('purchase.tax_amount') }}</th>
                                         <th>{{ __('purchase.subtotal') }}</th>
-                                        <th><i data-feather="trash-2"></i></th>
+                                        <th>{{ __('purchase.total') }}</th>
+                                        <th><i class="fas fa-trash"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,8 +154,8 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <div class="form-group">
-                                    <label for="note">{{ __('purchase.note') }}</label>
-                                    <textarea name="note" id="note" class="form-control" rows="5"></textarea>
+                                    <label for="summernote">{{ __('purchase.note') }}</label>
+                                    <textarea name="note" id="summernote" class="form-control" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -128,45 +163,64 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-6 offset-md-6">
-                                <div class="form-group row mb-3">
-                                    <label for="subtotal"
-                                        class="col-sm-6 col-form-label">{{ __('purchase.subtotal') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="subtotal" id="subtotal" class="form-control-plaintext"
-                                            value="0.00" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="total_tax"
-                                        class="col-sm-6 col-form-label">{{ __('purchase.total_tax') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="total_tax" id="total_tax"
-                                            class="form-control-plaintext" value="0.00" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="shipping"
-                                        class="col-sm-6 col-form-label">{{ __('purchase.shipping') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="number" name="shipping" id="shipping" class="form-control"
-                                            value="0" min="0" step="0.01">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="discount"
-                                        class="col-sm-6 col-form-label">{{ __('purchase.discount') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="number" name="discount" id="discount" class="form-control"
-                                            value="0" min="0" step="0.01">
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="grand_total"
-                                        class="col-sm-6 col-form-label">{{ __('purchase.grand_total') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="grand_total" id="grand_total"
-                                            class="form-control-plaintext" value="0.00" readonly>
-                                    </div>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th>{{ __('purchase.subtotal') }}</th>
+                                            <td>
+                                                <span id="subtotal-value">0.00</span>
+                                                <input type="hidden" name="subtotal" id="subtotal-input"
+                                                    value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.order_tax') }} (%)</th>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input type="number" step="0.01" min="0"
+                                                        class="form-control" id="order_tax" name="order_tax"
+                                                        value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.tax_amount') }}</th>
+                                            <td>
+                                                <span id="tax-value">0.00</span>
+                                                <input type="hidden" name="tax_amount" id="tax-input" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.order_discount') }}</th>
+                                            <td>
+                                                <input type="number" step="0.01" min="0" class="form-control"
+                                                    id="order_discount" name="order_discount" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.shipping_cost') }}</th>
+                                            <td>
+                                                <input type="number" step="0.01" min="0" class="form-control"
+                                                    id="shipping_cost" name="shipping_cost" value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.discount_amount') }}</th>
+                                            <td>
+                                                <span id="discount-value">0.00</span>
+                                                <input type="hidden" name="discount_amount" id="discount-input"
+                                                    value="0">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ __('purchase.grand_total') }}</th>
+                                            <td>
+                                                <span id="grand-total-value">0.00</span>
+                                                <input type="hidden" name="grand_total" id="grand-total-input"
+                                                    value="0">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +234,7 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <div class="form-group">
+                        <div class="input-blocks">
                             <label for="payment_method">{{ __('purchase.payment_method') }} <span
                                     class="text-danger">*</span></label>
                             <select name="payment_method" id="payment_method" class="form-control select2" required>
@@ -193,7 +247,7 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <div class="form-group">
+                        <div class="input-blocks">
                             <label for="paid_amount">{{ __('purchase.paid_amount') }}</label>
                             <input type="number" name="paid_amount" id="paid_amount" class="form-control"
                                 value="0" min="0" step="0.01">
@@ -201,9 +255,32 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <div class="form-group">
+                        <div class="input-blocks">
+                            <label for="account_id">{{ __('purchase.account') }} <span
+                                    class="text-danger">*</span></label>
+                            <select name="account_id" id="account_id" class="form-control select2" required>
+                                <option value="">{{ __('purchase.select_account') }}</option>
+                                @foreach ($accounts as $account)
+                                    <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="input-blocks">
                             <label for="payment_note">{{ __('purchase.payment_note') }}</label>
                             <textarea name="payment_note" id="payment_note" class="form-control" rows="1"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="input-blocks">
+                            <label for="due_amount">{{ __('purchase.due_amount') }}</label>
+                            <div class="input-group">
+                                <span id="due-amount-value">0.00</span>
+                                <input type="hidden" name="due_amount" id="due_amount" value="0">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -219,39 +296,52 @@
 
     <!-- Medicine Item Template (hidden) -->
     <table class="d-none">
-        <tr id="item-row-template" class="purchase-item">
+        <tr id="item-row-template" class="purchase-item" data-medicine-id="">
             <td>
                 <input type="hidden" name="medicine_id[]" class="medicine-id">
                 <span class="medicine-name"></span>
             </td>
             <td>
-                <input type="text" name="batch_no[]" class="form-control" required>
+                <input type="text" name="batch_no[]" class="form-control batch-no w-150px" required>
             </td>
             <td>
-                <input type="date" name="expiry_date[]" class="form-control" required>
+                <input type="date" name="expiry_date[]" class="form-control expiry-date" required>
             </td>
             <td>
-                <input type="number" name="quantity[]" class="form-control quantity" value="1" min="1"
-                    required>
+                <input type="number" name="quantity[]" class="form-control medicine-qty w-100px" value="1"
+                    min="1" required>
             </td>
             <td>
-                <input type="number" name="unit_price[]" class="form-control unit-price" value="0" min="0"
-                    step="0.01" required>
+                <input type="number" step="0.01" name="sale_price[]" class="form-control sale-price w-100px"
+                    value="0" min="0" step="0.01" required>
             </td>
             <td>
-                <input type="number" name="discount[]" class="form-control discount" value="0" min="0"
-                    max="100" step="0.01">
+                <input type="number" step="0.01" name="unit_price[]" class="form-control unit-price w-100px"
+                    value="0" min="0" step="0.01" required>
             </td>
             <td>
-                <input type="number" name="tax[]" class="form-control tax" value="0" min="0"
-                    max="100" step="0.01">
+                <input type="number" step="0.01" name="discount[]" class="form-control discount w-100px"
+                    value="0" min="0" max="100" step="0.01">
+            </td>
+            <td>
+                <input type="number" step="0.01" name="tax[]" class="form-control tax w-100px" value="0"
+                    min="0" max="100" step="0.01">
+            </td>
+            <td>
+                <span class="tax-amount">0.00</span>
+                <input type="hidden" name="tax_amount[]" class="tax-amount-input" value="0">
             </td>
             <td>
                 <span class="subtotal">0.00</span>
+                <input type="hidden" name="subtotal[]" class="subtotal-input" value="0">
             </td>
             <td>
-                <button type="button" class="btn btn-sm btn-danger remove-item">
-                    <i data-feather="trash-2"></i>
+                <span class="row-total">0.00</span>
+                <input type="hidden" name="row_total[]" class="row-total-input" value="0">
+            </td>
+            <td>
+                <button type="button" class="btn btn-sm btn-danger remove-medicine">
+                    <i class="fas fa-trash"></i>
                 </button>
             </td>
         </tr>
@@ -313,5 +403,5 @@
     <!-- Toastr JS -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
     <!-- Purchase Create JS -->
-    <script src="{{ asset('assets/js/pages/purchase-create.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/purchase.js') }}"></script>
 @endpush

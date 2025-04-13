@@ -185,4 +185,10 @@ return [
     ],
 
     'manage_purchase_orders' => 'Manage purchase orders',
+    'sale_price'             => 'Sale Price',
+    'order_discount'         => 'Order Discount',
+    'discount_amount'        => 'Discount Amount',
+    'purchase_invoice'       => 'Purchase Invoice',
+    'select_account'         => 'Select Account',
+    'account'                => 'Account',
 ];

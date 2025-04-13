@@ -5,6 +5,46 @@
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #invoice-container,
+            #invoice-container * {
+                visibility: visible;
+            }
+
+            #invoice-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+
+            /* Ensure layout is preserved during print */
+            .row {
+                display: flex !important;
+            }
+
+            .col-md-6 {
+                width: 50% !important;
+                float: left !important;
+            }
+
+            /* Remove unnecessary margins/paddings for better print layout */
+            #invoice-container .card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Clean print layout */
+            @page {
+                margin: 0.5cm;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -21,14 +61,6 @@
                     <a href="{{ route('purchases.index') }}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>{{ __('purchase.back_to_purchase') }}</a>
                 </div>
-            </li>
-            <li>
-                <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('purchase.print') }}" id="print-invoice"><i
-                        data-feather="printer" class="feather-printer"></i></a>
-            </li>
-            <li>
-                <a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('purchase.download') }}"
-                    id="download-invoice"><i data-feather="download" class="feather-download"></i></a>
             </li>
         </ul>
     </div>
@@ -86,8 +118,7 @@
                                                     $statusClass = 'text-warning';
                                                 }
                                             @endphp
-                                            <span
-                                                class="{{ $statusClass }}">{{ __('purchase.status.' . $statusText) }}</span>
+                                            <span class="{{ $statusClass }}">{{ $statusText }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -150,7 +181,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($purchase->purchaseDetails as $key => $item)
+                                        @foreach ($purchase->medicines as $key => $item)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $item->medicine ? $item->medicine->name : 'N/A' }}</td>
@@ -261,40 +292,9 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <script>
         $(document).ready(function() {
-            // Print invoice
-            $('#print-invoice').on('click', function() {
-                window.print();
-            });
-
-            // Download invoice as PDF
-            $('#download-invoice').on('click', function() {
-                const element = document.getElementById('invoice-container');
-                const options = {
-                    margin: 1,
-                    filename: 'purchase-invoice-{{ $purchase->invoice_no }}.pdf',
-                    image: {
-                        type: 'jpeg',
-                        quality: 0.98
-                    },
-                    html2canvas: {
-                        scale: 2
-                    },
-                    jsPDF: {
-                        unit: 'cm',
-                        format: 'a4',
-                        orientation: 'portrait'
-                    }
-                };
-
-                html2pdf().set(options).from(element).save();
-            });
+            window.print();
         });
     </script>
 @endpush

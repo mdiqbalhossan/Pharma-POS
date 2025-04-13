@@ -1,14 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Medicine;
 use App\Models\SaleReturn;
 use App\Models\Sales;
+use App\Trait\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SaleReturnController extends Controller
 {
+    use Transaction;
     /**
      * Display a listing of the resource.
      */
@@ -32,8 +35,8 @@ class SaleReturnController extends Controller
     public function createFromSale(Sales $sale)
     {
         $sale->load('medicines', 'customer');
-
-        return view('sales_return.create', compact('sale'));
+        $accounts = Account::all();
+        return view('sales_return.create', compact('sale', 'accounts'));
     }
 
     /**
@@ -55,6 +58,7 @@ class SaleReturnController extends Controller
             'payment_method' => 'required|string',
             'note'           => 'nullable|string',
             'confirmation'   => 'required|accepted',
+            'account_id'     => 'required|exists:accounts,id',
         ]);
 
         $sale     = Sales::findOrFail($request->sale_id);
@@ -88,6 +92,7 @@ class SaleReturnController extends Controller
                 'due_amount'     => $request->due_amount,
                 'payment_method' => $request->payment_method,
                 'note'           => $request->note,
+                'account_id'     => $request->account_id,
             ]);
 
             // Update stock (increase medicine quantity on return)
@@ -95,6 +100,14 @@ class SaleReturnController extends Controller
                 $medicine->quantity = ($medicine->quantity ?? 0) + $request->quantity;
                 $medicine->save();
             }
+
+            $this->saveTransaction([
+                'account_id'       => $request->account_id,
+                'type'             => 'sale_return',
+                'amount'           => $request->grand_total,
+                'transaction_date' => $request->date,
+                'description'      => $request->note,
+            ]);
 
             DB::commit();
 

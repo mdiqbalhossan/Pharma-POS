@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('hold_reference')->nullable();
             $table->string('note')->nullable();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('account_id')->constrained('accounts');
             $table->softDeletes();
             $table->timestamps();
         });

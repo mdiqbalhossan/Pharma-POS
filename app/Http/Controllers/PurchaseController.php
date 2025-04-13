@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Medicine;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use App\Trait\Transaction;
 use Barryvdh\DomPDF\Facade\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
+    use Transaction;
+
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +31,8 @@ class PurchaseController extends Controller
     {
         $suppliers     = Supplier::all();
         $invoiceNumber = Purchase::getInvoiceNumber();
-        return view('purchase.create', compact('suppliers', 'invoiceNumber'));
+        $accounts      = Account::all();
+        return view('purchase.create', compact('suppliers', 'invoiceNumber', 'accounts'));
     }
 
     /**
@@ -39,9 +44,8 @@ class PurchaseController extends Controller
         $request->validate([
             'supplier_id'    => 'required|exists:suppliers,id',
             'date'           => 'required|date',
-            'invoice_no'     => 'required|string|max:255|unique:purchases',
             'purchase_type'  => 'required|string|in:purchase,purchase_order',
-            'payment_method' => 'required|string|in:Cash,Bank Transfer,Credit Card,Cheque,Other',
+            'payment_method' => 'required|string',
             'medicine_id'    => 'required|array',
             'medicine_id.*'  => 'required|exists:medicines,id',
             'batch_no'       => 'required|array',
@@ -60,15 +64,16 @@ class PurchaseController extends Controller
             'grand_total'    => 'required|numeric|min:0',
             'paid_amount'    => 'required|numeric|min:0',
             'note'           => 'nullable|string',
+            'account_id'     => 'required|exists:accounts,id',
         ]);
 
         try {
             DB::beginTransaction();
-
+            $invoicePrefix = setting('invoice_prefix') ?? 'INV-';
             // Generate reference number if not provided
             if (empty($request->invoice_no)) {
                 $latestPurchase = Purchase::latest('id')->first();
-                $invoiceNo      = 'INV-' . date('Ymd') . '-' . sprintf('%04d', ($latestPurchase ? $latestPurchase->id + 1 : 1));
+                $invoiceNo      = $invoicePrefix . date('Ymd') . '-' . sprintf('%04d', ($latestPurchase ? $latestPurchase->id + 1 : 1));
             } else {
                 $invoiceNo = $request->invoice_no;
             }
@@ -83,7 +88,7 @@ class PurchaseController extends Controller
                 'supplier_id'    => $request->supplier_id,
                 'date'           => Carbon::parse($request->date)->format('Y-m-d'),
                 'subtotal'       => $request->subtotal,
-                'discount'       => $request->order_discount ?? 0,
+                'discount'       => $request->discount_amount ?? 0,
                 'tax'            => $request->order_tax ?? 0,
                 'total_tax'      => $request->tax_amount ?? 0,
                 'shipping'       => $request->shipping_cost ?? 0,
@@ -92,6 +97,7 @@ class PurchaseController extends Controller
                 'due_amount'     => $dueAmount,
                 'payment_method' => $request->payment_method,
                 'note'           => $request->note,
+                'account_id'     => $request->account_id,
             ]);
 
             // Add medicines to purchase
@@ -124,6 +130,14 @@ class PurchaseController extends Controller
                 }
             }
 
+            $this->saveTransaction([
+                'account_id'       => $request->account_id,
+                'type'             => 'purchase',
+                'amount'           => $request->grand_total,
+                'transaction_date' => $request->date,
+                'description'      => $request->note,
+            ]);
+
             DB::commit();
 
             return redirect()->route('purchases.index')
@@ -154,7 +168,8 @@ class PurchaseController extends Controller
     {
         $purchase->load('supplier', 'medicines');
         $suppliers = Supplier::all();
-        return view('purchase.edit', compact('purchase', 'suppliers'));
+        $accounts  = Account::all();
+        return view('purchase.edit', compact('purchase', 'suppliers', 'accounts'));
     }
 
     /**
@@ -166,8 +181,7 @@ class PurchaseController extends Controller
         $request->validate([
             'supplier_id'    => 'required|exists:suppliers,id',
             'date'           => 'required|date',
-            'invoice_no'     => 'required|string|max:255|unique:purchases,invoice_no,' . $purchase->id,
-            'payment_method' => 'required|string|in:Cash,Bank Transfer,Credit Card,Cheque,Other',
+            'payment_method' => 'required|string',
             'medicine_id'    => 'required|array',
             'medicine_id.*'  => 'required|exists:medicines,id',
             'batch_no'       => 'required|array',
@@ -186,6 +200,7 @@ class PurchaseController extends Controller
             'grand_total'    => 'required|numeric|min:0',
             'paid_amount'    => 'required|numeric|min:0',
             'note'           => 'nullable|string',
+            'account_id'     => 'required|exists:accounts,id',
         ]);
 
         try {
@@ -208,6 +223,7 @@ class PurchaseController extends Controller
                 'due_amount'     => $dueAmount,
                 'payment_method' => $request->payment_method,
                 'note'           => $request->note,
+                'account_id'     => $request->account_id,
             ]);
 
             // Update medicines
@@ -244,8 +260,14 @@ class PurchaseController extends Controller
                 }
             }
 
+            $this->updateTransaction([
+                'account_id'       => $request->account_id,
+                'type'             => 'purchase',
+                'amount'           => $request->grand_total,
+                'transaction_date' => $request->date,
+                'description'      => $request->note,
+            ]);
             DB::commit();
-
             return redirect()->route('purchases.index')
                 ->with('success', 'Purchase updated successfully');
 

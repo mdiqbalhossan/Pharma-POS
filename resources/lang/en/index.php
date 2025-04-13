@@ -421,5 +421,7 @@ return [
     'Transaction ID'                                                                                             => 'Transaction ID',
     'Account'                                                                                                    => 'Account',
     'Description'                                                                                                => 'Description',
-    
+    'Bank'                                                                                                       => 'Bank',
+    'Cheque'                                                                                                     => 'Cheque',
+    'Select Account'                                                                                             => 'Select Account',
 ];

@@ -162,10 +162,12 @@
                                             title="{{ __('purchase.action.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
-                                        <a class="me-2 p-2" href="{{ route('purchases.return', $purchase->id) }}"
-                                            title="{{ __('purchase.action.return') }}">
-                                            <i data-feather="corner-up-left" class="feather-edit"></i>
-                                        </a>
+                                        @if ($purchase->type == 'purchase')
+                                            <a class="me-2 p-2" href="{{ route('purchases.return', $purchase->id) }}"
+                                                title="{{ __('purchase.action.return') }}">
+                                                <i data-feather="corner-up-left" class="feather-edit"></i>
+                                            </a>
+                                        @endif
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
                                             title="{{ __('purchase.action.delete') }}" data-id="{{ $purchase->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
