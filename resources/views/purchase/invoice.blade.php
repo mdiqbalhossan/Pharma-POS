@@ -74,9 +74,9 @@
                         <div class="invoice-header mb-4 pb-3 border-bottom">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @if (setting('logo'))
+                                    @if (setting('invoice_logo'))
                                         <div class="logo-container mb-3">
-                                            <img src="{{ asset('storage/' . setting('logo')) }}"
+                                            <img src="{{ photo_url(setting('invoice_logo')) }}"
                                                 alt="{{ __('purchase.company_logo') }}" class="img-fluid"
                                                 style="max-height: 80px;">
                                         </div>
@@ -126,7 +126,7 @@
                         </div>
 
                         <!-- Supplier and Purchase Information -->
-                        <div class="invoice-info mb-4 pb-3 border-bottom">
+                        <div class="invoice-info mb-2 pb-1 border-bottom">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 class="section-title">{{ __('purchase.supplier_info') }}</h5>
@@ -163,8 +163,8 @@
                         </div>
 
                         <!-- Purchase Items Table -->
-                        <div class="invoice-items mb-4">
-                            <h5 class="section-title mb-3">{{ __('purchase.purchase_items') }}</h5>
+                        <div class="invoice-items mb-2">
+                            <h5 class="section-title mb-1">{{ __('purchase.purchase_items') }}</h5>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -184,15 +184,15 @@
                                         @foreach ($purchase->medicines as $key => $item)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $item->medicine ? $item->medicine->name : 'N/A' }}</td>
-                                                <td>{{ $item->batch_no }}</td>
-                                                <td>{{ $item->expiry_date ? date('M Y', strtotime($item->expiry_date)) : 'N/A' }}
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->pivot->batch_no }}</td>
+                                                <td>{{ date('d M, Y', strtotime($item->pivot->expiry_date)) }}
                                                 </td>
-                                                <td>{{ $item->quantity }}</td>
-                                                <td>${{ number_format($item->unit_price, 2) }}</td>
-                                                <td>${{ number_format($item->discount_amount, 2) }}</td>
-                                                <td>${{ number_format($item->tax_amount, 2) }}</td>
-                                                <td>${{ number_format($item->subtotal, 2) }}</td>
+                                                <td>{{ $item->pivot->quantity }} {{ $item->unit->name }}</td>
+                                                <td>{{ show_amount($item->pivot->unit_price) }}</td>
+                                                <td>{{ show_amount($item->pivot->discount_amount) }}</td>
+                                                <td>{{ show_amount($item->pivot->tax_amount) }}</td>
+                                                <td>{{ show_amount($item->pivot->subtotal) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -201,11 +201,11 @@
                         </div>
 
                         <!-- Payment Summary -->
-                        <div class="invoice-summary mb-4">
+                        <div class="invoice-summary mb-2">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="notes">
-                                        <h5 class="section-title mb-3">{{ __('purchase.notes') }}</h5>
+                                        <h5 class="section-title mb-1">{{ __('purchase.notes') }}</h5>
                                         <div class="note-content p-3 bg-light rounded">
                                             {!! $purchase->note ?? '<em>' . __('purchase.no_notes') . '</em>' !!}
                                         </div>
@@ -213,44 +213,44 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="payment-summary">
-                                        <h5 class="section-title mb-3">{{ __('purchase.summary') }}</h5>
+                                        <h5 class="section-title mb-1">{{ __('purchase.summary') }}</h5>
                                         <div class="summary-table">
                                             <table class="table table-bordered">
                                                 <tbody>
                                                     <tr>
                                                         <td>{{ __('purchase.subtotal') }}</td>
-                                                        <td class="text-end">${{ number_format($purchase->subtotal, 2) }}
-                                                        </td>
+                                                        <td class="text-end">
+                                                            {{ show_amount($purchase->subtotal) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>{{ __('purchase.tax') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->total_tax, 2) }}</td>
+                                                            {{ show_amount($purchase->total_tax) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>{{ __('purchase.discount') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->discount, 2) }}</td>
+                                                            {{ show_amount($purchase->discount) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>{{ __('purchase.shipping') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->shipping, 2) }}</td>
+                                                            {{ show_amount($purchase->shipping) }}</td>
                                                     </tr>
                                                     <tr class="fw-bold">
                                                         <td>{{ __('purchase.grand_total') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->grand_total, 2) }}</td>
+                                                            {{ show_amount($purchase->grand_total) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>{{ __('purchase.paid_amount') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->paid_amount, 2) }}</td>
+                                                            {{ show_amount($purchase->paid_amount) }}</td>
                                                     </tr>
                                                     <tr class="fw-bold">
                                                         <td>{{ __('purchase.due_amount') }}</td>
                                                         <td class="text-end">
-                                                            ${{ number_format($purchase->due_amount, 2) }}</td>
+                                                            {{ show_amount($purchase->due_amount) }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -261,7 +261,7 @@
                         </div>
 
                         <!-- Footer -->
-                        <div class="invoice-footer mt-5 pt-4 border-top">
+                        <div class="invoice-footer pt-4 border-top">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="terms-conditions">

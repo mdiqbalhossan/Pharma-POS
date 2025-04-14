@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('index.Sale') }} {{ __('index.Invoice No:') }} #{{ $sale->sale_no }}</title>
+    <title>{{ __('index.Purchase') }} {{ __('index.Invoice No:') }} #{{ $purchase->invoice_no }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,12 +43,12 @@
             margin-bottom: 30px;
         }
 
-        .customer-details {
+        .supplier-details {
             width: 50%;
             float: left;
         }
 
-        .sale-details {
+        .purchase-details {
             width: 50%;
             float: right;
             text-align: right;
@@ -81,9 +81,17 @@
         }
 
         .totals-row {
-            display: flex;
-            justify-content: space-between;
+            width: 100%;
+            clear: both;
             padding: 5px 0;
+        }
+
+        .totals-row span:first-child {
+            float: left;
+        }
+
+        .totals-row span:last-child {
+            float: right;
         }
 
         .totals-row.grand-total {
@@ -146,6 +154,17 @@
                 padding: 10px;
                 max-width: 100%;
             }
+
+            /* Ensure proper alignment in PDF */
+            .totals-row {
+                margin-bottom: 5px;
+            }
+
+            .clear {
+                clear: both;
+                height: 0;
+                overflow: hidden;
+            }
         }
 
         @isset($extra_css)
@@ -166,43 +185,42 @@
                 <p class="m-0">{{ setting('company_email') }}</p>
             </div>
             <div class="company-info">
-                <h2 class="m-0">{{ __('index.Sale Invoice') }}</h2>
-                <p class="m-0">{{ __('index.Invoice No:') }} #{{ $sale->sale_no }}</p>
-                <p class="m-0">{{ __('index.Date:') }} {{ date('d M, Y', strtotime($sale->sale_date)) }}</p>
-                <p class="m-0">{{ __('index.Status') }}: {{ ucfirst($sale->status) }}</p>
+                <h2 class="m-0">{{ __('index.Purchase Invoice') }}</h2>
+                <p class="m-0">{{ __('index.Invoice No:') }} #{{ $purchase->invoice_no }}</p>
+                <p class="m-0">{{ __('index.Date:') }} {{ date('d M, Y', strtotime($purchase->date)) }}</p>
+                <p class="m-0">{{ __('purchase.Type') }}: {{ ucfirst($purchase->type) }}</p>
             </div>
             <div class="clear"></div>
         </div>
 
         <div class="invoice-details">
-            <div class="customer-details">
-                <h3>{{ __('index.Customer Information') }}:</h3>
-                <p class="m-0"><strong>{{ $sale->customer->name }}</strong></p>
-                @if ($sale->customer->email)
-                    <p class="m-0">{{ __('index.Email:') }} {{ $sale->customer->email }}</p>
+            <div class="supplier-details">
+                <h3>{{ __('index.Supplier Information') }}:</h3>
+                <p class="m-0"><strong>{{ $purchase->supplier->name }}</strong></p>
+                @if ($purchase->supplier->email)
+                    <p class="m-0">{{ __('index.Email:') }} {{ $purchase->supplier->email }}</p>
                 @endif
-                @if ($sale->customer->phone)
-                    <p class="m-0">{{ __('index.Phone Number:') }} {{ $sale->customer->phone }}</p>
+                @if ($purchase->supplier->phone)
+                    <p class="m-0">{{ __('index.Phone Number:') }} {{ $purchase->supplier->phone }}</p>
                 @endif
-                @if ($sale->customer->address)
-                    <p class="m-0">{{ __('index.Address') }}: {{ $sale->customer->address }}</p>
+                @if ($purchase->supplier->address)
+                    <p class="m-0">{{ __('index.Address') }}: {{ $purchase->supplier->address }}</p>
                 @endif
             </div>
-            <div class="sale-details">
+            <div class="purchase-details">
                 <h3>{{ __('index.Payment Method') }}:</h3>
-                <p class="m-0">{{ __('index.Method') }}: {{ $sale->payment_method }}</p>
+                <p class="m-0">{{ __('index.Method') }}: {{ $purchase->payment_method }}</p>
                 <p class="m-0">{{ __('index.Status') }}:
                     @php
                         $paymentStatus = __('index.Paid');
-                        if ($sale->amount_due > 0 && $sale->amount_paid == 0) {
+                        if ($purchase->due_amount > 0 && $purchase->paid_amount == 0) {
                             $paymentStatus = __('index.Unpaid');
-                        } elseif ($sale->amount_due > 0) {
+                        } elseif ($purchase->due_amount > 0) {
                             $paymentStatus = __('index.Partial');
                         }
                     @endphp
                     {{ $paymentStatus }}
                 </p>
-                <p class="m-0">{{ __('index.Staff') }}: {{ $sale->user->name ?? __('index.N/A') }}</p>
             </div>
             <div class="clear"></div>
         </div>
@@ -212,19 +230,23 @@
                 <tr>
                     <th>#</th>
                     <th>{{ __('index.Medicine') }}</th>
+                    <th>{{ __('index.Batch No') }}</th>
+                    <th>{{ __('index.Expiry Date') }}</th>
                     <th>{{ __('index.Qty') }}</th>
                     <th>{{ __('index.Unit Price') }}</th>
                     <th class="text-right">{{ __('index.Total') }}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($sale->medicines as $index => $medicine)
+                @foreach ($purchase->medicines as $index => $medicine)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $medicine->name }}</td>
-                        <td>{{ $medicine->pivot->quantity }} {{ $medicine->unit->name }}</td>
-                        <td>{{ show_amount($medicine->pivot->price) }}</td>
-                        <td class="text-right">{{ show_amount($medicine->pivot->total) }}</td>
+                        <td>{{ $medicine->pivot->batch_no }}</td>
+                        <td>{{ date('d M, Y', strtotime($medicine->pivot->expiry_date)) }}</td>
+                        <td>{{ $medicine->pivot->quantity }}</td>
+                        <td>{{ show_amount($medicine->pivot->unit_price) }}</td>
+                        <td class="text-right">{{ show_amount($medicine->pivot->grand_total) }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -233,54 +255,46 @@
         <div class="totals">
             <div class="totals-row">
                 <span>{{ __('index.Sub Total') }}:</span>
-                <span>{{ show_amount($sale->total_amount) }}</span>
+                <span>{{ show_amount($purchase->subtotal) }}</span>
             </div>
             <div class="totals-row">
-                <span>{{ __('index.Tax') }} ({{ $sale->tax_percentage }}%):</span>
-                <span>{{ show_amount($sale->tax_amount) }}</span>
+                <span>{{ __('index.Tax') }}:</span>
+                <span>{{ show_amount($purchase->tax) }}</span>
             </div>
             <div class="totals-row">
-                <span>{{ __('index.Discount') }} ({{ $sale->discount_percentage }}%):</span>
-                <span>{{ show_amount($sale->discount_amount) }}</span>
+                <span>{{ __('index.Discount') }}:</span>
+                <span>{{ show_amount($purchase->discount) }}</span>
             </div>
             <div class="totals-row">
                 <span>{{ __('index.Shipping') }}:</span>
-                <span>{{ show_amount($sale->shipping_amount) }}</span>
+                <span>{{ show_amount($purchase->shipping) }}</span>
             </div>
             <div class="totals-row grand-total">
                 <span>{{ __('index.Grand Total') }}:</span>
-                <span>{{ show_amount($sale->grand_total) }}</span>
+                <span>{{ show_amount($purchase->grand_total) }}</span>
             </div>
             <div class="totals-row">
                 <span>{{ __('index.Amount Paid') }}:</span>
-                <span>{{ show_amount($sale->amount_paid) }}</span>
+                <span>{{ show_amount($purchase->paid_amount) }}</span>
             </div>
             <div class="totals-row">
                 <span>{{ __('index.Due') }}:</span>
-                <span>{{ show_amount($sale->amount_due) }}</span>
+                <span>{{ show_amount($purchase->due_amount) }}</span>
             </div>
         </div>
         <div class="clear"></div>
 
-        @if ($sale->note)
+        @if ($purchase->note)
             <div class="notes">
                 <h3>{{ __('index.Note') }}:</h3>
-                <p>{!! $sale->note !!}</p>
+                <p>{!! $purchase->note !!}</p>
             </div>
         @endif
 
-        <div class="barcode text-center">
-            <div class="barcode-container">
-                {!! $sale->barcode !!}
-            </div>
-        </div>
-
         <div class="footer">
-            <p>{{ setting('invoice_footer') ?? __('index.Thank You For Shopping With Us. Please Come Again') }}</p>
-            <p>{{ __('index.**VAT against this challan is payable through central registration. Thank you for your business!') }}
-            </p>
+            <p>{{ setting('invoice_footer') ?? __('index.Thank you for your business!') }}</p>
             <div class="no-print">
-                <button onclick="window.print()">{{ __('index.Print Receipt') }}</button>
+                <button onclick="window.print()">{{ __('index.Print Invoice') }}</button>
             </div>
         </div>
     </div>

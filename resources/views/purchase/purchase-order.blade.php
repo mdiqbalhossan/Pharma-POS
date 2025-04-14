@@ -133,12 +133,6 @@
                                             title="{{ __('purchase.action.edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
                                         </a>
-                                        <a class="me-2 p-2 convert-btn" href="javascript:void(0);" data-bs-toggle="modal"
-                                            data-bs-target="#convertPurchaseOrderModal"
-                                            data-purchase-id="{{ $order->id }}" data-invoice="{{ $order->invoice_no }}"
-                                            title="{{ __('purchase.convert_to') }}">
-                                            <i data-feather="refresh-cw" class="feather-refresh"></i>
-                                        </a>
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
                                             title="{{ __('purchase.action.delete') }}" data-id="{{ $order->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>

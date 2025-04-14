@@ -287,8 +287,50 @@ class SalesController extends Controller
         $barcode       = DNS2DFacade::getBarcodeHTML($sale->sale_no, 'QRCODE', 2, 2, 'black');
         $sale->barcode = $barcode;
 
+        $extra_css = '.no-print {
+                display: none;
+            }
+
+            .m-0 {
+                margin: 0;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .invoice-container {
+                box-shadow: none;
+                border: none;
+                padding: 10px;
+                max-width: 100%;
+            }
+                .totals-row {
+            width: 100%;
+            clear: both;
+            padding: 5px 0;
+        }
+
+        .totals-row span:first-child {
+            float: left;
+        }
+
+        .totals-row span:last-child {
+            float: right;
+        }
+
+            .logo-img {
+                margin-bottom: 20px;
+            }
+                .totals-row {
+                margin-bottom: 10px;
+                padding-bottom: 20px;
+            }
+            ';
+        $logo = photo_url_pdf(setting('invoice_logo'));
         // Generate PDF using DomPDF
-        $pdf = PDF::loadView('sales.invoice', compact('sale'));
+        $pdf = PDF::loadView('sales.invoice', compact('sale', 'extra_css', 'logo'));
 
         // Set filename
         $filename = 'sale_invoice_' . $sale->sale_no . '.pdf';

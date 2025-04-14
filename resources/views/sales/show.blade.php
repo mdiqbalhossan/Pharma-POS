@@ -36,7 +36,7 @@
             <div class="row mb-4">
                 <div class="col-md-12 d-flex justify-content-end">
                     <div class="action-buttons">
-                        <a href="#" class="btn btn-primary me-2" id="print-sale" onclick="window.print()">
+                        <a href="#" class="btn btn-primary me-2" id="print-sale">
                             <i data-feather="printer" class="me-1"></i> {{ __('index.Print Receipt') }}
                         </a>
                         <a href="{{ route('sales.download.invoice', $sale->id) }}" class="btn btn-info me-2"
@@ -141,33 +141,33 @@
                             <div class="sale-total">
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('index.Sub Total') }}:</span>
-                                    <span>${{ number_format($sale->total_amount, 2) }}</span>
+                                    <span>{{ show_amount($sale->total_amount) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('index.Tax') }} ({{ $sale->tax_percentage }}%):</span>
-                                    <span>${{ number_format($sale->tax_amount, 2) }}</span>
+                                    <span>{{ show_amount($sale->tax_amount) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('index.Discount') }}
                                         ({{ $sale->discount_percentage }}%):</span>
-                                    <span>${{ number_format($sale->discount_amount, 2) }}</span>
+                                    <span>{{ show_amount($sale->discount_amount) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('index.Shipping') }}:</span>
-                                    <span>${{ number_format($sale->shipping_amount, 2) }}</span>
+                                    <span>{{ show_amount($sale->shipping_amount) }}</span>
                                 </div>
                                 <div
                                     class="sale-total-item d-flex justify-content-between mb-3 border-top border-bottom py-2">
                                     <h5>{{ __('index.Grand Total') }}:</h5>
-                                    <h5>${{ number_format($sale->grand_total, 2) }}</h5>
+                                    <h5>{{ show_amount($sale->grand_total) }}</h5>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3">
                                     <span class="text-muted">{{ __('index.Amount Paid') }}:</span>
-                                    <span>${{ number_format($sale->amount_paid, 2) }}</span>
+                                    <span>{{ show_amount($sale->amount_paid) }}</span>
                                 </div>
                                 <div class="sale-total-item d-flex justify-content-between mb-3 border-top pt-2">
                                     <h6>{{ __('index.Due') }}:</h6>
-                                    <h6>${{ number_format($sale->amount_due, 2) }}</h6>
+                                    <h6>{{ show_amount($sale->amount_due) }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover">
-                                    <thead class="table-light">
+                                    <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>{{ __('index.Medicine') }}</th>
@@ -221,9 +221,9 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $medicine->name }}</td>
-                                                <td>{{ $medicine->pivot->quantity }}</td>
-                                                <td>${{ number_format($medicine->pivot->price, 2) }}</td>
-                                                <td>${{ number_format($medicine->pivot->total, 2) }}</td>
+                                                <td>{{ $medicine->pivot->quantity }} {{ $medicine->unit->name }}</td>
+                                                <td>{{ show_amount($medicine->pivot->price) }}</td>
+                                                <td>{{ show_amount($medicine->pivot->total) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -242,4 +242,12 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!-- Toastr JS -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#print-sale').click(function() {
+                window.open('{{ route('sales.invoice', $sale->id) }}', '_blank');
+            });
+        });
+    </script>
 @endpush

@@ -326,9 +326,45 @@ class PurchaseController extends Controller
     public function downloadInvoice(Purchase $purchase)
     {
         $purchase->load('supplier', 'medicines');
+        $extra_css = '.no-print {
+                display: none;
+            }
 
+            .m-0 {
+                margin: 0;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .invoice-container {
+                box-shadow: none;
+                border: none;
+                padding: 10px;
+                max-width: 100%;
+            }
+
+            .totals-row {
+                margin-bottom: 10px;
+                padding-bottom: 20px;
+            }
+
+            .clear {
+                clear: both;
+                height: 0;
+                overflow: hidden;
+            }
+
+            .logo-img {
+                margin-bottom: 20px;
+            }
+        ';
+
+        $logo = photo_url_pdf(setting('invoice_logo'));
         // Generate PDF using a PDF library like DomPDF
-        $pdf = PDF::loadView('purchase.invoice', compact('purchase'));
+        $pdf = PDF::loadView('purchase.invoice-pdf', compact('purchase', 'extra_css', 'logo'));
 
         // Set filename
         $filename = 'purchase_invoice_' . $purchase->invoice_no . '.pdf';
@@ -384,9 +420,8 @@ class PurchaseController extends Controller
             DB::beginTransaction();
 
             // Update purchase type to 'purchase'
-            $purchase->update([
-                'type' => 'purchase',
-            ]);
+            $purchase->type = 'purchase';
+            $purchase->save();
 
             // Update medicine stock based on received quantities
             foreach ($request->received_quantities as $medicineId => $receivedQty) {

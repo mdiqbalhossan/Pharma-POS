@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
 @endpush
 
+<!-- CSRF Token and Base URL -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta id="base-url" content="{{ url('/') }}">
+
 @section('content')
     <div class="page-header">
         <div class="add-item d-flex">
@@ -257,7 +261,12 @@
                 </div>
                 <div class="modal-body">
                     <!-- Content will be dynamically loaded via AJAX -->
-                    <p>{{ __('purchase.loading_details') }}</p>
+                    <div class="text-center p-4">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>{{ __('purchase.loading_details') }}</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"

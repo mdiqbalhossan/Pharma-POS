@@ -37,6 +37,7 @@ return [
 
     // Payment Options
     'Payment Method'                                                                                             => 'Payment Method',
+    'Method'                                                                                                     => 'Method',
     'Cash'                                                                                                       => 'Cash',
     'Card'                                                                                                       => 'Card',
 
@@ -424,4 +425,9 @@ return [
     'Bank'                                                                                                       => 'Bank',
     'Cheque'                                                                                                     => 'Cheque',
     'Select Account'                                                                                             => 'Select Account',
+    'Purchase Invoice'                                                                                           => 'Purchase Invoice',
+    'Supplier Information'                                                                                       => 'Supplier Information:',
+    'Batch No'                                                                                                   => 'Batch No',
+    'Expiry Date'                                                                                                => 'Expiry Date',
+    'Purchase'                                                                                                   => 'Purchase',
 ];

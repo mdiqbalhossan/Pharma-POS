@@ -9,6 +9,14 @@ function photo_url($photo)
 }
 
 /**
+ * Photo Url for PDF
+ */
+function photo_url_pdf($photo)
+{
+    return public_path('storage/' . $photo);
+}
+
+/**
  * Setting
  */
 function setting($key)
