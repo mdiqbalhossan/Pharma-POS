@@ -108,7 +108,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 @foreach (get_all_languages() as $language)
-                    <a href="{{ route('language', $language) }}"
+                    <a href="{{ route('change.lang', ['lang' => $language]) }}"
                         class="dropdown-item {{ get_current_user_language() == $language ? 'active' : '' }}">
                         <img src="{{ asset('assets/img/flags/' . get_language_flag($language) . '.png') }}"
                             alt="" height="16"> {{ get_language_full_name($language) }}

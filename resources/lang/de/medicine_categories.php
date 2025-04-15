@@ -2,26 +2,26 @@
 
 return [
     // Index page
-    'title'           => 'Medicine Categories',
-    'manage_subtitle' => 'Manage your medicine categories',
-    'create_button'   => 'Create Medicine Category',
+    'title'           => 'Medikamentenkategorien',
+    'manage_subtitle' => 'Medikamentenkategorien verwalten',
+    'create_button'   => 'Medikamentenkategorie erstellen',
     'sn'              => 'SN',
     'name'            => 'Name',
     'slug'            => 'Slug',
-    'description'     => 'Description',
-    'created_on'      => 'Created On',
-    'action'          => 'Action',
+    'description'     => 'Beschreibung',
+    'created_on'      => 'Erstellt am',
+    'action'          => 'Aktion',
     'na'              => 'N/A',
-    'edit'            => 'Edit',
-    'delete'          => 'Delete',
+    'edit'            => 'Bearbeiten',
+    'delete'          => 'Löschen',
 
     // Create page
-    'create_title'    => 'Create Medicine Category',
-    'create_subtitle' => 'Add a new medicine category',
-    'cancel'          => 'Cancel',
+    'create_title'    => 'Medikamentenkategorie erstellen',
+    'create_subtitle' => 'Neue Medikamentenkategorie hinzufügen',
+    'cancel'          => 'Abbrechen',
 
     // Edit page
-    'edit_title'      => 'Edit Medicine Category',
-    'edit_subtitle'   => 'Update medicine category details',
-    'update_button'   => 'Update Medicine Category',
+    'edit_title'      => 'Medikamentenkategorie bearbeiten',
+    'edit_subtitle'   => 'Medikamentenkategoriedetails aktualisieren',
+    'update_button'   => 'Medikamentenkategorie aktualisieren',
 ];

@@ -2,25 +2,25 @@
 
 return [
     // Index page
-    'title'           => 'Medicine Types',
-    'manage_subtitle' => 'Manage your medicine types',
-    'create_button'   => 'Create Medicine Type',
-    'sn'              => 'SN',
-    'name'            => 'Name',
-    'description'     => 'Description',
-    'created_on'      => 'Created On',
-    'action'          => 'Action',
-    'not_available'   => 'N/A',
-    'edit'            => 'Edit',
-    'delete'          => 'Delete',
+    'title'           => 'Tipos de Medicamentos',
+    'manage_subtitle' => 'Administrar sus tipos de medicamentos',
+    'create_button'   => 'Crear Tipo de Medicamento',
+    'sn'              => 'N°',
+    'name'            => 'Nombre',
+    'description'     => 'Descripción',
+    'created_on'      => 'Creado el',
+    'action'          => 'Acción',
+    'not_available'   => 'N/D',
+    'edit'            => 'Editar',
+    'delete'          => 'Eliminar',
 
     // Create page
-    'create_title'    => 'Create Medicine Type',
-    'create_subtitle' => 'Add a new medicine type',
-    'cancel'          => 'Cancel',
+    'create_title'    => 'Crear Tipo de Medicamento',
+    'create_subtitle' => 'Añadir un nuevo tipo de medicamento',
+    'cancel'          => 'Cancelar',
 
     // Edit page
-    'edit_title'      => 'Edit Medicine Type',
-    'edit_subtitle'   => 'Update medicine type details',
-    'update_button'   => 'Update Medicine Type',
+    'edit_title'      => 'Editar Tipo de Medicamento',
+    'edit_subtitle'   => 'Actualizar detalles de tipo de medicamento',
+    'update_button'   => 'Actualizar Tipo de Medicamento',
 ];

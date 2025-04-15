@@ -2,29 +2,29 @@
 
 return [
     // Common
-    'units'                   => 'Units',
-    'unit'                    => 'Unit',
-    'create_unit'             => 'Create Unit',
-    'edit_unit'               => 'Edit Unit',
-    'unit_details'            => 'Unit Details',
-    'manage_all_units'        => 'Manage all units',
-    'update_unit_information' => 'Update unit information',
-    'view_unit_information'   => 'View unit information',
-    'back_to_units'           => 'Back to Units',
-    'add_new_unit'            => 'Add a new unit',
+    'units'                   => 'Einheiten',
+    'unit'                    => 'Einheit',
+    'create_unit'             => 'Einheit erstellen',
+    'edit_unit'               => 'Einheit bearbeiten',
+    'unit_details'            => 'Einheiteninformationen',
+    'manage_all_units'        => 'Alle Einheiten verwalten',
+    'update_unit_information' => 'Einheiteninformationen aktualisieren',
+    'view_unit_information'   => 'Einheiteninformationen anzeigen',
+    'back_to_units'           => 'Zurück zu Einheiten',
+    'add_new_unit'            => 'Neue Einheit hinzufügen',
 
     // Table Headers
-    'sn'                      => 'SN',
+    'sn'                      => 'Nr.',
     'name'                    => 'Name',
-    'description'             => 'Description',
-    'created_on'              => 'Created On',
-    'action'                  => 'Action',
+    'description'             => 'Beschreibung',
+    'created_on'              => 'Erstellt am',
+    'action'                  => 'Aktion',
 
     // Actions
-    'update_unit'             => 'Update Unit',
-    'edit'                    => 'Edit',
-    'delete'                  => 'Delete',
+    'update_unit'             => 'Einheit aktualisieren',
+    'edit'                    => 'Bearbeiten',
+    'delete'                  => 'Löschen',
 
     // Placeholders
-    'na'                      => 'N/A',
+    'na'                      => 'Nicht verfügbar',
 ];

@@ -2,51 +2,51 @@
 
 return [
     // Breadcrumb and Page Titles
-    'customers'            => 'Customers',
-    'create_customer'      => 'Create Customer',
-    'edit_customer'        => 'Edit Customer',
-    'customer_details'     => 'Customer Details',
-    'manage_customers'     => 'Manage your customers',
-    'add_new_customer'     => 'Add a new customer',
-    'update_customer_info' => 'Update customer information',
-    'view_customer_info'   => 'View customer information',
+    'customers'            => 'Clientes',
+    'create_customer'      => 'Crear Cliente',
+    'edit_customer'        => 'Editar Cliente',
+    'customer_details'     => 'Detalles del Cliente',
+    'manage_customers'     => 'Administrar tus clientes',
+    'add_new_customer'     => 'Añadir un nuevo cliente',
+    'update_customer_info' => 'Actualizar información del cliente',
+    'view_customer_info'   => 'Ver información del cliente',
 
     // Actions
-    'create'               => 'Create Customer',
-    'update'               => 'Update Customer',
-    'edit'                 => 'Edit Customer',
-    'back'                 => 'Back to Customers',
-    'cancel'               => 'Cancel',
+    'create'               => 'Crear Cliente',
+    'update'               => 'Actualizar Cliente',
+    'edit'                 => 'Editar Cliente',
+    'back'                 => 'Volver a Clientes',
+    'cancel'               => 'Cancelar',
 
     // Table Headers
-    'sn'                   => 'SN',
-    'name'                 => 'Name',
-    'phone'                => 'Phone',
-    'email'                => 'Email',
-    'address'              => 'Address',
-    'balance'              => 'Balance',
-    'created_on'           => 'Created On',
-    'action'               => 'Action',
+    'sn'                   => 'N°',
+    'name'                 => 'Nombre',
+    'phone'                => 'Teléfono',
+    'email'                => 'Correo electrónico',
+    'address'              => 'Dirección',
+    'balance'              => 'Saldo',
+    'created_on'           => 'Creado el',
+    'action'               => 'Acción',
 
     // Form Labels
-    'city'                 => 'City',
-    'state'                => 'State',
-    'zip'                  => 'ZIP Code',
-    'opening_balance'      => 'Opening Balance',
-    'balance_type'         => 'Balance Type',
+    'city'                 => 'Ciudad',
+    'state'                => 'Estado/Provincia',
+    'zip'                  => 'Código Postal',
+    'opening_balance'      => 'Saldo Inicial',
+    'balance_type'         => 'Tipo de Saldo',
 
     // Card Titles
-    'customer_info'        => 'Customer Information',
+    'customer_info'        => 'Información del Cliente',
 
     // Balance Types
-    'debit'                => 'Debit',
-    'credit'               => 'Credit',
+    'debit'                => 'Debe',
+    'credit'               => 'Haber',
 
     // Tooltips
-    'edit_tooltip'         => 'Edit',
-    'view_tooltip'         => 'View',
-    'delete_tooltip'       => 'Delete',
+    'edit_tooltip'         => 'Editar',
+    'view_tooltip'         => 'Ver',
+    'delete_tooltip'       => 'Eliminar',
 
     // Other
-    'n_a'                  => 'N/A',
+    'n_a'                  => 'N/D',
 ];

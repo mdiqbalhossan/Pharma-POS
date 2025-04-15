@@ -2,47 +2,51 @@
 
 return [
     // Common
-    'expenses'                 => 'Expenses',
-    'expense'                  => 'Expense',
-    'create_expense'           => 'Create Expense',
-    'edit_expense'             => 'Edit Expense',
-    'expense_details'          => 'Expense Details',
-    'manage_expenses'          => 'Manage your expenses',
-    'update_expense_details'   => 'Update expense details',
-    'view_expense_information' => 'View expense information',
-    'back'                     => 'Back',
+    'expenses'                 => 'Dépenses',
+    'expense'                  => 'Dépense',
+    'create_expense'           => 'Créer une Dépense',
+    'edit_expense'             => 'Modifier la Dépense',
+    'expense_details'          => 'Détails de la Dépense',
+    'manage_expenses'          => 'Gérer vos dépenses',
+    'update_expense_details'   => 'Mettre à jour les détails de la dépense',
+    'view_expense_information' => 'Voir les informations de la dépense',
+    'back'                     => 'Retour',
 
     // Table Headers
-    'sn'                       => 'SN',
-    'category'                 => 'Category',
+    'sn'                       => 'N°',
+    'category'                 => 'Catégorie',
     'date'                     => 'Date',
-    'expense_for'              => 'Expense For',
-    'amount'                   => 'Amount',
-    'reference'                => 'Reference',
-    'created_on'               => 'Created On',
+    'expense_for'              => 'Dépense Pour',
+    'amount'                   => 'Montant',
+    'reference'                => 'Référence',
+    'created_on'               => 'Créé le',
     'action'                   => 'Action',
 
     // Form Labels
-    'expense_category'         => 'Expense Category',
-    'select_category'          => 'Select Category',
-    'choose_date'              => 'Choose Date',
+    'expense_category'         => 'Catégorie de Dépense',
+    'select_category'          => 'Sélectionner une Catégorie',
+    'choose_date'              => 'Choisir une Date',
     'description'              => 'Description',
 
     // Actions
-    'save_expense'             => 'Save Expense',
-    'update_expense'           => 'Update Expense',
-    'edit'                     => 'Edit',
-    'view'                     => 'View',
-    'delete'                   => 'Delete',
+    'save_expense'             => 'Enregistrer la Dépense',
+    'update_expense'           => 'Mettre à Jour la Dépense',
+    'edit'                     => 'Modifier',
+    'view'                     => 'Voir',
+    'delete'                   => 'Supprimer',
 
     // Details
-    'expense_information'      => 'Expense Information',
-    'created_at'               => 'Created At',
-    'last_updated'             => 'Last Updated',
+    'expense_information'      => 'Informations sur la Dépense',
+    'created_at'               => 'Créé le',
+    'last_updated'             => 'Dernière Mise à Jour',
 
     // Confirmation
-    'delete_confirmation'      => 'Are you sure you want to delete this expense?',
+    'delete_confirmation'      => 'Êtes-vous sûr de vouloir supprimer cette dépense?',
 
     // Placeholders
-    'na'                       => 'N/A',
+    'na'                       => 'N/D',
+
+    // Account
+    'account'                  => 'Compte',
+    'select_account'           => 'Sélectionner un Compte',
 ];

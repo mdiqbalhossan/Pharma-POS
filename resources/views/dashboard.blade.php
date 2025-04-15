@@ -12,7 +12,7 @@
                 <div class="dash-widgetcontent">
                     <h5>$<span class="counters"
                             data-count="{{ $totalPurchaseDue }}">{{ number_format($totalPurchaseDue, 2) }}</span></h5>
-                    <h6>Total Purchase Due</h6>
+                    <h6>{{ __('dashboard.total_purchase_due') }}</h6>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="dash-widgetcontent">
                     <h5>$<span class="counters"
                             data-count="{{ $totalSalesDue }}">{{ number_format($totalSalesDue, 2) }}</span></h5>
-                    <h6>Total Sales Due</h6>
+                    <h6>{{ __('dashboard.total_sales_due') }}</h6>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <div class="dash-widgetcontent">
                     <h5>$<span class="counters"
                             data-count="{{ $totalSaleAmount }}">{{ number_format($totalSaleAmount, 2) }}</span></h5>
-                    <h6>Total Sale Amount</h6>
+                    <h6>{{ __('dashboard.total_sale_amount') }}</h6>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <div class="dash-widgetcontent">
                     <h5>$<span class="counters"
                             data-count="{{ $totalExpenseAmount }}">{{ number_format($totalExpenseAmount, 2) }}</span></h5>
-                    <h6>Total Expense Amount</h6>
+                    <h6>{{ __('dashboard.total_expense_amount') }}</h6>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
             <div class="dash-count">
                 <div class="dash-counts">
                     <h4>{{ $customerCount }}</h4>
-                    <h5>Customers</h5>
+                    <h5>{{ __('dashboard.customers') }}</h5>
                 </div>
                 <div class="dash-imgs">
                     <i data-feather="user"></i>
@@ -67,7 +67,7 @@
             <div class="dash-count das1">
                 <div class="dash-counts">
                     <h4>{{ $supplierCount }}</h4>
-                    <h5>Suppliers</h5>
+                    <h5>{{ __('dashboard.suppliers') }}</h5>
                 </div>
                 <div class="dash-imgs">
                     <i data-feather="user-check"></i>
@@ -78,7 +78,7 @@
             <div class="dash-count das2">
                 <div class="dash-counts">
                     <h4>{{ $purchaseInvoiceCount }}</h4>
-                    <h5>Purchase Invoice</h5>
+                    <h5>{{ __('dashboard.purchase_invoice') }}</h5>
                 </div>
                 <div class="dash-imgs">
                     <img src="assets/img/icons/file-text-icon-01.svg" class="img-fluid" alt="icon">
@@ -89,7 +89,7 @@
             <div class="dash-count das3">
                 <div class="dash-counts">
                     <h4>{{ $salesInvoiceCount }}</h4>
-                    <h5>Sales Invoice</h5>
+                    <h5>{{ __('dashboard.sales_invoice') }}</h5>
                 </div>
                 <div class="dash-imgs">
                     <i data-feather="file"></i>
@@ -103,14 +103,14 @@
         <div class="col-xl-7 col-sm-12 col-12 d-flex">
             <div class="card flex-fill">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">Purchase & Sales</h5>
+                    <h5 class="card-title mb-0">{{ __('dashboard.purchase_and_sales') }}</h5>
                     <div class="graph-sets">
                         <ul class="mb-0">
                             <li>
-                                <span>Sales</span>
+                                <span>{{ __('dashboard.sales') }}</span>
                             </li>
                             <li>
-                                <span>Purchase</span>
+                                <span>{{ __('dashboard.purchase') }}</span>
                             </li>
                         </ul>
                         <div class="dropdown dropdown-wraper">
@@ -140,11 +140,11 @@
         <div class="col-xl-5 col-sm-12 col-12 d-flex">
             <div class="card flex-fill default-cover mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">Recent Medicines</h4>
+                    <h4 class="card-title mb-0">{{ __('dashboard.recent_medicines') }}</h4>
                     <div class="view-all-link">
                         <a href="{{ route('medicines.index') }}" class="view-all d-flex align-items-center">
-                            View All<span class="ps-2 d-flex align-items-center"><i data-feather="arrow-right"
-                                    class="feather-16"></i></span>
+                            {{ __('dashboard.view_all') }}<span class="ps-2 d-flex align-items-center"><i
+                                    data-feather="arrow-right" class="feather-16"></i></span>
                         </a>
                     </div>
                 </div>
@@ -154,8 +154,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Products</th>
-                                    <th>Price</th>
+                                    <th>{{ __('dashboard.products') }}</th>
+                                    <th>{{ __('dashboard.price') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -177,7 +177,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="text-center">No products found</td>
+                                        <td colspan="3" class="text-center">{{ __('dashboard.no_products_found') }}
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -189,7 +190,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Expired Medicines</h4>
+            <h4 class="card-title">{{ __('dashboard.expired_medicines') }}</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive dataview">
@@ -202,11 +203,11 @@
                                     <span class="checkmarks"></span>
                                 </label>
                             </th>
-                            <th>Product</th>
-                            <th>SKU</th>
-                            <th>Manufactured Date</th>
-                            <th>Expired Date</th>
-                            <th class="no-sort">Action</th>
+                            <th>{{ __('dashboard.product') }}</th>
+                            <th>{{ __('dashboard.sku') }}</th>
+                            <th>{{ __('dashboard.manufactured_date') }}</th>
+                            <th>{{ __('dashboard.expired_date') }}</th>
+                            <th class="no-sort">{{ __('dashboard.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,7 +251,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">No expired products found</td>
+                                <td colspan="6" class="text-center">{{ __('dashboard.no_expired_products_found') }}
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>

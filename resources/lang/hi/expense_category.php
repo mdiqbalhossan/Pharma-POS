@@ -2,29 +2,29 @@
 
 return [
     // Common
-    'expense_categories'              => 'Expense Categories',
-    'expense_category'                => 'Expense Category',
-    'create_expense_category'         => 'Create Expense Category',
-    'edit_expense_category'           => 'Edit Expense Category',
-    'manage_expense_categories'       => 'Manage your expense categories',
-    'update_expense_category_details' => 'Update expense category details',
-    'add_new_expense_category'        => 'Add a new expense category',
+    'expense_categories'              => 'व्यय श्रेणियां',
+    'expense_category'                => 'व्यय श्रेणी',
+    'create_expense_category'         => 'व्यय श्रेणी बनाएं',
+    'edit_expense_category'           => 'व्यय श्रेणी संपादित करें',
+    'manage_expense_categories'       => 'अपनी व्यय श्रेणियों का प्रबंधन करें',
+    'update_expense_category_details' => 'व्यय श्रेणी विवरण अपडेट करें',
+    'add_new_expense_category'        => 'नई व्यय श्रेणी जोड़ें',
 
     // Table Headers
-    'sn'                              => 'SN',
-    'name'                            => 'Name',
-    'description'                     => 'Description',
-    'created_on'                      => 'Created On',
-    'action'                          => 'Action',
+    'sn'                              => 'क्र.सं.',
+    'name'                            => 'नाम',
+    'description'                     => 'विवरण',
+    'created_on'                      => 'बनाया गया',
+    'action'                          => 'कार्रवाई',
 
     // Actions
-    'create'                          => 'Create Expense Category',
-    'update'                          => 'Update Expense Category',
-    'edit'                            => 'Edit',
-    'view'                            => 'View',
-    'delete'                          => 'Delete',
-    'cancel'                          => 'Cancel',
+    'create'                          => 'व्यय श्रेणी बनाएं',
+    'update'                          => 'व्यय श्रेणी अपडेट करें',
+    'edit'                            => 'संपादित करें',
+    'view'                            => 'देखें',
+    'delete'                          => 'हटाएं',
+    'cancel'                          => 'रद्द करें',
 
     // Placeholders
-    'na'                              => 'N/A',
+    'na'                              => 'लागू नहीं',
 ];

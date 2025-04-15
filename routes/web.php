@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\IncomeStatementController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicineCategoryController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\MedicineLeafController;
@@ -37,10 +38,7 @@ Route::redirect('/', 'login');
 Route::middleware('auth')->group(function () {
 
     // Language
-    Route::get('/language/{language}', function ($language) {
-        session('language', $language);
-        return redirect()->back();
-    })->name('language');
+    Route::get('lang', [LanguageController::class, 'change'])->name("change.lang");
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

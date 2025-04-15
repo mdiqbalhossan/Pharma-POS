@@ -2,51 +2,51 @@
 
 return [
     // Breadcrumb and Page Titles
-    'customers'            => 'Customers',
-    'create_customer'      => 'Create Customer',
-    'edit_customer'        => 'Edit Customer',
-    'customer_details'     => 'Customer Details',
-    'manage_customers'     => 'Manage your customers',
-    'add_new_customer'     => 'Add a new customer',
-    'update_customer_info' => 'Update customer information',
-    'view_customer_info'   => 'View customer information',
+    'customers'            => 'ग्राहक',
+    'create_customer'      => 'ग्राहक बनाएं',
+    'edit_customer'        => 'ग्राहक संपादित करें',
+    'customer_details'     => 'ग्राहक विवरण',
+    'manage_customers'     => 'अपने ग्राहकों का प्रबंधन करें',
+    'add_new_customer'     => 'नया ग्राहक जोड़ें',
+    'update_customer_info' => 'ग्राहक जानकारी अपडेट करें',
+    'view_customer_info'   => 'ग्राहक जानकारी देखें',
 
     // Actions
-    'create'               => 'Create Customer',
-    'update'               => 'Update Customer',
-    'edit'                 => 'Edit Customer',
-    'back'                 => 'Back to Customers',
-    'cancel'               => 'Cancel',
+    'create'               => 'ग्राहक बनाएं',
+    'update'               => 'ग्राहक अपडेट करें',
+    'edit'                 => 'ग्राहक संपादित करें',
+    'back'                 => 'ग्राहकों पर वापस जाएं',
+    'cancel'               => 'रद्द करें',
 
     // Table Headers
-    'sn'                   => 'SN',
-    'name'                 => 'Name',
-    'phone'                => 'Phone',
-    'email'                => 'Email',
-    'address'              => 'Address',
-    'balance'              => 'Balance',
-    'created_on'           => 'Created On',
-    'action'               => 'Action',
+    'sn'                   => 'क्र.सं.',
+    'name'                 => 'नाम',
+    'phone'                => 'फ़ोन',
+    'email'                => 'ईमेल',
+    'address'              => 'पता',
+    'balance'              => 'बैलेंस',
+    'created_on'           => 'बनाया गया',
+    'action'               => 'कार्रवाई',
 
     // Form Labels
-    'city'                 => 'City',
-    'state'                => 'State',
-    'zip'                  => 'ZIP Code',
-    'opening_balance'      => 'Opening Balance',
-    'balance_type'         => 'Balance Type',
+    'city'                 => 'शहर',
+    'state'                => 'राज्य',
+    'zip'                  => 'पिन कोड',
+    'opening_balance'      => 'प्रारंभिक बैलेंस',
+    'balance_type'         => 'बैलेंस प्रकार',
 
     // Card Titles
-    'customer_info'        => 'Customer Information',
+    'customer_info'        => 'ग्राहक जानकारी',
 
     // Balance Types
-    'debit'                => 'Debit',
-    'credit'               => 'Credit',
+    'debit'                => 'डेबिट',
+    'credit'               => 'क्रेडिट',
 
     // Tooltips
-    'edit_tooltip'         => 'Edit',
-    'view_tooltip'         => 'View',
-    'delete_tooltip'       => 'Delete',
+    'edit_tooltip'         => 'संपादित करें',
+    'view_tooltip'         => 'देखें',
+    'delete_tooltip'       => 'हटाएं',
 
     // Other
-    'n_a'                  => 'N/A',
+    'n_a'                  => 'लागू नहीं',
 ];

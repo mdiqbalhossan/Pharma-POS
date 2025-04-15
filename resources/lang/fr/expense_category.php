@@ -2,29 +2,29 @@
 
 return [
     // Common
-    'expense_categories'              => 'Expense Categories',
-    'expense_category'                => 'Expense Category',
-    'create_expense_category'         => 'Create Expense Category',
-    'edit_expense_category'           => 'Edit Expense Category',
-    'manage_expense_categories'       => 'Manage your expense categories',
-    'update_expense_category_details' => 'Update expense category details',
-    'add_new_expense_category'        => 'Add a new expense category',
+    'expense_categories'              => 'Catégories de Dépenses',
+    'expense_category'                => 'Catégorie de Dépense',
+    'create_expense_category'         => 'Créer une Catégorie de Dépense',
+    'edit_expense_category'           => 'Modifier la Catégorie de Dépense',
+    'manage_expense_categories'       => 'Gérer vos catégories de dépenses',
+    'update_expense_category_details' => 'Mettre à jour les détails de la catégorie de dépense',
+    'add_new_expense_category'        => 'Ajouter une nouvelle catégorie de dépense',
 
     // Table Headers
-    'sn'                              => 'SN',
-    'name'                            => 'Name',
+    'sn'                              => 'N°',
+    'name'                            => 'Nom',
     'description'                     => 'Description',
-    'created_on'                      => 'Created On',
+    'created_on'                      => 'Créé le',
     'action'                          => 'Action',
 
     // Actions
-    'create'                          => 'Create Expense Category',
-    'update'                          => 'Update Expense Category',
-    'edit'                            => 'Edit',
-    'view'                            => 'View',
-    'delete'                          => 'Delete',
-    'cancel'                          => 'Cancel',
+    'create'                          => 'Créer une Catégorie de Dépense',
+    'update'                          => 'Mettre à Jour la Catégorie de Dépense',
+    'edit'                            => 'Modifier',
+    'view'                            => 'Voir',
+    'delete'                          => 'Supprimer',
+    'cancel'                          => 'Annuler',
 
     // Placeholders
-    'na'                              => 'N/A',
+    'na'                              => 'N/D',
 ];

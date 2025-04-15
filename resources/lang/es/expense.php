@@ -2,47 +2,51 @@
 
 return [
     // Common
-    'expenses'                 => 'Expenses',
-    'expense'                  => 'Expense',
-    'create_expense'           => 'Create Expense',
-    'edit_expense'             => 'Edit Expense',
-    'expense_details'          => 'Expense Details',
-    'manage_expenses'          => 'Manage your expenses',
-    'update_expense_details'   => 'Update expense details',
-    'view_expense_information' => 'View expense information',
-    'back'                     => 'Back',
+    'expenses'                 => 'Gastos',
+    'expense'                  => 'Gasto',
+    'create_expense'           => 'Crear Gasto',
+    'edit_expense'             => 'Editar Gasto',
+    'expense_details'          => 'Detalles del Gasto',
+    'manage_expenses'          => 'Administrar tus gastos',
+    'update_expense_details'   => 'Actualizar detalles del gasto',
+    'view_expense_information' => 'Ver información del gasto',
+    'back'                     => 'Volver',
 
     // Table Headers
-    'sn'                       => 'SN',
-    'category'                 => 'Category',
-    'date'                     => 'Date',
-    'expense_for'              => 'Expense For',
-    'amount'                   => 'Amount',
-    'reference'                => 'Reference',
-    'created_on'               => 'Created On',
-    'action'                   => 'Action',
+    'sn'                       => 'N°',
+    'category'                 => 'Categoría',
+    'date'                     => 'Fecha',
+    'expense_for'              => 'Gasto Para',
+    'amount'                   => 'Importe',
+    'reference'                => 'Referencia',
+    'created_on'               => 'Creado el',
+    'action'                   => 'Acción',
 
     // Form Labels
-    'expense_category'         => 'Expense Category',
-    'select_category'          => 'Select Category',
-    'choose_date'              => 'Choose Date',
-    'description'              => 'Description',
+    'expense_category'         => 'Categoría de Gasto',
+    'select_category'          => 'Seleccionar Categoría',
+    'choose_date'              => 'Elegir Fecha',
+    'description'              => 'Descripción',
 
     // Actions
-    'save_expense'             => 'Save Expense',
-    'update_expense'           => 'Update Expense',
-    'edit'                     => 'Edit',
-    'view'                     => 'View',
-    'delete'                   => 'Delete',
+    'save_expense'             => 'Guardar Gasto',
+    'update_expense'           => 'Actualizar Gasto',
+    'edit'                     => 'Editar',
+    'view'                     => 'Ver',
+    'delete'                   => 'Eliminar',
 
     // Details
-    'expense_information'      => 'Expense Information',
-    'created_at'               => 'Created At',
-    'last_updated'             => 'Last Updated',
+    'expense_information'      => 'Información del Gasto',
+    'created_at'               => 'Creado el',
+    'last_updated'             => 'Última Actualización',
 
     // Confirmation
-    'delete_confirmation'      => 'Are you sure you want to delete this expense?',
+    'delete_confirmation'      => '¿Está seguro de que desea eliminar este gasto?',
 
     // Placeholders
-    'na'                       => 'N/A',
+    'na'                       => 'N/D',
+
+    // Account
+    'account'                  => 'Cuenta',
+    'select_account'           => 'Seleccionar Cuenta',
 ];

@@ -119,9 +119,9 @@
                                         <span class="badges status-badge ordered">{{ __('index.Hold') }}</span>
                                     @endif
                                 </td>
-                                <td>{{ number_format($sale->grand_total, 2) }}</td>
-                                <td>{{ number_format($sale->amount_paid, 2) }}</td>
-                                <td>{{ number_format($sale->amount_due, 2) }}</td>
+                                <td>{{ show_amount($sale->grand_total) }}</td>
+                                <td>{{ show_amount($sale->amount_paid) }}</td>
+                                <td>{{ show_amount($sale->amount_due) }}</td>
                                 <td>
                                     @if ($sale->amount_due <= 0)
                                         <span class="badge-linesuccess">{{ __('index.Paid') }}</span>

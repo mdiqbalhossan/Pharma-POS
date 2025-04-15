@@ -2,29 +2,29 @@
 
 return [
     // Common
-    'expense_categories'              => 'Expense Categories',
-    'expense_category'                => 'Expense Category',
-    'create_expense_category'         => 'Create Expense Category',
-    'edit_expense_category'           => 'Edit Expense Category',
-    'manage_expense_categories'       => 'Manage your expense categories',
-    'update_expense_category_details' => 'Update expense category details',
-    'add_new_expense_category'        => 'Add a new expense category',
+    'expense_categories'              => 'Categorías de Gastos',
+    'expense_category'                => 'Categoría de Gasto',
+    'create_expense_category'         => 'Crear Categoría de Gasto',
+    'edit_expense_category'           => 'Editar Categoría de Gasto',
+    'manage_expense_categories'       => 'Administrar categorías de gastos',
+    'update_expense_category_details' => 'Actualizar detalles de categoría de gasto',
+    'add_new_expense_category'        => 'Añadir nueva categoría de gasto',
 
     // Table Headers
-    'sn'                              => 'SN',
-    'name'                            => 'Name',
-    'description'                     => 'Description',
-    'created_on'                      => 'Created On',
-    'action'                          => 'Action',
+    'sn'                              => 'N°',
+    'name'                            => 'Nombre',
+    'description'                     => 'Descripción',
+    'created_on'                      => 'Creado el',
+    'action'                          => 'Acción',
 
     // Actions
-    'create'                          => 'Create Expense Category',
-    'update'                          => 'Update Expense Category',
-    'edit'                            => 'Edit',
-    'view'                            => 'View',
-    'delete'                          => 'Delete',
-    'cancel'                          => 'Cancel',
+    'create'                          => 'Crear Categoría de Gasto',
+    'update'                          => 'Actualizar Categoría de Gasto',
+    'edit'                            => 'Editar',
+    'view'                            => 'Ver',
+    'delete'                          => 'Eliminar',
+    'cancel'                          => 'Cancelar',
 
     // Placeholders
-    'na'                              => 'N/A',
+    'na'                              => 'N/D',
 ];

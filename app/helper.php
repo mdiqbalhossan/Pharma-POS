@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+
 /**
  * Photo Url
  */
@@ -162,5 +164,5 @@ function get_language_flag($language)
  */
 function get_current_user_language()
 {
-    return session('language') ?? 'en';
+    return Session::get('locale', 'en') ?? 'en';
 }

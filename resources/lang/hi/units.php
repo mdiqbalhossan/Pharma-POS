@@ -2,29 +2,29 @@
 
 return [
     // Common
-    'units'                   => 'Units',
-    'unit'                    => 'Unit',
-    'create_unit'             => 'Create Unit',
-    'edit_unit'               => 'Edit Unit',
-    'unit_details'            => 'Unit Details',
-    'manage_all_units'        => 'Manage all units',
-    'update_unit_information' => 'Update unit information',
-    'view_unit_information'   => 'View unit information',
-    'back_to_units'           => 'Back to Units',
-    'add_new_unit'            => 'Add a new unit',
+    'units'                   => 'इकाइयाँ',
+    'unit'                    => 'इकाई',
+    'create_unit'             => 'इकाई बनाएं',
+    'edit_unit'               => 'इकाई संपादित करें',
+    'unit_details'            => 'इकाई विवरण',
+    'manage_all_units'        => 'सभी इकाइयों का प्रबंधन करें',
+    'update_unit_information' => 'इकाई जानकारी अपडेट करें',
+    'view_unit_information'   => 'इकाई जानकारी देखें',
+    'back_to_units'           => 'इकाइयों पर वापस जाएं',
+    'add_new_unit'            => 'नई इकाई जोड़ें',
 
     // Table Headers
-    'sn'                      => 'SN',
-    'name'                    => 'Name',
-    'description'             => 'Description',
-    'created_on'              => 'Created On',
-    'action'                  => 'Action',
+    'sn'                      => 'क्र.सं.',
+    'name'                    => 'नाम',
+    'description'             => 'विवरण',
+    'created_on'              => 'बनाया गया',
+    'action'                  => 'कार्रवाई',
 
     // Actions
-    'update_unit'             => 'Update Unit',
-    'edit'                    => 'Edit',
-    'delete'                  => 'Delete',
+    'update_unit'             => 'इकाई अपडेट करें',
+    'edit'                    => 'संपादित करें',
+    'delete'                  => 'हटाएं',
 
     // Placeholders
-    'na'                      => 'N/A',
+    'na'                      => 'लागू नहीं',
 ];

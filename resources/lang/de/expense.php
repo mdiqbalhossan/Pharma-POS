@@ -2,47 +2,51 @@
 
 return [
     // Common
-    'expenses'                 => 'Expenses',
-    'expense'                  => 'Expense',
-    'create_expense'           => 'Create Expense',
-    'edit_expense'             => 'Edit Expense',
-    'expense_details'          => 'Expense Details',
-    'manage_expenses'          => 'Manage your expenses',
-    'update_expense_details'   => 'Update expense details',
-    'view_expense_information' => 'View expense information',
-    'back'                     => 'Back',
+    'expenses'                 => 'Ausgaben',
+    'expense'                  => 'Ausgabe',
+    'create_expense'           => 'Ausgabe erstellen',
+    'edit_expense'             => 'Ausgabe bearbeiten',
+    'expense_details'          => 'Ausgabedetails',
+    'manage_expenses'          => 'Ausgaben verwalten',
+    'update_expense_details'   => 'Ausgabedetails aktualisieren',
+    'view_expense_information' => 'Ausgabeinformationen anzeigen',
+    'back'                     => 'Zurück',
 
     // Table Headers
     'sn'                       => 'SN',
-    'category'                 => 'Category',
-    'date'                     => 'Date',
-    'expense_for'              => 'Expense For',
-    'amount'                   => 'Amount',
-    'reference'                => 'Reference',
-    'created_on'               => 'Created On',
-    'action'                   => 'Action',
+    'category'                 => 'Kategorie',
+    'date'                     => 'Datum',
+    'expense_for'              => 'Ausgabe für',
+    'amount'                   => 'Betrag',
+    'reference'                => 'Referenz',
+    'created_on'               => 'Erstellt am',
+    'action'                   => 'Aktion',
 
     // Form Labels
-    'expense_category'         => 'Expense Category',
-    'select_category'          => 'Select Category',
-    'choose_date'              => 'Choose Date',
-    'description'              => 'Description',
+    'expense_category'         => 'Ausgabenkategorie',
+    'select_category'          => 'Kategorie auswählen',
+    'choose_date'              => 'Datum auswählen',
+    'description'              => 'Beschreibung',
 
     // Actions
-    'save_expense'             => 'Save Expense',
-    'update_expense'           => 'Update Expense',
-    'edit'                     => 'Edit',
-    'view'                     => 'View',
-    'delete'                   => 'Delete',
+    'save_expense'             => 'Ausgabe speichern',
+    'update_expense'           => 'Ausgabe aktualisieren',
+    'edit'                     => 'Bearbeiten',
+    'view'                     => 'Anzeigen',
+    'delete'                   => 'Löschen',
 
     // Details
-    'expense_information'      => 'Expense Information',
-    'created_at'               => 'Created At',
-    'last_updated'             => 'Last Updated',
+    'expense_information'      => 'Ausgabeinformationen',
+    'created_at'               => 'Erstellt am',
+    'last_updated'             => 'Zuletzt aktualisiert',
 
     // Confirmation
-    'delete_confirmation'      => 'Are you sure you want to delete this expense?',
+    'delete_confirmation'      => 'Möchten Sie diese Ausgabe wirklich löschen?',
 
     // Placeholders
     'na'                       => 'N/A',
+
+    // Account
+    'account'                  => 'Konto',
+    'select_account'           => 'Konto auswählen',
 ];

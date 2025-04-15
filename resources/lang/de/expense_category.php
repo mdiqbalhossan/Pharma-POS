@@ -2,28 +2,28 @@
 
 return [
     // Common
-    'expense_categories'              => 'Expense Categories',
-    'expense_category'                => 'Expense Category',
-    'create_expense_category'         => 'Create Expense Category',
-    'edit_expense_category'           => 'Edit Expense Category',
-    'manage_expense_categories'       => 'Manage your expense categories',
-    'update_expense_category_details' => 'Update expense category details',
-    'add_new_expense_category'        => 'Add a new expense category',
+    'expense_categories'              => 'Ausgabenkategorien',
+    'expense_category'                => 'Ausgabenkategorie',
+    'create_expense_category'         => 'Ausgabenkategorie erstellen',
+    'edit_expense_category'           => 'Ausgabenkategorie bearbeiten',
+    'manage_expense_categories'       => 'Ausgabenkategorien verwalten',
+    'update_expense_category_details' => 'Ausgabenkategoriedetails aktualisieren',
+    'add_new_expense_category'        => 'Neue Ausgabenkategorie hinzufügen',
 
     // Table Headers
     'sn'                              => 'SN',
     'name'                            => 'Name',
-    'description'                     => 'Description',
-    'created_on'                      => 'Created On',
-    'action'                          => 'Action',
+    'description'                     => 'Beschreibung',
+    'created_on'                      => 'Erstellt am',
+    'action'                          => 'Aktion',
 
     // Actions
-    'create'                          => 'Create Expense Category',
-    'update'                          => 'Update Expense Category',
-    'edit'                            => 'Edit',
-    'view'                            => 'View',
-    'delete'                          => 'Delete',
-    'cancel'                          => 'Cancel',
+    'create'                          => 'Ausgabenkategorie erstellen',
+    'update'                          => 'Ausgabenkategorie aktualisieren',
+    'edit'                            => 'Bearbeiten',
+    'view'                            => 'Anzeigen',
+    'delete'                          => 'Löschen',
+    'cancel'                          => 'Abbrechen',
 
     // Placeholders
     'na'                              => 'N/A',
