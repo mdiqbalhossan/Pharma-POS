@@ -166,3 +166,38 @@ function get_current_user_language()
 {
     return Session::get('locale', 'en') ?? 'en';
 }
+
+/**
+ * Barcode Type
+ */
+function barcode_type($type)
+{
+    $barcodeTypes = [
+        'CODE128' => 'C128',
+        'CODE39'  => 'C39',
+        'EAN13'   => 'EAN13',
+        'EAN8'    => 'EAN8',
+        'UPCA'    => 'UPCA',
+        'UPCE'    => 'UPCE',
+    ];
+
+    return $barcodeTypes[$type] ?? $type;
+}
+
+/**
+ * Low Stock Product
+ */
+function low_stock_product()
+{
+    $low_stock_quantity = setting('low_stock_alert');
+    return \App\Models\Medicine::where('quantity', '<=', $low_stock_quantity)->get();
+}
+
+/**
+ * Near Expired Product
+ */
+function near_expired_product()
+{
+    $stock_expiry_alert_days = (int) setting('stock_expiry_alert_days');
+    return \App\Models\Medicine::where('expiration_date', '<=', now()->addDays($stock_expiry_alert_days))->get();
+}

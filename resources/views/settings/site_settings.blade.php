@@ -207,8 +207,12 @@
                                             </option>
                                             <option value="EAN13"
                                                 {{ $settings['barcode_type'] == 'EAN13' ? 'selected' : '' }}>EAN13</option>
-                                            <option value="UPC"
-                                                {{ $settings['barcode_type'] == 'UPC' ? 'selected' : '' }}>UPC</option>
+                                            <option value="EAN8"
+                                                {{ $settings['barcode_type'] == 'EAN8' ? 'selected' : '' }}>EAN8</option>
+                                            <option value="UPCA"
+                                                {{ $settings['barcode_type'] == 'UPCA' ? 'selected' : '' }}>UPCA</option>
+                                            <option value="UPCE"
+                                                {{ $settings['barcode_type'] == 'UPCE' ? 'selected' : '' }}>UPCE</option>
                                         </select>
                                         @error('barcode_type')
                                             <div class="invalid-feedback">{{ $message }}</div>

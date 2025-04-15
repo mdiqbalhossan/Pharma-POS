@@ -76,7 +76,7 @@
                                 @endif
 
                                 <div class="barcode-image">
-                                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($product['barcode'], 'C128', 1, 50) }}"
+                                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($product['barcode'], barcode_type(setting('barcode_type')), 1, 50) }}"
                                         alt="barcode" class="img-fluid">
                                 </div>
                                 <div class="barcode-text">
@@ -111,7 +111,7 @@
 
                 let printWindow = window.open('', '_blank');
                 printWindow.document.write(
-                '<html><head><title>{{ __('medicine.barcode_print') }}</title>');
+                    '<html><head><title>{{ __('medicine.barcode_print') }}</title>');
                 printWindow.document.write(
                     `<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">`);
                 printWindow.document.write(

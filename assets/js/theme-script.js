@@ -311,7 +311,6 @@ function showPOSNotification(title, type, message) {
 $(document).ready(function () {
     var $activeItem = $(".sidebar .active"); // your active menu item
     var $sidebar = $(".sidebar"); // or the scrollable container if different
-    console.log($activeItem);
     if ($activeItem.length) {
         var sidebarHeight = $sidebar.height();
         var itemOffsetTop = $activeItem.position().top;
@@ -319,5 +318,21 @@ $(document).ready(function () {
         var scrollTop = itemOffsetTop - sidebarHeight / 2 + itemHeight / 2;
 
         $sidebar.scrollTop(scrollTop);
+    }
+});
+
+$(document).ready(function () {
+    const today = new Date().toISOString().split("T")[0];
+    const hasModalShown = localStorage.getItem("hasModalShown");
+    let lowStockProduct = $("#low_stock_product").val();
+    let nearExpiredProduct = $("#near_expired_product").val();
+    if (lowStockProduct > 0 || nearExpiredProduct > 0) {
+        if (hasModalShown !== today) {
+            setTimeout(function () {
+                $("#low-stock-modal").modal("show");
+                $("#low-stock-modal").addClass("animated fadeInDown");
+                localStorage.setItem("hasModalShown", today);
+            }, 5000);
+        }
     }
 });

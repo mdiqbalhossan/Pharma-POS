@@ -51,6 +51,8 @@
 
 <body>
     <input type="hidden" id="currency" value="{{ setting('currency_symbol') }}">
+    <input type="hidden" id="low_stock_product" value="{{ low_stock_product()->count() }}">
+    <input type="hidden" id="near_expired_product" value="{{ near_expired_product()->count() }}">
     <div id="global-loader">
         <div class="whirly-loader"> </div>
     </div>
@@ -79,6 +81,8 @@
         @endif
 
     </div>
+
+    @include('layouts.partials._low_stock_modal')
     <!-- /Main Wrapper -->
     @if (Session::has('success'))
         <input type="hidden" name="type" class="notification_type" value="success">

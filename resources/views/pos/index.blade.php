@@ -77,7 +77,8 @@
                                                 @if ($medicine->quantity > 0)
                                                     <span><i data-feather="check" class="feather-16"></i></span>
                                                 @else
-                                                    <span><i data-feather="x-circle" class="feather-16"></i></span>
+                                                    <span class="bg-danger"><i data-feather="x-circle"
+                                                            class="feather-16"></i></span>
                                                 @endif
                                             </a>
                                             <h6 class="cat-name"><a

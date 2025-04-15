@@ -108,7 +108,7 @@ $(document).ready(function () {
                         ${
                             item.quantity > 0
                                 ? `<span><i data-feather="check" class="feather-16"></i></span>`
-                                : `<span><i data-feather="x-circle" class="feather-16"></i></span>`
+                                : `<span class="bg-danger"><i data-feather="x-circle" class="feather-16"></i></span>`
                         }
                     </a>
                     <h6 class="cat-name"><a
@@ -167,20 +167,63 @@ $(document).ready(function () {
             url: base_url + "/pos/medicine/" + id,
             type: "GET",
             success: function (response) {
-                addToCart(response);
-                // Add to localStorage
-                addToLocalStorage(response.id, 1);
-                $(".product-wrap .alert").addClass("d-none");
-                updateProductCount();
-                showPOSNotification(
-                    "Success!",
-                    "success",
-                    "Medicine added to cart"
-                );
-                calculateSubTotal();
-                calculateTotal();
-                calculateTax();
-                calculateDiscount();
+                let is_prescription_required = response.prescription_required;
+                let quantity = response.quantity;
+
+                if (quantity <= 0) {
+                    showPOSNotification(
+                        "Error!",
+                        "error",
+                        "Medicine is out of stock"
+                    );
+                    return;
+                }
+                if (is_prescription_required) {
+                    Swal.fire({
+                        title: "Prescription Required",
+                        text: "Please check the prescription before adding this medicine to cart.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, check prescription!",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            console.log("showConfirmationModal");
+                            addToCart(response);
+                            // Add to localStorage
+                            addToLocalStorage(response.id, 1);
+                            $(".product-wrap .alert").addClass("d-none");
+                            updateProductCount();
+                            showPOSNotification(
+                                "Success!",
+                                "success",
+                                "Medicine added to cart"
+                            );
+
+                            calculateSubTotal();
+                            calculateTotal();
+                            calculateTax();
+                            calculateDiscount();
+                        }
+                    });
+                } else {
+                    addToCart(response);
+                    // Add to localStorage
+                    addToLocalStorage(response.id, 1);
+                    $(".product-wrap .alert").addClass("d-none");
+                    updateProductCount();
+                    showPOSNotification(
+                        "Success!",
+                        "success",
+                        "Medicine added to cart"
+                    );
+
+                    calculateSubTotal();
+                    calculateTotal();
+                    calculateTax();
+                    calculateDiscount();
+                }
             },
         });
     }
@@ -227,6 +270,11 @@ $(document).ready(function () {
         $(".product-wrap").append(html);
         feather.replace();
 
+        // Focus on the quantity input field of the newly added product
+        $(
+            ".product-wrap .cart-product-item:last-child .qty-item-input"
+        ).focus();
+
         // All event handlers are now handled with delegation
     }
 
@@ -245,7 +293,8 @@ $(document).ready(function () {
         let price = $(element)
             .closest(".cart-product-item")
             .find(".sale-price")
-            .text();
+            .trim()
+            .replace(/[^0-9.-]+/g, "");
         $(element)
             .closest(".cart-product-item")
             .find(".qty-item-input")
@@ -269,6 +318,15 @@ $(document).ready(function () {
 
     $(".product-wrap").on("click", ".dec", function () {
         updateValue(this, -1);
+    });
+
+    $(".product-wrap").on("keyup", ".qty-item-input", function () {
+        let qty = $(this).val();
+        if (qty < 1) {
+            $(this).val(1);
+            qty = 1;
+        }
+        updateValue(this, qty);
     });
 
     // Also use event delegation for delete button
@@ -335,9 +393,13 @@ $(document).ready(function () {
     function calculateSubTotal() {
         let subTotal = 0;
         $(".cart-product-wrap .cart-product-item").each(function () {
-            subTotal +=
-                $(this).find(".qty-item input").val() *
-                $(this).find(".sale-price").text();
+            let sale_price = $(this)
+                .find(".sale-price")
+                .text()
+                .trim()
+                .replace(/[^0-9.-]+/g, "");
+            let qty = $(this).find(".qty-item input").val();
+            subTotal += sale_price * qty;
         });
         $("#sub-total").text(numberFormat(subTotal));
     }
@@ -904,7 +966,13 @@ $(document).ready(function () {
         $(".cart-product-wrap .cart-product-item").each(function () {
             let id = $(this).data("id");
             let qty = $(this).find(".qty-item-input").val();
-            let price = parseFloat($(this).find(".sale-price").text());
+            let price = parseFloat(
+                $(this)
+                    .find(".sale-price")
+                    .text()
+                    .trim()
+                    .replace(/[^0-9.-]+/g, "")
+            );
             let total = qty * price;
 
             cartItems.push({
@@ -1104,7 +1172,13 @@ $(document).ready(function () {
                 $(".cart-product-wrap .cart-product-item").each(function () {
                     let id = $(this).data("id");
                     let qty = $(this).find(".qty-item-input").val();
-                    let price = parseFloat($(this).find(".sale-price").text());
+                    let price = parseFloat(
+                        $(this)
+                            .find(".sale-price")
+                            .text()
+                            .trim()
+                            .replace(/[^0-9.-]+/g, "")
+                    );
                     let total = qty * price;
 
                     cartItems.push({
@@ -1195,7 +1269,13 @@ $(document).ready(function () {
         $(".cart-product-wrap .cart-product-item").each(function () {
             let id = $(this).data("id");
             let qty = $(this).find(".qty-item-input").val();
-            let price = parseFloat($(this).find(".sale-price").text());
+            let price = parseFloat(
+                $(this)
+                    .find(".sale-price")
+                    .text()
+                    .trim()
+                    .replace(/[^0-9.-]+/g, "")
+            );
             let total = qty * price;
 
             cartItems.push({
