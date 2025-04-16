@@ -223,3 +223,18 @@ function uploadImage(Request $request, $inputName = 'image', $uploadPath = 'uplo
 
     return null;
 }
+
+/**
+ * Purchase Info
+ */
+function purchase_medicine_info($unit_price, $quantity, $discount, $tax)
+{
+    $subtotal        = $unit_price * $quantity;
+    $discount_amount = $subtotal * $discount / 100;
+    $tax_amount      = ($subtotal - $discount_amount) * $tax / 100;
+
+    return [
+        'discount' => $discount_amount,
+        'tax'      => $tax_amount,
+    ];
+}

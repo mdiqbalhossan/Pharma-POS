@@ -71,11 +71,11 @@
                                         <tr>
                                             <td>{{ $account['name'] }}</td>
                                             <td>{{ ucfirst($account['type']) }}</td>
-                                            <td class="text-right">{{ number_format($account['debit'], 2) }}</td>
-                                            <td class="text-right">{{ number_format($account['credit'], 2) }}</td>
+                                            <td class="text-right">{{ show_amount($account['debit']) }}</td>
+                                            <td class="text-right">{{ show_amount($account['credit']) }}</td>
                                             <td
                                                 class="text-right {{ $account['balance'] < 0 ? 'text-danger' : 'text-success' }}">
-                                                {{ number_format($account['balance'], 2) }}
+                                                {{ show_amount($account['balance']) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -83,10 +83,10 @@
                                 <tfoot>
                                     <tr class="font-weight-bold">
                                         <td colspan="2">{{ __('account.total') }}</td>
-                                        <td class="text-right">{{ number_format($totalDebit, 2) }}</td>
-                                        <td class="text-right">{{ number_format($totalCredit, 2) }}</td>
+                                        <td class="text-right">{{ show_amount($totalDebit) }}</td>
+                                        <td class="text-right">{{ show_amount($totalCredit) }}</td>
                                         <td class="text-right {{ $totalBalance < 0 ? 'text-danger' : 'text-success' }}">
-                                            {{ number_format($totalBalance, 2) }}
+                                            {{ show_amount($totalBalance) }}
                                         </td>
                                     </tr>
                                 </tfoot>

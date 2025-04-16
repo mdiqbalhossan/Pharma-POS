@@ -175,8 +175,6 @@
                                             <th>{{ __('purchase.expiry') }}</th>
                                             <th>{{ __('purchase.qty') }}</th>
                                             <th>{{ __('purchase.unit_price') }}</th>
-                                            <th>{{ __('purchase.discount') }}</th>
-                                            <th>{{ __('purchase.tax') }}</th>
                                             <th>{{ __('purchase.total') }}</th>
                                         </tr>
                                     </thead>
@@ -190,9 +188,7 @@
                                                 </td>
                                                 <td>{{ $item->pivot->quantity }} {{ $item->unit->name }}</td>
                                                 <td>{{ show_amount($item->pivot->unit_price) }}</td>
-                                                <td>{{ show_amount($item->pivot->discount_amount) }}</td>
-                                                <td>{{ show_amount($item->pivot->tax_amount) }}</td>
-                                                <td>{{ show_amount($item->pivot->subtotal) }}</td>
+                                                <td>{{ show_amount($item->pivot->grand_total) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

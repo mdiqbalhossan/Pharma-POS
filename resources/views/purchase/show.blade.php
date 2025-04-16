@@ -231,12 +231,15 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $medicine->name }}</td>
                                                 <td>{{ $medicine->pivot->batch_no }}</td>
-                                                <td>{{ date('M Y', strtotime($medicine->pivot->expiry_date)) }}</td>
+                                                <td>{{ date('d M, Y', strtotime($medicine->pivot->expiry_date)) }}</td>
                                                 <td>{{ $medicine->pivot->quantity }} {{ $medicine->unit->name }}</td>
                                                 <td>{{ show_amount($medicine->pivot->unit_price) }}</td>
-                                                <td>{{ show_amount($medicine->pivot->discount_amount) }}</td>
-                                                <td>{{ show_amount($medicine->pivot->tax_amount) }}</td>
-                                                <td>{{ show_amount($medicine->pivot->subtotal) }}</td>
+                                                <td>{{ show_amount(purchase_medicine_info($medicine->pivot->unit_price, $medicine->pivot->quantity, $medicine->pivot->discount, $medicine->pivot->tax)['discount']) }}
+                                                    ({{ $medicine->pivot->discount }}%)
+                                                </td>
+                                                <td>{{ show_amount(purchase_medicine_info($medicine->pivot->unit_price, $medicine->pivot->quantity, $medicine->pivot->discount, $medicine->pivot->tax)['tax']) }}
+                                                    ({{ $medicine->pivot->tax }}%)</td>
+                                                <td>{{ show_amount($medicine->pivot->grand_total) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

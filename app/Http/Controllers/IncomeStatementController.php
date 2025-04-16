@@ -15,10 +15,10 @@ class IncomeStatementController extends Controller
         $endDate   = $request->get('end_date', now()->endOfMonth()->format('Y-m-d'));
 
         // Get revenue accounts (income type)
-        $revenueAccounts = Account::where('type', 'income')->get();
+        $revenueAccounts = Account::whereIn('type', ['asset', 'income'])->get();
 
         // Get expense accounts
-        $expenseAccounts = Account::where('type', 'expense')->get();
+        $expenseAccounts = Account::whereIn('type', ['liability', 'equity', 'expense'])->get();
 
         // Calculate total revenue
         $totalRevenue = $revenueAccounts->sum(function ($account) use ($startDate, $endDate) {
@@ -153,7 +153,7 @@ class IncomeStatementController extends Controller
     private function getAccountBalance($accountId, $startDate, $endDate)
     {
         return Transaction::where('account_id', $accountId)
-            ->whereBetween('date', [$startDate, $endDate])
+            ->whereBetween('transaction_date', [$startDate, $endDate])
             ->sum('amount');
     }
 }

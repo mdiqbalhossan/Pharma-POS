@@ -6,11 +6,6 @@
     @include('layouts.partials.breadcrumb', [
         'title' => __('users.User Details'),
         'subtitle' => __('users.View user information'),
-        'button' => [
-            'text' => __('users.Edit User'),
-            'url' => route('users.edit', $user->id),
-            'icon' => 'edit',
-        ],
     ])
 
     <div class="row">

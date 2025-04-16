@@ -64,7 +64,7 @@ class PurchaseController extends Controller
             'grand_total'    => 'required|numeric|min:0',
             'paid_amount'    => 'required|numeric|min:0',
             'note'           => 'nullable|string',
-            'account_id'     => 'required|exists:accounts,id',
+            'account_id'     => 'required',
         ]);
 
         try {
@@ -113,7 +113,7 @@ class PurchaseController extends Controller
                 // Attach medicine to purchase
                 $purchase->medicines()->attach($medicines[$i], [
                     'batch_no'    => $batchNumbers[$i],
-                    'expiry_date' => $expiryDates[$i],
+                    'expiry_date' => Carbon::parse($expiryDates[$i])->format('Y-m-d'),
                     'quantity'    => $quantities[$i],
                     'unit_price'  => $unitPrices[$i],
                     'discount'    => $discounts[$i] ?? 0,
@@ -134,7 +134,7 @@ class PurchaseController extends Controller
                 'account_id'       => $request->account_id,
                 'type'             => 'debit',
                 'amount'           => $request->grand_total,
-                'transaction_date' => $request->date,
+                'transaction_date' => Carbon::parse($request->date)->format('Y-m-d'),
                 'description'      => $request->note,
             ]);
 
@@ -145,7 +145,6 @@ class PurchaseController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-
             return redirect()->back()
                 ->with('error', 'Error creating purchase: ' . $e->getMessage())
                 ->withInput();
@@ -243,7 +242,7 @@ class PurchaseController extends Controller
                 // Attach medicine to purchase
                 $purchase->medicines()->attach($medicines[$i], [
                     'batch_no'    => $batchNumbers[$i],
-                    'expiry_date' => $expiryDates[$i],
+                    'expiry_date' => Carbon::parse($expiryDates[$i])->format('Y-m-d'),
                     'quantity'    => $quantities[$i],
                     'unit_price'  => $unitPrices[$i],
                     'discount'    => $discounts[$i] ?? 0,
@@ -264,7 +263,7 @@ class PurchaseController extends Controller
                 'account_id'       => $request->account_id,
                 'type'             => 'debit',
                 'amount'           => $request->grand_total,
-                'transaction_date' => $request->date,
+                'transaction_date' => Carbon::parse($request->date)->format('Y-m-d'),
                 'description'      => $request->note,
             ]);
             DB::commit();

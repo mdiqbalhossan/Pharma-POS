@@ -53,13 +53,41 @@
             padding: 10px;
             border: 1px solid #ddd;
         }
+
+        .company-logo {
+            width: 100px;
+        }
+
+        .company-details {
+            margin-left: 10px;
+        }
+
+        .company-details h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .company-details p {
+            margin: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="company-info">
+        <img src="{{ photo_url(setting('invoice_logo')) }}" alt="Company Logo" class="company-logo">
+        <div class="company-details">
+            <h2>{{ setting('company_name') }}</h2>
+            <p>{{ setting('company_address') }}</p>
+            <p>{{ setting('company_email') }}</p>
+            <p>{{ setting('company_phone') }}</p>
+        </div>
+    </div>
+
     <div class="header">
         <h1>Balance Sheet</h1>
-        <h3>{{ config('app.name') }}</h3>
     </div>
 
     <div class="date-range">
@@ -82,7 +110,7 @@
                         @if ($account['type'] === 'asset')
                             <tr>
                                 <td>{{ $account['name'] }}</td>
-                                <td class="text-right">{{ number_format($account['balance'], 2) }}</td>
+                                <td class="text-right">{{ show_amount($account['balance']) }}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -90,7 +118,7 @@
                 <tfoot>
                     <tr class="font-weight-bold">
                         <td>Total Assets</td>
-                        <td class="text-right">{{ number_format($totalAssets, 2) }}</td>
+                        <td class="text-right">{{ show_amount($totalAssets) }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -112,13 +140,13 @@
                         @if ($account['type'] === 'liability')
                             <tr>
                                 <td>{{ $account['name'] }}</td>
-                                <td class="text-right">{{ number_format($account['balance'], 2) }}</td>
+                                <td class="text-right">{{ show_amount($account['balance']) }}</td>
                             </tr>
                         @endif
                     @endforeach
                     <tr>
                         <td><strong>Total Liabilities</strong></td>
-                        <td class="text-right">{{ number_format($totalLiabilities, 2) }}</td>
+                        <td class="text-right">{{ show_amount($totalLiabilities) }}</td>
                     </tr>
 
                     <!-- Equity -->
@@ -126,25 +154,25 @@
                         @if ($account['type'] === 'equity')
                             <tr>
                                 <td>{{ $account['name'] }}</td>
-                                <td class="text-right">{{ number_format($account['balance'], 2) }}</td>
+                                <td class="text-right">{{ show_amount($account['balance']) }}</td>
                             </tr>
                         @endif
                     @endforeach
                     <tr>
                         <td><strong>Total Equity</strong></td>
-                        <td class="text-right">{{ number_format($totalEquity, 2) }}</td>
+                        <td class="text-right">{{ show_amount($totalEquity) }}</td>
                     </tr>
 
                     <!-- Net Income -->
                     <tr>
                         <td><strong>Net Income</strong></td>
-                        <td class="text-right">{{ number_format($netIncome, 2) }}</td>
+                        <td class="text-right">{{ show_amount($netIncome) }}</td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr class="font-weight-bold">
                         <td>Total Liabilities & Equity</td>
-                        <td class="text-right">{{ number_format($totalLiabilitiesAndEquity, 2) }}</td>
+                        <td class="text-right">{{ show_amount($totalLiabilitiesAndEquity) }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -154,11 +182,11 @@
     <div class="summary">
         <strong>Summary:</strong>
         @if ($totalAssets == $totalLiabilitiesAndEquity)
-            The balance sheet is balanced. Total Assets ({{ number_format($totalAssets, 2) }}) equals Total Liabilities
-            & Equity ({{ number_format($totalLiabilitiesAndEquity, 2) }}).
+            The balance sheet is balanced. Total Assets ({{ show_amount($totalAssets) }}) equals Total Liabilities
+            & Equity ({{ show_amount($totalLiabilitiesAndEquity) }}).
         @else
-            The balance sheet is not balanced. Total Assets ({{ number_format($totalAssets, 2) }}) does not equal Total
-            Liabilities & Equity ({{ number_format($totalLiabilitiesAndEquity, 2) }}).
+            The balance sheet is not balanced. Total Assets ({{ show_amount($totalAssets) }}) does not equal Total
+            Liabilities & Equity ({{ show_amount($totalLiabilitiesAndEquity) }}).
         @endif
     </div>
 

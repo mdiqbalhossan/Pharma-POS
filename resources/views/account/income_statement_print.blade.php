@@ -80,18 +80,42 @@
             font-size: 10px;
             color: #666;
         }
+
+        .company-logo {
+            width: 100px;
+        }
+
+        .company-details {
+            margin-left: 10px;
+        }
+
+        .company-details h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .company-details p {
+            margin: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="company-info">
+        <img src="{{ photo_url_pdf(setting('invoice_logo')) }}" alt="Company Logo" class="company-logo">
+        <div class="company-details">
+            <h2>{{ setting('company_name') }}</h2>
+            <p>{{ setting('company_address') }}</p>
+            <p>{{ setting('company_email') }}</p>
+        </div>
+    </div>
+
     <div class="header">
         <h1>Income Statement</h1>
         <p>For the period {{ \Carbon\Carbon::parse($startDate)->format('F d, Y') }} to
             {{ \Carbon\Carbon::parse($endDate)->format('F d, Y') }}</p>
-    </div>
-
-    <div class="date-range">
-        Generated on: {{ now()->format('F d, Y H:i:s') }}
     </div>
 
     <div class="section">
@@ -107,14 +131,14 @@
                 @foreach ($revenueBreakdown as $revenue)
                     <tr>
                         <td>{{ $revenue['name'] }}</td>
-                        <td class="text-right">{{ number_format($revenue['amount'], 2) }}</td>
+                        <td class="text-right">{{ show_amount($revenue['amount']) }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <td><strong>Total Revenue</strong></td>
-                    <td class="text-right"><strong>{{ number_format($totalRevenue, 2) }}</strong></td>
+                    <td class="text-right"><strong>{{ show_amount($totalRevenue) }}</strong></td>
                 </tr>
             </tfoot>
         </table>
@@ -133,14 +157,14 @@
                 @foreach ($expenseBreakdown as $expense)
                     <tr>
                         <td>{{ $expense['name'] }}</td>
-                        <td class="text-right">{{ number_format($expense['amount'], 2) }}</td>
+                        <td class="text-right">{{ show_amount($expense['amount']) }}</td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <td><strong>Total Expenses</strong></td>
-                    <td class="text-right"><strong>{{ number_format($totalExpenses, 2) }}</strong></td>
+                    <td class="text-right"><strong>{{ show_amount($totalExpenses) }}</strong></td>
                 </tr>
             </tfoot>
         </table>
@@ -150,15 +174,16 @@
         <h3>Net Income</h3>
         <p>
             @if ($netIncome >= 0)
-                The business made a profit of {{ number_format($netIncome, 2) }} during this period.
+                The business made a profit of {{ show_amount($netIncome) }} during this period.
             @else
-                The business incurred a loss of {{ number_format(abs($netIncome), 2) }} during this period.
+                The business incurred a loss of {{ show_amount(abs($netIncome)) }} during this period.
             @endif
         </p>
     </div>
 
     <div class="footer">
         <p>This is a computer-generated report. No signature is required.</p>
+        <p>Generated on: {{ now()->format('F d, Y H:i:s') }}</p>
     </div>
 </body>
 

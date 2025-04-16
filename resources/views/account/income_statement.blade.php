@@ -43,10 +43,6 @@
 
                         <!-- Action Buttons -->
                         <div class="mb-3">
-                            <a href="{{ route('income-statement.print', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
-                                class="btn btn-info" target="_blank">
-                                <i class="fas fa-print"></i> Print
-                            </a>
                             <a href="{{ route('income-statement.download', ['start_date' => $startDate, 'end_date' => $endDate]) }}"
                                 class="btn btn-success">
                                 <i class="fas fa-download"></i> Download PDF
@@ -70,14 +66,14 @@
                                             @foreach ($revenueBreakdown as $revenue)
                                                 <tr>
                                                     <td>{{ $revenue['name'] }}</td>
-                                                    <td class="text-right">{{ number_format($revenue['amount'], 2) }}</td>
+                                                    <td class="text-right">{{ show_amount($revenue['amount']) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr class="font-weight-bold">
                                                 <td>Total Revenue</td>
-                                                <td class="text-right">{{ number_format($totalRevenue, 2) }}</td>
+                                                <td class="text-right">{{ show_amount($totalRevenue) }}</td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -99,14 +95,14 @@
                                             @foreach ($expenseBreakdown as $expense)
                                                 <tr>
                                                     <td>{{ $expense['name'] }}</td>
-                                                    <td class="text-right">{{ number_format($expense['amount'], 2) }}</td>
+                                                    <td class="text-right">{{ show_amount($expense['amount']) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr class="font-weight-bold">
                                                 <td>Total Expenses</td>
-                                                <td class="text-right">{{ number_format($totalExpenses, 2) }}</td>
+                                                <td class="text-right">{{ show_amount($totalExpenses) }}</td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -120,10 +116,10 @@
                                 <div class="alert {{ $netIncome >= 0 ? 'alert-success' : 'alert-danger' }}">
                                     <strong>Net Income:</strong>
                                     @if ($netIncome >= 0)
-                                        The business made a profit of {{ number_format($netIncome, 2) }} during this
+                                        The business made a profit of {{ show_amount($netIncome) }} during this
                                         period.
                                     @else
-                                        The business incurred a loss of {{ number_format(abs($netIncome), 2) }} during this
+                                        The business incurred a loss of {{ show_amount(abs($netIncome)) }} during this
                                         period.
                                     @endif
                                 </div>

@@ -20,7 +20,7 @@ class TrialBalanceController extends Controller
             ->map(function ($account) use ($startDate, $endDate) {
                 $debit   = $account->getDebitAmount($startDate, $endDate);
                 $credit  = $account->getCreditAmount($startDate, $endDate);
-                $balance = $debit - $credit;
+                $balance = $credit - $debit;
 
                 return [
                     'id'      => $account->id,
@@ -31,10 +31,9 @@ class TrialBalanceController extends Controller
                     'balance' => $balance,
                 ];
             });
-
         $totalDebit   = $accounts->sum('debit');
         $totalCredit  = $accounts->sum('credit');
-        $totalBalance = $totalDebit - $totalCredit;
+        $totalBalance = $totalCredit - $totalDebit;
 
         return view('account.trial_balance', compact(
             'accounts',
@@ -59,7 +58,7 @@ class TrialBalanceController extends Controller
             ->map(function ($account) use ($startDate, $endDate) {
                 $debit   = $account->getDebitAmount($startDate, $endDate);
                 $credit  = $account->getCreditAmount($startDate, $endDate);
-                $balance = $debit - $credit;
+                $balance = $credit - $debit;
 
                 return [
                     'id'      => $account->id,
@@ -73,7 +72,7 @@ class TrialBalanceController extends Controller
 
         $totalDebit   = $accounts->sum('debit');
         $totalCredit  = $accounts->sum('credit');
-        $totalBalance = $totalDebit - $totalCredit;
+        $totalBalance = $totalCredit - $totalDebit;
 
         $pdf = PDF::loadView('account.trial_balance_pdf', compact(
             'accounts',
@@ -100,7 +99,7 @@ class TrialBalanceController extends Controller
             ->map(function ($account) use ($startDate, $endDate) {
                 $debit   = $account->getDebitAmount($startDate, $endDate);
                 $credit  = $account->getCreditAmount($startDate, $endDate);
-                $balance = $debit - $credit;
+                $balance = $credit - $debit;
 
                 return [
                     'id'      => $account->id,
@@ -114,7 +113,7 @@ class TrialBalanceController extends Controller
 
         $totalDebit   = $accounts->sum('debit');
         $totalCredit  = $accounts->sum('credit');
-        $totalBalance = $totalDebit - $totalCredit;
+        $totalBalance = $totalCredit - $totalDebit;
 
         $pdf = PDF::loadView('account.trial_balance_pdf', compact(
             'accounts',

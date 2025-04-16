@@ -47,7 +47,7 @@
                             <td>{{ $role->created_at->format('d M Y') }}</td>
                             <td class="action-table-data">
                                 <div class="edit-delete-action">
-                                    @if ($role->name != 'Admin')
+                                    @if ($role->name != 'admin')
                                         <a class="me-2 p-2" href="{{ route('roles.edit', $role->id) }}"
                                             data-bs-toggle="tooltip" title="{{ __('Edit') }}">
                                             <i data-feather="edit" class="feather-edit"></i>
@@ -58,7 +58,7 @@
                                         data-bs-toggle="tooltip" title="{{ __('Permissions') }}">
                                         <i data-feather="shield" class="shield"></i>
                                     </a>
-                                    @if ($role->name != 'Admin')
+                                    @if ($role->name != 'admin')
                                         <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
                                             title="{{ __('Delete') }}" data-id="{{ $role->id }}">
                                             <i data-feather="trash-2" class="feather-trash-2"></i>

@@ -53,7 +53,7 @@
         <div class="card">
             <div class="card-body add-product">
                 <div class="row">
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="input-blocks">
                             <label for="date">{{ __('index.Date') }} <span class="text-danger">*</span></label>
                             <div class="input-groupicon calender-input">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="input-blocks">
                             <label for="supplier_id">{{ __('purchase.supplier.title') }} <span
                                     class="text-danger">*</span></label>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 mb-3">
                         <div class="input-blocks">
                             <label for="purchase_type">{{ __('purchase.type') }} <span class="text-danger">*</span></label>
                             <select name="purchase_type" id="purchase_type" class="form-control select2" required>
@@ -90,22 +90,7 @@
                                     {{ __('purchase.purchase') }}</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <div class="input-blocks">
-                            <label for="purchase_status">{{ __('purchase.status') }} <span
-                                    class="text-danger">*</span></label>
-                            <select name="purchase_status" id="purchase_status" class="form-control select2" required>
-                                <option value="received" {{ $purchase->purchase_status == 'received' ? 'selected' : '' }}>
-                                    {{ __('purchase.received') }}</option>
-                                <option value="pending" {{ $purchase->purchase_status == 'pending' ? 'selected' : '' }}>
-                                    {{ __('purchase.pending') }}</option>
-                                <option value="ordered" {{ $purchase->purchase_status == 'ordered' ? 'selected' : '' }}>
-                                    {{ __('purchase.ordered') }}</option>
-                            </select>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
 
                 <div class="row">

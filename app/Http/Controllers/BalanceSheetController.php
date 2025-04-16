@@ -28,9 +28,9 @@ class BalanceSheetController extends Controller
         ];
 
         foreach ($accounts as $account) {
-            $debit   = $account->transactions->sum('debit');
-            $credit  = $account->transactions->sum('credit');
-            $balance = $debit - $credit;
+            $debit   = $account->getDebitAmount($startDate, $endDate);
+            $credit  = $account->getCreditAmount($startDate, $endDate);
+            $balance = $credit - $debit;
 
             // For liability and equity accounts, reverse the balance
             if (in_array($account->type, ['liability', 'equity'])) {
@@ -46,7 +46,7 @@ class BalanceSheetController extends Controller
             ];
 
             // Add to type totals
-            $typeTotals[$account->type] += $balance;
+            $typeTotals[$account->type == 'income' ? 'revenue' : $account->type] += $balance;
         }
 
         // Calculate total assets and liabilities
@@ -90,9 +90,9 @@ class BalanceSheetController extends Controller
         ];
 
         foreach ($accounts as $account) {
-            $debit   = $account->transactions->sum('debit');
-            $credit  = $account->transactions->sum('credit');
-            $balance = $debit - $credit;
+            $debit   = $account->getDebitAmount($startDate, $endDate);
+            $credit  = $account->getCreditAmount($startDate, $endDate);
+            $balance = $credit - $debit;
 
             if (in_array($account->type, ['liability', 'equity'])) {
                 $balance = -$balance;
@@ -149,9 +149,9 @@ class BalanceSheetController extends Controller
         ];
 
         foreach ($accounts as $account) {
-            $debit   = $account->transactions->sum('debit');
-            $credit  = $account->transactions->sum('credit');
-            $balance = $debit - $credit;
+            $debit   = $account->getDebitAmount($startDate, $endDate);
+            $credit  = $account->getCreditAmount($startDate, $endDate);
+            $balance = $credit - $debit;
 
             if (in_array($account->type, ['liability', 'equity'])) {
                 $balance = -$balance;

@@ -134,17 +134,6 @@ $(document).ready(function () {
         // Update calculations for the new row
         updateRowCalculations($("#purchase-table tr:last"));
         calculateTotals();
-
-        // Initialize the datepicker for the new row
-        $(".expiry-date").datetimepicker({
-            format: "DD-MM-YYYY",
-            icons: {
-                up: "fas fa-angle-up",
-                down: "fas fa-angle-down",
-                next: "fas fa-angle-right",
-                previous: "fas fa-angle-left",
-            },
-        });
     }
 
     // Remove medicine from table

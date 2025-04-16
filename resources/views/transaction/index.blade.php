@@ -44,8 +44,8 @@
                                         {{ ucfirst($transaction->type) }}
                                     </span>
                                 </td>
-                                <td>{{ number_format($transaction->amount, 2) }}</td>
-                                <td>{{ $transaction->transaction_date->format('Y-m-d') }}</td>
+                                <td>{{ show_amount($transaction->amount) }}</td>
+                                <td>{{ Carbon\Carbon::parse($transaction->transaction_date)->format('d M, Y') }}</td>
                                 <td>{{ $transaction->description }}</td>
                                 <td class="action-table-data">
                                     <div class="edit-delete-action">

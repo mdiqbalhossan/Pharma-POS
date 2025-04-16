@@ -65,13 +65,41 @@
         .date-range {
             margin-bottom: 10px;
         }
+
+        .company-logo {
+            width: 100px;
+        }
+
+        .company-details {
+            margin-left: 10px;
+        }
+
+        .company-details h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .company-details p {
+            margin: 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="company-info">
+        <img src="{{ photo_url_pdf(setting('invoice_logo')) }}" alt="Company Logo" class="company-logo">
+        <div class="company-details">
+            <h2>{{ setting('company_name') }}</h2>
+            <p>{{ setting('company_address') }}</p>
+            <p>{{ setting('company_email') }}</p>
+            <p>{{ setting('company_phone') }}</p>
+        </div>
+    </div>
+
     <div class="header">
         <h1>Trial Balance Report</h1>
-        <p>{{ config('app.name') }}</p>
     </div>
 
     <div class="date-range">
@@ -94,10 +122,10 @@
                 <tr>
                     <td>{{ $account['name'] }}</td>
                     <td>{{ ucfirst($account['type']) }}</td>
-                    <td class="text-right">{{ number_format($account['debit'], 2) }}</td>
-                    <td class="text-right">{{ number_format($account['credit'], 2) }}</td>
+                    <td class="text-right">{{ show_amount($account['debit']) }}</td>
+                    <td class="text-right">{{ show_amount($account['credit']) }}</td>
                     <td class="text-right {{ $account['balance'] < 0 ? 'text-danger' : 'text-success' }}">
-                        {{ number_format($account['balance'], 2) }}
+                        {{ show_amount($account['balance']) }}
                     </td>
                 </tr>
             @endforeach
@@ -105,10 +133,10 @@
         <tfoot>
             <tr>
                 <td colspan="2"><strong>Total</strong></td>
-                <td class="text-right"><strong>{{ number_format($totalDebit, 2) }}</strong></td>
-                <td class="text-right"><strong>{{ number_format($totalCredit, 2) }}</strong></td>
+                <td class="text-right"><strong>{{ show_amount($totalDebit) }}</strong></td>
+                <td class="text-right"><strong>{{ show_amount($totalCredit) }}</strong></td>
                 <td class="text-right {{ $totalBalance < 0 ? 'text-danger' : 'text-success' }}">
-                    <strong>{{ number_format($totalBalance, 2) }}</strong>
+                    <strong>{{ show_amount($totalBalance) }}</strong>
                 </td>
             </tr>
         </tfoot>

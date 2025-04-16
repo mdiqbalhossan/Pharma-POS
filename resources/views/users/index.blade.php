@@ -55,18 +55,23 @@
                             <td>{{ $user->created_at->format('d M Y') }}</td>
                             <td class="action-table-data">
                                 <div class="edit-delete-action">
-                                    <a class="me-2 p-2" href="{{ route('users.edit', $user->id) }}"
-                                        data-bs-toggle="tooltip" title="{{ __('users.Edit') }}">
-                                        <i data-feather="edit" class="feather-edit"></i>
-                                    </a>
+                                    @if ($user->id != 1)
+                                        <a class="me-2 p-2" href="{{ route('users.edit', $user->id) }}"
+                                            data-bs-toggle="tooltip" title="{{ __('users.Edit') }}">
+                                            <i data-feather="edit" class="feather-edit"></i>
+                                        </a>
+                                    @endif
+
                                     <a class="p-2 me-2" href="{{ route('users.show', $user->id) }}"
                                         data-bs-toggle="tooltip" title="{{ __('users.View') }}">
                                         <i data-feather="eye" class="feather-eye"></i>
                                     </a>
-                                    <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                        title="{{ __('users.Delete') }}" data-id="{{ $user->id }}">
-                                        <i data-feather="trash-2" class="feather-trash-2"></i>
-                                    </a>
+                                    @if ($user->id != auth()->user()->id && $user->id != 1)
+                                        <a class="confirm-text p-2" href="javascript:void(0);" data-bs-toggle="tooltip"
+                                            title="{{ __('users.Delete') }}" data-id="{{ $user->id }}">
+                                            <i data-feather="trash-2" class="feather-trash-2"></i>
+                                        </a>
+                                    @endif
                                     <form id="delete-form-{{ $user->id }}"
                                         action="{{ route('users.destroy', $user->id) }}" method="POST"
                                         style="display: none;">

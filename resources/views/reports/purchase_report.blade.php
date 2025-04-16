@@ -141,7 +141,6 @@
                             <th>{{ __('index.Purchase No') }}</th>
                             <th>{{ __('index.Supplier') }}</th>
                             <th>{{ __('index.Date') }}</th>
-                            <th>{{ __('index.Status') }}</th>
                             <th>{{ __('index.Grand Total') }}</th>
                             <th>{{ __('index.Paid') }}</th>
                             <th>{{ __('index.Due') }}</th>
@@ -152,18 +151,9 @@
                     <tbody>
                         @foreach ($purchases as $purchase)
                             <tr>
-                                <td>#{{ $purchase->purchase_no }}</td>
+                                <td>#{{ $purchase->invoice_no }}</td>
                                 <td>{{ $purchase->supplier ? $purchase->supplier->name : __('index.N/A') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d M Y') }}</td>
-                                <td>
-                                    @if ($purchase->status == 'received')
-                                        <span class="badge-linesuccess">{{ __('index.Received') }}</span>
-                                    @elseif($purchase->status == 'pending')
-                                        <span class="badges-warning">{{ __('index.Pending') }}</span>
-                                    @elseif($purchase->status == 'ordered')
-                                        <span class="badge-lineprimary">{{ __('index.Ordered') }}</span>
-                                    @endif
-                                </td>
                                 <td>{{ show_amount($purchase->grand_total, 2) }}</td>
                                 <td>{{ show_amount($purchase->amount_paid, 2) }}</td>
                                 <td>{{ show_amount($purchase->amount_due, 2) }}</td>
