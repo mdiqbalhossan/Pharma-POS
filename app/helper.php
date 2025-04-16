@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 /**
  * Photo Url
@@ -189,7 +191,7 @@ function barcode_type($type)
  */
 function low_stock_product()
 {
-    $low_stock_quantity = setting('low_stock_alert');
+    $low_stock_quantity = setting('low_stock_alert') ?? 10;
     return \App\Models\Medicine::where('quantity', '<=', $low_stock_quantity)->get();
 }
 
@@ -198,6 +200,26 @@ function low_stock_product()
  */
 function near_expired_product()
 {
-    $stock_expiry_alert_days = (int) setting('stock_expiry_alert_days');
+    $stock_expiry_alert_days = (int) setting('stock_expiry_alert_days') ?? 30;
     return \App\Models\Medicine::where('expiration_date', '<=', now()->addDays($stock_expiry_alert_days))->get();
+}
+
+/**
+ * Image Upload
+ */
+function uploadImage(Request $request, $inputName = 'image', $uploadPath = 'uploads/images')
+{
+    if ($request->hasFile($inputName)) {
+        $file = $request->file($inputName);
+
+        // Create a custom name (e.g., unique ID with extension)
+        $customName = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+        // Move the file to the specified folder
+        $file->move(public_path('storage/' . $uploadPath), $customName);
+
+        return $uploadPath . '/' . $customName;
+    }
+
+    return null;
 }

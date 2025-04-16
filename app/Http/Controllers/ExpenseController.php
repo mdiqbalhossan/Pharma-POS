@@ -51,7 +51,7 @@ class ExpenseController extends Controller
 
             $this->saveTransaction([
                 'account_id'       => $validated['account_id'],
-                'type'             => 'expense',
+                'type'             => 'debit',
                 'amount'           => $validated['amount'],
                 'transaction_date' => $validated['date'],
                 'description'      => $validated['description'],
@@ -106,7 +106,7 @@ class ExpenseController extends Controller
 
             $this->updateTransaction([
                 'account_id'       => $validated['account_id'],
-                'type'             => 'expense',
+                'type'             => 'debit',
                 'amount'           => $validated['amount'],
                 'transaction_date' => $validated['date'],
                 'description'      => $validated['description'],

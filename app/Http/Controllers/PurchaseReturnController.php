@@ -111,7 +111,7 @@ class PurchaseReturnController extends Controller
 
             $this->saveTransaction([
                 'account_id'       => $request->account_id,
-                'type'             => 'purchase_return',
+                'type'             => 'credit',
                 'amount'           => $request->grand_total,
                 'transaction_date' => $request->date,
                 'description'      => $request->note,

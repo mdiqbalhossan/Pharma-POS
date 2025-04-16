@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ setting('site_name') }} - {{ $title }}</title>
+    <title>{{ setting('site_name') }} - @yield('title')</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ photo_url(setting('favicon')) }}">
@@ -23,14 +23,14 @@
     @yield('styles')
 </head>
 
-<body class="account-page">
+<body class="error-page">
     <div id="global-loader">
         <div class="whirly-loader"></div>
     </div>
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-        {{ $slot }}
+        @yield('content')
     </div>
     <!-- /Main Wrapper -->
 

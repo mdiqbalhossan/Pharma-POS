@@ -70,7 +70,7 @@
                         <div class="tab_content active" data-tab="all">
                             <div class="row">
                                 @forelse ($medicines as $medicine)
-                                    <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3">
+                                    <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                                         <div class="product-info default-cover card" data-id="{{ $medicine->id }}">
                                             <a href="javascript:void(0);" class="img-bg">
                                                 <img src="{{ $medicine->image }}" alt="{{ __('index.Products') }}">
@@ -86,10 +86,15 @@
                                             <h6 class="product-name"><a
                                                     href="javascript:void(0);">{{ $medicine->name }}</a></h6>
                                             <div class="d-flex align-items-center justify-content-between price">
-                                                <span>{{ $medicine->quantity }} {{ __('index.Pcs') }}</span>
-                                                <p>{{ $medicine->sale_price }}</p>
+                                                <span>{{ $medicine->quantity }} {{ $medicine->unit->name }}</span>
+                                                <p>{{ show_amount($medicine->sale_price) }}</p>
                                             </div>
                                         </div>
+                                        <button type="button" class="btn btn-sm btn-outline-primary mt-2 alternate-med-btn"
+                                            data-id="{{ $medicine->id }}">
+                                            <i data-feather="repeat"
+                                                class="feather-14 me-1"></i>{{ __('index.Alternatives Medicines') }}
+                                        </button>
                                     </div>
                                 @empty
                                     <div class="col-12">
@@ -103,7 +108,7 @@
                             <div class="tab_content" data-tab="{{ $category->slug }}">
                                 <div class="row">
                                     @forelse ($category->medicines as $medicine)
-                                        <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2">
+                                        <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                                             <div class="product-info default-cover card" data-id="{{ $medicine->id }}">
                                                 <a href="javascript:void(0);" class="img-bg">
                                                     <img src="{{ $medicine->image }}" alt="{{ __('index.Products') }}">
@@ -118,10 +123,16 @@
                                                 <h6 class="product-name"><a
                                                         href="javascript:void(0);">{{ $medicine->name }}</a></h6>
                                                 <div class="d-flex align-items-center justify-content-between price">
-                                                    <span>{{ $medicine->quantity }} {{ __('index.Pcs') }}</span>
-                                                    <p>{{ $medicine->sale_price }}</p>
+                                                    <span>{{ $medicine->quantity }} {{ $medicine->unit->name }}</span>
+                                                    <p>{{ show_amount($medicine->sale_price) }}</p>
                                                 </div>
                                             </div>
+                                            <button type="button"
+                                                class="btn btn-sm btn-outline-primary mt-2 alternate-med-btn"
+                                                data-id="{{ $medicine->id }}">
+                                                <i data-feather="repeat"
+                                                    class="feather-14 me-1"></i>{{ __('index.Alternatives Medicines') }}
+                                            </button>
                                         </div>
                                     @empty
                                         <div class="col-12">
@@ -319,6 +330,9 @@
     @include('pos.include._customer')
     @include('pos.include._products')
     @include('pos.include._keyboard_shortcut')
+
+    <!-- Alternate Medicines Modal -->
+    @include('pos.include._alternate_modal')
 
 @endsection
 

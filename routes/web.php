@@ -130,6 +130,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/pos/search', 'search')->name('pos.search');
         Route::post('/pos/customer/store', 'storeCustomer')->name('pos.customer.store');
         Route::get('/pos/medicine/{id}', 'getMedicine')->name('pos.medicine');
+        Route::get('/pos/alternate-medicines/{id}', 'getAlternateMedicines')->name('pos.alternate-medicines');
         Route::get('/pos/search-orders', 'searchOrders')->name('pos.search.orders');
         Route::get('/pos/get-orders', 'getOrders')->name('pos.get.orders');
     });

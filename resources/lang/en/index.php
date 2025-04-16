@@ -430,4 +430,11 @@ return [
     'Batch No'                                                                                                   => 'Batch No',
     'Expiry Date'                                                                                                => 'Expiry Date',
     'Purchase'                                                                                                   => 'Purchase',
+    'Alternatives'                                                                                               => 'Alternatives',
+    'Alternate Medicines'                                                                                        => 'Alternate Medicines',
+    'Original Medicine'                                                                                          => 'Original Medicine',
+    'Alternate Medicines'                                                                                        => 'Alternate Medicines',
+    'Available Alternatives'                                                                                     => 'Available Alternatives',
+    'No medicines found'                                                                                         => 'No medicines found',
+    'Alternatives Medicines'                                                                                     => 'Alternatives Medicines',
 ];

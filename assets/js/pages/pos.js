@@ -99,7 +99,7 @@ $(document).ready(function () {
         html += `<div class="row">`;
         $.each(medicine, function (index, item) {
             html += `
-            <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3">
+            <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                 <div class="product-info default-cover card" data-id="${
                     item.id
                 }">
@@ -118,10 +118,16 @@ $(document).ready(function () {
                     <h6 class="product-name"><a
                             href="javascript:void(0);">${item.name}</a></h6>
                     <div class="d-flex align-items-center justify-content-between price">
-                        <span>${item.quantity} Pcs</span>
-                        <p>${item.sale_price}</p>
+                        <span>${item.quantity} ${item.unit.name}</span>
+                        <p>${currency} ${item.sale_price}</p>
                     </div>
+                    
                 </div>
+                <button type="button" class="btn btn-sm btn-outline-primary mt-2 alternate-med-btn" data-id="${
+                    item.id
+                }">
+                        <i data-feather="repeat" class="feather-14 me-1"></i>Alternatives Medicines
+                    </button>
             </div>
             `;
         });
@@ -1714,5 +1720,211 @@ $(document).ready(function () {
     // Play sound when erase cart
     soundBody.on("click", "#clear-cart", function () {
         removeSound.play();
+    });
+
+    /**
+     * Alternate Medicine Functionality
+     */
+
+    // Delegate click event for alternate medicine buttons
+    $(document).on("click", ".alternate-med-btn", function (e) {
+        e.stopPropagation(); // Prevent the medicine card click
+
+        const medicineId = $(this).data("id");
+
+        // Show the modal
+        $("#alternate-medicines").modal("show");
+
+        // Reset the containers
+        $(".selected-medicine").html("");
+        $(".alternate-medicines-container").html(`
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading alternate medicines...</p>
+            </div>
+        `);
+
+        // Fetch alternate medicines
+        $.ajax({
+            url: base_url + "/pos/alternate-medicines/" + medicineId,
+            type: "GET",
+            success: function (response) {
+                if (response.success) {
+                    // Display the original medicine
+                    const medicine = response.medicine;
+                    const originalMedicineHtml = `
+                        <div class="product-list d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center flex-fill">
+                                <a href="javascript:void(0);" class="img-bg me-2">
+                                    <img src="${
+                                        medicine.image
+                                    }" alt="Medicine" style="width: 50px; height: 50px;">
+                                </a>
+                                <div class="info d-flex align-items-center justify-content-between flex-fill">
+                                    <div>
+                                        <span>${medicine.generic_name}</span>
+                                        <h6><a href="javascript:void(0);">${
+                                            medicine.name
+                                        }</a></h6>
+                                    </div>
+                                    <p>${currency} ${medicine.sale_price}</p>
+                                </div>
+                            </div>
+                            <div class="quantity ms-3">
+                                <span class="badge ${
+                                    medicine.quantity > 0
+                                        ? "bg-success"
+                                        : "bg-danger"
+                                }">${medicine.quantity} ${
+                        medicine.unit?.name || "pcs"
+                    }</span>
+                            </div>
+                        </div>
+                    `;
+                    $(".selected-medicine").html(originalMedicineHtml);
+
+                    // Display alternate medicines
+                    const alternates = response.alternates;
+                    if (alternates.length === 0) {
+                        $(".alternate-medicines-container").html(`
+                            <div class="alert alert-info">
+                                No alternate medicines found for ${medicine.name}.
+                            </div>
+                        `);
+                    } else {
+                        let alternatesHtml = `<div class="row">`;
+
+                        alternates.forEach(function (alternate) {
+                            alternatesHtml += `
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex mb-2">
+                                                <img src="${
+                                                    alternate.image
+                                                }" alt="${
+                                alternate.name
+                            }" style="width: 50px; height: 50px; object-fit: cover;" class="me-2">
+                                                <div>
+                                                    <h6 class="mb-0">${
+                                                        alternate.name
+                                                    }</h6>
+                                                    <small class="text-muted">${
+                                                        alternate.generic_name
+                                                    }</small>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>${currency} ${
+                                alternate.sale_price
+                            }</span>
+                                                <span class="badge bg-success">${
+                                                    alternate.quantity
+                                                } ${
+                                alternate.unit?.name || "pcs"
+                            }</span>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-primary w-100 add-alternate-to-cart" data-id="${
+                                                alternate.id
+                                            }">
+                                                <i data-feather="shopping-cart" class="feather-14 me-1"></i>Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        alternatesHtml += `</div>`;
+                        $(".alternate-medicines-container").html(
+                            alternatesHtml
+                        );
+                        feather.replace();
+                    }
+                } else {
+                    $(".alternate-medicines-container").html(`
+                        <div class="alert alert-danger">
+                            ${
+                                response.message ||
+                                "Failed to load alternate medicines."
+                            }
+                        </div>
+                    `);
+                }
+            },
+            error: function () {
+                $(".alternate-medicines-container").html(`
+                    <div class="alert alert-danger">
+                        Failed to load alternate medicines. Please try again.
+                    </div>
+                `);
+            },
+        });
+    });
+
+    // Delegate click event for adding alternate medicine to cart
+    $(document).on("click", ".add-alternate-to-cart", function () {
+        const medicineId = $(this).data("id");
+
+        // Check if product is already in cart
+        let productExists = false;
+        $(".cart-product-item").each(function () {
+            if ($(this).data("id") == medicineId) {
+                productExists = true;
+                return false; // Break the loop
+            }
+        });
+
+        if (productExists) {
+            showPOSNotification(
+                "Error!",
+                "error",
+                "Medicine already in cart. You can update the quantity instead."
+            );
+            return;
+        }
+
+        // Fetch medicine details and add to cart
+        $.ajax({
+            url: base_url + "/pos/medicine/" + medicineId,
+            type: "GET",
+            success: function (response) {
+                // Add to cart
+                addToCart(response);
+                // Add to localStorage
+                addToLocalStorage(response.id, 1);
+                $(".product-wrap .alert").addClass("d-none");
+                updateProductCount();
+
+                // Close the modal
+                $("#alternate-medicines").modal("hide");
+
+                // Show notification
+                showPOSNotification(
+                    "Success!",
+                    "success",
+                    "Alternate medicine added to cart"
+                );
+
+                // Update calculations
+                calculateSubTotal();
+                calculateTotal();
+                calculateTax();
+                calculateDiscount();
+                calculateShipping();
+
+                // Play sound
+                cartSound.play();
+            },
+            error: function () {
+                showPOSNotification(
+                    "Error!",
+                    "error",
+                    "Failed to add medicine to cart. Please try again."
+                );
+            },
+        });
     });
 });

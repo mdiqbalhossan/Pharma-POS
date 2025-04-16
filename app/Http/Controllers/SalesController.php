@@ -114,7 +114,7 @@ class SalesController extends Controller
 
         $this->saveTransaction([
             'account_id'       => setting('default_account'),
-            'type'             => 'sale',
+            'type'             => 'credit',
             'amount'           => $request->grand_total,
             'transaction_date' => $request->sale_date,
             'description'      => $request->note,
@@ -190,7 +190,7 @@ class SalesController extends Controller
 
         $this->updateTransaction([
             'account_id'       => setting('default_account'),
-            'type'             => 'sale',
+            'type'             => 'credit',
             'amount'           => $request->grand_total,
             'transaction_date' => $request->sale_date,
             'description'      => $request->note,

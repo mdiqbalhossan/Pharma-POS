@@ -132,7 +132,7 @@ class PurchaseController extends Controller
 
             $this->saveTransaction([
                 'account_id'       => $request->account_id,
-                'type'             => 'purchase',
+                'type'             => 'debit',
                 'amount'           => $request->grand_total,
                 'transaction_date' => $request->date,
                 'description'      => $request->note,
@@ -262,7 +262,7 @@ class PurchaseController extends Controller
 
             $this->updateTransaction([
                 'account_id'       => $request->account_id,
-                'type'             => 'purchase',
+                'type'             => 'debit',
                 'amount'           => $request->grand_total,
                 'transaction_date' => $request->date,
                 'description'      => $request->note,

@@ -12,13 +12,6 @@
                         </button>
                     </div>
                     <div class="modal-body custom-modal-body">
-
-                        <div class="alert alert-outline-info alert-dismissible fade show">
-                            {{ __('modal.low_stock_modal.alert_message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i
-                                    class="fas fa-xmark"></i></button>
-                        </div>
-
                         <ul class="nav nav-pills modal-table-tab" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-low-stock-product-tab" data-bs-toggle="pill"

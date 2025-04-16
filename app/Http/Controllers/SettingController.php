@@ -79,8 +79,8 @@ class SettingController extends Controller
                 Storage::delete('public/' . $oldLogo);
             }
 
-            $path = $request->file('site_logo')->store('site', 'public');
-            Setting::set('site_logo', $path);
+            $path                   = uploadImage($request, 'site_logo', 'site');
+            $validated['site_logo'] = $path;
         }
 
         // Handle favicon upload
@@ -94,8 +94,8 @@ class SettingController extends Controller
                 Storage::delete('public/' . $oldFavicon);
             }
 
-            $path = $request->file('favicon')->store('site', 'public');
-            Setting::set('favicon', $path);
+            $path                 = uploadImage($request, 'favicon', 'site');
+            $validated['favicon'] = $path;
         }
 
         foreach ($validated as $key => $value) {
@@ -178,8 +178,8 @@ class SettingController extends Controller
                 Storage::delete('public/' . $oldLogo);
             }
 
-            $path = $request->file('invoice_logo')->store('company', 'public');
-            Setting::set('invoice_logo', $path);
+            $path                      = uploadImage($request, 'invoice_logo', 'company');
+            $validated['invoice_logo'] = $path;
         }
 
         foreach ($validated as $key => $value) {

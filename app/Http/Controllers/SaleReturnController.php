@@ -103,7 +103,7 @@ class SaleReturnController extends Controller
 
             $this->saveTransaction([
                 'account_id'       => $request->account_id,
-                'type'             => 'sale_return',
+                'type'             => 'debit',
                 'amount'           => $request->grand_total,
                 'transaction_date' => $request->date,
                 'description'      => $request->note,

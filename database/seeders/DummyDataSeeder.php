@@ -2,6 +2,12 @@
 namespace Database\Seeders;
 
 use App\Models\Medicine;
+use App\Models\MedicineCategory;
+use App\Models\MedicineLeaf;
+use App\Models\MedicineType;
+use App\Models\Supplier;
+use App\Models\Unit;
+use App\Models\Vendor;
 use Illuminate\Database\Seeder;
 
 class DummyDataSeeder extends Seeder
@@ -12,107 +18,107 @@ class DummyDataSeeder extends Seeder
     public function run(): void
     {
         // // Create Medicine Types
-        // $medicineTypes = [
-        //     ['name' => 'Tablet', 'description' => 'Solid dose form of medication'],
-        //     ['name' => 'Capsule', 'description' => 'Medication enclosed in a gelatin shell'],
-        //     ['name' => 'Syrup', 'description' => 'Liquid medication with sugar base'],
-        //     ['name' => 'Injection', 'description' => 'Medication administered via needle'],
-        //     ['name' => 'Cream', 'description' => 'Topical medication with oil and water base'],
-        //     ['name' => 'Ointment', 'description' => 'Topical medication with oil base'],
-        //     ['name' => 'Drops', 'description' => 'Liquid medication administered in drops'],
-        //     ['name' => 'Inhaler', 'description' => 'Medication administered via inhalation'],
-        // ];
+        $medicineTypes = [
+            ['name' => 'Tablet', 'description' => 'Solid dose form of medication'],
+            ['name' => 'Capsule', 'description' => 'Medication enclosed in a gelatin shell'],
+            ['name' => 'Syrup', 'description' => 'Liquid medication with sugar base'],
+            ['name' => 'Injection', 'description' => 'Medication administered via needle'],
+            ['name' => 'Cream', 'description' => 'Topical medication with oil and water base'],
+            ['name' => 'Ointment', 'description' => 'Topical medication with oil base'],
+            ['name' => 'Drops', 'description' => 'Liquid medication administered in drops'],
+            ['name' => 'Inhaler', 'description' => 'Medication administered via inhalation'],
+        ];
 
-        // foreach ($medicineTypes as $type) {
-        //     MedicineType::create($type);
-        // }
+        foreach ($medicineTypes as $type) {
+            MedicineType::create($type);
+        }
 
         // // Create Medicine Leafs
-        // $medicineLeafs = [
-        //     ['type' => 'blister', 'qty_box' => 10],
-        //     ['type' => 'strip', 'qty_box' => 15],
-        //     ['type' => 'bottle', 'qty_box' => 1],
-        //     ['type' => 'vial', 'qty_box' => 5],
-        //     ['type' => 'ampule', 'qty_box' => 10],
-        //     ['type' => 'tube', 'qty_box' => 1],
-        //     ['type' => 'sachet', 'qty_box' => 30],
-        // ];
+        $medicineLeafs = [
+            ['type' => 'blister', 'qty_box' => 10],
+            ['type' => 'strip', 'qty_box' => 15],
+            ['type' => 'bottle', 'qty_box' => 1],
+            ['type' => 'vial', 'qty_box' => 5],
+            ['type' => 'ampule', 'qty_box' => 10],
+            ['type' => 'tube', 'qty_box' => 1],
+            ['type' => 'sachet', 'qty_box' => 30],
+        ];
 
-        // foreach ($medicineLeafs as $leaf) {
-        //     MedicineLeaf::create($leaf);
-        // }
+        foreach ($medicineLeafs as $leaf) {
+            MedicineLeaf::create($leaf);
+        }
 
         // // Create Medicine Categories
-        // $medicineCategories = [
-        //     ['name' => 'Analgesics', 'description' => 'Pain relieving medications', 'is_active' => true],
-        //     ['name' => 'Antibiotics', 'description' => 'Medications that kill bacteria', 'is_active' => true],
-        //     ['name' => 'Antidepressants', 'description' => 'Medications for depression and mood disorders', 'is_active' => true],
-        //     ['name' => 'Antihypertensives', 'description' => 'Medications for high blood pressure', 'is_active' => true],
-        //     ['name' => 'Antihistamines', 'description' => 'Medications for allergies', 'is_active' => true],
-        //     ['name' => 'Antivirals', 'description' => 'Medications that inhibit viruses', 'is_active' => true],
-        //     ['name' => 'Corticosteroids', 'description' => 'Anti-inflammatory medications', 'is_active' => true],
-        //     ['name' => 'Diuretics', 'description' => 'Medications that increase urine production', 'is_active' => true],
-        //     ['name' => 'Antacids', 'description' => 'Medications for acid reflux and heartburn', 'is_active' => true],
-        //     ['name' => 'Vitamins', 'description' => 'Dietary supplements', 'is_active' => true],
-        //     ['name' => 'Antidiabetics', 'description' => 'Medications for diabetes management', 'is_active' => true],
-        //     ['name' => 'Antipsychotics', 'description' => 'Medications for serious mental disorders', 'is_active' => true],
-        // ];
+        $medicineCategories = [
+            ['name' => 'Analgesics', 'description' => 'Pain relieving medications', 'is_active' => true],
+            ['name' => 'Antibiotics', 'description' => 'Medications that kill bacteria', 'is_active' => true],
+            ['name' => 'Antidepressants', 'description' => 'Medications for depression and mood disorders', 'is_active' => true],
+            ['name' => 'Antihypertensives', 'description' => 'Medications for high blood pressure', 'is_active' => true],
+            ['name' => 'Antihistamines', 'description' => 'Medications for allergies', 'is_active' => true],
+            ['name' => 'Antivirals', 'description' => 'Medications that inhibit viruses', 'is_active' => true],
+            ['name' => 'Corticosteroids', 'description' => 'Anti-inflammatory medications', 'is_active' => true],
+            ['name' => 'Diuretics', 'description' => 'Medications that increase urine production', 'is_active' => true],
+            ['name' => 'Antacids', 'description' => 'Medications for acid reflux and heartburn', 'is_active' => true],
+            ['name' => 'Vitamins', 'description' => 'Dietary supplements', 'is_active' => true],
+            ['name' => 'Antidiabetics', 'description' => 'Medications for diabetes management', 'is_active' => true],
+            ['name' => 'Antipsychotics', 'description' => 'Medications for serious mental disorders', 'is_active' => true],
+        ];
 
-        // foreach ($medicineCategories as $category) {
-        //     MedicineCategory::create($category);
-        // }
+        foreach ($medicineCategories as $category) {
+            MedicineCategory::create($category);
+        }
 
         // Create a test Unit, Supplier, and Vendor if they don't exist
-        // Unit::create(['name' => 'Tablet', 'description' => 'Tablet']);
-        // Unit::create(['name' => 'Bottle', 'description' => 'Bottle']);
-        // Unit::create(['name' => 'Tube', 'description' => 'Tube']);
-        // Unit::create(['name' => 'Vial', 'description' => 'Vial']);
+        Unit::create(['name' => 'Tablet', 'description' => 'Tablet']);
+        Unit::create(['name' => 'Bottle', 'description' => 'Bottle']);
+        Unit::create(['name' => 'Tube', 'description' => 'Tube']);
+        Unit::create(['name' => 'Vial', 'description' => 'Vial']);
 
-        // Supplier::create([
-        //     'name'                 => 'PharmaMed Distributors',
-        //     'email'                => 'contact@pharmamed.com',
-        //     'phone'                => '555-123-4567',
-        //     'address'              => '123 Pharma Street',
-        //     'city'                 => 'New York',
-        //     'state'                => 'NY',
-        //     'zip'                  => '10001',
-        //     'opening_balance'      => 1000,
-        //     'opening_balance_type' => 'credit',
-        // ]);
-        // Supplier::create([
-        //     'name'                 => 'Global Health Supplies',
-        //     'email'                => 'info@globalhealthsupplies.com',
-        //     'phone'                => '555-987-6543',
-        //     'address'              => '456 Health Avenue',
-        //     'city'                 => 'New York',
-        //     'state'                => 'NY',
-        //     'zip'                  => '10001',
-        //     'opening_balance'      => 1000,
-        //     'opening_balance_type' => 'credit',
-        // ]);
+        Supplier::create([
+            'name'                 => 'PharmaMed Distributors',
+            'email'                => 'contact@pharmamed.com',
+            'phone'                => '555-123-4567',
+            'address'              => '123 Pharma Street',
+            'city'                 => 'New York',
+            'state'                => 'NY',
+            'zip'                  => '10001',
+            'opening_balance'      => 1000,
+            'opening_balance_type' => 'credit',
+        ]);
+        Supplier::create([
+            'name'                 => 'Global Health Supplies',
+            'email'                => 'info@globalhealthsupplies.com',
+            'phone'                => '555-987-6543',
+            'address'              => '456 Health Avenue',
+            'city'                 => 'New York',
+            'state'                => 'NY',
+            'zip'                  => '10001',
+            'opening_balance'      => 1000,
+            'opening_balance_type' => 'credit',
+        ]);
 
-        // Vendor::create([
-        //     'name'                 => 'Johnson Pharma',
-        //     'email'                => 'sales@johnsonpharma.com',
-        //     'phone'                => '555-333-9876',
-        //     'address'              => '789 Medical Boulevard',
-        //     'city'                 => 'New York',
-        //     'state'                => 'NY',
-        //     'zip'                  => '10001',
-        //     'opening_balance'      => 1000,
-        //     'opening_balance_type' => 'credit',
-        // ]);
-        // Vendor::create([
-        //     'name'                 => 'MediCorp Industries',
-        //     'email'                => 'orders@medicorp.com',
-        //     'phone'                => '555-444-5555',
-        //     'address'              => '321 Medicorp Plaza',
-        //     'city'                 => 'New York',
-        //     'state'                => 'NY',
-        //     'zip'                  => '10001',
-        //     'opening_balance'      => 1000,
-        //     'opening_balance_type' => 'credit',
-        // ]);
+        Vendor::create([
+            'name'                 => 'Johnson Pharma',
+            'email'                => 'sales@johnsonpharma.com',
+            'phone'                => '555-333-9876',
+            'address'              => '789 Medical Boulevard',
+            'city'                 => 'New York',
+            'state'                => 'NY',
+            'zip'                  => '10001',
+            'opening_balance'      => 1000,
+            'opening_balance_type' => 'credit',
+        ]);
+        Vendor::create([
+            'name'                 => 'MediCorp Industries',
+            'email'                => 'orders@medicorp.com',
+            'phone'                => '555-444-5555',
+            'address'              => '321 Medicorp Plaza',
+            'city'                 => 'New York',
+            'state'                => 'NY',
+            'zip'                  => '10001',
+            'opening_balance'      => 1000,
+            'opening_balance_type' => 'credit',
+        ]);
 
         // Create Medicines
         $medicines = [
@@ -704,6 +710,119 @@ class DummyDataSeeder extends Seeder
                 'description'           => 'Eye redness reliever',
                 'is_active'             => true,
             ],
+            [
+                'name'                  => 'Napa 500mg',
+                'generic_name'          => 'Paracetamol',
+                'barcode'               => '8901234567911',
+                'medicine_type_id'      => 1, // Tablet
+                'medicine_leaf_id'      => 1, // Blister
+                'unit_id'               => 1, // Tablet
+                'supplier_id'           => 1,
+                'vendor_id'             => 1,
+                'sale_price'            => 10.00,
+                'purchase_price'        => 5.00,
+                'vat_percentage'        => 5,
+                'discount_percentage'   => 0,
+                'shelf'                 => 'N1',
+                'dosage'                => '500mg',
+                'quantity'              => 100,
+                'batch_number'          => 'NAPA2023001',
+                'manufacturing_date'    => '2023-01-01',
+                'expiration_date'       => '2024-01-01',
+                'reorder_level'         => 50,
+                'alert_quantity'        => 25,
+                'prescription_required' => false,
+                'side_effects'          => 'Nausea, vomiting, diarrhea',
+                'contraindications'     => 'Liver disease, kidney disease',
+                'image'                 => null,
+                'description'           => 'Pain reliever and fever reducer',
+                'is_active'             => true,
+            ],
+            [
+                'name'                  => 'Fevril 500mg',
+                'generic_name'          => 'Paracetamol',
+                'barcode'               => '8901234567912',
+                'medicine_type_id'      => 1, // Tablet
+                'medicine_leaf_id'      => 1, // Blister
+                'unit_id'               => 1, // Tablet
+                'supplier_id'           => 1,
+                'vendor_id'             => 1,
+                'sale_price'            => 10.00,
+                'purchase_price'        => 5.00,
+                'vat_percentage'        => 5,
+                'discount_percentage'   => 0,
+                'shelf'                 => 'N1',
+                'dosage'                => '500mg',
+                'quantity'              => 100,
+                'batch_number'          => 'FEVR2023001',
+                'manufacturing_date'    => '2023-01-01',
+                'expiration_date'       => '2024-01-01',
+                'reorder_level'         => 50,
+                'alert_quantity'        => 25,
+                'prescription_required' => false,
+                'side_effects'          => 'Nausea, vomiting, diarrhea',
+                'contraindications'     => 'Liver disease, kidney disease',
+                'image'                 => null,
+                'description'           => 'Pain reliever and fever reducer',
+                'is_active'             => true,
+            ],
+            [
+                'name'                  => 'Ace 500mg',
+                'generic_name'          => 'Paracetamol',
+                'barcode'               => '8901234567913',
+                'medicine_type_id'      => 1, // Tablet
+                'medicine_leaf_id'      => 1, // Blister
+                'unit_id'               => 1, // Tablet
+                'supplier_id'           => 1,
+                'vendor_id'             => 1,
+                'sale_price'            => 10.00,
+                'purchase_price'        => 5.00,
+                'vat_percentage'        => 5,
+                'discount_percentage'   => 0,
+                'shelf'                 => 'N1',
+                'dosage'                => '500mg',
+                'quantity'              => 100,
+                'batch_number'          => 'ACE2023001',
+                'manufacturing_date'    => '2023-01-01',
+                'expiration_date'       => '2024-01-01',
+                'reorder_level'         => 50,
+                'alert_quantity'        => 25,
+                'prescription_required' => false,
+                'side_effects'          => 'Nausea, vomiting, diarrhea',
+                'contraindications'     => 'Liver disease, kidney disease',
+                'image'                 => null,
+                'description'           => 'Pain reliever and fever reducer',
+                'is_active'             => true,
+            ],
+            [
+                'name'                  => 'Pyrex 500mg',
+                'generic_name'          => 'Paracetamol',
+                'barcode'               => '8901234567914',
+                'medicine_type_id'      => 1, // Tablet
+                'medicine_leaf_id'      => 1, // Blister
+                'unit_id'               => 1, // Tablet
+                'supplier_id'           => 1,
+                'vendor_id'             => 1,
+                'sale_price'            => 10.00,
+                'purchase_price'        => 5.00,
+                'vat_percentage'        => 5,
+                'discount_percentage'   => 0,
+                'shelf'                 => 'N1',
+                'dosage'                => '500mg',
+                'quantity'              => 100,
+                'batch_number'          => 'PYRE2023001',
+                'manufacturing_date'    => '2023-01-01',
+                'expiration_date'       => '2024-01-01',
+                'reorder_level'         => 50,
+                'alert_quantity'        => 25,
+                'prescription_required' => false,
+                'side_effects'          => 'Nausea, vomiting, diarrhea',
+                'contraindications'     => 'Liver disease, kidney disease',
+                'image'                 => null,
+                'description'           => 'Pain reliever and fever reducer',
+                'is_active'             => true,
+            ],
+
         ];
 
         foreach ($medicines as $medicine) {
@@ -713,54 +832,52 @@ class DummyDataSeeder extends Seeder
             switch ($medicine['name']) {
                 case 'Paracetamol 500mg':
                 case 'Ibuprofen 400mg':
-                    $med->medicine_categories()->attach([4]); // Analgesics
+                    $med->medicine_categories()->attach([1]); // Analgesics
                     break;
                 case 'Amoxicillin 250mg':
                 case 'Azithromycin 500mg':
                 case 'Ciprofloxacin 500mg':
-                    $med->medicine_categories()->attach([3]); // Antibiotics
+                    $med->medicine_categories()->attach([2]); // Antibiotics
                     break;
                 case 'Sertraline 50mg':
-                    $med->medicine_categories()->attach([6]); // Antidepressants
+                    $med->medicine_categories()->attach([3]); // Antidepressants
                     break;
                 case 'Lisinopril 10mg':
                 case 'Amlodipine 5mg':
-                    $med->medicine_categories()->attach([7]); // Antihypertensives
+                    $med->medicine_categories()->attach([4]); // Antihypertensives
                     break;
                 case 'Cetirizine 10mg':
                 case 'Loratadine 10mg':
-                    $med->medicine_categories()->attach([8]); // Antihistamines
+                    $med->medicine_categories()->attach([5]); // Antihistamines
                     break;
                 case 'Hydrocortisone Cream 1%':
-                    $med->medicine_categories()->attach([10]); // Corticosteroids
+                    $med->medicine_categories()->attach([6]); // Corticosteroids
                     break;
                 case 'Furosemide 40mg':
-                    $med->medicine_categories()->attach([11]); // Diuretics
+                    $med->medicine_categories()->attach([7]); // Diuretics
                     break;
                 case 'Omeprazole 20mg':
                 case 'Ranitidine 150mg':
-                    $med->medicine_categories()->attach([12]); // Antacids
+                    $med->medicine_categories()->attach([8]); // Antacids
                     break;
                 case 'Vitamin C 500mg':
-                    $med->medicine_categories()->attach([13]); // Vitamins
+                    $med->medicine_categories()->attach([9]); // Vitamins
                     break;
                 case 'Metformin 500mg':
                 case 'Insulin Vial':
-                    $med->medicine_categories()->attach([14]); // Antidiabetics
+                    $med->medicine_categories()->attach([10]); // Antidiabetics
                     break;
                 case 'Cough Syrup':
                     $med->medicine_categories()->attach([4, 9]); // Analgesics, Antivirals
                     break;
                 case 'Atorvastatin 10mg':
-                    $med->medicine_categories()->attach([7]); // Using Antihypertensives category
+                    $med->medicine_categories()->attach([4]); // Using Antihypertensives category
                     break;
                 case 'Salbutamol Inhaler':
-                                                              // Create new category for respiratory if needed
-                    $med->medicine_categories()->attach([9]); // Using Antivirals category
+                    $med->medicine_categories()->attach([11]); // Using Antivirals category
                     break;
                 case 'Eye Drops':
-                                                              // Create new category for eye care if needed
-                    $med->medicine_categories()->attach([8]); // Using Antihistamines category
+                    $med->medicine_categories()->attach([5]); // Using Antihistamines category
                     break;
             }
         }

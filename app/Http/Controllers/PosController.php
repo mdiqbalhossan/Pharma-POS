@@ -24,7 +24,7 @@ class PosController extends Controller
 
     public function search(Request $request)
     {
-        $medicines = Medicine::search($request->search)->get();
+        $medicines = Medicine::with(['medicine_type', 'medicine_leaf', 'unit', 'supplier', 'vendor', 'medicine_categories'])->search($request->search)->get();
         return response()->json($medicines);
     }
 
@@ -52,6 +52,34 @@ class PosController extends Controller
     {
         $medicine = Medicine::find($id);
         return response()->json($medicine);
+    }
+
+    /**
+     * Get alternate medicines based on generic name
+     */
+    public function getAlternateMedicines($id)
+    {
+        $medicine = Medicine::find($id);
+
+        if (! $medicine) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Medicine not found',
+            ]);
+        }
+
+        // Get medicines with the same generic name but different ID
+        $alternateMedicines = Medicine::with(['medicine_type', 'medicine_leaf', 'unit', 'supplier', 'vendor'])
+            ->where('generic_name', $medicine->generic_name)
+            ->where('id', '!=', $medicine->id)
+            ->where('quantity', '>', 0) // Only show medicines that are in stock
+            ->get();
+
+        return response()->json([
+            'success'    => true,
+            'medicine'   => $medicine,
+            'alternates' => $alternateMedicines,
+        ]);
     }
 
     /**
