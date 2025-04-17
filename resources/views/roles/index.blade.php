@@ -65,8 +65,7 @@
                                         </a>
                                     @endif
                                     <form id="delete-form-{{ $role->id }}"
-                                        action="{{ route('roles.destroy', $role->id) }}" method="POST"
-                                        style="display: none;">
+                                        action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>

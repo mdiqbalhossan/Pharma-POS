@@ -1,3 +1,4 @@
+{{-- This is email template thats why use internal css --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,10 @@
     <title>Tested Email Send</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Responsive media query for mobile */
+        /*
+        * This is email template thats why use internal css
+        * Responsive media query for mobile
+        */
         @media only screen and (max-width: 600px) {
             .container {
                 width: 100% !important;

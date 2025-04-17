@@ -81,7 +81,7 @@
                 </div>
             </div>
 
-            <div id="return-form-container" style="display: none;" class="mt-4">
+            <div id="return-form-container" class="mt-4 d-none">
                 <form id="return-form" action="{{ route('sale-returns.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="sale_id" value="{{ $sale->id }}">

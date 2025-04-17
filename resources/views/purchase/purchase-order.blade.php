@@ -139,7 +139,7 @@
                                         </a>
                                         <form id="delete-form-{{ $order->id }}"
                                             action="{{ route('purchases.destroy', $order->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

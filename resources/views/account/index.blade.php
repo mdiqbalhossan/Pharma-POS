@@ -72,7 +72,7 @@
                                         </a>
                                         <form id="delete-form-{{ $account->id }}"
                                             action="{{ route('accounts.destroy', $account->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

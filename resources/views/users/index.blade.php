@@ -73,8 +73,7 @@
                                         </a>
                                     @endif
                                     <form id="delete-form-{{ $user->id }}"
-                                        action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                        style="display: none;">
+                                        action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>

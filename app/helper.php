@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 
 /**
  * Photo Url
+ * @param string $photo
+ * @return string
  */
 function photo_url($photo)
 {
@@ -14,6 +16,8 @@ function photo_url($photo)
 
 /**
  * Photo Url for PDF
+ * @param string $photo
+ * @return string
  */
 function photo_url_pdf($photo)
 {
@@ -22,6 +26,8 @@ function photo_url_pdf($photo)
 
 /**
  * Setting
+ * @param string $key
+ * @return string
  */
 function setting($key)
 {
@@ -30,6 +36,8 @@ function setting($key)
 
 /**
  * Currency
+ * @param float $amount
+ * @return string
  */
 function currency($amount)
 {
@@ -38,6 +46,7 @@ function currency($amount)
 
 /**
  * Currency Symbol
+ * @return string
  */
 function currency_symbol()
 {
@@ -46,6 +55,8 @@ function currency_symbol()
 
 /**
  * Show Amount
+ * @param float $amount
+ * @return string
  */
 function show_amount($amount)
 {
@@ -54,6 +65,8 @@ function show_amount($amount)
 
 /**
  * Date Format
+ * @param string $date
+ * @return string
  */
 function date_show($date)
 {
@@ -63,6 +76,8 @@ function date_show($date)
 
 /**
  * Time Format
+ * @param string $time
+ * @return string
  */
 function time_show($time)
 {
@@ -72,6 +87,8 @@ function time_show($time)
 
 /**
  * Date Time Show
+ * @param string $dateTime
+ * @return string
  */
 function date_time_show($dateTime)
 {
@@ -82,6 +99,7 @@ function date_time_show($dateTime)
 
 /**
  * Get All Languages
+ * @return array
  */
 function get_all_languages()
 {
@@ -99,6 +117,8 @@ function get_all_languages()
 
 /**
  * Get Language Full name
+ * @param string $language
+ * @return string
  */
 function get_language_full_name($language)
 {
@@ -131,6 +151,8 @@ function get_language_full_name($language)
 
 /**
  * Get Langauge Flag
+ * @param string $language
+ * @return string
  */
 function get_language_flag($language)
 {
@@ -163,6 +185,7 @@ function get_language_flag($language)
 
 /**
  * Get Current User Language
+ * @return string
  */
 function get_current_user_language()
 {
@@ -171,6 +194,8 @@ function get_current_user_language()
 
 /**
  * Barcode Type
+ * @param string $type
+ * @return string
  */
 function barcode_type($type)
 {
@@ -188,6 +213,7 @@ function barcode_type($type)
 
 /**
  * Low Stock Product
+ * @return Collection
  */
 function low_stock_product()
 {
@@ -197,6 +223,7 @@ function low_stock_product()
 
 /**
  * Near Expired Product
+ * @return Collection
  */
 function near_expired_product()
 {
@@ -206,6 +233,10 @@ function near_expired_product()
 
 /**
  * Image Upload
+ * @param Request $request
+ * @param string $inputName
+ * @param string $uploadPath
+ * @return string|null
  */
 function uploadImage(Request $request, $inputName = 'image', $uploadPath = 'uploads/images')
 {
@@ -226,6 +257,11 @@ function uploadImage(Request $request, $inputName = 'image', $uploadPath = 'uplo
 
 /**
  * Purchase Info
+ * @param float $unit_price
+ * @param float $quantity
+ * @param float $discount
+ * @param float $tax
+ * @return array
  */
 function purchase_medicine_info($unit_price, $quantity, $discount, $tax)
 {

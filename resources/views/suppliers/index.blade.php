@@ -83,7 +83,7 @@
                                         </a>
                                         <form id="delete-form-{{ $supplier->id }}"
                                             action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -102,12 +102,4 @@
     <!-- Datatable JS -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script>
-        $(document).on('click', '.confirm-text', function() {
-            var id = $(this).data('id');
-            if (confirm("{{ __('supplier.delete_confirm') }}")) {
-                $('#delete-form-' + id).submit();
-            }
-        });
-    </script>
 @endpush

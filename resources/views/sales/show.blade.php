@@ -36,7 +36,7 @@
             <div class="row mb-4">
                 <div class="col-md-12 d-flex justify-content-end">
                     <div class="action-buttons">
-                        <a href="#" class="btn btn-primary me-2" id="print-sale">
+                        <a href="#" class="btn btn-primary me-2" id="print-sale" data-sale-id="{{ $sale->id }}">
                             <i data-feather="printer" class="me-1"></i> {{ __('index.Print Receipt') }}
                         </a>
                         <a href="{{ route('sales.download.invoice', $sale->id) }}" class="btn btn-info me-2"
@@ -243,11 +243,5 @@
     <!-- Toastr JS -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#print-sale').click(function() {
-                window.open('{{ route('sales.invoice', $sale->id) }}', '_blank');
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/pages/sale_show.js') }}"></script>
 @endpush

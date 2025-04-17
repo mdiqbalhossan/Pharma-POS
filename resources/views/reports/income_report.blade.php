@@ -143,6 +143,8 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <!-- Chart JS -->
     <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
+
+    {{-- Internal JS use dynamically change the chart data --}}
     <script>
         @if (count($incomeByDate) > 0)
             // Chart data

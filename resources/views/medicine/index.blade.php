@@ -89,7 +89,7 @@
                                         </a>
                                         <form id="delete-form-{{ $medicine->id }}"
                                             action="{{ route('medicines.destroy', $medicine->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

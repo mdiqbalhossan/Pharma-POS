@@ -72,7 +72,7 @@
                             <i data-feather="trash-2" class="feather-sm me-1"></i> {{ __('supplier.delete') }}
                         </button>
                         <form id="delete-form-{{ $supplier->id }}"
-                            action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" style="display: none;">
+                            action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" class="d-none">
                             @csrf
                             @method('DELETE')
                         </form>
@@ -82,14 +82,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $(document).on('click', '.confirm-text', function() {
-            var id = $(this).data('id');
-            if (confirm("{{ __('supplier.delete_confirm') }}")) {
-                $('#delete-form-' + id).submit();
-            }
-        });
-    </script>
-@endpush

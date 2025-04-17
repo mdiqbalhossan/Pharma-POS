@@ -30,11 +30,10 @@
                         <div class="col-md-3 text-center mb-4">
                             @if ($medicine->image)
                                 <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
-                                    class="img-fluid rounded mb-3" style="max-height: 200px;">
+                                    class="img-fluid rounded mb-3 he-200p-max">
                             @else
-                                <div class="border rounded d-flex align-items-center justify-content-center"
-                                    style="height: 200px;">
-                                    <i data-feather="image" style="width: 64px; height: 64px; color: #ccc;"></i>
+                                <div class="border rounded d-flex align-items-center justify-content-center he-200p">
+                                    <i data-feather="image" class="feather-no-placeholder"></i>
                                 </div>
                             @endif
 
@@ -46,8 +45,7 @@
                                     <i data-feather="trash-2" class="feather-sm me-1"></i> {{ __('medicine.delete') }}
                                 </button>
                                 <form id="delete-form-{{ $medicine->id }}"
-                                    action="{{ route('medicines.destroy', $medicine->id) }}" method="POST"
-                                    style="display: none;">
+                                    action="{{ route('medicines.destroy', $medicine->id) }}" method="POST" class="d-none">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -343,29 +341,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        // Script for delete confirmation
-        $(document).on('click', '.confirm-text', function() {
-            const id = $(this).data('id');
-            Swal.fire({
-                title: '{{ __('medicine.are_you_sure') }}',
-                text: "{{ __('medicine.you_wont_be_able_to_revert_this') }}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: '{{ __('medicine.yes_delete_it') }}',
-                cancelButtonText: '{{ __('medicine.no_cancel') }}',
-                customClass: {
-                    confirmButton: 'btn btn-primary me-3',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            }).then(function(result) {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + id).submit();
-                }
-            });
-        });
-    </script>
-@endpush

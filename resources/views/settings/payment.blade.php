@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            {{-- Inline css is used because dynamically hide/show the bank details section --}}
                             <div class="row mt-3 bank-details-section" id="bank_details_section"
                                 style="{{ $settings['payment_bank_enabled'] == '1' ? '' : 'display: none;' }}">
                                 <div class="col-md-12">
@@ -113,6 +113,7 @@
                                     </div>
                                 </div>
 
+                                {{-- Inline css is used because dynamically hide/show the other payment method section --}}
                                 <div class="col-md-6 other-payment-section" id="other_payment_section"
                                     style="{{ $settings['payment_other_enabled'] == '1' ? '' : 'display: none;' }}">
                                     <div class="form-group mb-3">
@@ -143,23 +144,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Toggle bank details section
-            const bankEnabledCheckbox = document.getElementById('payment_bank_enabled');
-            const bankDetailsSection = document.getElementById('bank_details_section');
-
-            bankEnabledCheckbox.addEventListener('change', function() {
-                bankDetailsSection.style.display = this.checked ? 'block' : 'none';
-            });
-
-            // Toggle other payment method section
-            const otherEnabledCheckbox = document.getElementById('payment_other_enabled');
-            const otherPaymentSection = document.getElementById('other_payment_section');
-
-            otherEnabledCheckbox.addEventListener('change', function() {
-                otherPaymentSection.style.display = this.checked ? 'block' : 'none';
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/pages/payment_settings.js') }}"></script>
 @endsection

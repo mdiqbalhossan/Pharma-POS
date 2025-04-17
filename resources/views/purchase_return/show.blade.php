@@ -1,3 +1,4 @@
+{{-- Here inline css is used because of print pdf --}}
 @extends('layouts.app')
 
 @section('title', __('purchase_return.purchase_return_details'))

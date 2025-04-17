@@ -56,7 +56,7 @@
                                         </a>
                                         <form id="delete-form-{{ $type->id }}"
                                             action="{{ route('medicine-types.destroy', $type->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

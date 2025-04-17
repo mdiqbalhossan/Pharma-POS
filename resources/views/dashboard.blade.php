@@ -263,6 +263,7 @@
 @endsection
 
 @push('scripts')
+    {{-- Internal JS use for dynamically change the chart data --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Sales & Purchase Chart

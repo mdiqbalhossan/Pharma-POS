@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
     <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.css') }}">
 @endpush
 
 @section('content')
@@ -170,7 +170,7 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!-- jQuery UI JS -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
 
     <!-- Print Barcode -->
     <script src="{{ asset('assets/js/pages/print_barcode.js') }}"></script>

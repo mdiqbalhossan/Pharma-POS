@@ -126,7 +126,7 @@
                                         </a>
                                         <form id="delete-form-{{ $adjustment->id }}"
                                             action="{{ route('stock-adjustments.destroy', $adjustment->id) }}"
-                                            method="POST" style="display: none;">
+                                            method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

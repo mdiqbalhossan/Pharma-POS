@@ -55,8 +55,7 @@
                                             <i data-feather="trash-2" class="feather-trash-2"></i>
                                         </a>
                                         <form id="delete-form-{{ $unit->id }}"
-                                            action="{{ route('units.destroy', $unit->id) }}" method="POST"
-                                            style="display: none;">
+                                            action="{{ route('units.destroy', $unit->id) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

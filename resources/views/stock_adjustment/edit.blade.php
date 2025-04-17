@@ -12,7 +12,7 @@
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
     <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.min.css') }}">
 @endpush
 
 @section('content')
@@ -194,7 +194,7 @@
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
 
     <!-- jQuery UI JS -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
     <!-- Custom Purchase JS -->
     <script src="{{ asset('assets/js/pages/purchase.js') }}"></script>
 @endpush

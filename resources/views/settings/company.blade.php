@@ -294,7 +294,7 @@
                                                     @if (!empty($settings['invoice_logo']))
                                                         <img src="{{ asset('public/storage/' . $settings['invoice_logo']) }}"
                                                             alt="{{ __('Invoice Logo') }}"
-                                                            class="img-fluid img-thumbnail" style="max-height: 100px;">
+                                                            class="img-fluid img-thumbnail he-100p-max">
                                                     @else
                                                         <p class="text-muted">{{ __('No logo uploaded') }}</p>
                                                     @endif

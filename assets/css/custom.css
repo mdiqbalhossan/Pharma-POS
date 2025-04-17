@@ -42,3 +42,29 @@
 .pos-products .product-info {
     margin-bottom: 0px !important;
 }
+
+.he-200p {
+    height: 200px;
+}
+
+.he-100p {
+    height: 100px;
+}
+
+.feather-no-placeholder {
+    color: #ccc;
+    width: 64px;
+    height: 64px;
+}
+
+.he-200p-max {
+    max-height: 200px;
+}
+
+.he-100p-max {
+    max-height: 100px;
+}
+
+.he-80p-max {
+    max-height: 80px;
+}

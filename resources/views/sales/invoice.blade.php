@@ -5,149 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('index.Sale') }} {{ __('index.Invoice No:') }} #{{ $sale->sale_no }}</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/pdf/sale_invoice.css') }}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-
-        .invoice-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-            font-size: 16px;
-            line-height: 24px;
-        }
-
-        .header {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-
-        .logo {
-            float: left;
-            max-width: 350px;
-        }
-
-        .company-info {
-            float: right;
-            text-align: right;
-        }
-
-        .invoice-details {
-            margin-bottom: 30px;
-        }
-
-        .customer-details {
-            width: 50%;
-            float: left;
-        }
-
-        .sale-details {
-            width: 50%;
-            float: right;
-            text-align: right;
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table th,
-        table td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #f8f8f8;
-        }
-
-        .totals {
-            float: right;
-            width: 350px;
-        }
-
-        .totals-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }
-
-        .totals-row.grand-total {
-            font-weight: bold;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
-        .payment-info {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .notes {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .barcode {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        @media print {
-            .no-print {
-                display: none;
-            }
-
-            .m-0 {
-                margin: 0;
-            }
-
-            body {
-                padding: 0;
-                margin: 0;
-            }
-
-            .invoice-container {
-                box-shadow: none;
-                border: none;
-                padding: 10px;
-                max-width: 100%;
-            }
-        }
-
         @isset($extra_css)
             {!! $extra_css !!}
         @endisset
@@ -157,9 +16,8 @@
 <body>
     <div class="invoice-container">
         <div class="header">
-            <div class="logo">
-                <img src="{{ $logo ?? photo_url(setting('invoice_logo')) }}" alt="Logo" style="width: 100px;"
-                    class="logo-img">
+            <div class="logo"><img src="{{ $logo ?? photo_url(setting('invoice_logo')) }}" alt="Logo"
+                    class="logo-img he-100p">
                 <h2 class="m-0">{{ setting('company_name') }}</h2>
                 <p class="m-0">{{ setting('company_address') }}</p>
                 <p class="m-0">{{ setting('company_phone') }}</p>
@@ -173,40 +31,33 @@
             </div>
             <div class="clear"></div>
         </div>
-
         <div class="invoice-details">
             <div class="customer-details">
                 <h3>{{ __('index.Customer Information') }}:</h3>
                 <p class="m-0"><strong>{{ $sale->customer->name }}</strong></p>
                 @if ($sale->customer->email)
                     <p class="m-0">{{ __('index.Email:') }} {{ $sale->customer->email }}</p>
-                @endif
-                @if ($sale->customer->phone)
-                    <p class="m-0">{{ __('index.Phone Number:') }} {{ $sale->customer->phone }}</p>
-                @endif
-                @if ($sale->customer->address)
-                    <p class="m-0">{{ __('index.Address') }}: {{ $sale->customer->address }}</p>
-                @endif
+                    @endif@if ($sale->customer->phone)
+                        <p class="m-0">{{ __('index.Phone Number:') }} {{ $sale->customer->phone }}</p>
+                        @endif@if ($sale->customer->address)
+                            <p class="m-0">{{ __('index.Address') }}: {{ $sale->customer->address }}</p>
+                        @endif
             </div>
             <div class="sale-details">
                 <h3>{{ __('index.Payment Method') }}:</h3>
                 <p class="m-0">{{ __('index.Method') }}: {{ $sale->payment_method }}</p>
-                <p class="m-0">{{ __('index.Status') }}:
-                    @php
-                        $paymentStatus = __('index.Paid');
-                        if ($sale->amount_due > 0 && $sale->amount_paid == 0) {
-                            $paymentStatus = __('index.Unpaid');
-                        } elseif ($sale->amount_due > 0) {
-                            $paymentStatus = __('index.Partial');
-                        }
-                    @endphp
-                    {{ $paymentStatus }}
-                </p>
+                <p class="m-0">{{ __('index.Status') }}: @php
+                    $paymentStatus = __('index.Paid');
+                    if ($sale->amount_due > 0 && $sale->amount_paid == 0) {
+                        $paymentStatus = __('index.Unpaid');
+                    } elseif ($sale->amount_due > 0) {
+                        $paymentStatus = __('index.Partial');
+                    }
+                @endphp {{ $paymentStatus }} </p>
                 <p class="m-0">{{ __('index.Staff') }}: {{ $sale->user->name ?? __('index.N/A') }}</p>
             </div>
             <div class="clear"></div>
         </div>
-
         <table>
             <thead>
                 <tr>
@@ -229,59 +80,43 @@
                 @endforeach
             </tbody>
         </table>
-
         <div class="totals">
             <div class="totals-row">
-                <span>{{ __('index.Sub Total') }}:</span>
-                <span>{{ show_amount($sale->total_amount) }}</span>
+                <span>{{ __('index.Sub Total') }}:</span><span>{{ show_amount($sale->total_amount) }}</span>
+            </div>
+            <div class="totals-row"><span>{{ __('index.Tax') }}
+                    ({{ $sale->tax_percentage }}%):</span><span>{{ show_amount($sale->tax_amount) }}</span></div>
+            <div class="totals-row"><span>{{ __('index.Discount') }}
+                    ({{ $sale->discount_percentage }}%):</span><span>{{ show_amount($sale->discount_amount) }}</span>
             </div>
             <div class="totals-row">
-                <span>{{ __('index.Tax') }} ({{ $sale->tax_percentage }}%):</span>
-                <span>{{ show_amount($sale->tax_amount) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>{{ __('index.Discount') }} ({{ $sale->discount_percentage }}%):</span>
-                <span>{{ show_amount($sale->discount_amount) }}</span>
-            </div>
-            <div class="totals-row">
-                <span>{{ __('index.Shipping') }}:</span>
-                <span>{{ show_amount($sale->shipping_amount) }}</span>
+                <span>{{ __('index.Shipping') }}:</span><span>{{ show_amount($sale->shipping_amount) }}</span>
             </div>
             <div class="totals-row grand-total">
-                <span>{{ __('index.Grand Total') }}:</span>
-                <span>{{ show_amount($sale->grand_total) }}</span>
+                <span>{{ __('index.Grand Total') }}:</span><span>{{ show_amount($sale->grand_total) }}</span>
             </div>
             <div class="totals-row">
-                <span>{{ __('index.Amount Paid') }}:</span>
-                <span>{{ show_amount($sale->amount_paid) }}</span>
+                <span>{{ __('index.Amount Paid') }}:</span><span>{{ show_amount($sale->amount_paid) }}</span>
             </div>
             <div class="totals-row">
-                <span>{{ __('index.Due') }}:</span>
-                <span>{{ show_amount($sale->amount_due) }}</span>
+                <span>{{ __('index.Due') }}:</span><span>{{ show_amount($sale->amount_due) }}</span>
             </div>
         </div>
         <div class="clear"></div>
-
         @if ($sale->note)
             <div class="notes">
                 <h3>{{ __('index.Note') }}:</h3>
                 <p>{!! $sale->note !!}</p>
             </div>
         @endif
-
         <div class="barcode text-center">
-            <div class="barcode-container">
-                {!! $sale->barcode !!}
-            </div>
+            <div class="barcode-container">{!! $sale->barcode !!} </div>
         </div>
-
         <div class="footer">
             <p>{{ setting('invoice_footer') ?? __('index.Thank You For Shopping With Us. Please Come Again') }}</p>
             <p>{{ __('index.**VAT against this challan is payable through central registration. Thank you for your business!') }}
             </p>
-            <div class="no-print">
-                <button onclick="window.print()">{{ __('index.Print Receipt') }}</button>
-            </div>
+            <div class="no-print"><button onclick="window.print()">{{ __('index.Print Receipt') }}</button></div>
         </div>
     </div>
 </body>

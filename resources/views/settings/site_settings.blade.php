@@ -307,8 +307,8 @@
                                                 <div class="mb-3">
                                                     @if (!empty($settings['site_logo']))
                                                         <img src="{{ asset('public/storage/' . $settings['site_logo']) }}"
-                                                            alt="{{ __('Site Logo') }}" class="img-fluid img-thumbnail"
-                                                            style="max-height: 100px;">
+                                                            alt="{{ __('Site Logo') }}"
+                                                            class="img-fluid img-thumbnail he-100p-max">
                                                     @else
                                                         <p class="text-muted">{{ __('No logo uploaded') }}</p>
                                                     @endif
@@ -336,8 +336,8 @@
                                             <div class="mb-3">
                                                 @if (!empty($settings['favicon']))
                                                     <img src="{{ asset('public/storage/' . $settings['favicon']) }}"
-                                                        alt="{{ __('Favicon') }}" class="img-fluid img-thumbnail"
-                                                        style="max-height: 100px;">
+                                                        alt="{{ __('Favicon') }}"
+                                                        class="img-fluid img-thumbnail he-100p-max">
                                                 @else
                                                     <p class="text-muted">{{ __('No favicon uploaded') }}</p>
                                                 @endif

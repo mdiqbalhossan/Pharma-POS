@@ -84,7 +84,7 @@
                                     </a>
                                     <form id="delete-form-{{ $customer->id }}"
                                         action="{{ route('customers.destroy', $customer->id) }}" method="POST"
-                                        style="display: none;">
+                                        class="d-none">
                                         @csrf
                                         @method('DELETE')
                                     </form>

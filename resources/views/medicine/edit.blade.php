@@ -388,7 +388,7 @@
                         @if ($medicine->image)
                             <div class="mb-2">
                                 <img src="{{ asset($medicine->image) }}" alt="{{ $medicine->name }}"
-                                    class="img-thumbnail" style="max-height: 100px;">
+                                    class="img-thumbnail he-100p-max">
                             </div>
                         @endif
                         <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"

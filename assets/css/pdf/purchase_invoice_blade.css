@@ -1,0 +1,38 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #invoice-container,
+    #invoice-container * {
+        visibility: visible;
+    }
+
+    #invoice-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    /* Ensure layout is preserved during print */
+    .row {
+        display: flex !important;
+    }
+
+    .col-md-6 {
+        width: 50% !important;
+        float: left !important;
+    }
+
+    /* Remove unnecessary margins/paddings for better print layout */
+    #invoice-container .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Clean print layout */
+    @page {
+        margin: 0.5cm;
+    }
+}

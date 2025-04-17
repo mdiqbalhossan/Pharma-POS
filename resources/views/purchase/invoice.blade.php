@@ -5,46 +5,7 @@
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-
-            #invoice-container,
-            #invoice-container * {
-                visibility: visible;
-            }
-
-            #invoice-container {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-            }
-
-            /* Ensure layout is preserved during print */
-            .row {
-                display: flex !important;
-            }
-
-            .col-md-6 {
-                width: 50% !important;
-                float: left !important;
-            }
-
-            /* Remove unnecessary margins/paddings for better print layout */
-            #invoice-container .card {
-                border: none !important;
-                box-shadow: none !important;
-            }
-
-            /* Clean print layout */
-            @page {
-                margin: 0.5cm;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/pdf/purchase_invoice_blade.css') }}">
 @endpush
 
 @section('content')
@@ -77,8 +38,7 @@
                                     @if (setting('invoice_logo'))
                                         <div class="logo-container mb-3">
                                             <img src="{{ photo_url(setting('invoice_logo')) }}"
-                                                alt="{{ __('purchase.company_logo') }}" class="img-fluid"
-                                                style="max-height: 80px;">
+                                                alt="{{ __('purchase.company_logo') }}" class="img-fluid he-80p-max">
                                         </div>
                                     @endif
                                     <h2 class="company-name">{{ setting('company_name') }}</h2>
@@ -288,9 +248,5 @@
 @endsection
 
 @push('script')
-    <script>
-        $(document).ready(function() {
-            window.print();
-        });
-    </script>
+    <script src="{{ asset('assets/js/default_print.js') }}"></script>
 @endpush

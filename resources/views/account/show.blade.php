@@ -27,7 +27,7 @@
                             <i data-feather="trash-2" class="me-1"></i>{{ __('account.delete') }}
                         </a>
                         <form id="delete-form-{{ $account->id }}" action="{{ route('accounts.destroy', $account->id) }}"
-                            method="POST" style="display: none;">
+                            method="POST" class="d-none">
                             @csrf
                             @method('DELETE')
                         </form>

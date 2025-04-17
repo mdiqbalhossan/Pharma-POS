@@ -56,7 +56,7 @@
                                         </a>
                                         <form id="delete-form-{{ $leaf->id }}"
                                             action="{{ route('medicine-leafs.destroy', $leaf->id) }}" method="POST"
-                                            style="display: none;">
+                                            class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

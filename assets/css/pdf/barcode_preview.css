@@ -1,0 +1,29 @@
+.barcode-item {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px dashed #ddd;
+}
+
+.barcode-container {
+    padding: 15px;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .barcode-container {
+        padding: 0;
+    }
+
+    .barcode-item {
+        border: none;
+    }
+}

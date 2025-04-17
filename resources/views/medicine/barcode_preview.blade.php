@@ -4,37 +4,7 @@
 
 @push('plugin')
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}">
-    <style>
-        .barcode-item {
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px dashed #ddd;
-        }
-
-        .barcode-container {
-            padding: 15px;
-        }
-
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            .barcode-container {
-                padding: 0;
-            }
-
-            .barcode-item {
-                border: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/pdf/barcode_preview.css') }}">
 @endpush
 
 @section('content')
@@ -102,35 +72,5 @@
 
 @push('script')
     <!-- Print Barcode -->
-    <script>
-        $(document).ready(function() {
-            "use strict";
-            // Print Barcode
-            $(document).on("click", "#print_btn", function() {
-                let container = $(".barcode-container");
-
-                let printWindow = window.open('', '_blank');
-                printWindow.document.write(
-                    '<html><head><title>{{ __('medicine.barcode_print') }}</title>');
-                printWindow.document.write(
-                    `<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">`);
-                printWindow.document.write(
-                    `<style>body{padding:15px;}</style>`);
-                printWindow.document.write('</head><body>');
-                printWindow.document.write(container.html());
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();
-
-                printWindow.onload = function() {
-                    printWindow.focus();
-                    printWindow.print();
-                };
-
-                // After print save or close then close the print window
-                printWindow.onbeforeunload = function() {
-                    printWindow.close();
-                };
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/pdf/barcode_preview.js') }}"></script>
 @endpush

@@ -58,7 +58,7 @@
                                         </a>
                                         <form id="delete-form-{{ $category->id }}"
                                             action="{{ route('medicine-categories.destroy', $category->id) }}"
-                                            method="POST" style="display: none;">
+                                            method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

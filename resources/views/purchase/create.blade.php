@@ -12,7 +12,7 @@
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}">
     <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.css') }}">
 @endpush
 
 @section('content')
@@ -377,7 +377,7 @@
 
 @push('script')
     <!-- jQuery UI JS -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
     <!-- Datatable JS -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
