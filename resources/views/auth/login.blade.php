@@ -22,7 +22,9 @@
                                 <label class="form-label">Email Address</label>
                                 <div class="form-addons">
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autofocus>
+                                        name="email"
+                                        value="{{ app_mode() == 'demo' ? 'admin@gmail.com' : old('email') }}" required
+                                        autofocus>
                                     <img src="{{ asset('assets/img/icons/mail.svg') }}" alt="img">
                                 </div>
                                 @error('email')
@@ -35,7 +37,8 @@
                                 <label>Password</label>
                                 <div class="pass-group">
                                     <input type="password" class="pass-input @error('password') is-invalid @enderror"
-                                        name="password" required>
+                                        name="password"
+                                        value="{{ app_mode() == 'demo' ? 'password' : old('password') }}" required>
                                     <span class="fas toggle-password fa-eye-slash"></span>
                                 </div>
                                 @error('password')

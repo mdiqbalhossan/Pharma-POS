@@ -2,13 +2,13 @@
 
     <!-- Logo -->
     <div class="header-left active">
-        <a href="index.html" class="logo logo-normal">
+        <a href="{{ route('dashboard') }}" class="logo logo-normal">
             <img src="{{ photo_url(setting('site_logo')) }}" alt="">
         </a>
-        <a href="index.html" class="logo logo-white">
+        <a href="{{ route('dashboard') }}" class="logo logo-white">
             <img src="{{ photo_url(setting('site_logo')) }}" alt="">
         </a>
-        <a href="index.html" class="logo-small">
+        <a href="{{ route('dashboard') }}" class="logo-small">
             <img src="{{ photo_url(setting('favicon')) }}" alt="">
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
@@ -150,7 +150,7 @@
                     <a class="dropdown-item" href="{{ route('profile.edit') }}"> <i class="me-2"
                             data-feather="user"></i> My
                         Profile</a>
-                    <a class="dropdown-item" href="general-settings.html"><i class="me-2"
+                    <a class="dropdown-item" href="{{ route('settings.site') }}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
                     <form method="POST" action="{{ route('logout') }}">
@@ -172,8 +172,8 @@
         <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="profile.html">My Profile</a>
-            <a class="dropdown-item" href="general-settings.html">Settings</a>
+            <a class="dropdown-item" href="{{ route('profile.edit') }}">My Profile</a>
+            <a class="dropdown-item" href="{{ route('settings.site') }}">Settings</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a class="dropdown-item" href="{{ route('logout') }}"

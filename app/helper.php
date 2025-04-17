@@ -274,3 +274,12 @@ function purchase_medicine_info($unit_price, $quantity, $discount, $tax)
         'tax'      => $tax_amount,
     ];
 }
+
+/**
+ * App Mode
+ * @return string
+ */
+function app_mode()
+{
+    return env('APP_MODE');
+}
