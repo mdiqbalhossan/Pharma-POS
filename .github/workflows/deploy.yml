@@ -30,5 +30,6 @@ jobs:
             **/node_modules/**
             **/vendor/**
             storage/
+            assets/plugins/
+            assets/scss/
             .env
-            deploy.yml

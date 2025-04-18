@@ -164,12 +164,7 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td class="productimgname">
                                             <a href="{{ route('medicines.show', $product->id) }}" class="product-img">
-                                                @if ($product->image)
-                                                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                                                @else
-                                                    <img src="assets/img/products/stock-img-01.png"
-                                                        alt="{{ $product->name }}">
-                                                @endif
+                                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                                             </a>
                                             <a href="{{ route('medicines.show', $product->id) }}">{{ $product->name }}</a>
                                         </td>
@@ -223,12 +218,7 @@
                                     <div class="productimgname">
                                         <a href="{{ route('medicines.show', $product->id) }}"
                                             class="product-img stock-img">
-                                            @if ($product->image)
-                                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                                            @else
-                                                <img src="assets/img/products/expire-product-01.png"
-                                                    alt="{{ $product->name }}">
-                                            @endif
+                                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                                         </a>
                                         <a href="{{ route('medicines.show', $product->id) }}">{{ $product->name }}</a>
                                     </div>
