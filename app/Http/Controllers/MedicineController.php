@@ -10,7 +10,6 @@ use App\Models\Unit;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -22,7 +21,7 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        $medicines = Medicine::with(['medicine_type', 'medicine_leaf', 'unit', 'supplier', 'vendor'])->get();
+        $medicines = Medicine::with(['medicine_type', 'medicine_leaf', 'unit', 'supplier', 'vendor'])->latest()->get();
         return view('medicine.index', compact('medicines'));
     }
 
@@ -97,13 +96,14 @@ class MedicineController extends Controller
         if (! empty($validated['expiration_date'])) {
             $validated['expiration_date'] = date('Y-m-d', strtotime($validated['expiration_date']));
         }
-
+        $validated['loyalty_point']       = $request->filled('loyalty_point') ? $request->input('loyalty_point') : 0;
+        $validated['vat_percentage']      = $request->filled('vat_percentage') ? $request->input('vat_percentage') : null;
+        $validated['discount_percentage'] = $request->filled('discount_percentage') ? $request->input('discount_percentage') : null;
+        $validated['reorder_level']       = $request->filled('reorder_level') ? $request->input('reorder_level') : null;
+        $validated['alert_quantity']      = $request->filled('alert_quantity') ? $request->input('alert_quantity') : null;
         // Handle image upload
         if ($request->hasFile('image')) {
-            $image     = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/medicines', $imageName);
-            $validated['image'] = 'medicines/' . $imageName;
+            $validated['image'] = uploadImage($request, 'image', 'uploads/medicines');
         }
         DB::beginTransaction();
         try {
@@ -119,7 +119,7 @@ class MedicineController extends Controller
                 ->with('success', 'Medicine created successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error($e->getMessage());
+            log_message('error', $e->getMessage());
             return redirect()->route('medicines.index')
                 ->with('error', 'Failed to create medicine.');
         }
@@ -214,6 +214,12 @@ class MedicineController extends Controller
             $validated['expiration_date'] = date('Y-m-d', strtotime($validated['expiration_date']));
         }
 
+        $validated['loyalty_point']       = $request->filled('loyalty_point') ? $request->input('loyalty_point') : 0;
+        $validated['vat_percentage']      = $request->filled('vat_percentage') ? $request->input('vat_percentage') : null;
+        $validated['discount_percentage'] = $request->filled('discount_percentage') ? $request->input('discount_percentage') : null;
+        $validated['reorder_level']       = $request->filled('reorder_level') ? $request->input('reorder_level') : null;
+        $validated['alert_quantity']      = $request->filled('alert_quantity') ? $request->input('alert_quantity') : null;
+
         // Update slug
         $validated['slug'] = Str::slug($validated['name']);
 
@@ -224,24 +230,29 @@ class MedicineController extends Controller
                 Storage::delete('public/' . $medicine->image);
             }
 
-            $image     = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/medicines', $imageName);
-            $validated['image'] = 'medicines/' . $imageName;
+            $validated['image'] = uploadImage($request, 'image', 'uploads/medicines');
         }
+        DB::beginTransaction();
+        try {
+            // Update medicine
+            $medicine->update($validated);
 
-        // Update medicine
-        $medicine->update($validated);
+            // Sync medicine categories
+            if (isset($validated['medicine_categories'])) {
+                $medicine->medicine_categories()->sync($validated['medicine_categories']);
+            } else {
+                $medicine->medicine_categories()->detach();
+            }
 
-        // Sync medicine categories
-        if (isset($validated['medicine_categories'])) {
-            $medicine->medicine_categories()->sync($validated['medicine_categories']);
-        } else {
-            $medicine->medicine_categories()->detach();
+            DB::commit();
+            return redirect()->route('medicines.index')
+                ->with('success', 'Medicine updated successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            log_message('error', $e->getMessage());
+            return redirect()->route('medicines.index')
+                ->with('error', 'Failed to update medicine.');
         }
-
-        return redirect()->route('medicines.index')
-            ->with('success', 'Medicine updated successfully.');
     }
 
     /**

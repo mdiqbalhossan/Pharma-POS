@@ -13,6 +13,70 @@ function loadJS(FILE_URL, async = true) {
     scriptEle.addEventListener("error", (ev) => {});
 }
 
+let type = $(".notification_type").val();
+let message = $(".notification_message").val();
+
+if (type == "success") {
+    showNotification("Success", type, message);
+}
+
+if (type == "error") {
+    showNotification("Error", type, message);
+}
+
+if (type == "info") {
+    showNotification("Info", type, message);
+}
+
+if (type == "warning") {
+    showNotification("Warning", type, message);
+}
+
+function showNotification(title, type, message) {
+    new Notify({
+        status: type,
+        title: title,
+        text: message,
+        effect: "fade",
+        speed: 300,
+        customClass: "",
+        customIcon: "",
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 10000,
+        notificationsGap: null,
+        notificationsPadding: null,
+        type: "outline",
+        position: "right top",
+        customWrapper: "",
+    });
+}
+
+/**
+ * Show notification for POS
+ */
+function showPOSNotification(title, type, message) {
+    new Notify({
+        status: type,
+        title: title,
+        text: message,
+        effect: "fade",
+        speed: 300,
+        customClass: "",
+        customIcon: "",
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 1000,
+        notificationsGap: null,
+        notificationsPadding: null,
+        type: "outline",
+        position: "right bottom",
+        customWrapper: "",
+    });
+}
+
 $(document).ready(function () {
     const today = new Date().toISOString().split("T")[0];
     const hasModalShown = localStorage.getItem("hasModalShown");

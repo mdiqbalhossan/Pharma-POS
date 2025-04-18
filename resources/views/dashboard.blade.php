@@ -262,22 +262,26 @@
     </div>
 @endsection
 
-@push('scripts')
-    {{-- Internal JS use for dynamically change the chart data --}}
+@push('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Here internal js use for dynamically change the chart data
+        $(document).ready(function() {
             // Sales & Purchase Chart
             if ($('#sales_charts').length > 0) {
                 var options = {
+                    colors: ['#28C76F', '#FF4D4D'],
                     series: [{
-                        name: 'Sales',
+                        name: "Sales",
+                        type: "column",
                         data: @json($monthlySales)
                     }, {
-                        name: 'Purchase',
+                        name: "Purchase",
+                        type: "column",
                         data: @json($monthlyPurchases)
                     }],
                     chart: {
                         type: 'bar',
+                        fontFamily: 'Poppins, sans-serif',
                         height: 350,
                         toolbar: {
                             show: false,
@@ -286,7 +290,7 @@
                     plotOptions: {
                         bar: {
                             horizontal: false,
-                            columnWidth: '55%',
+                            columnWidth: '60%',
                             endingShape: 'rounded'
                         },
                     },
@@ -303,14 +307,18 @@
                             'Nov', 'Dec'
                         ],
                     },
+                    yaxis: {
+                        title: {
+                            text: '{{ setting('currency_symbol') }}({{ setting('currency') }})'
+                        }
+                    },
                     fill: {
                         opacity: 1
                     },
-                    colors: ['#28C76F', '#FF9F43'],
                     tooltip: {
                         y: {
                             formatter: function(val) {
-                                return "$ " + val
+                                return "{{ setting('currency_symbol') }} " + val
                             }
                         }
                     }

@@ -141,7 +141,7 @@ class Medicine extends Model
     public function getImageAttribute()
     {
         if ($this->attributes['image']) {
-            return asset('storage/' . $this->attributes['image']);
+            return asset('public/storage/' . $this->attributes['image']);
         }
         return asset('assets/img/placeholder.png');
     }

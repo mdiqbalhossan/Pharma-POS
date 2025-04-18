@@ -14,6 +14,8 @@
         'subtitle' => __('medicine.update_medicine_information'),
     ])
 
+    @include('layouts.partials.alert')
+
     <div class="card">
         <div class="card-body">
             <form action="{{ route('medicines.update', $medicine->id) }}" method="POST" enctype="multipart/form-data">

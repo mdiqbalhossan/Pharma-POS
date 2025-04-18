@@ -14,6 +14,8 @@
         'subtitle' => __('medicine.add_new_medicine'),
     ])
 
+    @include('layouts.partials.alert')
+
     <div class="card">
         <div class="card-body">
             <form action="{{ route('medicines.store') }}" method="POST" enctype="multipart/form-data">

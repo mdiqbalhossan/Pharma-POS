@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -282,4 +283,25 @@ function purchase_medicine_info($unit_price, $quantity, $discount, $tax)
 function app_mode()
 {
     return env('APP_MODE');
+}
+
+/**
+ * Log Message
+ * @param string $message
+ */
+function log_message($type, $message)
+{
+    if ($type == 'info') {
+        Log::info($message);
+    } elseif ($type == 'error') {
+        Log::error($message);
+    } elseif ($type == 'warning') {
+        Log::warning($message);
+    } elseif ($type == 'debug') {
+        Log::debug($message);
+    } elseif ($type == 'critical') {
+        Log::critical($message);
+    } elseif ($type == 'alert') {
+        Log::alert($message);
+    }
 }

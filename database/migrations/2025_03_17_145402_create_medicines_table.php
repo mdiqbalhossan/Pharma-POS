@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string('dosage')->nullable()->comment('e.g. 10mg, 20mg, 30mg');
             $table->integer('quantity')->default(0);
             $table->string('batch_number')->nullable();
-            $table->date('manufacturing_date')->nullable();
-            $table->date('expiration_date')->nullable();
+            $table->string('manufacturing_date')->nullable();
+            $table->string('expiration_date')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('lot_number')->nullable();
             $table->string('reorder_level')->nullable();
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->boolean('prescription_required')->default(false);
             $table->text('side_effects')->nullable();
             $table->text('contraindications')->nullable();
-            $table->float('loyalty_point')->default(0);
+            $table->float('loyalty_point')->default(0)->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);

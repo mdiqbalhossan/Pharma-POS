@@ -114,7 +114,6 @@
 
     <!-- Chart JS -->
     <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
 
     <!-- Sweetalert 2 -->
     <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>

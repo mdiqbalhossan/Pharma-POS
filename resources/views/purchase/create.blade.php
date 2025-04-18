@@ -39,15 +39,7 @@
 
     {{-- Error --}}
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('layouts.partials.alert')
 
 
     <form id="purchase-form" action="{{ route('purchases.store') }}" method="POST">
@@ -157,8 +149,7 @@
                                             <th>{{ __('purchase.subtotal') }}</th>
                                             <td>
                                                 <span id="subtotal-value">0.00</span>
-                                                <input type="hidden" name="subtotal" id="subtotal-input"
-                                                    value="0">
+                                                <input type="hidden" name="subtotal" id="subtotal-input" value="0">
                                             </td>
                                         </tr>
                                         <tr>

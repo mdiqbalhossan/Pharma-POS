@@ -24,3 +24,11 @@ jobs:
           protocol: ftp # or sftp
           server-dir: ${{ secrets.FTP_TARGET }}
           local-dir: ./
+          exclude: |
+            .git*
+            **/.git*
+            **/node_modules/**
+            **/vendor/**
+            storage/
+            .env
+            deploy.yml
