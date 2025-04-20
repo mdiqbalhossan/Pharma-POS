@@ -17,8 +17,8 @@ class DashboardController extends Controller
         $totalPurchaseDue = Purchase::sum('due_amount');
 
         // Sales Data
-        $totalSalesDue   = Sales::sum('amount_due');
-        $totalSaleAmount = Sales::sum('grand_total');
+        $totalSalesDue   = Sales::where('status', '!=', 'pending')->sum('amount_due');
+        $totalSaleAmount = Sales::where('status', '!=', 'pending')->sum('grand_total');
 
         // Expense Data
         $totalExpenseAmount = Expense::sum('amount');
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $customerCount        = Customer::count();
         $supplierCount        = Supplier::count();
         $purchaseInvoiceCount = Purchase::count();
-        $salesInvoiceCount    = Sales::count();
+        $salesInvoiceCount    = Sales::where('status', '!=', 'pending')->count();
 
         // Monthly Sales & Purchase Data for Chart
         $currentYear      = date('Y');
@@ -68,6 +68,7 @@ class DashboardController extends Controller
     {
         $monthlySales = Sales::selectRaw('MONTH(sale_date) as month, SUM(grand_total) as total')
             ->whereYear('sale_date', $year)
+            ->where('status', '!=', 'pending')
             ->groupBy('month')
             ->orderBy('month')
             ->pluck('total', 'month')

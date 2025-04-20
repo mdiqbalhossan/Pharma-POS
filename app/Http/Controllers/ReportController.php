@@ -24,7 +24,7 @@ class ReportController extends Controller
     public function salesReport(Request $request)
     {
         $query = Sales::with('customer');
-
+        $query->where('status', '!=', 'pending');
         // Apply date filters if provided
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = Carbon::parse($request->start_date)->startOfDay();
@@ -173,6 +173,7 @@ class ReportController extends Controller
     public function invoiceReport(Request $request)
     {
         $query = Sales::with(['customer']);
+        $query->where('status', '!=', 'pending');
 
         // Apply date filters if provided
         if ($request->filled('start_date') && $request->filled('end_date')) {
@@ -261,6 +262,7 @@ class ReportController extends Controller
         // Calculate customer metrics
         foreach ($customers as $customer) {
             $salesQuery = Sales::where('customer_id', $customer->id);
+            $salesQuery->where('status', '!=', 'pending');
 
             // Apply date filters if provided
             if ($request->filled('start_date') && $request->filled('end_date')) {
@@ -277,10 +279,10 @@ class ReportController extends Controller
             $customer->total_orders = $sales->count();
         }
 
-        $totalOrders  = Sales::count();
-        $totalSpent   = Sales::sum('grand_total');
-        $totalBalance = Sales::sum('amount_due');
-        $totalDue     = Sales::sum('amount_due');
+        $totalOrders  = Sales::where('status', '!=', 'pending')->count();
+        $totalSpent   = Sales::where('status', '!=', 'pending')->sum('grand_total');
+        $totalBalance = Sales::where('status', '!=', 'pending')->sum('amount_due');
+        $totalDue     = Sales::where('status', '!=', 'pending')->sum('amount_due');
 
         return view('reports.customer_report', compact(
             'customers',
@@ -339,6 +341,7 @@ class ReportController extends Controller
 
         // Get sales income
         $salesQuery = Sales::query();
+        $salesQuery->where('status', '!=', 'pending');
         if ($start_date && $end_date) {
             $salesQuery->whereBetween('sale_date', [$start_date, $end_date]);
         }
@@ -363,7 +366,7 @@ class ReportController extends Controller
 
             foreach ($period as $date) {
                 $dateStr     = $date->format('Y-m-d');
-                $saleAmount  = Sales::whereDate('sale_date', $dateStr)->sum('amount_paid');
+                $saleAmount  = Sales::whereDate('sale_date', $dateStr)->where('status', '!=', 'pending')->sum('amount_paid');
                 $otherAmount = Transaction::where('type', 'income')
                     ->whereDate('transaction_date', $dateStr)
                     ->sum('amount');
@@ -399,6 +402,7 @@ class ReportController extends Controller
 
         // Get sales tax
         $salesQuery = Sales::query();
+        $salesQuery->where('status', '!=', 'pending');
         if ($start_date && $end_date) {
             $salesQuery->whereBetween('sale_date', [$start_date, $end_date]);
         }
@@ -426,7 +430,7 @@ class ReportController extends Controller
                 $monthStart = $date->copy()->startOfMonth();
                 $monthEnd   = $date->copy()->endOfMonth();
 
-                $monthSalesTax    = Sales::whereBetween('sale_date', [$monthStart, $monthEnd])->sum('tax_amount');
+                $monthSalesTax    = Sales::whereBetween('sale_date', [$monthStart, $monthEnd])->where('status', '!=', 'pending')->sum('tax_amount');
                 $monthPurchaseTax = Purchase::whereBetween('date', [$monthStart, $monthEnd])->sum('total_tax');
 
                 $taxByMonth[$date->format('Y-m')] = [
@@ -461,7 +465,7 @@ class ReportController extends Controller
         // INCOME SECTION
 
         // Sales revenue
-        $sales        = Sales::whereBetween('sale_date', [$start_date, $end_date])->get();
+        $sales        = Sales::whereBetween('sale_date', [$start_date, $end_date])->where('status', '!=', 'pending')->get();
         $salesRevenue = $sales->sum('grand_total');
 
         // Other income

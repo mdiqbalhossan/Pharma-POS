@@ -115,8 +115,10 @@
                                 <td>
                                     @if ($sale->status == 'success')
                                         <span class="badges status-badge">{{ __('index.Success') }}</span>
-                                    @elseif($sale->status == 'hold')
+                                    @elseif($sale->status == 'pending')
                                         <span class="badges status-badge ordered">{{ __('index.Hold') }}</span>
+                                    @elseif($sale->status == 'cancelled')
+                                        <span class="badges status-badge cancelled">{{ __('index.Cancelled') }}</span>
                                     @endif
                                 </td>
                                 <td>{{ show_amount($sale->grand_total) }}</td>
@@ -139,9 +141,11 @@
                                         <a class="me-2 p-2" href="{{ route('sales.invoice', $sale->id) }}">
                                             <i data-feather="file-text" class="action-eye"></i>
                                         </a>
-                                        <a class="me-2 p-2" href="{{ route('sales.return', $sale->id) }}">
-                                            <i data-feather="refresh-cw" class="action-eye"></i>
-                                        </a>
+                                        @if ($sale->status == 'success')
+                                            <a class="me-2 p-2" href="{{ route('sales.return', $sale->id) }}">
+                                                <i data-feather="refresh-cw" class="action-eye"></i>
+                                            </a>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
