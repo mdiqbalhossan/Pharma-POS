@@ -1063,6 +1063,9 @@ $(document).ready(function () {
                     "success",
                     "Sale completed successfully"
                 );
+                let sale_no = response.data.sale_new_no;
+                localStorage.setItem("sale_no", sale_no);
+                initSaleNo();
             },
             error: function (xhr) {
                 let errors = xhr.responseJSON.errors;
@@ -1702,6 +1705,7 @@ $(document).ready(function () {
             $(".order-search-input").val("");
         });
     });
+
     let soundBody = $("body");
     // Work with media
     let cartSound = new Howl({

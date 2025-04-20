@@ -50,7 +50,7 @@ class SalesController extends Controller
                 $sale = $this->salesUpdate($saleExists, $request);
             }
             DB::commit();
-
+            $sale->sale_new_no = Sales::generateSaleNumber();
             return response()->json([
                 'success' => true,
                 'message' => $status === 'hold' ? 'Order has been placed on hold successfully' : 'Sale completed successfully',
@@ -190,6 +190,7 @@ class SalesController extends Controller
         }
         if ($request->status == 'success') {
             $this->updateTransaction([
+                'id'               => $sale->transaction_id,
                 'account_id'       => setting('default_account'),
                 'type'             => 'credit',
                 'amount'           => $request->grand_total,

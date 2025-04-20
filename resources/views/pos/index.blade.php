@@ -164,7 +164,8 @@
                         <div class="flex-grow-1">
                             <select class="select">
                                 @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                    <option value="{{ $customer->id }}" {{ $customer->id == 1 ? 'selected' : '' }}>
+                                        {{ $customer->name }}</option>
                                 @endforeach
                             </select>
                         </div>
