@@ -6,7 +6,7 @@ use App\Models\Medicine;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use App\Trait\Transaction;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

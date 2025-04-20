@@ -5,7 +5,7 @@ use App\Models\Customer;
 use App\Models\Medicine;
 use App\Models\Sales;
 use App\Trait\Transaction;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
