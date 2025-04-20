@@ -264,14 +264,18 @@ $(document).ready(function () {
     $("#purchase-form").on("submit", function (e) {
         if ($("#purchase-table tbody tr").length === 0) {
             e.preventDefault();
-            toastr.error("Please add at least one medicine to the purchase.");
+            showNotification(
+                "Error",
+                "error",
+                "Please add at least one medicine to the purchase."
+            );
             return false;
         }
 
         // Check if supplier is selected
         if (!$("#supplier_id").val()) {
             e.preventDefault();
-            toastr.error("Please select a supplier.");
+            showNotification("Error", "error", "Please select a supplier.");
             return false;
         }
 
@@ -288,7 +292,11 @@ $(document).ready(function () {
 
         if (!isValid) {
             e.preventDefault();
-            toastr.error("Please fill in all required fields for medicines.");
+            showNotification(
+                "Error",
+                "error",
+                "Please fill in all required fields for medicines."
+            );
             return false;
         }
 
@@ -303,7 +311,7 @@ $(document).ready(function () {
         const address = $("#supplier_address").val();
 
         if (!name) {
-            toastr.error("Supplier name is required.");
+            showNotification("Error", "error", "Supplier name is required.");
             return;
         }
 
@@ -332,19 +340,31 @@ $(document).ready(function () {
                     $("#supplierModal").modal("hide");
                     $("#supplier-form")[0].reset();
 
-                    toastr.success("Supplier added successfully.");
+                    showNotification(
+                        "Success",
+                        "success",
+                        "Supplier added successfully."
+                    );
                 } else {
-                    toastr.error(response.message || "Error adding supplier.");
+                    showNotification(
+                        "Error",
+                        "error",
+                        response.message || "Error adding supplier."
+                    );
                 }
             },
             error: function (xhr) {
                 const errors = xhr.responseJSON.errors;
                 if (errors) {
                     $.each(errors, function (key, value) {
-                        toastr.error(value[0]);
+                        showNotification("Error", "error", value[0]);
                     });
                 } else {
-                    toastr.error("Error adding supplier.");
+                    showNotification(
+                        "Error",
+                        "error",
+                        "Error adding supplier."
+                    );
                 }
             },
         });

@@ -93,21 +93,22 @@
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
                             {{ $saleReturn->quantity }}
+                            {{ $saleReturn->medicine ? $saleReturn->medicine->unit->name : '' }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($saleReturn->unit_price, 2) }}
+                            {{ show_amount($saleReturn->unit_price) }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($saleReturn->total_price, 2) }}
+                            {{ show_amount($saleReturn->total_price) }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($saleReturn->discount, 2) }}%
+                            {{ $saleReturn->discount }}%
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($saleReturn->tax, 2) }}%
+                            {{ $saleReturn->tax }}%
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:right;border-bottom: 1px solid #ddd;">
-                            {{ number_format($saleReturn->grand_total, 2) }}
+                            {{ show_amount($saleReturn->grand_total) }}
                         </td>
                     </tr>
 
@@ -122,7 +123,7 @@
                             {{ __('index.Grand Total') }}</td>
                         <td
                             style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;border-top: 1px solid #ddd;">
-                            {{ number_format($saleReturn->grand_total, 2) }}</td>
+                            {{ show_amount($saleReturn->grand_total) }}</td>
                     </tr>
 
                     <tr class="total">
@@ -134,7 +135,7 @@
                         <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
                             {{ __('index.Paid Amount') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
-                            {{ number_format($saleReturn->paid_amount, 2) }}</td>
+                            {{ show_amount($saleReturn->paid_amount) }}</td>
                     </tr>
 
                     <tr class="total">
@@ -146,7 +147,7 @@
                         <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
                             {{ __('index.Due Amount') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
-                            {{ number_format($saleReturn->due_amount, 2) }}</td>
+                            {{ show_amount($saleReturn->due_amount) }}</td>
                     </tr>
 
                     <tr class="total">

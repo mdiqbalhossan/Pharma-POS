@@ -88,3 +88,15 @@
 .he-80p-max {
     max-height: 80px;
 }
+
+@media (max-width: 768px) {
+    .w-sm-50 {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .w-sm-50 {
+        width: 50%;
+    }
+}

@@ -99,7 +99,7 @@ $(document).ready(function () {
         html += `<div class="row">`;
         $.each(medicine, function (index, item) {
             html += `
-            <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                 <div class="product-info default-cover card" data-id="${
                     item.id
                 }">

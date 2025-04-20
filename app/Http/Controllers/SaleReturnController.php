@@ -105,7 +105,7 @@ class SaleReturnController extends Controller
                 'account_id'       => $request->account_id,
                 'type'             => 'debit',
                 'amount'           => $request->grand_total,
-                'transaction_date' => $request->date,
+                'transaction_date' => now(),
                 'description'      => $request->note,
             ]);
 

@@ -113,7 +113,7 @@ class PurchaseReturnController extends Controller
                 'account_id'       => $request->account_id,
                 'type'             => 'credit',
                 'amount'           => $request->grand_total,
-                'transaction_date' => $request->date,
+                'transaction_date' => now(),
                 'description'      => $request->note,
             ]);
 

@@ -17,7 +17,7 @@
     <div class="invoice-container">
         <div class="header">
             <div class="logo"><img src="{{ $logo ?? photo_url(setting('invoice_logo')) }}" alt="Logo"
-                    class="logo-img he-100p">
+                    class="logo-img he-50p">
                 <h2 class="m-0">{{ setting('company_name') }}</h2>
                 <p class="m-0">{{ setting('company_address') }}</p>
                 <p class="m-0">{{ setting('company_phone') }}</p>
@@ -37,11 +37,13 @@
                 <p class="m-0"><strong>{{ $sale->customer->name }}</strong></p>
                 @if ($sale->customer->email)
                     <p class="m-0">{{ __('index.Email:') }} {{ $sale->customer->email }}</p>
-                    @endif@if ($sale->customer->phone)
-                        <p class="m-0">{{ __('index.Phone Number:') }} {{ $sale->customer->phone }}</p>
-                        @endif@if ($sale->customer->address)
-                            <p class="m-0">{{ __('index.Address') }}: {{ $sale->customer->address }}</p>
-                        @endif
+                @endif
+                @if ($sale->customer->phone)
+                    <p class="m-0">{{ __('index.Phone Number:') }} {{ $sale->customer->phone }}</p>
+                @endif
+                @if ($sale->customer->address)
+                    <p class="m-0">{{ __('index.Address') }}: {{ $sale->customer->address }}</p>
+                @endif
             </div>
             <div class="sale-details">
                 <h3>{{ __('index.Payment Method') }}:</h3>

@@ -169,9 +169,9 @@
                                             </td>
                                             <td>
                                                 <span
-                                                    class="tax-amount">{{ show_amount($medicine->pivot->total_tax) }}</span>
-                                                <input type="hidden" name="tax_amount[]" class="tax-amount-input"
-                                                    value="{{ $medicine->pivot->total_tax }}">
+                                                    class="tax-amount">{{ show_amount(purchase_medicine_info($medicine->pivot->unit_price, $medicine->pivot->quantity, $medicine->pivot->discount, $medicine->pivot->tax)['tax']) }}</span>
+                                                <input type="hidden" name="total_tax[]" class="tax-amount-input"
+                                                    value="{{ purchase_medicine_info($medicine->pivot->unit_price, $medicine->pivot->quantity, $medicine->pivot->discount, $medicine->pivot->tax)['tax'] }}">
                                             </td>
                                             <td>
                                                 <span
@@ -181,9 +181,9 @@
                                             </td>
                                             <td>
                                                 <span
-                                                    class="row-total">{{ show_amount($medicine->pivot->total_tax) }}</span>
+                                                    class="row-total">{{ show_amount($medicine->pivot->grand_total) }}</span>
                                                 <input type="hidden" name="row_total[]" class="row-total-input"
-                                                    value="{{ $medicine->pivot->total_tax }}">
+                                                    value="{{ $medicine->pivot->grand_total }}">
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-danger remove-medicine">
@@ -228,16 +228,16 @@
                                                 <div class="input-group">
                                                     <input type="number" step="0.01" min="0"
                                                         class="form-control" id="order_tax" name="order_tax"
-                                                        value="{{ $purchase->order_tax }}">
+                                                        value="{{ $purchase->tax }}">
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('purchase.tax_amount') }}</th>
                                             <td>
-                                                <span id="tax-value">{{ show_amount($purchase->tax_amount) }}</span>
+                                                <span id="tax-value">{{ show_amount($purchase->total_tax) }}</span>
                                                 <input type="hidden" name="tax_amount" id="tax-input"
-                                                    value="{{ $purchase->tax_amount }}">
+                                                    value="{{ $purchase->total_tax }}">
                                             </td>
                                         </tr>
                                         <tr>
@@ -245,7 +245,7 @@
                                             <td>
                                                 <input type="number" step="0.01" min="0" class="form-control"
                                                     id="order_discount" name="order_discount"
-                                                    value="{{ $purchase->order_discount }}">
+                                                    value="{{ $purchase->discount }}">
                                             </td>
                                         </tr>
                                         <tr>
@@ -253,16 +253,15 @@
                                             <td>
                                                 <input type="number" step="0.01" min="0" class="form-control"
                                                     id="shipping_cost" name="shipping_cost"
-                                                    value="{{ $purchase->shipping_cost }}">
+                                                    value="{{ $purchase->shipping }}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>{{ __('purchase.discount_amount') }}</th>
                                             <td>
-                                                <span
-                                                    id="discount-value">{{ show_amount($purchase->discount_amount) }}</span>
+                                                <span id="discount-value">{{ show_amount($purchase->discount) }}</span>
                                                 <input type="hidden" name="discount_amount" id="discount-input"
-                                                    value="{{ $purchase->discount_amount }}">
+                                                    value="{{ $purchase->discount }}">
                                             </td>
                                         </tr>
                                         <tr>

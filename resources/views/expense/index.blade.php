@@ -46,7 +46,8 @@
                         @foreach ($expenses as $expense)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $expense->expenseCategory->name ?? __('expense.na') }}</td>
+                                <td>{{ $expense->expenseCategory ? $expense->expenseCategory->name : __('expense.na') }}
+                                </td>
                                 <td>{{ $expense->formatted_date }}</td>
                                 <td>{{ $expense->expense_for }}</td>
                                 <td>{{ $expense->formatted_amount }}</td>

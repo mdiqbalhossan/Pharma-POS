@@ -53,7 +53,7 @@ class ExpenseController extends Controller
                 'account_id'       => $validated['account_id'],
                 'type'             => 'debit',
                 'amount'           => $validated['amount'],
-                'transaction_date' => $validated['date'],
+                'transaction_date' => now(),
                 'description'      => $validated['description'],
             ]);
             DB::commit();
@@ -62,7 +62,7 @@ class ExpenseController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('expenses.index')
-                ->with('error', 'Expense creation failed.');
+                ->with('error', 'Expense creation failed.' . $e->getMessage());
         }
     }
 
@@ -105,10 +105,11 @@ class ExpenseController extends Controller
             $expense->update($validated);
 
             $this->updateTransaction([
+                'id'               => $expense->id,
                 'account_id'       => $validated['account_id'],
                 'type'             => 'debit',
                 'amount'           => $validated['amount'],
-                'transaction_date' => $validated['date'],
+                'transaction_date' => now(),
                 'description'      => $validated['description'],
             ]);
             DB::commit();

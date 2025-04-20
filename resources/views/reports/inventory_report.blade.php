@@ -116,12 +116,14 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->generic_name ?? __('N/A') }}</td>
                                 <td>
-                                    @foreach ($product->medicine_categories as $category)
+                                    @forelse ($product->medicine_categories as $category)
                                         {{ $category->name }}
                                         @if (!$loop->last)
                                             ,
                                         @endif
-                                    @endforeach
+                                    @empty
+                                        {{ __('N/A') }}
+                                    @endforelse
                                 </td>
                                 <td>{{ show_amount($product->sale_price, 2) }}</td>
                                 <td>

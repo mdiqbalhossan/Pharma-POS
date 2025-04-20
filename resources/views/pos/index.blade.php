@@ -12,13 +12,13 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between flex-column flex-sm-column flex-md-row mt-5 mt-sm-5 mt-md-2">
         {{-- Search and Barcode Scan Option --}}
-        <div class="d-flex align-items-center w-50 ps-4">
+        <div class="d-flex align-items-center w-sm-50 px-4 px-sm-4">
             <div class="input-group">
                 <input type="text" class="form-control"
                     placeholder="{{ __('index.Search product by name or scan barcode...') }}" id="search-medicine">
-                <button class="btn btn-primary"><i data-feather="camera" class="feather-16"></i></button>
+                <button class="btn btn-primary m-0 m-sm-0"><i data-feather="camera" class="feather-16"></i></button>
             </div>
         </div>
         {{-- Action Button --}}
@@ -70,7 +70,7 @@
                         <div class="tab_content active" data-tab="all">
                             <div class="row">
                                 @forelse ($medicines as $medicine)
-                                    <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
+                                    <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                                         <div class="product-info default-cover card" data-id="{{ $medicine->id }}">
                                             <a href="javascript:void(0);" class="img-bg">
                                                 <img src="{{ $medicine->image }}" alt="{{ __('index.Products') }}">
@@ -108,7 +108,7 @@
                             <div class="tab_content" data-tab="{{ $category->slug }}">
                                 <div class="row">
                                     @forelse ($category->medicines as $medicine)
-                                        <div class="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
+                                        <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 pe-2 mb-3">
                                             <div class="product-info default-cover card" data-id="{{ $medicine->id }}">
                                                 <a href="javascript:void(0);" class="img-bg">
                                                     <img src="{{ $medicine->image }}" alt="{{ __('index.Products') }}">
@@ -247,7 +247,7 @@
                     <h6>{{ __('index.Payment Method') }}</h6>
                     <div class="row d-flex align-items-center justify-content-center methods">
                         @if (setting('payment_cash_enabled'))
-                            <div class="col-md-6 col-lg-4 item">
+                            <div class="col-sm-6 col-md-4 col-lg-4 item">
                                 <div class="default-cover payment-option">
                                     <input type="radio" id="payment-cash" name="payment-method" value="cash"
                                         class="payment-radio" checked>
@@ -260,7 +260,7 @@
                             </div>
                         @endif
                         @if (setting('payment_card_enabled'))
-                            <div class="col-md-6 col-lg-4 item">
+                            <div class="col-sm-6 col-md-4 col-lg-4 item">
                                 <div class="default-cover payment-option">
                                     <input type="radio" id="payment-card" name="payment-method" value="card"
                                         class="payment-radio">
@@ -273,7 +273,7 @@
                             </div>
                         @endif
                         @if (setting('payment_bank_enabled'))
-                            <div class="col-md-6 col-lg-4 item">
+                            <div class="col-sm-6 col-md-4 col-lg-4 item">
                                 <div class="default-cover payment-option">
                                     <input type="radio" id="payment-bank" name="payment-method" value="bank"
                                         class="payment-radio">
@@ -286,7 +286,7 @@
                             </div>
                         @endif
                         @if (setting('payment_cheque_enabled'))
-                            <div class="col-md-6 col-lg-4 item">
+                            <div class="col-sm-6 col-md-4 col-lg-4 item">
                                 <div class="default-cover payment-option">
                                     <input type="radio" id="payment-cheque" name="payment-method" value="cheque"
                                         class="payment-radio">

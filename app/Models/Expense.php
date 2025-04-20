@@ -26,7 +26,7 @@ class Expense extends Model
      */
     public function getFormattedAmountAttribute()
     {
-        return number_format($this->amount, 2);
+        return show_amount($this->amount);
     }
 
     /**

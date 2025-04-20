@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $(".return-btn").on("click", function () {
+        console.log("return-btn clicked");
         const medicineId = $(this).data("medicine-id");
         const medicineName = $(this).data("medicine-name");
         const soldQty = $(this).data("sold-qty");
@@ -15,6 +16,8 @@ $(document).ready(function () {
 
         // Set max on quantity
         $("#quantity").attr("max", soldQty);
+
+        $("#return-form-container").removeClass("d-none");
     });
 
     // Calculate totals
@@ -57,19 +60,31 @@ $(document).ready(function () {
         const soldQty = parseInt($("#sold_qty").val()) || 0;
 
         if (quantity <= 0) {
-            alert("Return quantity must be greater than 0");
+            showNotification(
+                "Error",
+                "error",
+                "Return quantity must be greater than 0"
+            );
             e.preventDefault();
             return false;
         }
 
         if (quantity > soldQty) {
-            alert("Return quantity cannot be greater than sold quantity");
+            showNotification(
+                "Error",
+                "error",
+                "Return quantity cannot be greater than sold quantity"
+            );
             e.preventDefault();
             return false;
         }
 
         if (!$("#confirmation").is(":checked")) {
-            alert("Please confirm the return by checking the confirmation box");
+            showNotification(
+                "Error",
+                "error",
+                "Please confirm the return by checking the confirmation box"
+            );
             e.preventDefault();
             return false;
         }

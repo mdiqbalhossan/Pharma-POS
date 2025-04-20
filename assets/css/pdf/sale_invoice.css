@@ -139,3 +139,15 @@ table th {
         max-width: 100%;
     }
 }
+
+.he-100p {
+    height: 100px;
+}
+
+.he-50p {
+    height: 50px;
+}
+
+.he-200p {
+    height: 200px;
+}

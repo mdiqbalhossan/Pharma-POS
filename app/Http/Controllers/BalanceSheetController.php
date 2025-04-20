@@ -106,7 +106,7 @@ class BalanceSheetController extends Controller
                 'balance' => $balance,
             ];
 
-            $typeTotals[$account->type] += $balance;
+            $typeTotals[$account->type == 'income' ? 'revenue' : $account->type] += $balance;
         }
 
         $totalAssets               = $typeTotals['asset'];
@@ -165,7 +165,7 @@ class BalanceSheetController extends Controller
                 'balance' => $balance,
             ];
 
-            $typeTotals[$account->type] += $balance;
+            $typeTotals[$account->type == 'income' ? 'revenue' : $account->type] += $balance;
         }
 
         $totalAssets               = $typeTotals['asset'];

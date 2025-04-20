@@ -74,7 +74,7 @@
 
     <!-- Expense Summary -->
     <div class="row">
-        <div class="col-lg-12 col-sm-12 col-12 d-flex">
+        <div class="col-lg-4 col-sm-12 col-12 d-flex">
             <div class="dash-count border">
                 <div class="dash-counts">
                     <h4>{{ show_amount($totalExpenses, 2) }}</h4>

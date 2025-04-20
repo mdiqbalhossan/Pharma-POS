@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Income Statement</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/pdf/income_statement.css') }}">
+    <link rel="stylesheet" href="{{ public_path('../assets/css/pdf/income_statement.css') }}">
 </head>
 
 <body>

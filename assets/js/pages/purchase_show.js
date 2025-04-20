@@ -90,7 +90,9 @@ $(document).ready(function () {
                     // Update modal content
                     modalBody.html(html);
                 } else {
-                    toastr.error(
+                    showNotification(
+                        "Error",
+                        "error",
                         response.message || "Failed to load purchase details"
                     );
                     modalBody.html(
@@ -105,7 +107,7 @@ $(document).ready(function () {
                 const errorMsg = xhr.responseJSON
                     ? xhr.responseJSON.message
                     : "Something went wrong while loading the purchase details";
-                toastr.error(errorMsg);
+                showNotification("Error", "error", errorMsg);
                 modalBody.html(
                     `<div class="alert alert-danger">${errorMsg}</div>`
                 );
@@ -139,9 +141,10 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     // Show success message
-                    toastr.success(
-                        response.message ||
-                            "Purchase order converted successfully"
+                    showNotification(
+                        "Success",
+                        "success",
+                        "Purchase order converted successfully"
                     );
 
                     // Close modal after 1 second and reload page
@@ -151,7 +154,9 @@ $(document).ready(function () {
                     }, 1000);
                 } else {
                     // Show error message
-                    toastr.error(
+                    showNotification(
+                        "Error",
+                        "error",
                         response.message || "Failed to convert purchase order"
                     );
                     button.attr("disabled", false).html("Convert");
@@ -161,7 +166,7 @@ $(document).ready(function () {
                 const errorMsg = xhr.responseJSON
                     ? xhr.responseJSON.message
                     : "Something went wrong while converting the purchase order";
-                toastr.error(errorMsg);
+                showNotification("Error", "error", errorMsg);
                 button.attr("disabled", false).html("Convert");
             },
         });

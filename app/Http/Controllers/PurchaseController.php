@@ -176,6 +176,7 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
+        // dd($request->all());
         // Validate request
         $request->validate([
             'supplier_id'    => 'required|exists:suppliers,id',
@@ -236,9 +237,9 @@ class PurchaseController extends Controller
 
             // Detach existing medicines
             $purchase->medicines()->detach();
-
             // Attach new medicines
             for ($i = 0; $i < count($medicines); $i++) {
+
                 // Attach medicine to purchase
                 $purchase->medicines()->attach($medicines[$i], [
                     'batch_no'    => $batchNumbers[$i],
@@ -249,7 +250,7 @@ class PurchaseController extends Controller
                     'total_price' => $unitPrices[$i] * $quantities[$i],
                     'grand_total' => $rowTotals[$i],
                     'tax'         => $request->tax[$i] ?? 0,
-                    'total_tax'   => $request->tax_amount[$i] ?? 0,
+                    'total_tax'   => $request->total_tax[$i] ?? 0,
                 ]);
                 if ($request->purchase_type == 'purchase') {
                     // Update medicine stock
@@ -260,21 +261,23 @@ class PurchaseController extends Controller
             }
 
             $this->updateTransaction([
+                'id'               => $purchase->id,
                 'account_id'       => $request->account_id,
                 'type'             => 'debit',
                 'amount'           => $request->grand_total,
                 'transaction_date' => Carbon::parse($request->date)->format('Y-m-d'),
                 'description'      => $request->note,
             ]);
+            log_message('error', DB::getQueryLog());
             DB::commit();
             return redirect()->route('purchases.index')
                 ->with('success', 'Purchase updated successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
-
+            dd($e->getMessage() . ' ' . $e->getTraceAsString() . ' ' . $e->getFile() . ' ' . $e->getLine());
             return redirect()->back()
-                ->with('error', 'Error updating purchase: ' . $e->getMessage())
+                ->with('error', 'Error updating purchase: ' . $e->getMessage() . ' ' . $e->getTraceAsString())
                 ->withInput();
         }
     }

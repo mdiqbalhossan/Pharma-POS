@@ -153,7 +153,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>{{ __('purchase.order_tax') }} (%)</th>
+                                            <th>{{ __('purchase.order_tax') }}</th>
                                             <td>
                                                 <div class="input-group">
                                                     <input type="number" step="0.01" min="0"

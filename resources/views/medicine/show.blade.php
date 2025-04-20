@@ -132,12 +132,12 @@
                                                 <div class="col-md-6 mb-3">
                                                     <h6 class="text-muted mb-1">{{ __('medicine.sale_price') }}</h6>
                                                     <p class="text-dark fw-bold">
-                                                        {{ number_format($medicine->sale_price, 2) }}</p>
+                                                        {{ show_amount($medicine->sale_price) }}</p>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
                                                     <h6 class="text-muted mb-1">{{ __('medicine.purchase_price') }}</h6>
-                                                    <p class="text-dark">{{ number_format($medicine->purchase_price, 2) }}
+                                                    <p class="text-dark">{{ show_amount($medicine->purchase_price) }}
                                                     </p>
                                                 </div>
 

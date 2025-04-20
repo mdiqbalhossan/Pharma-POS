@@ -115,11 +115,12 @@
                                 <td>#{{ $return->sale ? $return->sale->sale_no : __('index.N/A') }}</td>
                                 <td>{{ $return->medicine ? $return->medicine->name : __('index.N/A') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($return->created_at)->format('d M Y') }}</td>
-                                <td>{{ $return->quantity }}</td>
-                                <td>{{ number_format($return->unit_price, 2) }}</td>
-                                <td>{{ number_format($return->grand_total, 2) }}</td>
-                                <td>{{ number_format($return->paid_amount, 2) }}</td>
-                                <td>{{ number_format($return->due_amount, 2) }}</td>
+                                <td>{{ $return->quantity }} {{ $return->medicine ? $return->medicine->unit->name : '' }}
+                                </td>
+                                <td>{{ show_amount($return->unit_price) }}</td>
+                                <td>{{ show_amount($return->grand_total) }}</td>
+                                <td>{{ show_amount($return->paid_amount) }}</td>
+                                <td>{{ show_amount($return->due_amount) }}</td>
                                 <td>
                                     @if ($return->due_amount <= 0)
                                         <span class="badge-linesuccess">{{ __('index.Paid') }}</span>

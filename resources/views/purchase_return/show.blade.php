@@ -92,21 +92,22 @@
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
                             {{ $purchaseReturn->quantity }}
+                            {{ $purchaseReturn->medicine ? $purchaseReturn->medicine->unit->name : '' }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->unit_price, 2) }}
+                            {{ show_amount($purchaseReturn->unit_price) }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->total_price, 2) }}
+                            {{ show_amount($purchaseReturn->total_price) }}
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->discount, 2) }}%
+                            {{ show_amount($purchaseReturn->discount) }}%
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:center;border-bottom: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->tax, 2) }}%
+                            {{ show_amount($purchaseReturn->tax) }}%
                         </td>
                         <td style="padding:5px;vertical-align:top;text-align:right;border-bottom: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->grand_total, 2) }}
+                            {{ show_amount($purchaseReturn->grand_total) }}
                         </td>
                     </tr>
 
@@ -121,7 +122,7 @@
                             {{ __('purchase_return.grand_total_heading') }}</td>
                         <td
                             style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;border-top: 1px solid #ddd;">
-                            {{ number_format($purchaseReturn->grand_total, 2) }}</td>
+                            {{ show_amount($purchaseReturn->grand_total) }}</td>
                     </tr>
 
                     <tr class="total">
@@ -133,7 +134,7 @@
                         <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
                             {{ __('purchase_return.paid_amount_label') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
-                            {{ number_format($purchaseReturn->paid_amount, 2) }}</td>
+                            {{ show_amount($purchaseReturn->paid_amount) }}</td>
                     </tr>
 
                     <tr class="total">
@@ -145,7 +146,7 @@
                         <td style="padding:5px;vertical-align:top;text-align:right;font-weight: bold;">
                             {{ __('purchase_return.due_amount_label') }}</td>
                         <td style="padding:5px;vertical-align:top;text-align:right;">
-                            {{ number_format($purchaseReturn->due_amount, 2) }}</td>
+                            {{ show_amount($purchaseReturn->due_amount) }}</td>
                     </tr>
 
                     <tr class="total">

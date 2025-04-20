@@ -438,4 +438,5 @@ return [
     'No medicines found'                                                                                         => 'No medicines found',
     'Alternatives Medicines'                                                                                     => 'Alternatives Medicines',
     'Reference/Invoice No:'                                                                                      => 'Reference/Invoice No:',
+    'View'                                                                                                       => 'View',
 ];

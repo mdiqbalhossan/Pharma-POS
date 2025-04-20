@@ -22,7 +22,7 @@
                             class="me-2"></i>{{ __('medicine.back') }}</a>
                 </li>
                 <li>
-                    <button class="btn btn-primary" id="print_btn">
+                    <button class="btn btn-primary" id="print_btn" data-base-url="{{ url('/') }}">
                         <i data-feather="printer" class="me-2"></i>{{ __('medicine.print_barcode') }}
                     </button>
                 </li>

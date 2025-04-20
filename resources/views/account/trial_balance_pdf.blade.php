@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Trial Balance Report</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/pdf/trial_balance.css') }}">
+    <link rel="stylesheet" href="{{ public_path('../assets/css/pdf/trial_balance.css') }}">
 </head>
 
 <body>

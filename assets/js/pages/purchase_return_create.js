@@ -18,6 +18,8 @@ $(document).ready(function () {
         // Set max on quantity
         const maxQty = Math.min(purchaseQty, currentStock);
         $("#quantity").attr("max", maxQty);
+
+        $("#return-form-container").removeClass("d-none").fadeIn(1000);
     });
 
     // Calculate totals

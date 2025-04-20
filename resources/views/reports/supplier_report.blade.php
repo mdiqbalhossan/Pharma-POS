@@ -123,7 +123,7 @@
                                 <td>{{ $data->email ?? __('N/A') }}</td>
                                 <td>{{ $data->phone ?? __('N/A') }}</td>
                                 <td>{{ $data->purchase_count }}</td>
-                                <td>{{ show_amount($data->total_amount, 2) }}</td>
+                                <td>{{ show_amount($data->total_purchases, 2) }}</td>
                                 <td>{{ show_amount($data->total_paid, 2) }}</td>
                                 <td>{{ show_amount($data->total_due, 2) }}</td>
                                 <td class="action-table-data">
