@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('index.Sale') }} {{ __('index.Invoice No:') }} #{{ $sale->sale_no }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/pdf/sale_invoice.css') }}">
+    <link rel="stylesheet" href="{{ public_path('../assets/css/pdf/sale_invoice.css') }}">
     <style>
         @isset($extra_css)
             {!! $extra_css !!}
