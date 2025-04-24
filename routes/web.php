@@ -34,6 +34,7 @@ use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+
 Route::redirect('/', 'login');
 
 Route::get('/clear-cache', function () {

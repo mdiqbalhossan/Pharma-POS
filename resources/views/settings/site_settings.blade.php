@@ -224,7 +224,7 @@
                                     <div class="form-group mb-3">
                                         <label for="default_account">{{ __('Default Account') }}</label>
                                         <select name="default_account" id="default_account"
-                                            class="select2 @error('default_account') is-invalid @enderror" required>
+                                            class="select2 @error('default_account') is-invalid @enderror">
                                             <option value="">{{ __('Select Account') }}</option>
                                             @foreach ($accounts as $account)
                                                 <option value="{{ $account->id }}"

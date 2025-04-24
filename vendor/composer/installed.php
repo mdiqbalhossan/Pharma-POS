@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '75c22fab40fd1ab65248314e03df4c247a3b8825',
+        'reference' => '3a00a96601644fc1adbaf2d8c112748dc52f235c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -469,6 +469,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'joynala/web-installer' => array(
+            'pretty_version' => 'v2.4.5.1',
+            'version' => '2.4.5.1',
+            'reference' => 'a6c705b13debd42ba5924a7346fabe5459e98129',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../joynala/web-installer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -496,7 +505,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '75c22fab40fd1ab65248314e03df4c247a3b8825',
+            'reference' => '3a00a96601644fc1adbaf2d8c112748dc52f235c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

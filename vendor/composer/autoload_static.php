@@ -217,6 +217,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'A' => 
         array (
             'App\\' => 4,
+            'Abedin\\WebInstaller\\' => 20,
         ),
     );
 
@@ -666,6 +667,10 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
+        'Abedin\\WebInstaller\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joynala/web-installer/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -686,6 +691,20 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
     );
 
     public static $classMap = array (
+        'Abedin\\WebInstaller\\Commands\\MakeJson' => __DIR__ . '/..' . '/joynala/web-installer/src/Commands/MakeJson.php',
+        'Abedin\\WebInstaller\\Commands\\VerifyCode' => __DIR__ . '/..' . '/joynala/web-installer/src/Commands/VerifyCode.php',
+        'Abedin\\WebInstaller\\Controllers\\Controller' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/Controller.php',
+        'Abedin\\WebInstaller\\Controllers\\InstallationController' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/InstallationController.php',
+        'Abedin\\WebInstaller\\Controllers\\PermissionController' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/PermissionController.php',
+        'Abedin\\WebInstaller\\Controllers\\RequirementController' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/RequirementController.php',
+        'Abedin\\WebInstaller\\Controllers\\UpdateController' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/UpdateController.php',
+        'Abedin\\WebInstaller\\Controllers\\WelcomeController' => __DIR__ . '/..' . '/joynala/web-installer/src/Controllers/WelcomeController.php',
+        'Abedin\\WebInstaller\\Middleware\\CheckHasConfigMiddleware' => __DIR__ . '/..' . '/joynala/web-installer/src/Middleware/CheckHasConfigMiddleware.php',
+        'Abedin\\WebInstaller\\Providers\\AppServiceProvider' => __DIR__ . '/..' . '/joynala/web-installer/src/Providers/AppServiceProvider.php',
+        'Abedin\\WebInstaller\\Traits\\InstallationTrait' => __DIR__ . '/..' . '/joynala/web-installer/src/Traits/InstallationTrait.php',
+        'Abedin\\WebInstaller\\Traits\\PermissionTrait' => __DIR__ . '/..' . '/joynala/web-installer/src/Traits/PermissionTrait.php',
+        'Abedin\\WebInstaller\\Traits\\RequirementTrait' => __DIR__ . '/..' . '/joynala/web-installer/src/Traits/RequirementTrait.php',
+        'Abedin\\WebInstaller\\Traits\\UpdateTrait' => __DIR__ . '/..' . '/joynala/web-installer/src/Traits/UpdateTrait.php',
         'App\\Console\\Commands\\CheckInventoryStock' => __DIR__ . '/../..' . '/app/Console/Commands/CheckInventoryStock.php',
         'App\\Http\\Controllers\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountController.php',
         'App\\Http\\Controllers\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjaxController.php',
@@ -706,6 +725,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'App\\Http\\Controllers\\ExpenseCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpenseCategoryController.php',
         'App\\Http\\Controllers\\ExpenseController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpenseController.php',
         'App\\Http\\Controllers\\IncomeStatementController' => __DIR__ . '/../..' . '/app/Http/Controllers/IncomeStatementController.php',
+        'App\\Http\\Controllers\\LanguageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LanguageController.php',
         'App\\Http\\Controllers\\MedicineCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/MedicineCategoryController.php',
         'App\\Http\\Controllers\\MedicineController' => __DIR__ . '/../..' . '/app/Http/Controllers/MedicineController.php',
         'App\\Http\\Controllers\\MedicineLeafController' => __DIR__ . '/../..' . '/app/Http/Controllers/MedicineLeafController.php',
@@ -727,6 +747,9 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'App\\Http\\Controllers\\UnitController' => __DIR__ . '/../..' . '/app/Http/Controllers/UnitController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorController.php',
+        'App\\Http\\Middleware\\PreventDemo' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventDemo.php',
+        'App\\Http\\Middleware\\SetLocale' => __DIR__ . '/../..' . '/app/Http/Middleware/SetLocale.php',
+        'App\\Http\\Middleware\\XSS' => __DIR__ . '/../..' . '/app/Http/Middleware/XSS.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Jobs\\CheckInventoryStock' => __DIR__ . '/../..' . '/app/Jobs/CheckInventoryStock.php',
@@ -910,6 +933,7 @@ class ComposerStaticInit88970a0117c062eed55fa8728fc43833
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Seeders\\AccountSeeder' => __DIR__ . '/../..' . '/database/seeders/AccountSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DummyDataSeeder' => __DIR__ . '/../..' . '/database/seeders/DummyDataSeeder.php',
         'Database\\Seeders\\PermissionSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionSeeder.php',

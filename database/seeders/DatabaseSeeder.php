@@ -32,11 +32,12 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             DummyDataSeeder::class,
             AccountSeeder::class,
+            SettingsSedder::class,
         ]);
 
         // Create default User
         $user = User::create([
-            'name'     => 'Admin',
+            'name'     => 'Mr Admin',
             'email'    => 'admin@gmail.com',
             'password' => bcrypt('password'),
         ]);

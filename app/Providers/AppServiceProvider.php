@@ -22,5 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('auth-layout', AuthLayout::class);
+        if (! $this->app->runningInConsole()) {
+            if (! file_exists(base_path('storage/installed')) && ! request()->is('install') && ! request()->is('install/*')) {
+                header("Location: install");
+                exit;
+            }
+        }
     }
 }

@@ -2026,6 +2026,59 @@
             "install-path": "../jean85/pretty-package-versions"
         },
         {
+            "name": "joynala/web-installer",
+            "version": "v2.4.5.1",
+            "version_normalized": "2.4.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joynal-a/web-installer.git",
+                "reference": "a6c705b13debd42ba5924a7346fabe5459e98129"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joynal-a/web-installer/zipball/a6c705b13debd42ba5924a7346fabe5459e98129",
+                "reference": "a6c705b13debd42ba5924a7346fabe5459e98129",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.0"
+            },
+            "time": "2025-02-09T11:35:18+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Abedin\\WebInstaller\\Providers\\AppServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Abedin\\WebInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joynal Abedin",
+                    "email": "abedin.dev@gmail.com"
+                }
+            ],
+            "description": "This is a laravel web installer and builder",
+            "support": {
+                "issues": "https://github.com/joynal-a/web-installer/issues",
+                "source": "https://github.com/joynal-a/web-installer/tree/v2.4.5.1"
+            },
+            "install-path": "../joynala/web-installer"
+        },
+        {
             "name": "laravel/breeze",
             "version": "v2.3.5",
             "version_normalized": "2.3.5.0",
