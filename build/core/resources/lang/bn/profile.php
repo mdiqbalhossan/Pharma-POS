@@ -1,0 +1,30 @@
+<?php
+
+return [
+    // Profile
+    'Edit Profile'                                                                                                                                                                            => 'প্রোফাইল সম্পাদনা করুন',
+    'Manage your account information'                                                                                                                                                         => 'আপনার অ্যাকাউন্টের তথ্য পরিচালনা করুন',
+    'Profile Information'                                                                                                                                                                     => 'প্রোফাইল তথ্য',
+    'Update your account\'s profile information and email address.'                                                                                                                           => 'আপনার অ্যাকাউন্টের প্রোফাইল তথ্য এবং ইমেইল ঠিকানা আপডেট করুন।',
+    'Name'                                                                                                                                                                                    => 'নাম',
+    'Email'                                                                                                                                                                                   => 'ইমেইল',
+    'Your email address is unverified.'                                                                                                                                                       => 'আপনার ইমেইল ঠিকানা অনুমোদিত নয়।',
+    'Click here to re-send the verification email.'                                                                                                                                           => 'পুনরায় যাচাইকরণ ইমেইল পাঠাতে এখানে ক্লিক করুন।',
+    'A new verification link has been sent to your email address.'                                                                                                                            => 'আপনার ইমেইল ঠিকানায় একটি নতুন যাচাইকরণ লিঙ্ক পাঠানো হয়েছে।',
+    'Save Changes'                                                                                                                                                                            => 'পরিবর্তন সংরক্ষণ করুন',
+    'Profile information updated successfully.'                                                                                                                                               => 'প্রোফাইল তথ্য সফলভাবে আপডেট করা হয়েছে।',
+    'Update Password'                                                                                                                                                                         => 'পাসওয়ার্ড আপডেট করুন',
+    'Ensure your account is using a long, random password to stay secure.'                                                                                                                    => 'নিশ্চিত করুন যে আপনার অ্যাকাউন্ট নিরাপত্তা বজায় রাখতে একটি দীর্ঘ, অযাচাইকৃত পাসওয়ার্ড ব্যবহার করছে।',
+    'Current Password'                                                                                                                                                                        => 'বর্তমান পাসওয়ার্ড',
+    'New Password'                                                                                                                                                                            => 'নতুন পাসওয়ার্ড',
+    'Confirm Password'                                                                                                                                                                        => 'পাসওয়ার্ড নিশ্চিত করুন',
+    'Password updated successfully.'                                                                                                                                                          => 'পাসওয়ার্ড সফলভাবে আপডেট করা হয়েছে।',
+    'Save'                                                                                                                                                                                    => 'সংরক্ষণ করুন',
+    'Saved.'                                                                                                                                                                                  => 'সংরক্ষিত হয়েছে।',
+    'Delete Account'                                                                                                                                                                          => 'অ্যাকাউন্ট মুছুন',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.' => 'আপনার অ্যাকাউন্ট মুছুন, তার সমস্ত সম্পদ এবং তথ্য স্থায়ীভাবে মুছুন হবে। আপনার অ্যাকাউন্ট মুছুন আগে, আপনি যা ধরে রাখতে চান তা ডাউনলোড করুন।',
+    'Are you sure you want to delete your account?'                                                                                                                                           => 'আপনি কি আপনার অ্যাকাউন্ট মুছুন চান?',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'       => 'আপনার অ্যাকাউন্ট মুছুন, তার সমস্ত সম্পদ এবং তথ্য স্থায়ীভাবে মুছুন হবে। আপনার অ্যাকাউন্ট স্থায়ীভাবে মুছুন চান তা নিশ্চিত করতে আপনার পাসওয়ার্ড প্রবেশ করুন।',
+    'Password'                                                                                                                                                                                => 'পাসওয়ার্ড',
+    'Cancel'                                                                                                                                                                                  => 'বাতিল করুন',
+];

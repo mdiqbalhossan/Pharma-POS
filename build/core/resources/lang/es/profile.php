@@ -1,0 +1,30 @@
+<?php
+
+return [
+    // Profile
+    'Edit Profile'                                                                                                                                                                            => 'Editar Perfil',
+    'Manage your account information'                                                                                                                                                         => 'Administrar la información de su cuenta',
+    'Profile Information'                                                                                                                                                                     => 'Información de Perfil',
+    'Update your account\'s profile information and email address.'                                                                                                                           => 'Actualizar la información de perfil y dirección de correo electrónico de su cuenta.',
+    'Name'                                                                                                                                                                                    => 'Nombre',
+    'Email'                                                                                                                                                                                   => 'Correo electrónico',
+    'Your email address is unverified.'                                                                                                                                                       => 'Su dirección de correo electrónico no está verificada.',
+    'Click here to re-send the verification email.'                                                                                                                                           => 'Haga clic aquí para reenviar el correo de verificación.',
+    'A new verification link has been sent to your email address.'                                                                                                                            => 'Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.',
+    'Save Changes'                                                                                                                                                                            => 'Guardar Cambios',
+    'Profile information updated successfully.'                                                                                                                                               => 'Información de perfil actualizada con éxito.',
+    'Update Password'                                                                                                                                                                         => 'Actualizar Contraseña',
+    'Ensure your account is using a long, random password to stay secure.'                                                                                                                    => 'Asegúrese de que su cuenta utilice una contraseña larga y aleatoria para mantener la seguridad.',
+    'Current Password'                                                                                                                                                                        => 'Contraseña Actual',
+    'New Password'                                                                                                                                                                            => 'Nueva Contraseña',
+    'Confirm Password'                                                                                                                                                                        => 'Confirmar Contraseña',
+    'Password updated successfully.'                                                                                                                                                          => 'Contraseña actualizada con éxito.',
+    'Save'                                                                                                                                                                                    => 'Guardar',
+    'Saved.'                                                                                                                                                                                  => 'Guardado.',
+    'Delete Account'                                                                                                                                                                          => 'Eliminar Cuenta',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.' => 'Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información que desee conservar.',
+    'Are you sure you want to delete your account?'                                                                                                                                           => '¿Está seguro de que desea eliminar su cuenta?',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'       => 'Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Introduzca su contraseña para confirmar que desea eliminar permanentemente su cuenta.',
+    'Password'                                                                                                                                                                                => 'Contraseña',
+    'Cancel'                                                                                                                                                                                  => 'Cancelar',
+];

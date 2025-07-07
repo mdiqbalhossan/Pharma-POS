@@ -27,6 +27,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $userStoreHasOne = Auth::user()->store()->exists();
+        if ($userStoreHasOne) {
+            $store = Auth::user()->store()->first();
+            $request->session()->put('store_id', $store->id);
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

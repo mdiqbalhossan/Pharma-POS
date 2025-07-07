@@ -1,10 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    use HasStore;
+
     protected $fillable = [
         'transaction_id',
         'account_id',

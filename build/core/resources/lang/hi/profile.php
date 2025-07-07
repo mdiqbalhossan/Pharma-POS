@@ -1,0 +1,30 @@
+<?php
+
+return [
+    // Profile
+    'Edit Profile'                                                                                                                                                                            => 'प्रोफ़ाइल संपादित करें',
+    'Manage your account information'                                                                                                                                                         => 'अपने खाते की जानकारी का प्रबंधन करें',
+    'Profile Information'                                                                                                                                                                     => 'प्रोफ़ाइल जानकारी',
+    'Update your account\'s profile information and email address.'                                                                                                                           => 'अपने खाते की प्रोफ़ाइल जानकारी और ईमेल पता अपडेट करें।',
+    'Name'                                                                                                                                                                                    => 'नाम',
+    'Email'                                                                                                                                                                                   => 'ईमेल',
+    'Your email address is unverified.'                                                                                                                                                       => 'आपका ईमेल पता असत्यापित है।',
+    'Click here to re-send the verification email.'                                                                                                                                           => 'सत्यापन ईमेल फिर से भेजने के लिए यहां क्लिक करें।',
+    'A new verification link has been sent to your email address.'                                                                                                                            => 'आपके ईमेल पते पर एक नया सत्यापन लिंक भेजा गया है।',
+    'Save Changes'                                                                                                                                                                            => 'परिवर्तन सहेजें',
+    'Profile information updated successfully.'                                                                                                                                               => 'प्रोफ़ाइल जानकारी सफलतापूर्वक अपडेट की गई।',
+    'Update Password'                                                                                                                                                                         => 'पासवर्ड अपडेट करें',
+    'Ensure your account is using a long, random password to stay secure.'                                                                                                                    => 'सुनिश्चित करें कि आपका खाता सुरक्षित रहने के लिए एक लंबे, यादृच्छिक पासवर्ड का उपयोग कर रहा है।',
+    'Current Password'                                                                                                                                                                        => 'वर्तमान पासवर्ड',
+    'New Password'                                                                                                                                                                            => 'नया पासवर्ड',
+    'Confirm Password'                                                                                                                                                                        => 'पासवर्ड की पुष्टि करें',
+    'Password updated successfully.'                                                                                                                                                          => 'पासवर्ड सफलतापूर्वक अपडेट किया गया।',
+    'Save'                                                                                                                                                                                    => 'सहेजें',
+    'Saved.'                                                                                                                                                                                  => 'सहेजा गया।',
+    'Delete Account'                                                                                                                                                                          => 'खाता हटाएं',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.' => 'एक बार जब आपका खाता हटा दिया जाता है, तो इसके सभी संसाधन और डेटा स्थायी रूप से हटा दिए जाएंगे। अपना खाता हटाने से पहले, कृपया कोई भी डेटा या जानकारी डाउनलोड करें जिसे आप रखना चाहते हैं।',
+    'Are you sure you want to delete your account?'                                                                                                                                           => 'क्या आप सुनिश्चित हैं कि आप अपना खाता हटाना चाहते हैं?',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'       => 'एक बार जब आपका खाता हटा दिया जाता है, तो इसके सभी संसाधन और डेटा स्थायी रूप से हटा दिए जाएंगे। पुष्टि करने के लिए कृपया अपना पासवर्ड दर्ज करें कि आप अपना खाता स्थायी रूप से हटाना चाहते हैं।',
+    'Password'                                                                                                                                                                                => 'पासवर्ड',
+    'Cancel'                                                                                                                                                                                  => 'रद्द करें',
+];

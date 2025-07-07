@@ -1,11 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Account extends Model
 {
+    use HasStore;
+
     protected $fillable = ['name', 'type', 'description', 'is_active'];
 
     public function transactions(): HasMany

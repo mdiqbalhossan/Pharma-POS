@@ -1,10 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 
 class SaleReturn extends Model
 {
+    use HasStore;
+
     protected $fillable = [
         'sale_id',
         'medicine_id',

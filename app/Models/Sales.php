@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sales extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasStore;
 
     protected $fillable = [
         'sale_no',

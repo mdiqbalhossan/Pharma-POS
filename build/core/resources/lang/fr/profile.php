@@ -1,0 +1,30 @@
+<?php
+
+return [
+    // Profile
+    'Edit Profile'                                                                                                                                                                            => 'Modifier le Profil',
+    'Manage your account information'                                                                                                                                                         => 'Gérer les informations de votre compte',
+    'Profile Information'                                                                                                                                                                     => 'Informations du Profil',
+    'Update your account\'s profile information and email address.'                                                                                                                           => 'Mettre à jour les informations de profil et l\'adresse email de votre compte.',
+    'Name'                                                                                                                                                                                    => 'Nom',
+    'Email'                                                                                                                                                                                   => 'Email',
+    'Your email address is unverified.'                                                                                                                                                       => 'Votre adresse email n\'est pas vérifiée.',
+    'Click here to re-send the verification email.'                                                                                                                                           => 'Cliquez ici pour renvoyer l\'email de vérification.',
+    'A new verification link has been sent to your email address.'                                                                                                                            => 'Un nouveau lien de vérification a été envoyé à votre adresse email.',
+    'Save Changes'                                                                                                                                                                            => 'Enregistrer les Modifications',
+    'Profile information updated successfully.'                                                                                                                                               => 'Informations du profil mises à jour avec succès.',
+    'Update Password'                                                                                                                                                                         => 'Mettre à Jour le Mot de Passe',
+    'Ensure your account is using a long, random password to stay secure.'                                                                                                                    => 'Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.',
+    'Current Password'                                                                                                                                                                        => 'Mot de Passe Actuel',
+    'New Password'                                                                                                                                                                            => 'Nouveau Mot de Passe',
+    'Confirm Password'                                                                                                                                                                        => 'Confirmer le Mot de Passe',
+    'Password updated successfully.'                                                                                                                                                          => 'Mot de passe mis à jour avec succès.',
+    'Save'                                                                                                                                                                                    => 'Enregistrer',
+    'Saved.'                                                                                                                                                                                  => 'Enregistré.',
+    'Delete Account'                                                                                                                                                                          => 'Supprimer le Compte',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.' => 'Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées. Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous souhaitez conserver.',
+    'Are you sure you want to delete your account?'                                                                                                                                           => 'Êtes-vous sûr de vouloir supprimer votre compte?',
+    'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'       => 'Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées. Veuillez saisir votre mot de passe pour confirmer que vous souhaitez supprimer définitivement votre compte.',
+    'Password'                                                                                                                                                                                => 'Mot de Passe',
+    'Cancel'                                                                                                                                                                                  => 'Annuler',
+];

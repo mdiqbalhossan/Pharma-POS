@@ -1,0 +1,190 @@
+<?php
+
+return [
+    // General terms
+    'purchases'              => 'ক্রয়',
+    'purchase'               => 'ক্রয়',
+    'purchase_order'         => 'ক্রয় অর্ডার',
+    'list'                   => 'ক্রয় তালিকা',
+    'manage_purchases'       => 'আপনার ক্রয় পরিচালনা করুন',
+    'add_new'                => 'নতুন ক্রয় যোগ করুন',
+    'order'                  => 'ক্রয় অর্ডার',
+    'order_details'          => 'ক্রয় অর্ডার বিবরণ পরিচালনা করুন',
+    'add_medicine'           => 'ঔষধ যোগ করুন',
+    'no_items_added'         => 'এখনও কোনও ঔষধ আইটেম যোগ করা হয়নি। চালু রাখতে আইটেম যোগ করুন।',
+    'total_tax'              => 'মোট কর',
+    'payment_info'           => 'পেমেন্ট তথ্য',
+    'payment_note'           => 'পেমেন্ট নোট',
+    'edit_purchase'          => 'ক্রয় তথ্য আপডেট করুন',
+    'received'               => 'প্রাপ্ত',
+    'pending'                => 'মুলতুবি',
+    'ordered'                => 'অর্ডার করা',
+    'phone'                  => 'ফোন',
+    'email'                  => 'ইমেইল',
+    'address'                => 'ঠিকানা',
+    'to'                     => 'প্রতি',
+    'items'                  => 'ক্রয় আইটেম',
+    'purchase_type'          => 'ক্রয় প্রকার',
+    'purchase_items'         => 'ক্রয় আইটেম',
+    'print'                  => 'প্রিন্ট',
+    'download'               => 'ডাউনলোড',
+    'company_logo'           => 'কোম্পানি লোগো',
+    'back_to_purchase'       => 'ক্রয়ে ফিরে যান',
+    'view_invoice_details'   => 'ক্রয় চালান বিবরণ দেখুন',
+    'converting_order'       => 'ক্রয় অর্ডার: :invoice ক্রয়ে রূপান্তর করা হচ্ছে',
+
+    // Page titles and descriptions
+    'edit'                   => 'ক্রয় সম্পাদনা করুন',
+    'create'                 => 'ক্রয় তৈরি করুন',
+    'details'                => 'ক্রয় বিবরণ',
+    'invoice'                => 'ক্রয় চালান',
+    'invoice_title'          => 'ক্রয় চালান',
+    'new'                    => 'নতুন ক্রয়',
+    'create_new'             => 'নতুন ক্রয় তৈরি করুন',
+    'update'                 => 'ক্রয় আপডেট করুন',
+    'save'                   => 'ক্রয় সংরক্ষণ করুন',
+    'view_info'              => 'ক্রয় তথ্য দেখুন',
+    'update_info'            => 'ক্রয় তথ্য আপডেট করুন',
+    'view_invoice'           => 'ক্রয় চালান বিবরণ দেখুন',
+    'back_to'                => 'ক্রয়ে ফিরে যান',
+    'convert_to'             => 'ক্রয়ে রূপান্তর করুন',
+
+    // Field labels
+    'reference_invoice'      => 'রেফারেন্স/চালান নং',
+    'date'                   => 'তারিখ',
+    'type'                   => 'প্রকার',
+    'supplier'               => 'সরবরাহকারী',
+    'select_supplier'        => 'সরবরাহকারী নির্বাচন করুন',
+    'medicine_name'          => 'ঔষধের নাম',
+    'medicine_placeholder'   => 'দয়া করে ঔষধের নাম বা বারকোড টাইপ করুন এবং নির্বাচন করুন',
+    'medicine'               => 'ঔষধ',
+    'batch_no'               => 'ব্যাচ নং',
+    'expiry_date'            => 'মেয়াদ উত্তীর্ণ তারিখ',
+    'qty'                    => 'পরিমাণ',
+    'mrp'                    => 'এমআরপি',
+    'purchase_price'         => 'ক্রয় মূল্য',
+    'discount_percent'       => 'ছাড় শতাংশ',
+    'tax_percent'            => 'কর শতাংশ',
+    'tax_amount'             => 'কর পরিমাণ',
+    'subtotal'               => 'সাবটোটাল',
+    'row_total'              => 'রো টোটাল',
+    'action'                 => 'কার্য',
+    'order_tax'              => 'অর্ডার কর শতাংশ',
+    'discount'               => 'ছাড়',
+    'shipping_cost'          => 'পরিবহন খরচ',
+    'shipping'               => 'পরিবহন',
+    'note'                   => 'নোট',
+    'grand_total'            => 'মোট টোটাল',
+    'paid_amount'            => 'পরিশোধ করা পরিমাণ',
+    'due_amount'             => 'বাকি পরিমাণ',
+    'payment_method'         => 'পেমেন্ট পদ্ধতি',
+    'payment_status'         => 'পেমেন্ট স্ট্যাটাস',
+    'supplier_name'          => 'সরবরাহকারীর নাম',
+    'reference'              => 'রেফারেন্স',
+    'paid'                   => 'পরিশোধ করা',
+    'due'                    => 'বাকি',
+    'tax'                    => 'কর',
+
+    // Payment methods (simplified)
+    'payment_method_cash'    => 'নগদ',
+    'payment_method_bank'    => 'ব্যাংক ট্রান্সফার',
+    'payment_method_cheque'  => 'চেক',
+    'payment_method_other'   => 'অন্যান্য',
+
+    // Invoice specific
+    'invoice_no'             => 'চালান নং',
+    'status'                 => 'অবস্থা',
+    'supplier_info'          => 'সরবরাহকারীর তথ্য',
+    'purchase_info'          => 'ক্রয় তথ্য',
+    'payment_summary'        => 'পেমেন্ট সারাংশ',
+    'summary'                => 'সারাংশ',
+    'item'                   => 'আইটেম',
+    'batch'                  => 'ব্যাচ',
+    'expiry'                 => 'মেয়াদ উত্তীর্ণ',
+    'unit_price'             => 'একক মূল্য',
+    'total'                  => 'মোট',
+    'notes'                  => 'নোটস',
+    'no_notes'               => 'কোন নোটস উপলব্ধ নয়',
+    'terms_conditions'       => 'শর্তাবলী ও অবস্থা',
+    'standard_terms'         => 'স্ট্যান্ডার্ড শর্তাবলী প্রযোজ্য।',
+    'authorized_signature'   => 'অনুমোদিত স্বাক্ষর',
+    'thank_you'              => 'আপনার ব্যবসার জন্য ধন্যবাদ!',
+
+    // Filter options
+    'sort_date'              => 'তারিখ অনুসারে সাজান',
+    'newest'                 => 'সর্বাধিক সাম্প্রতিক',
+    'oldest'                 => 'সবচেয়ে পুরানো',
+    'choose_supplier'        => 'সরবরাহকারীর নাম নির্বাচন করুন',
+    'choose_status'          => 'অবস্থা নির্বাচন করুন',
+    'choose_payment_status'  => 'পেমেন্ট স্ট্যাটাস নির্বাচন করুন',
+    'enter_reference'        => 'রেফারেন্স লিখুন',
+    'search'                 => 'অনুসন্ধান',
+
+    // অবস্থা বিকল্প
+    'status_received'        => 'প্রাপ্ত',
+    'status_ordered'         => 'অর্ডার করা',
+    'status_pending'         => 'অপেক্ষারত',
+
+    // পেমেন্ট স্ট্যাটাস বিকল্প
+    'payment_status'         => [
+        'paid'    => 'পরিশোধ করা',
+        'partial' => 'আংশিক',
+        'unpaid'  => 'অপরিশোধিত',
+    ],
+
+    // ভেন্ডর বিকল্প
+    'vendor'                 => [
+        'apex_computers'   => 'এপেক্স কম্পিউটার',
+        'beats_headphones' => 'বিটস হেডফোন',
+        'dazzle_shoes'     => 'ড্যাজল জুতা',
+        'best_accessories' => 'সেরা সামগ্রী',
+    ],
+
+    // রেফারেন্স বিকল্প
+    'reference'              => [
+        'pt001' => 'পিটি০০১',
+        'pt002' => 'পিটি০০২',
+        'pt003' => 'পিটি০০৩',
+    ],
+
+    // কর্ম
+    'action'                 => [
+        'view'     => 'দেখুন',
+        'edit'     => 'সম্পাদনা',
+        'delete'   => 'মুছুন',
+        'print'    => 'প্রিন্ট',
+        'download' => 'ডাউনলোড',
+        'return'   => 'ফেরত',
+        'save'     => 'সংরক্ষণ',
+        'update'   => 'আপডেট',
+        'cancel'   => 'বাতিল',
+        'back'     => 'পিছনে',
+    ],
+
+    // সরবরাহকারী মডাল
+    'supplier'               => [
+        'add_new' => 'নতুন সরবরাহকারী যোগ করুন',
+        'add'     => 'সরবরাহকারী যোগ করুন',
+        'name'    => 'নাম',
+        'email'   => 'ইমেইল',
+        'phone'   => 'ফোন',
+        'address' => 'ঠিকানা',
+        'close'   => 'বন্ধ করুন',
+    ],
+
+    // অন্যান্য
+    'loading_details'        => 'ক্রয় বিবরণ লোড করা হচ্ছে...',
+    'convert_order_purchase' => 'ক্রয় অর্ডারকে ক্রয়ে রূপান্তর করুন',
+    'convert'                => 'রূপান্তর',
+    'collapse'               => 'সংকুচিত করুন',
+
+    // ফরম্যাট স্ট্রিং
+    'format'                 => [
+        'subtotal'    => 'সাবটোটাল:',
+        'tax'         => 'কর:',
+        'discount'    => 'ছাড়:',
+        'grand_total' => 'মোট টোটাল:',
+        'paid_amount' => 'পরিশোধ করা পরিমাণ:',
+        'due_amount'  => 'বাকি পরিমাণ:',
+    ],
+];

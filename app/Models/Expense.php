@@ -1,11 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
+    use HasStore;
+
     protected $fillable = ['expense_category_id', 'date', 'expense_for', 'amount', 'description', 'reference', 'account_id'];
 
     protected $casts = [

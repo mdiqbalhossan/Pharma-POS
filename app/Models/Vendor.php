@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
-    use HasFactory;
+    use HasStore, HasFactory;
 
     protected $fillable = [
         'name',
@@ -18,7 +18,7 @@ class Vendor extends Model
         'state',
         'zip',
         'opening_balance',
-        'opening_balance_type'
+        'opening_balance_type',
     ];
 
     protected $appends = [
@@ -32,10 +32,10 @@ class Vendor extends Model
      */
     public function getFormattedOpeningBalanceAttribute()
     {
-        if (!$this->opening_balance) {
+        if (! $this->opening_balance) {
             return '0.00';
         }
-        
+
         return number_format($this->opening_balance, 2);
     }
 }

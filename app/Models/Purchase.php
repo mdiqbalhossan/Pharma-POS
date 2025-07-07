@@ -1,10 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Trait\HasStore;
 use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
+    use HasStore;
+
     protected $fillable = [
         'invoice_no',
         'type',

